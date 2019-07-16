@@ -64,7 +64,7 @@ section {
 	background: #88b086;
 }
 
-section img {
+section svg {
 	width: auto;
 	height: 100%;
 }
@@ -103,7 +103,7 @@ section img {
 #title {
 	display: inline;
 	color: #F7F2DB;
-	font-size: 70%;
+	font-size: 1rem;
 	font-family: "LatoTitle";
 	text-transform: uppercase;
 	letter-spacing: 1px;
@@ -152,23 +152,23 @@ footer #tab1BikeTrail:hover {
 	background: #ea9154;
 }
 
-footer #tab2:hover {
+footer #tab2Peony:hover {
 	background: #CC7B94;
 }
 
-footer #tab3:hover {
+footer #tab3WaterFeature:hover {
 	background: #3995B1;
 }
 
-footer #tab4:hover {
+footer #tab4Bridge:hover {
 	background: #9D885F;
 }
 
-footer #tab5:hover {
+footer #tab5Daylily:hover {
 	background: #967EA5;
 }
 
-footer #tab6:hover {
+footer #tab6MemoryGarden:hover {
 	background: #547EAC;
 }
 
@@ -306,9 +306,6 @@ footer img {
 	/* to {
         stroke-dashoffset: 0;
     } */
-
-
-
 }
 
 
