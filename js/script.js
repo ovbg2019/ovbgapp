@@ -27,7 +27,7 @@ window.onload = function() {
 	const daylilyToWaterFeature = document.querySelector('#daylilyToWaterFeature');
 	const waterFeatureToDaylily = document.querySelector('#waterFeatureToDaylily');
 	const bridgeToDaylily = document.querySelector('#bridgeToDaylily');
-	const bikeTrail = document.querySelector('#bikeTrail');
+	const tab1BikeTrail = document.querySelector('#tab1BikeTrail');
 	const reset = document.querySelector('#reset');
 
 	//Event Listeners
