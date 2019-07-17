@@ -1,13 +1,11 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
 	<title>OVBG App</title>
 	<meta charset="utf-8">
-	<meta name="viewport"
-		  content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link href="style.css"
-		  rel="stylesheet"
-		  type="text/css">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link href="style.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -15,46 +13,66 @@
 		<header></header>
 
 		<section>
+			<div id="mapBox">
 
+				<!-- PUT THE MAP SVG/OBJECT HERE -->
+				
+				<img id="map" src="images/park_map_v4_1.svg" />
+			</div>
 
 			<div id="infoPanel">
 				<div id="titleBar">
 					<div>
-						<img id="titleBarImage"
-							 src="images/daylily_icon.svg" />
+						<img id="titleBarImage" src="images/daylily_icon.svg" alt="Daylily Collection" />
 						<h3 id="title">Daylily Collection</h3>
 					</div>
-					<img id="closeButton"
-						 src="images/close_button.png" />
+					<img id="closeButton" src="images/close_button.png" alt="Close button" />
+				</div>
+				<div id="contentBox">
+					<div id="contentImageBox">
+						<img src="images/temp_image.jpg" />
+						<img src="images/temp_image.jpg" />
+						<img src="images/temp_image.jpg" />
+						<img src="images/temp_image.jpg" />
+					</div>
+					<div id="contentTextBox">
+						<p>
+							The one of a kind collection of locally hybridized daylilies addition to the already
+							beautiful gardens was made possible by the generous donation from Henry Lorrain and the late
+							Douglas Lycett, founders of We’re in the Hayfield Now. The City would like to thank the
+							volunteers including the Oshawa Garden Club, Brooklin Horticulture Society and individual
+							volunteers who dedicated their time to dig, transport, store and replant the daylilies to
+							make this collection a reality.
+						</p>
+
+						<p>
+							The 265 daylily collection was established in 2017 and can be found on the east side of the
+							Oshawa Creek directly across from the Peony Garden with access to the Kolodzie Oshawa Creek
+							Bike Path.
+						</p>
+					</div>
 				</div>
 			</div>
 		</section>
 
 		<footer>
-			<div class="tab"
-				 id='tab1BikeTrail'>
-				<img src="images/bike_path_icon.svg" />
+			<div class="tab" id='tab1BikeTrail'>
+				<img src="images/bike_path_icon.svg" alt="Bike Trail" />
 			</div>
-			<div class="tab"
-				 id="tab2Peony">
-
-				<img src="images/peony_icon.svg" />
+			<div class="tab" id="tab2Peony">
+				<img src="images/peony_icon.svg" alt="Peony Garden" />
 			</div>
-			<div class="tab"
-				 id='tab3WaterFeature'>
-				<img src="images/water_feature_icon.svg" />
+			<div class="tab" id='tab3WaterFeature'>
+				<img src="images/water_feature_icon.svg" alt="Water Feature" />
 			</div>
-			<div class="tab"
-				 id="tab4Bridge">
-				<img src="images/bridge_icon.svg" />
+			<div class="tab" id="tab4Bridge">
+				<img src="images/bridge_icon.svg" alt="Rotary Bridge" />
 			</div>
-			<div class="tab"
-				 id="tab5Daylily">
-				<img src="images/daylily_icon.svg" />
+			<div class="tab" id="tab5Daylily">
+				<img src="images/daylily_icon.svg" alt="Daylily Collection" />
 			</div>
-			<div class="tab"
-				 id="tab6MemoryGarden">
-				<img src="images/memory_garden_icon.svg" />
+			<div class="tab" id="tab6MemoryGarden">
+				<img src="images/memory_garden_icon.svg" alt="Memory Garden" />
 			</div>
 
 		</footer>
