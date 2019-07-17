@@ -45,15 +45,15 @@ window.onload = function() {
   
         // decide which item in the drop down was clicked and assign viewbox data to svg
         if (item.value === 1) {
-          newView = `${1170} ${300} ${700} ${765}`;
+          newView = `${1170} ${500} ${700} ${765}`;
         } else if(item.value === 2) {
-          newView = `${783} ${100} ${700} ${990}`;
+          newView = `${783} ${300} ${700} ${990}`;
         } else if (item.value === 3) {
-          newView = `${1300} ${150} ${644} ${806}`;
+          newView = `${1320} ${400} ${644} ${806}`;
         } else if (item.value === 4) {
-          newView = `${1320} ${56} ${512} ${848}`;
+          newView = `${1250} ${110} ${600} ${1000}`;
         } else if (item.value === 5) {
-          newView = `${1170} ${300} ${700} ${765}`;          
+          newView = `${1170} ${300} ${700} ${1000}`;          
         }
   
         // call Zoom function and update viewbox

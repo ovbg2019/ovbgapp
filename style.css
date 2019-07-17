@@ -80,7 +80,7 @@ section {
 	background: #88b086;
 }
 
-section img {
+section svg {
 	width: auto;
 	height: 100%;
 }
@@ -119,7 +119,7 @@ section img {
 #title {
 	display: inline;
 	color: #F7F2DB;
-	font-size: 70%;
+	font-size: 1rem;
 	font-family: "LatoTitle";
 	text-transform: uppercase;
 	letter-spacing: 1px;
@@ -134,6 +134,44 @@ section img {
 #closeButton {
 	height: 70%;
 	width: auto;
+}
+
+
+/* Dropdown and SVG styles for zoom */
+
+#svgMapObj, #svgMap, #mapSection {
+  width: auto;
+  height: 100%;
+}
+
+.destination-menu {
+  width: 100%;
+  height: 30rem;
+  font-size: 20rem;
+}
+
+
+.destination-select {
+  width: 80%;
+  background: var(--paths);
+  border-radius: 0.6rem;
+  border: 0.1rem solid var(--concrete-path);
+  z-index: 9000;
+  position: absolute;
+  top: 1rem;
+  left: 2.25rem;
+}
+
+.destination-select li {
+  list-style: none;
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 1.4rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.hidden {
+  display: none;
 }
 
 footer {
@@ -168,23 +206,23 @@ footer #tab1BikeTrail:hover {
 	background: #ea9154;
 }
 
-footer #tab2:hover {
+footer #tab2Peony:hover {
 	background: #CC7B94;
 }
 
-footer #tab3:hover {
+footer #tab3WaterFeature:hover {
 	background: #3995B1;
 }
 
-footer #tab4:hover {
+footer #tab4Bridge:hover {
 	background: #9D885F;
 }
 
-footer #tab5:hover {
+footer #tab5Daylily:hover {
 	background: #967EA5;
 }
 
-footer #tab6:hover {
+footer #tab6MemoryGarden:hover {
 	background: #547EAC;
 }
 
@@ -194,198 +232,4 @@ footer img {
 }
 
 
-
-/* Dropdown and SVG styles for zoom */
-
-#svgMapObj, #svgMap, #mapSection {
-  width: auto;
-  height: 100%;
-}
-
-.destination-menu {
-  width: 100vw;
-  height: 30rem;
-  font-size: 20rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
-.destination-select {
-  width: 80vw;
-  margin: 0 auto;
-  background: var(--paths);
-  border-radius: 0.6rem;
-  border: 0.1rem solid var(--concrete-path);
-  z-index: 9000;
-  position: absolute;
-  top: 1rem;
-  left: 3.6rem;
-}
-
-.destination-select li {
-  list-style: none;
-  text-align: center;
-  padding: 0.5rem;
-  font-size: 1.4rem;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.hidden {
-  display: none;
-}
-
-
-
 /* PATH ANIMATIONS */
-
-.penoyToBridgeAnimate {
-	fill: transparent;
-	stroke: #679DF6;
-	stroke-width: 16;
-	stroke-linecap: round;
-	stroke-miterlimit: 10;
-	stroke-dasharray: 597;
-	stroke-dashoffset: 597;
-	animation: penoyToBridgeAnimate 5s ease-out infinite;
-
-}
-
-@keyframes penoyToBridgeAnimate {
-	to {
-		stroke-dashoffset: 0;
-	}
-}
-
-.penoyToDaylilyAnimate {
-	fill: transparent;
-	stroke: #679DF6;
-	stroke-width: 16;
-	stroke-linecap: round;
-	stroke-miterlimit: 10;
-	stroke-dasharray: 1062;
-	stroke-dashoffset: 1062;
-	animation: penoyToDaylilyAnimate 5s ease-out infinite;
-
-}
-
-@keyframes penoyToDaylilyAnimate {
-	to {
-		stroke-dashoffset: 0;
-	}
-}
-
-.penoyToWaterFeatureAnimate {
-	fill: transparent;
-	stroke: #679DF6;
-	stroke-width: 7.5;
-	stroke-linecap: round;
-	stroke-miterlimit: 10;
-	stroke-dasharray: 654;
-	stroke-dashoffset: 654;
-	animation: penoyToWaterFeatureAnimate 5s ease-out infinite;
-
-}
-
-@keyframes penoyToWaterFeatureAnimate {
-	to {
-		stroke-dashoffset: 0;
-	}
-}
-
-.bridgeToWaterFeatureAnimate {
-	fill: transparent;
-	stroke: #679DF6;
-	stroke-width: 16;
-	stroke-linecap: round;
-	stroke-miterlimit: 10;
-	stroke-dasharray: 1119;
-	stroke-dashoffset: 1119;
-	animation: bridgeToWaterFeatureAnimate 5s ease-out infinite;
-
-}
-
-@keyframes bridgeToWaterFeatureAnimate {
-	to {
-		stroke-dashoffset: 0;
-	}
-}
-
-
-.daylilyToWaterFeatureAnimate {
-	fill: transparent;
-	stroke: #679DF6;
-	stroke-width: 16;
-	stroke-linecap: round;
-	stroke-miterlimit: 10;
-	stroke-dasharray: 1581;
-	stroke-dashoffset: 1581;
-	animation: daylilyToWaterFeatureAnimate 5s ease-out infinite;
-
-}
-
-@keyframes daylilyToWaterFeatureAnimate {
-	to {
-		stroke-dashoffset: 0;
-	}
-}
-
-.waterFeatureToDaylilyAnimate {
-	fill: transparent;
-	stroke: #679DF6;
-	stroke-width: 16;
-	stroke-linecap: round;
-	stroke-miterlimit: 10;
-	stroke-dasharray: 0;
-	stroke-dashoffset: 5810;
-	animation: waterFeatureToDaylilyAnimate 5s ease-out infinite;
-
-}
-
-@keyframes waterFeatureToDaylilyAnimate {
-	from {
-		stroke-dashoffset: 1581;
-	}
-}
-
-
-.bridgeToDaylilyAnimate {
-	fill: transparent;
-	stroke: #679DF6;
-	stroke-width: 16;
-	stroke-linecap: round;
-	stroke-miterlimit: 10;
-	stroke-dasharray: 615;
-	stroke-dashoffset: 615;
-	animation: bridgeToDaylilyAnimate 8s infinite ease-out;
-
-}
-
-@keyframes bridgeToDaylilyAnimate {
-	/* to {
-        stroke-dashoffset: 0;
-    } */
-
-
-
-}
-
-
-.bikeTrailAnimate {
-	fill: transparent;
-	stroke: #EA9154;
-	stroke-width: 30;
-	stroke-miterlimit: 10;
-	stroke-dasharray: 150, 22.5;
-	stroke-dashoffset: 1400;
-	animation: bikeTrailAnimate 5s ease-in infinite;
-	/* animation: animatebike 5s linear; */
-}
-
-@keyframes bikeTrailAnimate {
-	from {
-		stroke-dashoffset: 0;
-	}
-
-}
