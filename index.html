@@ -10,15 +10,23 @@
 
 <body>
 	<main>
-		<header></header>
+    <div id="destination-menu">
+        <ul class="destination-select">
+          <li value="0" id="placeholder">Select Destination</li>
+          <li value="1" class="hidden">Gazebo</li>
+          <li value="2" class="hidden">Waterfall Garden</li>
+          <li value="3" class="hidden">Bridge</li>
+          <li value="4" class="hidden">DayLily Collection</li>
+          <li value="5" class="hidden">Bike Path</li>
+        </ul>
+      </div>
 
+      <section id="mapSection">
+        <object id="svgMapObj" data="./images/park_map_v4_1.svg" type="image/svg+xml" viewBox="0 0 1920 1080">
+          Your browser doesn't support SVG
+        </object>
+      </section>
 		<section>
-			<div id="mapBox">
-
-				<!-- PUT THE MAP SVG/OBJECT HERE -->
-				
-				<img id="map" src="images/park_map_v4_1.svg" />
-			</div>
 
 			<div id="infoPanel">
 				<div id="titleBar">
@@ -78,6 +86,7 @@
 		</footer>
 	</main>
 
+  <script src="./js/app.js"></script>
 </body>
 
 </html>
