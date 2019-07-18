@@ -4,22 +4,22 @@
 <head>
 	<title>OVBG App</title>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="style.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
 	<main>
-    <div id="destination-menu">
-        <ul class="destination-select">
-          <li value="0" id="placeholder">Select Destination</li>
-          <li value="1" class="hidden">Gazebo</li>
-          <li value="2" class="hidden">Waterfall Garden</li>
-          <li value="3" class="hidden">Bridge</li>
-          <li value="4" class="hidden">DayLily Collection</li>
-          <li value="5" class="hidden">Bike Path</li>
-        </ul>
-      </div>
+		<div id="destination-menu">
+			<ul class="destination-select">
+				<li value="0" id="placeholder">Select Destination</li>
+				<li value="1" class="menuItem hidden">Gazebo</li>
+				<li value="2" class="menuItem hidden">Waterfall Garden</li>
+				<li value="3" class="menuItem hidden">Bridge</li>
+				<li value="4" class="menuItem hidden">DayLily Collection</li>
+				<li value="5" class="menuItem hidden">Bike Path</li>
+			</ul>
+		</div>
 
         <section id="mapBox">
           <object id="svgMapObj" data="./images/park_map_v4_1.svg" type="image/svg+xml" viewBox="0 0 1920 1080">
@@ -32,33 +32,53 @@
 			<div id="infoPanel">
 				<div id="titleBar">
 					<div>
-						<img id="titleBarImage" src="images/daylily_icon.svg" alt="Daylily Collection" />
-						<h3 id="title">Daylily Collection</h3>
+						<img id="titleBarIcon" src="images/temp_image.jpg" alt="Daylily Collection" />
+						<h3 id="title">Park Feature Title</h3>
 					</div>
 					<img id="closeButton" src="images/close_button.png" alt="Close button" />
 				</div>
 				<div id="contentBox">
 					<div id="contentImageBox">
-						<img src="images/temp_image.jpg" />
-						<img src="images/temp_image.jpg" />
-						<img src="images/temp_image.jpg" />
-						<img src="images/temp_image.jpg" />
+						<img class="galleryImage" src="images/temp_image.jpg" />
+						<img class="galleryImage" src="images/temp_image.jpg" />
+						<img class="galleryImage" src="images/temp_image.jpg" />
+						<img class="galleryImage" src="images/temp_image.jpg" />
 					</div>
 					<div id="contentTextBox">
-						<p>
-							The one of a kind collection of locally hybridized daylilies addition to the already
-							beautiful gardens was made possible by the generous donation from Henry Lorrain and the late
-							Douglas Lycett, founders of We’re in the Hayfield Now. The City would like to thank the
-							volunteers including the Oshawa Garden Club, Brooklin Horticulture Society and individual
-							volunteers who dedicated their time to dig, transport, store and replant the daylilies to
-							make this collection a reality.
-						</p>
 
-						<p>
-							The 265 daylily collection was established in 2017 and can be found on the east side of the
-							Oshawa Creek directly across from the Peony Garden with access to the Kolodzie Oshawa Creek
-							Bike Path.
-						</p>
+						<!--NEW UPDATE July 17 9pm-->
+						<!-- Tab links -->
+
+						<input id="tab1" type="radio" name="tabs" checked>
+						<label for="tab1"><img id="tabIcon" src="images/about_icon.svg" alt="about icon">
+							<h4>About</h4>
+						</label>
+
+						<input id="tab2" type="radio" name="tabs">
+						<label for="tab2"><img id="tabIcon" src="images/history_icon.png" alt="history icon">
+							<h4>History</h4>
+						</label>
+
+						<input id="tab3" type="radio" name="tabs">
+						<label for="tab3"><img id="tabIcon" src="images/share_icon.svg" alt="share icon">
+							<h4>Share</h4>
+						</label>
+
+						<!-- Tab content -->
+						<div id="about" class="content">
+							<p>
+								About paragraph goes here
+							</p>
+						</div>
+
+						<div id="history" class="content">
+							<p>History paragraph goes here.</p>
+						</div>
+
+						<div id="share" class="content">
+							<p>Share options</p>
+						</div>
+						<!--end NEW UPDATE July 17 9pm-->
 					</div>
 				</div>
 			</div>
@@ -87,7 +107,8 @@
 		</footer>
 	</main>
 
-  <script src="./js/app.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/object_script.js"></script>
 </body>
 
 </html>
