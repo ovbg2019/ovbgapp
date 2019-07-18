@@ -9,7 +9,7 @@
 :root {
 
   /* Colors */
-  --paths:  #f7f2db;
+  --paths:  #f7f2db;   /* aka white chocolate */
   --concrete-path: #383838;
   --map-green: #88b086;
   --peony: #CC7B94;
@@ -88,7 +88,8 @@ section {
 /* 
 section svg {
 	width: auto;
-	height: 100%;
+  height: 100%;
+  
 section #map {
 	width: 1280px;
 	height: 720px;
@@ -147,9 +148,17 @@ section #map {
 
 /* Dropdown and SVG styles */
 
-#svgMapObj, #svgMap, #mapSection {
-  width: auto;
-  height: 100%;
+#svgMapObj, #svgMap {
+	width: 1280px;
+  height: 720px;
+  
+  transition: 0.5s ease-in-out;
+}
+
+#mapBox {
+  width: 100%;
+  height: 720px;
+  overflow: scroll;
 }
 
 .destination-menu {
@@ -157,7 +166,6 @@ section #map {
   height: 30rem;
   font-size: 20rem;
 }
-
 
 .destination-select {
   width: 80%;
@@ -181,6 +189,11 @@ section #map {
 .hidden {
   display: none;
 }
+
+/* Zoom animations */
+/* .moveTo-gazebo {
+  transform: translate(100px, 100px);
+} */
 
 #contentBox {
 	height: 88%;
