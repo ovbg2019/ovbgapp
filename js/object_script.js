@@ -102,6 +102,10 @@
             TITLE_BAR_ICON.src = parkFeature[i].icon;
             for (let j in GALLERY_IMAGES)
                 GALLERY_IMAGES[j].src = parkFeature[i].galleryImages[j];
+
+                // The below code sets the items in the drop down to the path names when bottom nav items are clicked
+                // The text is already updated to the selected destination in the drop down code in app.js
+                // Consider removing
             for (let j in DESTINATIONS)
                 DESTINATIONS[j].textContent = parkFeature[i].paths[j];
             ABOUT_TEXT.innerHTML = parkFeature[i].about;
