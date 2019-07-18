@@ -1,6 +1,7 @@
 // Put everything inside an onload to ensure that everything has loaded in before any code is executed
 window.onload = function() {
 
+  // Constants for the dropdown
   const DROP_DOWN = document.querySelector('.destination-select'); // Select the drop down
   const DROP_DOWN_ITEM = document.querySelectorAll('.destination-select li'); // Create array of li items in drop down list
   

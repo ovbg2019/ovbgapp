@@ -2,11 +2,11 @@
 
 <body>
 	<script>
-		let url = 'https://www.example.com?name=hello';
+		let url = 'https://www.example.com?id=3';
 		let params = (new URL(url)).searchParams;
-		let parsed = params.get('name');
-		document.write(parsed);
-
+		let parsed = params.get('id');
+		let i = parseInt(parsed);
+		document.write(i);
 	</script>
 </body>
 
