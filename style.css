@@ -286,5 +286,75 @@ footer img {
 	max-width: 75%;
 }
 
+/*NEW UPDATE JULY 17 9pm*/
+/*3 TABS*/
+.content{
+    display: none;
+    padding-top: 60px;
+    
+    
+}
+#tab1:checked ~ #about,
+#tab2:checked ~ #history,
+#tab3:checked ~ #share{
+    display: block;
+}
+input {
+    display: none;
+}
 
+label {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    float: left;
+    padding: 15px;
+    transition: 0.3s ease-in-out;
+    font-size: 20px;
+    color: #000; /*NOT SURE ABOUT THE COLOUR YET SO I PUT BLACK FOR NOW*/
+    font-family: "latoTitle";
+    width: 33.33%;
+    height: auto;
+    justify-content:center;
+    align-items:center;
+    line-height: 30px;
+}
+
+label h4{
+    margin-left: 15px; 
+    
+}
+label:hover {
+    font-weight: bolder;
+    cursor: pointer;
+}
+input:checked + label {
+    color: #000;
+    /*border-bottom: 1px solid #000;*/ 
+    /*font-weight: bolder;*/
+    
+}
+input:checked + label h4  {
+    border-bottom: 1px solid #967EA5;
+    
+    
+}
+
+#tabIcon{
+    width: 5%;
+    height: auto;
+    align-content: center;
+}
+
+
+@media screen and (max-width: 667px) {
+    #tabIcon{
+        width: 20%;
+        height: 20%;
+    }
+    label h4{
+        font-size: 18px;
+    }
+}
+/*END UPDATE 3 TABS*/
 /* PATH ANIMATIONS */
