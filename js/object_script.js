@@ -6,7 +6,7 @@
     // declaring an array of object to to store the values 
     let parkFeature = [{
             name: 'Bike Trail',
-            colour: '#ea9154',
+            colour: '#B15222',
             icon: 'images/bike_path_icon.svg',
             about: '<p>This is a 7 km paved multi-use recreational trail that stretches from Lakeview Park to the Oshawa Valley Botanical Garden. Surrounded by lush vegetation the recreational trail meanders along the Oshawa Creek.</p><p> Along the recreational trail there are connections to other recreational trails including the Michael Starr Trail, Harmony Creek Trail, and other attractions including Oshawa Valley Botanical Garden and downtown Oshawa.</p> <p> Portions of the recreational trail travel close to the creek and has steep slopes, sharp turns and unprotected edges. Caution should be used when accessing and maneuvering the recreational trail.</p>',
             galleryImages: ['images/temp_pic1.jpg', 'images/temp_pic1.jpg', 'images/temp_pic1.jpg', 'images/temp_pic1.jpg'],
@@ -14,7 +14,7 @@
         },
         {
             name: 'Peony Garden',
-            colour: '#CC7B94',
+            colour: '#B04A7F',
             icon: 'images/peony_icon.svg',
             about: '<p>The Peony Garden is located within the Oshawa Valley Botanical Garden. In 2001, the Canadian Peony Society donated 100 plants from the Wally Gilbert Collection to the project. This contribution led to the official launch of the Oshawa Valley Botanical Garden.</p> <p>Further donations from peony breeders and suppliers across North America have led to the entire collection flourishing into the largest contemporary collection of peonies in North America. With more than 300 varieties in cultivation, the collection is truly impressive!</p> <p>The succession of blooms begins in late May and continues through to the last week of June. The Annual Peony Festival coincides with the climax of the bloom cycle in June.</p>',
             galleryImages: ['images/temp_pic2.jpg', 'images/temp_pic2.jpg', 'images/temp_pic2.jpg', 'images/temp_pic2.jpg'],
@@ -22,7 +22,7 @@
         },
         {
             name: 'Waterfall Garden',
-            colour: '#3995B1',
+            colour: '#327687',
             icon: 'images/water_feature_icon.svg',
             about: '<p>The Rockery Garden is located within Kinsman Valley Park of the Oshawa Valley Botanical Garden. It is just north of the Peony Garden and features a waterfall.</p> <p>The garden and its surroundings provides the perfect opportunity to enjoy nature and is a beautiful backdrop for any occasion.',
             galleryImages: ['images/temp_pic3.jpg', 'images/temp_pic3.jpg', 'images/temp_pic3.jpg', 'images/temp_pic3.jpg'],
@@ -30,7 +30,7 @@
         },
         {
             name: 'Rotary Bridge',
-            colour: '#9D885F',
+            colour: '#806B53',
             icon: 'images/bridge_icon.svg',
             about: '<p>Rotary Bridge was dedicated by the Rotary Club Oshawa-Parkwood and opened in celebration of the 100th anniversary of Rotary International in 2006.</p> <p>It is located over The Oshawa Creek in The Oshawa Valley Botanical Gardens and it will serve to remind the citizens of Oshawa of the tremendous acts of service that both Rotary Clubs have performed for so many years.</p>',
             galleryImages: ['images/temp_pic4.jpg', 'images/temp_pic4.jpg', 'images/temp_pic4.jpg', 'images/temp_pic4.jpg'],
@@ -38,7 +38,7 @@
         },
         {
             name: 'Daylily Collection',
-            colour: '#967EA5',
+            colour: '#7D6287',
             icon: 'images/daylily_icon.svg',
             about: '<p>The one of a kind collection of locally hybridized daylilies addition to the already beautiful gardens was made possible by the generous donation from Henry Lorrain and the late Douglas Lycett, founders of We’re in the Hayfield Now.</p> <p>The City would like to thank the volunteers including the Oshawa Garden Club, Brooklin Horticulture Society and individual volunteers who dedicated their time to dig, transport, store and replant the daylilies to make this collection a reality.</p> <p>The 265 daylily collection was established in 2017 and can be found on the east side of the Oshawa Creek directly across from the Peony Garden with access to the Kolodzie Oshawa Creek Bike Path.</p>',
             galleryImages: ['images/temp_pic5.jpg', 'images/temp_pic5.jpg', 'images/temp_pic5.jpg', 'images/temp_pic5.jpg'],
@@ -46,7 +46,7 @@
         },
         {
             name: 'Memory Garden',
-            colour: '#547EAC',
+            colour: '#4571A2',
             icon: 'images/memory_garden_icon.svg',
             about: '<p>The Memory Garden is comprised of several gardens and includes tree lined walkways and a central gathering area which provides a formal gathering space and opportunities for passive recreation. The Memory Garden provides an opportunity where residents can honour and remember loved ones through the Commemorative Tree and Bench program.</p> <p>Visitors to the Oshawa Valley Botanical Gardens can now enjoy a new shade structure thanks to donations from the Rotary Club of Oshawa and the Rotary Club of Oshawa-Parkwood.</p> <p>The shade structure is classically designed and features an antique bronze Rotary emblem in the center of the floor, perfect for quiet contemplation, as a centrepiece for photographs or as a formal wedding ceremony.</p>',
             galleryImages: ['images/temp_pic6.jpg', 'images/temp_pic6.jpg', 'images/temp_pic6.jpg', 'images/temp_pic6.jpg'],

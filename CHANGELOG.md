@@ -1,7 +1,15 @@
+*** Updated on Friday, July 19, 2019 2:15AM ***
+- Cleaned up the CSS
+- Modified the colors in the JS with new colors for selected tab
+
+-----------------------------------------------------------------------------------------------------------
+
 *** Updated on Thursday, July 18, 2019 ***
 - Added ChangeLog.md file
 
-*** Updated on Wednesday, July 17,2019 by Sullie***
+-----------------------------------------------------------------------------------------------------------
+
+*** Updated on Wednesday, July 17,2019 by Sully***
 INDEX.HTML
     - Assigned changes to the dropdown menu items
 
