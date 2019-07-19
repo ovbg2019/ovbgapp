@@ -1,5 +1,7 @@
+*** Updated on Thursday, July 18, 2019 ***
+- Added ChangeLog.md file
 
-*** Updated on Wednesday, July 17,2018 by Sullie***
+*** Updated on Wednesday, July 17,2019 by Sullie***
 INDEX.HTML
     - Assigned changes to the dropdown menu items
 
