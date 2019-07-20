@@ -1,6 +1,6 @@
 // This file contains the objects to store the data in objects for each of the point of interest
 
-window.onload = function () {
+// window.onload = function () {
     // window.onload is commented for now bcz it interferes with the functionality of the dropdown JS (app.js) file
 
     // declaring an array of object to to store the values 
@@ -124,4 +124,4 @@ window.onload = function () {
             GALLERY_IMAGES[j].src = parkFeature[id].galleryImages[j];
         ABOUT_TEXT.innerHTML = parkFeature[id].about;
     }
-}
+// }

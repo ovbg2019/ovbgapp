@@ -155,7 +155,7 @@ section #map {
 } */
 
 #infoPanel {
-	display: none;
+	/* display: none; */
 	position: fixed;
 	bottom: 7vh;
 	height: 40vh;
