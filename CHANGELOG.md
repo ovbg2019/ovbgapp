@@ -1,4 +1,10 @@
 *** Updated on Friday, July 19, 2019 8:850PM ***
+OBJECT_SCRIPT.JS
+    - Added TweenMax animations to load the information panel on/off
+
+-----------------------------------------------------------------------------------------------------------
+
+*** Updated on Friday, July 19, 2019 8:850PM ***
 INDEX.HTML
     - Added tabindex to the tabs to make them accessible through the TAB key
 

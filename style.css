@@ -157,7 +157,7 @@ section #map {
 #infoPanel {
 	/* display: none; */
 	position: fixed;
-	bottom: 7vh;
+	bottom: -100vh;
 	height: 40vh;
 	width: 100vw;
 	background: #F7F2DB;
@@ -402,7 +402,7 @@ input:checked+label {
 	#infoPanel {
 		display: block;
 		position: fixed;
-		bottom: 8vh;
+		bottom: -100vh;
 		left: 0;
 		height: 80vh;
 		width: 30vw;

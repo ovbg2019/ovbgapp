@@ -64,43 +64,68 @@
     const GALLERY_IMAGES = document.querySelectorAll('.galleryImage');
     const ABOUT_TEXT = document.querySelector('#about');
     const DESTINATIONS = document.querySelectorAll('.menuItem');
+
+    // variable to store the active colour to be set to the tabs
     let activeColour = "";
+
+    // variable to identify which tab to open 
     let id = 0;
 
+    // variable to store and read the state of the infoPanel (0: closed, 1: open)
+    let infoPanelState = 0;
 
     // This block of code will parse the data from the URL of the page and determine which tab to open when the app initially opens
-    // determining the ID of the tab
+
+    // parsing the id from the URL of the webpage
     let params = new URLSearchParams(location.search);
     let parsed = params.get('id');
+
+    // storing the parsed id in the id variable
     id = parseInt(parsed);
+
+    // opening the info panel and populating it with content based on the id and tab determined from the URL
     if (!isNaN(id)) {
         setContent();
+        openInfoPanel();
     } else {
         id = 0;
-        setContent();
     }
 
+    // a user can use TAB key to bring focus to different tabs
+    // this loop changes the id based on the tab that is being focused
     for (let i in TABS) {
         TABS[i].onfocus = function () {
             id = i;
         };
     }
 
+    // this function opens the info panel when ENTER key is pressed
     document.body.onkeyup = function (e) {
         if (e.keyCode === 13) {
-            setContent();
+            // closing the info panel before changing content
+            closeInfoPanel();
+            // using the setTimeout to delay and sync the loading of content with the animation
+            // setting the content in the info panel
+            setTimeout(setContent, 250);
+            // opening the panel with new content
+            openInfoPanel();
         }
     };
 
     // seting event listener on each tab using a loop (to reduce redundant code)
     // will allow the user to click each tab and based on the tab selected, it will populate the content
     for (let i in TABS) {
-
-        // TABS[i].addEventListener('click', function () {
+        // applying a function to onclick event of each tab
         TABS[i].onclick = function () {
+            // setting the id and the content based on the id
             id = i;
-            setContent();
-            // });
+            // closing the info panel before changing content
+            closeInfoPanel();
+            // using the setTimeout to delay and sync the loading of content with the animation
+            // setting the content in the info panel
+            setTimeout(setContent, 250);
+            // opening the panel with new content
+            openInfoPanel();
         };
     }
 
@@ -112,7 +137,7 @@
         }
     }
 
-    // fcuntion to set all the content inside the info panel
+    // function to set all the content inside the info panel
     function setContent() {
         resetTabAppearance();
         activeColour = parkFeature[id].colour;
@@ -123,5 +148,36 @@
         for (let j in GALLERY_IMAGES)
             GALLERY_IMAGES[j].src = parkFeature[id].galleryImages[j];
         ABOUT_TEXT.innerHTML = parkFeature[id].about;
+    }
+
+    // this function animates the infoPanel and its contents when it opens up
+    function openInfoPanel() {
+        // animating the panel while opening
+        if (infoPanelState === 0) {
+            TweenMax.fromTo("#infoPanel", 1, {
+                bottom: '-100vh',
+            }, {
+                delay: 0.5,
+                bottom: '7vh',
+                ease: Expo.easeOut
+            });
+            // setting state of the info panel to OPEN
+            infoPanelState = 1;
+        }
+    }
+
+    // this function animates the infoPanel and its contents when it closes
+    function closeInfoPanel() {
+        // animating the info panel while closing
+        if (infoPanelState === 1) {
+            TweenMax.fromTo("#infoPanel", 0.75, {
+                bottom: '7vh',
+            }, {
+                bottom: '-100vh',
+                ease: Circ.easeInOut
+            });
+            // setting state of the info panel to CLOSED
+            infoPanelState = 0;
+        }
     }
 // }
