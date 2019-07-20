@@ -1,6 +1,6 @@
 // This file contains the objects to store the data in objects for each of the point of interest
 
-// window.onload = function () {
+window.onload = function () {
     // window.onload is commented for now bcz it interferes with the functionality of the dropdown JS (app.js) file
 
     // declaring an array of object to to store the values 
@@ -65,59 +65,63 @@
     const ABOUT_TEXT = document.querySelector('#about');
     const DESTINATIONS = document.querySelectorAll('.menuItem');
     let activeColour = "";
+    let id = 0;
 
 
     // This block of code will parse the data from the URL of the page and determine which tab to open when the app initially opens
     // determining the ID of the tab
     let params = new URLSearchParams(location.search);
     let parsed = params.get('id');
-    let i = parseInt(parsed);
-    if (!isNaN(i)) {
-        // setting the color scheme and the content inside the info panel based on the id parsed from the tab AND ONLY IF THE ID IS AVAILABLE IN THE URL
-        // if no ID is available, then it will load the default HTML
-
-        resetTabAppearance();
-        activeColour = parkFeature[i].colour;
-        TABS[i].style.backgroundColor = activeColour;
-        TITLE_BAR.style.backgroundColor = activeColour;
-        TITLE.textContent = parkFeature[i].name;
-        TITLE_BAR_ICON.src = parkFeature[i].icon;
-        for (let j in GALLERY_IMAGES)
-            GALLERY_IMAGES[j].src = parkFeature[i].galleryImages[j];
-        // for (let j in DESTINATIONS)
-        //     DESTINATIONS[j].textContent = parkFeature[i].paths[j];
-        ABOUT_TEXT.innerHTML = parkFeature[i].about;
+    id = parseInt(parsed);
+    if (!isNaN(id)) {
+        setContent();
+    } else {
+        id = 0;
+        setContent();
     }
+
+    for (let i in TABS) {
+        TABS[i].onfocus = function () {
+            id = i;
+        };
+    }
+
+    document.body.onkeyup = function (e) {
+        if (e.keyCode === 13) {
+            setContent();
+        }
+    };
 
     // seting event listener on each tab using a loop (to reduce redundant code)
     // will allow the user to click each tab and based on the tab selected, it will populate the content
     for (let i in TABS) {
 
-        TABS[i].addEventListener('click', function () {
-            resetTabAppearance();
-            activeColour = parkFeature[i].colour;
-            TABS[i].style.backgroundColor = activeColour;
-            TITLE_BAR.style.backgroundColor = activeColour;
-            TITLE.textContent = parkFeature[i].name;
-            TITLE_BAR_ICON.src = parkFeature[i].icon;
-            for (let j in GALLERY_IMAGES)
-                GALLERY_IMAGES[j].src = parkFeature[i].galleryImages[j];
-
-                // The below code sets the items in the drop down to the path names when bottom nav items are clicked
-                // The text is already updated to the selected destination in the drop down code in app.js
-                // Consider removing
-            // for (let j in DESTINATIONS)
-            //     DESTINATIONS[j].textContent = parkFeature[i].paths[j];
-            ABOUT_TEXT.innerHTML = parkFeature[i].about;
-        });
+        // TABS[i].addEventListener('click', function () {
+        TABS[i].onclick = function () {
+            id = i;
+            setContent();
+            // });
+        };
     }
 
     // Functions to reset the appearance of the tabs
     function resetTabAppearance() {
         for (let i = 0; i < 6; i++) {
-            TABS[i].style.backgroundColor = '#707070';
+            TABS[i].style.backgroundColor = '';
             TITLE_BAR.style.backgroundColor = '#383838';
         }
     }
 
-// }
+    // fcuntion to set all the content inside the info panel
+    function setContent() {
+        resetTabAppearance();
+        activeColour = parkFeature[id].colour;
+        TABS[id].style.backgroundColor = activeColour;
+        TITLE_BAR.style.backgroundColor = activeColour;
+        TITLE.textContent = parkFeature[id].name;
+        TITLE_BAR_ICON.src = parkFeature[id].icon;
+        for (let j in GALLERY_IMAGES)
+            GALLERY_IMAGES[j].src = parkFeature[id].galleryImages[j];
+        ABOUT_TEXT.innerHTML = parkFeature[id].about;
+    }
+}
