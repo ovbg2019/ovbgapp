@@ -92,7 +92,8 @@ header {
 
 #svgMapObj {
 	width: auto;
-	height: 100%;
+  height: 58.5%;
+  /* Set height back to 58.5% from 100% as 58.5 was the base height for the zoom ins */
 	overflow: scroll;
 }
 

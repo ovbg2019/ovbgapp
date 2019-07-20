@@ -6,7 +6,7 @@ window.onload = function() {
   const DROP_DOWN_ITEM = document.querySelectorAll('.destination-select li'); // Create array of li items in drop down list
   
   // Set this via QR or nav button
-  // *** Hard coded peony for testing purposes ***
+  // *** Hard coded for testing purposes ***
   let currentLocation = 'bike';
   
   // List of items in the drop down (order matters)
@@ -19,6 +19,22 @@ window.onload = function() {
     'Bike Path',
     'Memory Garden'
   ];
+
+  const setLocation = function(value) {
+    if (value === 1) {
+      currentLocation = 'peony';
+    } else if (value === 2) {
+      currentLocation = 'waterfall';
+    } else if (value === 3) {
+      currentLocation = 'bridge';
+    } else if (value === 4) {
+      currentLocation = 'daylily';
+    } else if (value === 5) {
+      currentLocation = 'bike';
+    } else if (value === 6) {
+      currentLocation = 'memory';
+    }
+  }
 
   // Animate zoom/ position of location
   const animatedZoom = function(classes) {
@@ -164,7 +180,7 @@ window.onload = function() {
     });
 
   });
+
+
   
   }
-  
-  
