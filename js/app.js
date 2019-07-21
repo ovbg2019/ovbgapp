@@ -7,7 +7,7 @@ window.onload = function() {
   
   // Set this via QR or nav button
   // *** Hard coded for testing purposes ***
-  let currentLocation = 'bike';
+  let currentLocation = 'peony';
   
   // List of items in the drop down (order matters)
   const LOCATIONS = [
@@ -93,7 +93,7 @@ window.onload = function() {
             animatedZoom('moveTo-daylily-waterfall');
           // destination is set to Bike Path
           } else if (item.value === 5) {
-            animatedZoom('moveTo-peony-bike');
+            animatedZoom('moveTo-waterfall-bike');
           // destination is set to Memory Garden
           } else if (item.value === 6) {
             animatedZoom('moveTo-memory-waterfall');
