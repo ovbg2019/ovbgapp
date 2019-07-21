@@ -12,9 +12,9 @@ body {
 
 :root {
 
-  /*  OLD Colors */
-  /* --paths:  #f7f2db;   /* aka white chocolate */
-  /* --concrete-path: #383838;
+	/*  OLD Colors */
+	/* --paths:  #f7f2db;   /* aka white chocolate */
+	/* --concrete-path: #383838;
   --map-green: #88b086;
   --peony: #CC7B94;
   --water-feature: #3995B1;
@@ -24,17 +24,18 @@ body {
   --day-lily:  #967EA5;
   --map: #707070; */
 
-  /* /* NEW COLORS */
-  --paths:  #f7f2db; /*  aka white chocolate */
-  --concrete-path: #383838;
-  --map-green: #88b086;
-  --peony: #B04A7F;
-  --water-feature: #327687;
-  --memory-garden: #4571A2;
-  --bridge: #806B53;
-  --bike-path: #477043; 
-  --day-lily:  #7D6287;
-  --map: #707070;
+	/* /* NEW COLORS */
+	--paths: #f7f2db;
+	/*  aka white chocolate */
+	--concrete-path: #383838;
+	--map-green: #88b086;
+	--peony: #B04A7F;
+	--water-feature: #327687;
+	--memory-garden: #4571A2;
+	--bridge: #806B53;
+	--bike-path: #B15222;
+	--day-lily: #7D6287;
+	--map: #707070;
 
 }
 
@@ -99,15 +100,15 @@ header {
 #svgMap {
 	width: auto;
 	height: 100%;
-  }
-  
-  .destination-menu {
+}
+
+.destination-menu {
 	width: 100%;
 	height: 30rem;
-  }
-  
-  
-  .destination-select {
+}
+
+
+.destination-select {
 	width: 80vw;
 	background: var(--paths);
 	border-radius: 1.5vh;
@@ -116,19 +117,19 @@ header {
 	position: absolute;
 	top: 5vh;
 	left: 10vw;
-  }
-  
-  .destination-select li {
+}
+
+.destination-select li {
 	list-style: none;
 	text-align: center;
 	padding: 1vh;
 	font-size: 3vh;
 	font-family: "ButtonFont";
-  }
-  
-  .hidden {
+}
+
+.hidden {
 	display: none;
-  }
+}
 
 section {
 	top: 0;
@@ -154,8 +155,9 @@ section #map {
 } */
 
 #infoPanel {
+	/* display: none; */
 	position: fixed;
-	bottom: 7vh;
+	bottom: -100vh;
 	height: 40vh;
 	width: 100vw;
 	background: #F7F2DB;
@@ -187,7 +189,7 @@ section #map {
 #title {
 	display: inline;
 	color: #F7F2DB;
-	font-size: 3.5vh;
+	font-size: 3vh;
 	font-family: "TitleFont";
 	text-transform: capitalize;
 	letter-spacing: 1px;
@@ -207,6 +209,7 @@ section #map {
 #contentBox {
 	height: 88%;
 	width: 100%;
+	margin: 0 auto;
 	padding: 2vh;
 	padding-bottom: 2vh;
 	overflow: scroll;
@@ -276,28 +279,40 @@ footer .tab:hover {
 	cursor: pointer;
 }
 
-footer #tab1BikeTrail:hover {
-	background: #ea9154;
+footer #tab1BikeTrail:hover,
+footer #tab1BikeTrail:focus {
+	background: var(--bike-path);
+	outline: none;
 }
 
-footer #tab2Peony:hover {
-	background: #CC7B94;
+footer #tab2Peony:hover,
+footer #tab2Peony:focus {
+	background: var(--peony);
+	outline: none;
 }
 
-footer #tab3WaterFeature:hover {
-	background: #3995B1;
+footer #tab3WaterFeature:hover,
+footer #tab3WaterFeature:focus {
+	background: var(--water-feature);
+	outline: none;
 }
 
-footer #tab4Bridge:hover {
-	background: #9D885F;
+footer #tab4Bridge:hover,
+footer #tab4Bridge:focus {
+	background: var(--bridge);
+	outline: none;
 }
 
-footer #tab5Daylily:hover {
-	background: #967EA5;
+footer #tab5Daylily:hover,
+footer #tab5Daylily:focus {
+	background: var(--day-lily);
+	outline: none;
 }
 
-footer #tab6MemoryGarden:hover {
-	background: #547EAC;
+footer #tab6MemoryGarden:hover,
+footer #tab6MemoryGarden:focus {
+	background: var(--memory-garden);
+	outline: none;
 }
 
 footer img {
@@ -307,49 +322,214 @@ footer img {
 
 /*NEW UPDATE JULY 17 9pm*/
 /*3 TABS*/
-.content{
-    display: none;
+.content {
+	display: none;
 }
-#tab1:checked ~ #about,
-#tab2:checked ~ #history,
-#tab3:checked ~ #share{
-    display: block;
+
+#tab1:checked~#about,
+#tab2:checked~#history,
+#tab3:checked~#share {
+	display: block;
 }
 
 input {
-    display: none;
+	display: none;
 }
 
 label {
-    display: flex;
-    flex-direction: row;
-    float: left;
+	display: flex;
+	flex-direction: row;
+	float: left;
 	padding: 15px 20px;
 	margin-bottom: 2vh;
-    font-size: 2.5vh;
-    color: #383838; /*NOT SURE ABOUT THE COLOUR YET SO I PUT BLACK FOR NOW*/
-    font-family: "LinkFont";
-    width: 33.33%;
-	justify-content:center;
+	font-size: 2.5vh;
+	color: #383838;
+	/*NOT SURE ABOUT THE COLOUR YET SO I PUT BLACK FOR NOW*/
+	font-family: "LinkFont";
+	width: 33.33%;
+	justify-content: center;
 	align-items: center;
 	border-radius: 1vh;
 }
 
 label h4 {
 	margin-left: 1vw;
-    
-}
-label:hover {
-    cursor: pointer;
-}
-input:checked + label {
-	background-color: rgba(0, 0, 0, 0.1);
-	transition: 0.3s ease-in-out;
-	
+
 }
 
-#tabIcon{
-    width: auto;
-    height: 2.5vh;
+label:hover {
+	cursor: pointer;
+}
+
+input:checked+label {
+	background-color: rgba(0, 0, 0, 0.1);
+	transition: 0.3s ease-in-out;
+
+}
+
+#tabIcon {
+	width: auto;
+	height: 2.5vh;
 	margin-right: 1vw;
+}
+
+@media only screen and (min-width: 769px) {
+	.destination-select {
+		display: none;
+	}
+
+	section {
+		position: absolute;
+		top: 0;
+		width: 100vw;
+		height: 100vh;
+		overflow: scroll;
+	}
+
+	#svgMapObj {
+		position: relative;
+		left: 30vw;
+		width: auto;
+		height: 100%;
+		/* overflow: scroll; */
+	}
+	
+	#svgMap {
+		width: auto;
+		height: 100%;
+	}
+
+	#infoPanel {
+		display: block;
+		position: fixed;
+		bottom: -100vh;
+		left: 0;
+		height: 80vh;
+		width: 30vw;
+		background: #F7F2DB;
+		box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.2);
+	}
+
+	#titleBar {
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		top: 0;
+		height: 10%;
+		width: 100%;
+		background: #383838;
+		border-top-left-radius: 2vh;
+		border-top-right-radius: 2vh;
+		box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+	}
+	
+	#titleBar div {
+		display: flex;
+		align-items: center;
+		width: 85%;
+		height: 90%;
+	}
+	
+	#title {
+		display: inline;
+		color: #F7F2DB;
+		font-size: 3vh;
+		font-family: "TitleFont";
+		text-transform: capitalize;
+		letter-spacing: 1px;
+	}
+	
+	#titleBarIcon {
+		max-height: 50%;
+		max-width: 50%;
+		margin: 0 3%;
+	}
+	
+	#closeButton {
+		height: 60%;
+		width: auto;
+	}
+	
+	#contentBox {
+		height: 92%;
+		width: 100%;
+		margin: 0 auto;
+		padding: 2vh;
+		padding-bottom: 1vh;
+		overflow: scroll;
+	}
+	
+	#contentImageBox {
+		width: 100%;
+		height: auto;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-evenly;
+		align-content: center;
+		background: rgba(0, 0, 0, 0.05);
+		padding: 0.5vh 1vh;
+		border-radius: 1vh;
+	}
+	
+	#contentImageBox .galleryImage {
+		width: 46%;
+		margin: 1vh 0;
+		height: auto;
+		border-radius: 1vh;
+		box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+	}
+	
+	#contentTextBox {
+		width: 100%;
+		height: auto;
+		margin-top: 2vh;
+		background: rgba(0, 0, 0, 0.05);
+		border-radius: 1vh;
+		margin-bottom: 5vh;
+	}
+	
+	#contentTextBox p {
+		color: #383838;
+		font-size: 3vh;
+		font-family: "ParaFont";
+		line-height: 4vh;
+		padding: 2vh 1.5vw;
+	}
+
+	label {
+		display: flex;
+		flex-direction: row;
+		float: left;
+		padding: 15px 10px;
+		margin-bottom: 2vh;
+		font-size: 2.5vh;
+		color: #383838;
+		/*NOT SURE ABOUT THE COLOUR YET SO I PUT BLACK FOR NOW*/
+		font-family: "LinkFont";
+		width: 33.33%;
+		justify-content: space-around;
+		align-items: center;
+		border-radius: 1vh;
+	}
+	
+	label h4 {
+		margin-left: 0vw;	
+	}
+
+	#tabIcon {
+		width: auto;
+		height: 2.5vh;
+		margin-right: 0vw;
+	}
+
+	footer {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		position: fixed;
+		bottom: 0vh;
+		left: 0;
+		height: 10vh;
+		width: 30vw;
+	}
 }

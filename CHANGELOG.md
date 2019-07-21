@@ -1,3 +1,23 @@
+*** Updated on Friday, July 19, 2019 8:850PM ***
+OBJECT_SCRIPT.JS
+    - Added TweenMax animations to load the information panel on/off
+
+-----------------------------------------------------------------------------------------------------------
+
+*** Updated on Friday, July 19, 2019 8:850PM ***
+INDEX.HTML
+    - Added tabindex to the tabs to make them accessible through the TAB key
+
+STYLE.CSS
+    - Updated with media queries for larger displays
+    - Applied :focus effects to the tab to register the interaction through the TAB key
+
+OBJECT_SCRIPT.JS
+    - Replaced all the "addEventListener" methods with "onclick" assignment as it allows the better functionality with lesser code
+    - Added the ability to open a tab with ENTER key (selected through TAB)
+
+-----------------------------------------------------------------------------------------------------------
+
 *** Updated on Friday, July 19, 2019 2:15AM ***
 - Cleaned up the CSS
 - Modified the colors in the JS with new colors for selected tab
