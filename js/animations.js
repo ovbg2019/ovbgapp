@@ -18,7 +18,8 @@ window.onload = function() {
 
 	//Buttons
 	const DROP_DOWN = document.querySelector('.destination-select');
-	const DROP_DOWN_ITEM = document.querySelectorAll('.destination-select li'); // Create array of li items in drop down list
+	const DROP_DOWN_ITEM = document.querySelectorAll('.destination-select li');
+	// Create array of li items in drop down list
 
 	const tlm = new TimelineMax({});
 
@@ -90,8 +91,9 @@ window.onload = function() {
 	};
 
 	//on change event handler, selects the course list and updates the page to the selected course
-	DROP_DOWN.addEventListener('click', () => {
+	DROP_DOWN_ITEM.addEventListener('click', () => {
 		console.log(DROP_DOWN);
+		console.log(DROP_DOWN_ITEM);
 
 		index = DROP_DOWN_ITEM.selectedIndex;
 

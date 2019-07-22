@@ -4,10 +4,6 @@ window.onload = function() {
 	const DROP_DOWN = document.querySelector('.destination-select'); // Select the drop down
 	const DROP_DOWN_ITEM = document.querySelectorAll('.destination-select li'); // Create array of li items in drop down list
 
-	// Constants for the dropdown
-	const DROP_DOWN = document.querySelector('.destination-select'); // Select the drop down
-	const DROP_DOWN_ITEM = document.querySelectorAll('.destination-select li'); // Create array of li items in drop down list
-
 	// Set this via QR or nav button
 	// *** Hard coded for testing purposes ***
 	let currentLocation = 'peony';
@@ -68,6 +64,7 @@ window.onload = function() {
 					// destination is set to Waterfall Garden
 					if (item.value === 2) {
 						animatedZoom('moveTo-peony-waterfall');
+
 						// destination is set to Bridge
 					} else if (item.value === 3) {
 						animatedZoom('moveTo-bridge-peony');
