@@ -1,3 +1,18 @@
+*** Updated on Sunday, July 21, 2019 10:23PM ***
+        FUNCTIONAL THE IMAGE GALLERY        
+INDEX.HTML
+    - added 'expanded images', 'small images' divs 
+        
+STYLE.CSS
+    - modified contents and sizes for the image gallery
+    
+OBJECT_SCRIPT.JS
+    - added 2 arrays (bigImages, smImages) inside parkFeature array
+    - added closeImgGallery() function into resetTabAppearance() function
+    - added image gallery script
+
+-----------------------------------------------------------------------------------------------------------
+
 *** Updated on Friday, July 19, 2019 8:850PM ***
 OBJECT_SCRIPT.JS
     - Added TweenMax animations to load the information panel on/off
