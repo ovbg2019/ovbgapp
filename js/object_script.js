@@ -126,7 +126,7 @@ document.body.onkeyup = function (e) {
         closeInfoPanel();
         // using the setTimeout to delay and sync the loading of content with the animation
         // setting the content in the info panel
-        setTimeout(setContent, 250);
+        setTimeout(setContent, 350);
         // opening the panel with new content
         openInfoPanel();
     }
@@ -143,7 +143,7 @@ for (let i in TABS) {
         closeInfoPanel();
         // using the setTimeout to delay and sync the loading of content with the animation
         // setting the content in the info panel
-        setTimeout(setContent, 250);
+        setTimeout(setContent, 350);
         // opening the panel with new content
         openInfoPanel();
     };
@@ -205,6 +205,9 @@ function closeInfoPanel() {
         });
         // setting state of the info panel to CLOSED
         infoPanelState = 0;
+
+        // resetting the tab appereance
+        setTimeout(resetTabAppearance, 350);
     }
 }
 

@@ -320,33 +320,16 @@ footer img {
 	max-width: 75%;
 }
 
-/*NEW UPDATE JULY 17 9pm*/
-/*3 TABS*/
-.content {
-	display: none;
-}
-
-#tab1:checked~#about,
-#tab2:checked~#history,
-#tab3:checked~#share {
-	display: block;
-}
-
-input {
-	display: none;
-}
-
 label {
 	display: flex;
 	flex-direction: row;
-	float: left;
-	padding: 15px 20px;
+	padding: 10px 20px;
 	margin-bottom: 2vh;
-	font-size: 2.5vh;
+	font-size: 3vh;
 	color: #383838;
-	/*NOT SURE ABOUT THE COLOUR YET SO I PUT BLACK FOR NOW*/
+	background-color: rgba(0, 0, 0, 0.1);
 	font-family: "LinkFont";
-	width: 33.33%;
+	width: 100%;
 	justify-content: center;
 	align-items: center;
 	border-radius: 1vh;
@@ -354,7 +337,6 @@ label {
 
 label h4 {
 	margin-left: 1vw;
-
 }
 
 label:hover {
@@ -415,7 +397,8 @@ input:checked+label {
     position: relative;
 }
 
-/*end Gallery Image style--------------*/	
+/* STYLES FOR LARGE DISPLAYS */
+
 @media only screen and (min-width: 769px) {
 	.destination-select {
 		display: none;
@@ -542,21 +525,20 @@ input:checked+label {
 	label {
 		display: flex;
 		flex-direction: row;
-		float: left;
-		padding: 15px 10px;
+		padding: 10px 20px;
 		margin-bottom: 2vh;
-		font-size: 2.5vh;
+		font-size: 3vh;
 		color: #383838;
-		/*NOT SURE ABOUT THE COLOUR YET SO I PUT BLACK FOR NOW*/
+		background-color: rgba(0, 0, 0, 0.1);
 		font-family: "LinkFont";
-		width: 33.33%;
-		justify-content: space-around;
+		width: 100%;
+		justify-content: center;
 		align-items: center;
 		border-radius: 1vh;
 	}
 	
 	label h4 {
-		margin-left: 0vw;	
+		margin-left: 0.5vw;	
 	}
 
 	#tabIcon {
