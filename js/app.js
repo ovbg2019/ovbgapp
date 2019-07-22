@@ -4,9 +4,13 @@ window.onload = function() {
 	const DROP_DOWN = document.querySelector('.destination-select'); // Select the drop down
 	const DROP_DOWN_ITEM = document.querySelectorAll('.destination-select li'); // Create array of li items in drop down list
 
+	// Constants for the dropdown
+	const DROP_DOWN = document.querySelector('.destination-select'); // Select the drop down
+	const DROP_DOWN_ITEM = document.querySelectorAll('.destination-select li'); // Create array of li items in drop down list
+
 	// Set this via QR or nav button
-	// *** Hard coded peony for testing purposes ***
-	let currentLocation = 'bike';
+	// *** Hard coded for testing purposes ***
+	let currentLocation = 'peony';
 
 	// List of items in the drop down (order matters)
 	const LOCATIONS = [
@@ -18,6 +22,22 @@ window.onload = function() {
 		'Bike Path',
 		'Memory Garden',
 	];
+
+	const setLocation = function(value) {
+		if (value === 1) {
+			currentLocation = 'peony';
+		} else if (value === 2) {
+			currentLocation = 'waterfall';
+		} else if (value === 3) {
+			currentLocation = 'bridge';
+		} else if (value === 4) {
+			currentLocation = 'daylily';
+		} else if (value === 5) {
+			currentLocation = 'bike';
+		} else if (value === 6) {
+			currentLocation = 'memory';
+		}
+	};
 
 	// Animate zoom/ position of location
 	const animatedZoom = function(classes) {
@@ -31,96 +51,9 @@ window.onload = function() {
 		MAP_SVG.classList.add(classes);
 	};
 
-	//Animate Paths
-	const tlm = new TimelineMax({});
-
-	const removeCurrentAnimation = function() {
-		tlm.progress(0).clear();
-	};
-	//declare variable index
-	let index;
-
-	/* decare new array - pathList which will contain objects of path*/
-	let pathList = new Array();
-
-	//first object with array index 0
-	pathList[0] = {
-		draw: () => {
-			removeCurrentAnimation();
-		},
-	};
-	pathList[1] = {
-		draw: () => {
-			removeCurrentAnimation();
-			tlm.fromTo(
-				peonyToBridgePath,
-				5,
-				{
-					strokeWidth: 10,
-					strokeDasharray: 807,
-					strokeDashoffset: 807,
-				},
-				{
-					stroke: '#679DF6',
-					strokeWidth: 20,
-					strokeDasharray: 807,
-					strokeDashoffset: 0,
-					repeat: -1,
-					ease: Sine.easeInOut,
-					// ease: Circ.easeOut,
-					// ease: Circ.easeIn,
-					repeatDelay: 1,
-				}
-			);
-		},
-	};
-	pathList[2] = {
-		draw: () => {
-			removeCurrentAnimation();
-			tlm.fromTo(
-				bridgeToPeonyPath,
-				5,
-				{
-					strokeWidth: 10,
-					strokeDasharray: 807,
-					strokeDashoffset: 807,
-				},
-				{
-					stroke: '#679DF6',
-					strokeWidth: 20,
-					strokeDasharray: 807,
-					strokeDashoffset: 0,
-					repeat: -1,
-					ease: Sine.easeInOut,
-					// ease: Circ.easeOut,
-					// ease: Circ.easeIn,
-					repeatDelay: 1,
-				}
-			);
-		},
-	};
-
-	//End of Path Animation
-
 	// Create evenbt listener on drop down menu
 	DROP_DOWN.addEventListener('click', function() {
-		//
-		// index = DROP_DOWN.selectedIndex;
-
-		// /*Determines which path was selected from the list and then uses the value of the same property to retrieve object from the array.*/
-		// // index = DROP_DOWN.selectedIndex;
-
-		// //call on the drawn method from the array
-		// pathList[index].draw();
-
-		// // move to next array element
-		// index++;
-
-		// //circle back to 0 i.e 1st element
-		// index = index % pathList.length;
-
 		// Loop through the elements in the drop down and add event listeners to them
-
 		DROP_DOWN_ITEM.forEach(item => {
 			// toggle the hidden class on each item in the list (unhiding them)
 			item.classList.toggle('hidden');
@@ -135,7 +68,6 @@ window.onload = function() {
 					// destination is set to Waterfall Garden
 					if (item.value === 2) {
 						animatedZoom('moveTo-peony-waterfall');
-
 						// destination is set to Bridge
 					} else if (item.value === 3) {
 						animatedZoom('moveTo-bridge-peony');
@@ -162,7 +94,7 @@ window.onload = function() {
 						animatedZoom('moveTo-daylily-waterfall');
 						// destination is set to Bike Path
 					} else if (item.value === 5) {
-						animatedZoom('moveTo-peony-bike');
+						animatedZoom('moveTo-waterfall-bike');
 						// destination is set to Memory Garden
 					} else if (item.value === 6) {
 						animatedZoom('moveTo-memory-waterfall');
