@@ -1,8 +1,19 @@
 // Put everything inside an onload to ensure that everything has loaded in before any code is executed
 window.onload = function() {
+	//declare consts and set DOM reference
+
 	// Constants for the dropdown
 	const DROP_DOWN = document.querySelector('.destination-select'); // Select the drop down
 	const DROP_DOWN_ITEM = document.querySelectorAll('.destination-select li'); // Create array of li items in drop down list
+
+	// Get SVG document inside Object by ID
+	const SVG_PATH_MAP = document.querySelector('#svgMapObj').contentDocument;
+	//SVG Navigation Paths
+	/* Penoy */
+	const peonyToBridgePath = SVG_PATH_MAP.querySelector('#peony_to_bridge');
+	const bridgeToPeonyPath = SVG_PATH_MAP.querySelector('#bridge_to_peony');
+	//sets the displayed text to the selected location name from li
+	const PLACE_HOLDER = document.querySelector('#placeholder');
 
 	// Set this via QR or nav button
 	// *** Hard coded for testing purposes ***
@@ -47,6 +58,53 @@ window.onload = function() {
 		MAP_SVG.classList.add(classes);
 	};
 
+	/* ANIMATIONS BEGINS */
+	//New TimeLine Max const for GSAP
+	const TLM = new TimelineMax({});
+	//Clears Current/Active Animation
+	const removeCurrentAnimation = function() {
+		TLM.progress(0).clear();
+	};
+
+	//declare variable index
+	let index;
+
+	/* decare new array - pathList which will contain objects of path*/
+
+	let pathList = new Array();
+
+	pathList[0] = {
+		draw: () => {
+			removeCurrentAnimation();
+			TLM.fromTo(
+				peonyToBridgePath,
+				5,
+				{
+					strokeWidth: 10,
+					strokeDasharray: 807,
+					strokeDashoffset: 807,
+				},
+				{
+					stroke: '#679DF6',
+					strokeWidth: 20,
+					strokeDasharray: 807,
+					strokeDashoffset: 0,
+					repeat: -1,
+					ease: Sine.easeInOut,
+					// ease: Circ.easeOut,
+					// ease: Circ.easeIn,
+					repeatDelay: 1,
+				}
+			);
+		},
+	};
+
+	const DRAW = (pathList, index) => {
+		return pathList[index].draw();
+	};
+
+	/* ANIMATIONS ENDS */
+
 	// Create evenbt listener on drop down menu
 	DROP_DOWN.addEventListener('click', function() {
 		// Loop through the elements in the drop down and add event listeners to them
@@ -57,7 +115,7 @@ window.onload = function() {
 			// Add the event listener to the item
 			item.addEventListener('click', function() {
 				// Upon clicking an item in the list set the displayed text to the selected location name
-				document.getElementById('placeholder').textContent = `Go to: ${LOCATIONS[item.value]}`;
+				PLACE_HOLDER.textContent = `Go to: ${LOCATIONS[item.value]}`;
 
 				// If current location is Peony Garden
 				if (currentLocation === 'peony') {
@@ -68,6 +126,7 @@ window.onload = function() {
 						// destination is set to Bridge
 					} else if (item.value === 3) {
 						animatedZoom('moveTo-bridge-peony');
+						DRAW(pathList, 0);
 						// destination is set to DayLily Collection
 					} else if (item.value === 4) {
 						animatedZoom('moveTo-peony-daylily');
@@ -101,6 +160,7 @@ window.onload = function() {
 					// destination is set to Peony Garden
 					if (item.value === 1) {
 						animatedZoom('moveTo-bridge-peony');
+
 						// destination is set to Waterfall Garden
 					} else if (item.value === 2) {
 						animatedZoom('moveTo-bridge-waterfall');
