@@ -162,6 +162,9 @@ function resetTabAppearance() {
     }
     // reset image gallery
     closeImgGallery();
+        
+    //reset info to the top - the info will scroll to the top once click to other tab
+    document.getElementById('contentBox').scrollTop = 0;
 }
 
 // function to set all the content inside the info panel
