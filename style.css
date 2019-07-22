@@ -92,8 +92,8 @@ header {
 /* Dropdown and SVG styles */
 
 #svgMapObj {
-	width: auto;
-	height: 100%;
+  width: auto;
+  height: 100%;
 	overflow: scroll;
 }
 
