@@ -1,3 +1,13 @@
+*** Updated on Monday, July 22, 2019 5:57PM ***
+    OBJECT_SCRIPT.JS
+        - Animated the scaling of the map to match with the expanded info panel
+        - Now the map object scale between 58.5% to 100%
+
+    INDEX.HTML
+        - Added link to jQuery CDN (lol. Everything was working without it)
+
+-----------------------------------------------------------------------------------------------------------
+
 *** Updated on Monday, July 22, 2019 1:37PM ***
 
 APP.JS - Penoy to Bridge Animation
@@ -5,6 +15,7 @@ APP.JS - Penoy to Bridge Animation
 SVG_MAP - Updated SVG, moved ccs to css/zoom.css
 CSS also move style to folder css
 
+-----------------------------------------------------------------------------------------------------------
 
 *** Updated on Sunday, July 21, 2019 10:23PM ***
         FUNCTIONAL THE IMAGE GALLERY
