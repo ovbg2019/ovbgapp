@@ -4,6 +4,9 @@ window.onload = function() {
   // Constants for the dropdown
   const DROP_DOWN = document.querySelector('.destination-select'); // Select the drop down
   const DROP_DOWN_ITEM = document.querySelectorAll('.destination-select li'); // Create array of li items in drop down list
+  const MAP_OBJ = document.getElementById('svgMapObj');  // Target object element holding SVG of map
+  const MAP_SVG = MAP_OBJ.contentDocument.getElementById('svgMap'); // Get the SVG document inside the Object tag
+
   
   // Set this via QR or nav button
   // *** Hard coded for testing purposes ***
@@ -38,15 +41,22 @@ window.onload = function() {
 
   // Animate zoom/ position of location
   const animatedZoom = function(classes) {
-    // Target object element holding SVG of map
-    const MAP_OBJ = document.getElementById('svgMapObj');
-    // Get the SVG document inside the Object tag
-    const MAP_SVG = MAP_OBJ.contentDocument.getElementById('svgMap');
+
     // Reset Class List
     MAP_SVG.removeAttribute('class');
     // Add classes to SVG
     MAP_SVG.classList.add(classes);
   }
+
+  // if anywhere in the map is clicked the dropdown will close
+  MAP_SVG.addEventListener('click', function(e) {
+    DROP_DOWN_ITEM.forEach(item => {
+      // toggle the hidden class on each item in the list (unhiding them)
+      item.classList.toggle('hidden');
+      // Upon clicking an item in the list set the displayed text to the selected location name
+      document.getElementById('placeholder').textContent = `${LOCATIONS[item.value]}`;
+    });
+  });
 
   
   // Create evenbt listener on drop down menu
@@ -181,6 +191,4 @@ window.onload = function() {
 
   });
 
-
-  
   }
