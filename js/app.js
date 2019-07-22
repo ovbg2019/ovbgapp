@@ -11,6 +11,8 @@ window.onload = function() {
   // Set this via QR or nav button
   // *** Hard coded for testing purposes ***
   let currentLocation = 'peony';
+
+  let startPosition = '';
   
   // List of items in the drop down (order matters)
   const LOCATIONS = [
@@ -41,7 +43,6 @@ window.onload = function() {
 
   // Animate zoom/ position of location
   const animatedZoom = function(classes) {
-
     // Reset Class List
     MAP_SVG.removeAttribute('class');
     // Add classes to SVG
@@ -54,7 +55,7 @@ window.onload = function() {
       // toggle the hidden class on each item in the list (unhiding them)
       item.classList.toggle('hidden');
       // Upon clicking an item in the list set the displayed text to the selected location name
-      document.getElementById('placeholder').textContent = `${LOCATIONS[item.value]}`;
+      document.getElementById('placeholder').textContent = `Select Destination`;
     });
   });
 
