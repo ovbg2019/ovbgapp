@@ -77,7 +77,7 @@ window.onload = function() {
 				peonyToBridgePath,
 				5,
 				{
-					strokeWidth: 10,
+					strokeWidth: 20,
 					strokeDasharray: 807,
 					strokeDashoffset: 807,
 				},
