@@ -1,11 +1,19 @@
+*** Updated on Monday, July 22, 2019 1:37PM ***
+
+APP.JS - Penoy to Bridge Animation
+        - updated added CONST for PLACEHOLDER
+SVG_MAP - Updated SVG, moved ccs to css/zoom.css
+CSS also move style to folder css
+
+
 *** Updated on Sunday, July 21, 2019 10:23PM ***
-        FUNCTIONAL THE IMAGE GALLERY        
+        FUNCTIONAL THE IMAGE GALLERY
 INDEX.HTML
-    - added 'expanded images', 'small images' divs 
-        
+    - added 'expanded images', 'small images' divs
+
 STYLE.CSS
     - modified contents and sizes for the image gallery
-    
+
 OBJECT_SCRIPT.JS
     - added 2 arrays (bigImages, smImages) inside parkFeature array
     - added closeImgGallery() function into resetTabAppearance() function
