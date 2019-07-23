@@ -14,7 +14,7 @@ window.onload = function () {
       smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
       paths: ['bike_to_peony', 'bike_to_waterfall', 'bike_to_bridge', 'bike_to_daylily', 'bike_to_memory'],
       featureZoomPoints: ['190%', 0.2, 1],
-      // pathZoomPoints: ['100%', '300px', '200px']
+      // pathZoomPoints: [['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1]]
     },
     {
       name: 'Peony Garden',
@@ -26,7 +26,7 @@ window.onload = function () {
       smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
       paths: ['peony_to_bike', 'peony_to_waterfall', 'peony_to_bridge', 'peony_to_daylily', 'peony_to_memory'],
       featureZoomPoints: ['180%', 0.4, 0.95],
-      // pathZoomPoints: ['100%', '300px', '200px']
+      // pathZoomPoints: [['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1]]
     },
     {
       name: 'Waterfall Garden',
@@ -38,7 +38,7 @@ window.onload = function () {
       smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
       paths: ['waterfall_to_peony', 'waterfall_to_bike', 'waterfall_to_bridge', 'waterfall_to_daylily', 'waterfall_to_memory'],
       featureZoomPoints: ['170%', 0.35, 0.4],
-      // pathZoomPoints: ['100%', '300px', '200px']
+      // pathZoomPoints: [['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1]]
     },
     {
       name: 'Rotary Bridge',
@@ -50,7 +50,7 @@ window.onload = function () {
       smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
       paths: ['bridge_to_peony', 'bridge_to_waterfall', 'bridge_to_bike', 'bridge_to_daylily', 'bridge_to_memory'],
       featureZoomPoints: ['200%', 0.145, 1.4],
-      // pathZoomPoints: ['100%', '300px', '200px']
+      // pathZoomPoints: [['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1]]
     },
     {
       name: 'Daylily Collection',
@@ -62,7 +62,7 @@ window.onload = function () {
       smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
       paths: ['daylily_to_peony', 'daylily_to_waterfall', 'daylily_to_beidge', 'daylily_to_bike', 'daylily_to_memory'],
       featureZoomPoints: ['220%', 0, 1.33],
-      // pathZoomPoints: ['100%', '300px', '200px']
+      // pathZoomPoints: [['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1]]
     },
     {
       name: 'Memory Garden',
@@ -74,7 +74,7 @@ window.onload = function () {
       smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
       paths: ['memory_to_peony', 'memory_to_waterfall', 'memory_to_bridge', 'memory_to_daylily', 'memory_to_bike'],
       featureZoomPoints: ['170%', 0, 0.06],
-      // pathZoomPoints: ['100%', '300px', '200px']
+      // pathZoomPoints: [['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1]]
     },
   ];
 
