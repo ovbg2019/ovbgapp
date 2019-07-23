@@ -202,7 +202,7 @@ section #map {
 }
 
 #closeButton {
-	height: 60%;
+	height: 50%;
 	width: auto;
 }
 
@@ -479,7 +479,7 @@ input:checked+label {
 	}
 
 	#closeButton {
-		height: 60%;
+		height: 50%;
 		width: auto;
 	}
 

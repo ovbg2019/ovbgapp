@@ -1,3 +1,10 @@
+*** Updated on Monday, July 23, 2019 2:50AM ***
+    SCRIPT.JS
+        - Added the new zoom in/out animation
+	    - The values for the zoom [zoom level, top scroll, left scroll] added in the objects 
+
+-----------------------------------------------------------------------------------------------------------
+
 *** Updated on Monday, July 22, 2019 5:57PM ***
     OBJECT_SCRIPT.JS
         - Animated the scaling of the map to match with the expanded info panel
