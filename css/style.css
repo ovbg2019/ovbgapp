@@ -20,7 +20,7 @@ body {
   --water-feature: #3995B1;
   --memory-garden: #547EAC;
   --bridge: #9D885F;
-  --bike-path: #ea9154; 
+  --bike-path: #ea9154;
   --day-lily:  #967EA5;
   --map: #707070; */
 
@@ -43,27 +43,27 @@ body {
 
 @font-face {
 	font-family: "TitleFont";
-	src: url(fonts/Lato-Black.ttf);
+	src: url(../fonts/Lato-Black.ttf);
 }
 
 @font-face {
 	font-family: "LinkFont";
-	src: url(fonts/Lato-Heavy.ttf);
+	src: url(../fonts/Lato-Heavy.ttf);
 }
 
 @font-face {
 	font-family: "ButtonFont";
-	src: url(fonts/Lato-Semibold.ttf);
+	src: url(../fonts/Lato-Semibold.ttf);
 }
 
 @font-face {
 	font-family: "ParaFont";
-	src: url(fonts/Lato-Medium.ttf);
+	src: url(../fonts/Lato-Medium.ttf);
 }
 
 @font-face {
 	font-family: "ParaFontItalic";
-	src: url(fonts/Lato-Italic.ttf);
+	src: url(../fonts/Lato-Italic.ttf);
 }
 
 
@@ -92,8 +92,8 @@ header {
 /* Dropdown and SVG styles */
 
 #svgMapObj {
-  width: auto;
-  height: 100%;
+	width: auto;
+	height: 100%;
 	overflow: scroll;
 }
 
@@ -144,11 +144,11 @@ section {
 	overflow: scroll;
 } */
 
-/* 
+/*
 section svg {
 	width: auto;
   height: 100%;
-  
+
 section #map {
 	width: 1280px;
 	height: 720px;
@@ -356,45 +356,52 @@ input:checked+label {
 }
 
 /*gallery Images style--------------------*/
-    
-#modalContent{
-    position: relative;
-    /*opacity: 0;*/
-    border-radius: 1vh;
-    width: 100%;
-    height: auto;
-    display:grid;
-}
-.bigImage{
-    width: 80%;
-    height: auto;
-    position: absolute;  
+
+#modalContent {
+	position: relative;
+	/*opacity: 0;*/
+	border-radius: 1vh;
+	width: 100%;
+	height: auto;
+	display: grid;
 }
 
-.smImage{
-    width: 17.7%;
-    height: auto;
-    background-color: yellow;
-    display: flex;
-    flex-direction: column;
-    margin-left: 82%;
-    margin-bottom: 2%;
-    transition: animation ease-in-out 2s normal;
+.bigImage {
+	width: 80%;
+	height: auto;
+	position: absolute;
 }
-.bigImage,.smImage{
-    border-radius: 1vh;
+
+.smImage {
+	width: 17.7%;
+	height: auto;
+	background-color: yellow;
+	display: flex;
+	flex-direction: column;
+	margin-left: 82%;
+	margin-bottom: 2%;
+	transition: animation ease-in-out 2s normal;
 }
-#expandedImg, #thumbnail{
-    float: left;    
+
+.bigImage,
+.smImage {
+	border-radius: 1vh;
 }
-#expandedImg{
-    width: 80%;
-    display: none;
+
+#expandedImg,
+#thumbnail {
+	float: left;
 }
-#thumbnail{
-    width: 100%;
-    display: none;
-    position: relative;
+
+#expandedImg {
+	width: 80%;
+	display: none;
+}
+
+#thumbnail {
+	width: 100%;
+	display: none;
+	position: relative;
 }
 
 /* STYLES FOR LARGE DISPLAYS */
@@ -419,7 +426,7 @@ input:checked+label {
 		height: 100%;
 		/* overflow: scroll; */
 	}
-	
+
 	#svgMap {
 		width: auto;
 		height: 100%;
@@ -448,14 +455,14 @@ input:checked+label {
 		border-top-right-radius: 2vh;
 		box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
 	}
-	
+
 	#titleBar div {
 		display: flex;
 		align-items: center;
 		width: 85%;
 		height: 90%;
 	}
-	
+
 	#title {
 		display: inline;
 		color: #F7F2DB;
@@ -464,18 +471,18 @@ input:checked+label {
 		text-transform: capitalize;
 		letter-spacing: 1px;
 	}
-	
+
 	#titleBarIcon {
 		max-height: 50%;
 		max-width: 50%;
 		margin: 0 3%;
 	}
-	
+
 	#closeButton {
 		height: 60%;
 		width: auto;
 	}
-	
+
 	#contentBox {
 		height: 92%;
 		width: 100%;
@@ -484,7 +491,7 @@ input:checked+label {
 		padding-bottom: 1vh;
 		overflow: scroll;
 	}
-	
+
 	#contentImageBox {
 		width: 100%;
 		height: auto;
@@ -496,7 +503,7 @@ input:checked+label {
 		padding: 0.5vh 1vh;
 		border-radius: 1vh;
 	}
-	
+
 	#contentImageBox .galleryImage {
 		width: 46%;
 		margin: 1vh 0;
@@ -504,7 +511,7 @@ input:checked+label {
 		border-radius: 1vh;
 		box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
 	}
-	
+
 	#contentTextBox {
 		width: 100%;
 		height: auto;
@@ -513,7 +520,7 @@ input:checked+label {
 		border-radius: 1vh;
 		margin-bottom: 5vh;
 	}
-	
+
 	#contentTextBox p {
 		color: #383838;
 		font-size: 3vh;
@@ -536,9 +543,9 @@ input:checked+label {
 		align-items: center;
 		border-radius: 1vh;
 	}
-	
+
 	label h4 {
-		margin-left: 0.5vw;	
+		margin-left: 0.5vw;
 	}
 
 	#tabIcon {

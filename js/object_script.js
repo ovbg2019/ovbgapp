@@ -162,6 +162,9 @@ function resetTabAppearance() {
     }
     // reset image gallery
     closeImgGallery();
+
+    //reset info to the top - the info will scroll to the top once click to other tab
+    document.getElementById('contentBox').scrollTop = 0;
 }
 
 // function to set all the content inside the info panel
@@ -188,6 +191,12 @@ function openInfoPanel() {
             bottom: '7vh',
             ease: Expo.easeOut
         });
+        if (window.innerWidth < 769) {
+            TweenMax.to("#svgMapObj", 1.5, {
+                delay: 0.5,
+                height: '58.5%'
+            });
+        }
         // setting state of the info panel to OPEN
         infoPanelState = 1;
     }
@@ -203,6 +212,14 @@ function closeInfoPanel() {
             bottom: '-100vh',
             ease: Circ.easeInOut
         });
+
+        if (window.innerWidth < 769) {
+            TweenMax.to("#svgMapObj", 1.5, {
+                delay: 0.5,
+                height: '100%'
+            });
+        }
+
         // setting state of the info panel to CLOSED
         infoPanelState = 0;
 
@@ -271,7 +288,7 @@ function showSlides(n) {
 function closeImgGallery() {
     expandedImg.style.display = "none";
     thumbnail.style.display = "none";
-    contentImg.style.display = "block";
+    contentImg.style.display = "flex";
 }
 
 // END IMAGE GALLERY SCRIPT ----------  
