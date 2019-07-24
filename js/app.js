@@ -77,7 +77,7 @@ window.onload = function() {
 				MAP_SVG,
 				1,
 				{
-					x: '-55%',
+					x: '-60%',
 					y: '3%',
 					scaleX: 1.3,
 					scaleY: 1.3,
