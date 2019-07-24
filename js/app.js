@@ -73,22 +73,22 @@ window.onload = function() {
 	pathList[0] = {
 		draw: () => {
 			removeCurrentAnimation();
-// 			TLM.fromTo(
-// 				MAP_SVG,
-// 				1,
-// 				{
-// 					x: '-50%',
-// 					y: '3%',
-// 					scaleX: 1.3,
-// 					scaleY: 1.3,
-// 				},
-// 				{
-// 					scaleX: 1.3,
-// 					scaleY: 1.3,
-// 					//ease: ExpoScaleEase.config(0.1, 1, Circ.easeIn),
-// 					ease:Expo.easeInOut,
-// 				}
-// 			),
+			TLM.fromTo(
+				MAP_SVG,
+				1,
+				{
+					x: '-50%',
+					y: '3%',
+					scaleX: 1.3,
+					scaleY: 1.3,
+				},
+				{
+					scaleX: 1.3,
+					scaleY: 1.3,
+					//ease: ExpoScaleEase.config(0.1, 1, Circ.easeIn),
+					ease:Expo.easeInOut,
+				}
+			);
 				TLM.fromTo(
 					peonyToBridgePath,
 					5,
