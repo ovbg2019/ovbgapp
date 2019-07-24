@@ -141,9 +141,9 @@ window.onload = function() {
 					if (item.value === 2) {
 						animatedZoom('moveTo-peony-waterfall');
 						// destination is set to Bridge
-					} else if (item.value === 3) {
-// 						animatedZoom('moveTo-bridge-peony');
-						DRAW(pathList, 0);
+					} else if (item.value === 3) { 						
+						animatedZoom('moveTo-bridge-peony');
+						//DRAW(pathList, 0);
 						// destination is set to DayLily Collection
 					} else if (item.value === 4) {
 						animatedZoom('moveTo-peony-daylily');
