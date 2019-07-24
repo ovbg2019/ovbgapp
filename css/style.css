@@ -362,7 +362,7 @@ input:checked+label {
 	border-radius: 1vh;
 	width: 100%;
 	height: auto;
-	display: grid;
+	display: block;
 }
 
 .bigImage {
