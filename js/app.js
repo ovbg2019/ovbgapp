@@ -75,7 +75,7 @@ window.onload = function() {
 			removeCurrentAnimation();
 			TLM.fromTo(
 				MAP_SVG,
-				2,
+				1,
 				{
 					x: '-50%',
 					y: '3%',
