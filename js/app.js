@@ -80,13 +80,13 @@ window.onload = function() {
 					x: '-65%',
 					y: '3%',
 					scaleX: 1.3,
-					scaleY: 1.3,
+					scaleY: 1.3
 				},
 				{
 					scaleX: 1.3,
 					scaleY: 1.3,
 					//ease: ExpoScaleEase.config(0.1, 1, Circ.easeIn),
-					ease:Expo.easeIn,
+					ease:Expo.easeIn
 				}
 			);
 				TLM.fromTo(
@@ -104,7 +104,7 @@ window.onload = function() {
 						strokeDashoffset: 0,
 						repeat: -1,
 						ease: Sine.easeInOut,
-						repeatDelay: 1,
+						repeatDelay: 1
 					}
 				);
 		}
