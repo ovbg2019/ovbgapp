@@ -139,7 +139,7 @@ window.onload = function () {
   let currentLocation = '';
 
   // set start position based on tab click
-  let startPosition = parsed;
+  let startPosition = parseInt(parsed);
   // set destination position based on dropdown selection
   let destination = '';
 
@@ -464,6 +464,9 @@ window.onload = function () {
       }, {
         bottom: '-24vh',
         ease: Circ.easeOut
+      });
+      TweenMax.to("#titleBar", 0.75, {
+        backgroundColor: '#383838'
       });
 
       // scaling the map back to full height
