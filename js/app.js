@@ -85,7 +85,8 @@ window.onload = function() {
 				{
 					scaleX: 1.3,
 					scaleY: 1.3,
-					ease: ExpoScaleEase.config(0.1, 1, Circ.easeIn),
+					//ease: ExpoScaleEase.config(0.1, 1, Circ.easeIn),
+					ease:Expo.easeInOut,
 				}
 			),
 				TLM.fromTo(
