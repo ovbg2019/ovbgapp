@@ -73,22 +73,22 @@ window.onload = function() {
 	pathList[0] = {
 		draw: () => {
 			removeCurrentAnimation();
-// 			TLM.fromTo(
-// 				MAP_SVG,
-// 				1,
-// 				{
-// 					x: '-65%',
-// 					y: '3%',
-// 					scaleX: 1.3,
-// 					scaleY: 1.3,
-// 				},
-// 				{
-// 					scaleX: 1.3,
-// 					scaleY: 1.3,
-// 					//ease: ExpoScaleEase.config(0.1, 1, Circ.easeIn),
-// 					ease:Expo.easeIn,
-// 				}
-// 			);
+			TLM.fromTo(
+				MAP_SVG,
+				1,
+				{
+					x: '-65%',
+					y: '3%',
+					scaleX: 1.3,
+					scaleY: 1.3,
+				},
+				{
+					scaleX: 1.3,
+					scaleY: 1.3,
+					//ease: ExpoScaleEase.config(0.1, 1, Circ.easeIn),
+					ease:Expo.easeIn,
+				}
+			);
 				TLM.fromTo(
 					peonyToBridgePath,
 					5,
@@ -107,7 +107,7 @@ window.onload = function() {
 						repeatDelay: 1,
 					}
 				);
-		},
+		}
 	};
 
 	const DRAW = (pathList, index) => {
@@ -143,8 +143,8 @@ window.onload = function() {
 						animatedZoom('moveTo-peony-waterfall');
 						// destination is set to Bridge
 					} else if (item.value === 3) { 						
-						animatedZoom('moveTo-bridge-peony');
-						//DRAW(pathList, 0);
+						//animatedZoom('moveTo-bridge-peony');
+						DRAW(pathList, 0);
 						// destination is set to DayLily Collection
 					} else if (item.value === 4) {
 						animatedZoom('moveTo-peony-daylily');
