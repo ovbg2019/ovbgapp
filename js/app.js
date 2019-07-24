@@ -107,7 +107,7 @@ window.onload = function() {
 						repeatDelay: 1,
 					}
 				);
-		};
+		}
 	};
 
 	const DRAW = (pathList, index) => {
