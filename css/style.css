@@ -218,7 +218,7 @@ section #map {
 #contentImageBox {
 	width: 100%;
 	height: auto;
-	display: flex;
+	display: inline-block;
 	justify-content: space-between;
 	align-content: center;
 	background: rgba(0, 0, 0, 0.05);
@@ -359,7 +359,6 @@ input:checked+label {
 
 #modalContent {
 	position: relative;
-	/*opacity: 0;*/
 	border-radius: 1vh;
 	width: 100%;
 	height: auto;
@@ -375,14 +374,14 @@ input:checked+label {
 .smImage {
 	width: 17.7%;
 	height: auto;
-	background-color: yellow;
 	display: flex;
 	flex-direction: column;
 	margin-left: 82%;
 	margin-bottom: 2%;
-	transition: animation ease-in-out 2s normal;
 }
-
+.smImage:active {
+	border: 1px solid ##f7f2db;
+}
 .bigImage,
 .smImage {
 	border-radius: 1vh;
