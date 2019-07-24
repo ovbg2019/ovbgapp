@@ -380,7 +380,7 @@ input:checked+label {
 	margin-bottom: 2%;
 }
 .smImage:active {
-	border: 1px solid ##f7f2db;
+	border: 1px solid #f7f2db;
 }
 .bigImage,
 .smImage {
