@@ -14,7 +14,14 @@ window.onload = function () {
       smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
       paths: ['bike_to_peony', 'bike_to_waterfall', 'bike_to_bridge', 'bike_to_daylily', 'bike_to_memory'],
       featureZoomPoints: ['180%', 0.2, 1],
-      // pathZoomPoints: [['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1]]
+      pathZoomPoints: [
+        ['180%', 0.4, 0.95],
+        ['180%', 0.30, 1.05],
+        ['120%', 0.1, 0.40],
+        ['140%', 0.1, 0.87],
+        ['120%', 0.01, 0.60],
+        ['100%', 0, 0.33]
+      ]
     },
     {
       name: 'Peony Garden',
@@ -26,7 +33,14 @@ window.onload = function () {
       smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
       paths: ['peony_to_bike', 'peony_to_waterfall', 'peony_to_bridge', 'peony_to_daylily', 'peony_to_memory'],
       featureZoomPoints: ['180%', 0.4, 0.95],
-      // pathZoomPoints: [['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1]]
+      pathZoomPoints: [
+        ['180%', 0.4, 0.95],
+        ['180%', 0.30, 1.05],
+        ['120%', 0.1, 0.40],
+        ['140%', 0.1, 0.87],
+        ['120%', 0.01, 0.60],
+        ['100%', 0, 0.33]
+      ]
     },
     {
       name: 'Waterfall Garden',
@@ -38,7 +52,14 @@ window.onload = function () {
       smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
       paths: ['waterfall_to_peony', 'waterfall_to_bike', 'waterfall_to_bridge', 'waterfall_to_daylily', 'waterfall_to_memory'],
       featureZoomPoints: ['170%', 0.35, 0.4],
-      // pathZoomPoints: [['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1]]
+      pathZoomPoints: [
+        ['180%', 0.4, 0.95],
+        ['180%', 0.30, 1.05],
+        ['120%', 0.1, 0.40],
+        ['140%', 0.1, 0.87],
+        ['120%', 0.01, 0.60],
+        ['100%', 0, 0.33]
+      ]
     },
     {
       name: 'Rotary Bridge',
@@ -50,7 +71,14 @@ window.onload = function () {
       smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
       paths: ['bridge_to_peony', 'bridge_to_waterfall', 'bridge_to_bike', 'bridge_to_daylily', 'bridge_to_memory'],
       featureZoomPoints: ['200%', 0.145, 1.4],
-      // pathZoomPoints: [['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1]]
+      pathZoomPoints: [
+        ['180%', 0.4, 0.95],
+        ['180%', 0.30, 1.05],
+        ['120%', 0.1, 0.40],
+        ['140%', 0.1, 0.87],
+        ['120%', 0.01, 0.60],
+        ['100%', 0, 0.33]
+      ]
     },
     {
       name: 'Daylily Collection',
@@ -62,7 +90,14 @@ window.onload = function () {
       smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
       paths: ['daylily_to_peony', 'daylily_to_waterfall', 'daylily_to_beidge', 'daylily_to_bike', 'daylily_to_memory'],
       featureZoomPoints: ['220%', 0, 1.33],
-      // pathZoomPoints: [['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1]]
+      pathZoomPoints: [
+        ['180%', 0.4, 0.95],
+        ['180%', 0.30, 1.05],
+        ['120%', 0.1, 0.40],
+        ['140%', 0.1, 0.87],
+        ['120%', 0.01, 0.60],
+        ['100%', 0, 0.33]
+      ]
     },
     {
       name: 'Memory Garden',
@@ -74,19 +109,28 @@ window.onload = function () {
       smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
       paths: ['memory_to_peony', 'memory_to_waterfall', 'memory_to_bridge', 'memory_to_daylily', 'memory_to_bike'],
       featureZoomPoints: ['170%', 0, 0.06],
-      // pathZoomPoints: [['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1]]
+      pathZoomPoints: [
+        ['180%', 0.4, 0.95],
+        ['180%', 0.30, 1.05],
+        ['120%', 0.1, 0.40],
+        ['140%', 0.1, 0.87],
+        ['120%', 0.01, 0.60],
+        ['100%', 0, 0.33]
+      ]
     },
   ];
 
 
   // List of items in the drop down (order matters)
+  // CAUTION: ORDER CHANGE
+  // PLEASE MAKE CHANGES ACCORDINGLY IF NECESSASARY
   const LOCATIONS = [
     'Select Destination',
     'Peony Garden',
+    'Bike Path',
     'Waterfall Garden',
     'Bridge',
-    'DayLily Collection',
-    'Bike Path',
+    'Daylily Collection',
     'Memory Garden'
   ];
 
@@ -298,7 +342,10 @@ window.onload = function () {
       // Add the event listener to the item
       item.addEventListener('click', function () {
         // will set destination location based item in dropdown being selected
-        setPath(startPosition, item.value);
+        // setPath(startPosition, item.value);
+        if (item.value !== 0) {
+          pathZoomIn((item.value - 1));
+        }
         // Upon clicking an item in the list set the displayed text to the selected location name
         document.getElementById('placeholder').textContent = `Go to: ${LOCATIONS[item.value]}`;
       });
@@ -434,7 +481,10 @@ window.onload = function () {
         bottom: INFO_PANEL.style.bottom,
       }, {
         bottom: '-100vh',
-        ease: Circ.easeInOut
+        ease: Circ.easeInOut,
+        onComplete: function() {
+          resetTabAppearance();
+        }
       });
 
       // scaling the map back to full height
@@ -452,7 +502,7 @@ window.onload = function () {
       infoPanelState = 0;
 
       // resetting the tab appereance
-      setTimeout(resetTabAppearance, 350);
+      // setTimeout(resetTabAppearance, 350);
     }
   }
 
@@ -491,27 +541,60 @@ window.onload = function () {
     }
   }
 
+  let leftScroll = '';
+  let topScroll = '';
+  let zoomLevel = '';
+  // ZOOM IN: PARK FEATURES
   // this function takes the zoom level and scroll values to scroll and zoom the map to the visible area
   function featureZoomIn() {
     // variable to store the value to scroll from left
-    let leftScroll = (parkFeature[id].featureZoomPoints[2] * window.innerHeight) + 'px';
+    leftScroll = (parkFeature[id].featureZoomPoints[2] * window.innerHeight) + 'px';
 
     // variable to store the value to scroll from the top
-    let topScroll = (parkFeature[id].featureZoomPoints[1] * window.innerHeight) + 'px';
+    topScroll = (parkFeature[id].featureZoomPoints[1] * window.innerHeight) + 'px';
 
     // variable to store the zoom level
-    let zoomLevel = parkFeature[id].featureZoomPoints[0];
-
-    // animating the scroll
-    $('section').animate({
-      scrollLeft: leftScroll,
-      scrollTop: topScroll
-    }, 1500, "easeInOutSine");
+    zoomLevel = parkFeature[id].featureZoomPoints[0];
 
     // animating the zoom
     TweenMax.to('#svgMapObj', 1, {
       height: zoomLevel,
-      ease: Sine.easeOut
+      ease: Sine.easeOut,
+      onComplete: function() {
+         // animating the scroll
+    $('section').animate({
+      scrollLeft: leftScroll,
+      scrollTop: topScroll
+    }, 1000, "easeInOutSine");
+      }
+    });
+  }
+
+  // ZOOM IN: NAVIGATION PATHS
+  // this function takes the zoom level and scroll values to scroll and zoom the map to the visible area
+  function pathZoomIn(end) {
+    // variable to store the value to scroll from left
+    leftScroll = (parkFeature[id].pathZoomPoints[end][2] * window.innerHeight) + 'px';
+
+    // variable to store the value to scroll from the top
+    topScroll = (parkFeature[id].pathZoomPoints[end][1] * window.innerHeight) + 'px';
+
+    // variable to store the zoom level
+    zoomLevel = parkFeature[id].pathZoomPoints[end][0];
+
+    console.log('Left Scroll: ' + leftScroll + '\nTop Scroll: ' + topScroll + '\nZoom: ' + zoomLevel);
+
+    // animating the zoom
+    TweenMax.to('#svgMapObj', 1, {
+      height: zoomLevel,
+      ease: Sine.easeOut,
+      onComplete: function () {
+        // animating the scroll
+        $('section').animate({
+          scrollLeft: leftScroll,
+          scrollTop: topScroll
+        }, 1000, "easeInOutSine");
+      }
     });
   }
 

@@ -342,16 +342,6 @@ label h4 {
 	margin-left: 1vw;
 }
 
-label:hover {
-	cursor: pointer;
-}
-
-input:checked+label {
-	background-color: rgba(0, 0, 0, 0.1);
-	transition: 0.3s ease-in-out;
-
-}
-
 #tabIcon {
 	width: auto;
 	height: 2.5vh;
