@@ -74,25 +74,38 @@ window.onload = function() {
 		draw: () => {
 			removeCurrentAnimation();
 			TLM.fromTo(
-				peonyToBridgePath,
-				5,
+				MAP_SVG,
+				2,
 				{
-					strokeWidth: 20,
-					strokeDasharray: 807,
-					strokeDashoffset: 807,
+					x: '-50%',
+					y: '3%',
+					scaleX: 1.3,
+					scaleY: 1.3,
 				},
 				{
-					stroke: '#679DF6',
-					strokeWidth: 20,
-					strokeDasharray: 807,
-					strokeDashoffset: 0,
-					repeat: -1,
-					ease: Sine.easeInOut,
-					// ease: Circ.easeOut,
-					// ease: Circ.easeIn,
-					repeatDelay: 1,
+					scaleX: 1.3,
+					scaleY: 1.3,
+					ease: ExpoScaleEase.config(0.1, 1, Circ.easeIn),
 				}
-			);
+			),
+				TLM.fromTo(
+					peonyToBridgePath,
+					5,
+					{
+						strokeWidth: 20,
+						strokeDasharray: 807,
+						strokeDashoffset: 807,
+					},
+					{
+						stroke: '#679DF6',
+						strokeWidth: 20,
+						strokeDasharray: 807,
+						strokeDashoffset: 0,
+						repeat: -1,
+						ease: Sine.easeInOut,
+						repeatDelay: 1,
+					}
+				);
 		},
 	};
 
