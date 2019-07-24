@@ -281,6 +281,18 @@ function showSlides(n) {
     slides[slideIndex - 1].style.display = 'block';
     // load the current image from the thumbnail
     thumbnails[slideIndex - 1].className += " active";
+        
+    //animate big image on click the thumbnail
+    thumbnail.addEventListener('click', function() {
+        TweenMax.fromTo('.bigImage', 1, {
+        opacity:0,
+        ease: Sine.easeIn
+        }, {
+        opacity: 1,
+        ease: Sine.easeOut
+    
+        });
+    });
 
 }
 
