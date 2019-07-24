@@ -220,7 +220,7 @@ section #map {
 #contentImageBox {
 	width: 100%;
 	height: auto;
-	display: inline-block;
+	display: block;
 	justify-content: space-between;
 	align-content: center;
 	background: rgba(0, 0, 0, 0.05);
@@ -229,7 +229,7 @@ section #map {
 }
 
 #contentImageBox .galleryImage {
-	width: 23%;
+	width: 24%;
 	height: auto;
 	border-radius: 1vh;
 	/* border: 2px solid #ebebeb; */
