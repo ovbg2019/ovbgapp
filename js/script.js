@@ -13,8 +13,15 @@ window.onload = function () {
       bigImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
       smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
       paths: ['bike_to_peony', 'bike_to_waterfall', 'bike_to_bridge', 'bike_to_daylily', 'bike_to_memory'],
-      featureZoomPoints: ['190%', 0.2, 1],
-      // pathZoomPoints: [['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1]]
+      featureZoomPoints: ['180%', 0.2, 1],
+      pathZoomPoints: [
+        ['180%', 0.4, 0.95],
+        ['180%', 0.30, 1.05],
+        ['120%', 0.1, 0.40],
+        ['140%', 0.1, 0.87],
+        ['120%', 0.01, 0.60],
+        ['100%', 0, 0.33]
+      ]
     },
     {
       name: 'Peony Garden',
@@ -26,7 +33,14 @@ window.onload = function () {
       smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
       paths: ['peony_to_bike', 'peony_to_waterfall', 'peony_to_bridge', 'peony_to_daylily', 'peony_to_memory'],
       featureZoomPoints: ['180%', 0.4, 0.95],
-      // pathZoomPoints: [['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1]]
+      pathZoomPoints: [
+        ['180%', 0.4, 0.95],
+        ['180%', 0.30, 1.05],
+        ['120%', 0.1, 0.40],
+        ['140%', 0.1, 0.87],
+        ['120%', 0.01, 0.60],
+        ['100%', 0, 0.33]
+      ]
     },
     {
       name: 'Waterfall Garden',
@@ -38,7 +52,14 @@ window.onload = function () {
       smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
       paths: ['waterfall_to_peony', 'waterfall_to_bike', 'waterfall_to_bridge', 'waterfall_to_daylily', 'waterfall_to_memory'],
       featureZoomPoints: ['170%', 0.35, 0.4],
-      // pathZoomPoints: [['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1]]
+      pathZoomPoints: [
+        ['180%', 0.4, 0.95],
+        ['180%', 0.30, 1.05],
+        ['120%', 0.1, 0.40],
+        ['140%', 0.1, 0.87],
+        ['120%', 0.01, 0.60],
+        ['100%', 0, 0.33]
+      ]
     },
     {
       name: 'Rotary Bridge',
@@ -50,7 +71,14 @@ window.onload = function () {
       smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
       paths: ['bridge_to_peony', 'bridge_to_waterfall', 'bridge_to_bike', 'bridge_to_daylily', 'bridge_to_memory'],
       featureZoomPoints: ['200%', 0.145, 1.4],
-      // pathZoomPoints: [['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1]]
+      pathZoomPoints: [
+        ['180%', 0.4, 0.95],
+        ['180%', 0.30, 1.05],
+        ['120%', 0.1, 0.40],
+        ['140%', 0.1, 0.87],
+        ['120%', 0.01, 0.60],
+        ['100%', 0, 0.33]
+      ]
     },
     {
       name: 'Daylily Collection',
@@ -62,7 +90,14 @@ window.onload = function () {
       smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
       paths: ['daylily_to_peony', 'daylily_to_waterfall', 'daylily_to_beidge', 'daylily_to_bike', 'daylily_to_memory'],
       featureZoomPoints: ['220%', 0, 1.33],
-      // pathZoomPoints: [['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1]]
+      pathZoomPoints: [
+        ['180%', 0.4, 0.95],
+        ['180%', 0.30, 1.05],
+        ['120%', 0.1, 0.40],
+        ['140%', 0.1, 0.87],
+        ['120%', 0.01, 0.60],
+        ['100%', 0, 0.33]
+      ]
     },
     {
       name: 'Memory Garden',
@@ -74,19 +109,28 @@ window.onload = function () {
       smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
       paths: ['memory_to_peony', 'memory_to_waterfall', 'memory_to_bridge', 'memory_to_daylily', 'memory_to_bike'],
       featureZoomPoints: ['170%', 0, 0.06],
-      // pathZoomPoints: [['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1], ['190%', 0.2, 1]]
+      pathZoomPoints: [
+        ['180%', 0.4, 0.95],
+        ['180%', 0.30, 1.05],
+        ['120%', 0.1, 0.40],
+        ['140%', 0.1, 0.87],
+        ['120%', 0.01, 0.60],
+        ['100%', 0, 0.33]
+      ]
     },
   ];
 
 
   // List of items in the drop down (order matters)
+  // CAUTION: ORDER CHANGE
+  // PLEASE MAKE CHANGES ACCORDINGLY IF NECESSASARY
   const LOCATIONS = [
     'Select Destination',
     'Peony Garden',
+    'Bike Path',
     'Waterfall Garden',
     'Bridge',
-    'DayLily Collection',
-    'Bike Path',
+    'Daylily Collection',
     'Memory Garden'
   ];
 
@@ -100,6 +144,7 @@ window.onload = function () {
   const TABS = document.querySelectorAll('.tab');
 
   // Info panel elements
+  const INFO_PANEL = document.querySelector('#infoPanel');
   const TITLE_BAR = document.querySelector('#titleBar');
   const TITLE = document.querySelector('#title');
   const CLOSE_BUTTON = document.querySelector('#closeButton');
@@ -138,7 +183,7 @@ window.onload = function () {
   let currentLocation = '';
 
   // set start position based on tab click
-  let startPosition = parsed;
+  let startPosition = parseInt(parsed);
   // set destination position based on dropdown selection
   let destination = '';
 
@@ -297,14 +342,17 @@ window.onload = function () {
       // Add the event listener to the item
       item.addEventListener('click', function () {
         // will set destination location based item in dropdown being selected
-        setPath(startPosition, item.value);
+        // setPath(startPosition, item.value);
+        if (item.value !== 0) {
+          pathZoomIn((item.value - 1));
+        }
         // Upon clicking an item in the list set the displayed text to the selected location name
         document.getElementById('placeholder').textContent = `Go to: ${LOCATIONS[item.value]}`;
       });
     });
   });
 
-  
+
 
   /* OPENING AND CLOSING THE INFORMATION PANEL AND POPULATING IT WITH THE CONTENT */
 
@@ -333,7 +381,7 @@ window.onload = function () {
       // setting the content in the info panel
       setTimeout(setContent, 350);
       // opening the panel with new content
-      openInfoPanel();
+      setTimeout(openInfoPanel, 500);
     }
   };
 
@@ -352,6 +400,10 @@ window.onload = function () {
       // opening the panel with new content
       openInfoPanel();
     };
+  }
+
+  TITLE_BAR.onclick = function () {
+    minimizeInfoPanel();
   }
 
   // closing the tab on close button click
@@ -385,47 +437,60 @@ window.onload = function () {
   // this function animates the infoPanel and its contents when it opens up
   function openInfoPanel() {
     // animating the panel while opening
-    if (infoPanelState === 0) {
-      TweenMax.fromTo("#infoPanel", 1, {
-        bottom: '-100vh',
-      }, {
-        delay: 0.5,
-        bottom: '7vh',
-        ease: Expo.easeOut
-      });
+    if (infoPanelState < 2) {
+      if (infoPanelState === 0) {
+        TweenMax.fromTo("#infoPanel", 1, {
+          bottom: '-100vh',
+        }, {
+          delay: 0.5,
+          bottom: '7vh',
+          ease: Expo.easeOut
+        });
+      } else if (infoPanelState === 1) {
+        TweenMax.fromTo("#infoPanel", 1, {
+          bottom: INFO_PANEL.style.bottom,
+        }, {
+          delay: 0,
+          bottom: '7vh',
+          ease: Expo.easeOut
+        });
+      }
 
       // scaling the map to compensate for the opening of the info panel
       // if condition to only make it work on mobile
       if (window.innerWidth < 769) {
-        TweenMax.to("section", 1.5, {
+        TweenMax.to("section", 2, {
           delay: 0.5,
           height: '53.5%',
           onComplete: function () {
             // zooming in on the perticular park feature
-            mapZoomIn();
+            featureZoomIn();
           }
         });
       }
       // setting state of the info panel to OPEN
-      infoPanelState = 1;
+      infoPanelState = 2;
     }
   }
 
   // this function animates the infoPanel and its contents when it closes
   function closeInfoPanel() {
     // animating the info panel while closing
-    if (infoPanelState === 1) {
+    if (infoPanelState > 0) {
       TweenMax.fromTo("#infoPanel", 0.75, {
-        bottom: '7vh',
+        bottom: INFO_PANEL.style.bottom,
       }, {
         bottom: '-100vh',
-        ease: Circ.easeInOut
+        ease: Circ.easeInOut,
+        onComplete: function() {
+          resetTabAppearance();
+        }
       });
-      
+
       // scaling the map back to full height
       // if condition to only make it work on mobile
       if (window.innerWidth < 769) {
-        TweenMax.to("section", 1, {
+        TweenMax.to("section", 2, {
           height: '92%',
           onComplete: function () {
             // zooming out to the full map
@@ -437,31 +502,99 @@ window.onload = function () {
       infoPanelState = 0;
 
       // resetting the tab appereance
-      setTimeout(resetTabAppearance, 350);
+      // setTimeout(resetTabAppearance, 350);
     }
   }
 
+  function minimizeInfoPanel() {
+    // animating the info panel while closing
+    if (infoPanelState === 2) {
+      TweenMax.fromTo("#infoPanel", 0.75, {
+        bottom: INFO_PANEL.style.bottom,
+      }, {
+        bottom: '-24vh',
+        ease: Circ.easeOut
+      });
+      TweenMax.to("#titleBar", 0.75, {
+        backgroundColor: '#383838'
+      });
+
+      // scaling the map back to full height
+      // if condition to only make it work on mobile
+      if (window.innerWidth < 769) {
+        TweenMax.to("section", 1, {
+          height: '85%',
+          onComplete: function () {
+            // zooming out to the full map
+            mapZoomOut();
+          }
+        });
+      }
+      // setting state of the info panel to CLOSED
+      infoPanelState = 1;
+
+      // resetting the tab appereance
+      setTimeout(resetTabAppearance, 350);
+    } else if (infoPanelState === 1) {
+      setContent();
+      openInfoPanel();
+    }
+  }
+
+  let leftScroll = '';
+  let topScroll = '';
+  let zoomLevel = '';
+  // ZOOM IN: PARK FEATURES
   // this function takes the zoom level and scroll values to scroll and zoom the map to the visible area
-  function mapZoomIn() {
+  function featureZoomIn() {
     // variable to store the value to scroll from left
-    let leftScroll = (parkFeature[id].featureZoomPoints[2] * window.innerHeight) + 'px';
+    leftScroll = (parkFeature[id].featureZoomPoints[2] * window.innerHeight) + 'px';
 
     // variable to store the value to scroll from the top
-    let topScroll = (parkFeature[id].featureZoomPoints[1] * window.innerHeight) + 'px';
+    topScroll = (parkFeature[id].featureZoomPoints[1] * window.innerHeight) + 'px';
 
     // variable to store the zoom level
-    let zoomLevel = parkFeature[id].featureZoomPoints[0];
+    zoomLevel = parkFeature[id].featureZoomPoints[0];
 
-    // animating the scroll
-    $('section').animate({
-      scrollLeft: leftScroll,
-      scrollTop: topScroll
-    }, 1500, "easeInOutSine");
-    
     // animating the zoom
     TweenMax.to('#svgMapObj', 1, {
       height: zoomLevel,
-      ease: Sine.easeOut
+      ease: Sine.easeOut,
+      onComplete: function() {
+         // animating the scroll
+    $('section').animate({
+      scrollLeft: leftScroll,
+      scrollTop: topScroll
+    }, 1000, "easeInOutSine");
+      }
+    });
+  }
+
+  // ZOOM IN: NAVIGATION PATHS
+  // this function takes the zoom level and scroll values to scroll and zoom the map to the visible area
+  function pathZoomIn(end) {
+    // variable to store the value to scroll from left
+    leftScroll = (parkFeature[id].pathZoomPoints[end][2] * window.innerHeight) + 'px';
+
+    // variable to store the value to scroll from the top
+    topScroll = (parkFeature[id].pathZoomPoints[end][1] * window.innerHeight) + 'px';
+
+    // variable to store the zoom level
+    zoomLevel = parkFeature[id].pathZoomPoints[end][0];
+
+    console.log('Left Scroll: ' + leftScroll + '\nTop Scroll: ' + topScroll + '\nZoom: ' + zoomLevel);
+
+    // animating the zoom
+    TweenMax.to('#svgMapObj', 1, {
+      height: zoomLevel,
+      ease: Sine.easeOut,
+      onComplete: function () {
+        // animating the scroll
+        $('section').animate({
+          scrollLeft: leftScroll,
+          scrollTop: topScroll
+        }, 1000, "easeInOutSine");
+      }
     });
   }
 
