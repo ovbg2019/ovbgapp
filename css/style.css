@@ -126,6 +126,7 @@ header {
 	padding: 1vh;
 	font-size: 3vh;
 	font-family: "ButtonFont";
+	
 }
 
 .hidden {
@@ -204,8 +205,9 @@ section #map {
 }
 
 #closeButton {
-	height: 60%;
+	height: 40%;
 	width: auto;
+	filter:  drop-shadow(1px 1px 1px #383838);
 }
 
 #contentBox {
@@ -232,7 +234,6 @@ section #map {
 	width: 24%;
 	height: auto;
 	border-radius: 1vh;
-	/* border: 2px solid #ebebeb; */
 	box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
 }
 
@@ -339,16 +340,6 @@ label {
 
 label h4 {
 	margin-left: 1vw;
-}
-
-label:hover {
-	cursor: pointer;
-}
-
-input:checked+label {
-	background-color: rgba(0, 0, 0, 0.1);
-	transition: 0.3s ease-in-out;
-
 }
 
 #tabIcon {
@@ -480,8 +471,9 @@ input:checked+label {
 	}
 
 	#closeButton {
-		height: 60%;
+		height: 40%;
 		width: auto;
+		filter:  drop-shadow(1px 1px 1px #383838);
 	}
 
 	#contentBox {
