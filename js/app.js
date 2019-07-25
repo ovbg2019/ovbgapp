@@ -4,8 +4,10 @@ window.onload = function() {
 
 	// Get SVG document inside Object by ID
 	const SVG_PATH_MAP = document.querySelector('#svgMapObj').contentDocument;
+
 	//SVG Navigation Paths
 	/* Penoy */
+
 	const peonyToBridgePath = SVG_PATH_MAP.querySelector('#peony_to_bridge');
 	const bridgeToPeonyPath = SVG_PATH_MAP.querySelector('#bridge_to_peony');
 	const PLACE_HOLDER = document.querySelector('#placeholder');
@@ -13,7 +15,9 @@ window.onload = function() {
 	const DROP_DOWN = document.querySelector('.destination-select'); // Select the drop down
 	const DROP_DOWN_ITEM = document.querySelectorAll('.destination-select li'); // Create array of li items in drop down list
 	const MAP_OBJ = document.getElementById('svgMapObj'); // Target object element holding SVG of map
-	const MAP_SVG = MAP_OBJ.contentDocument.getElementById('svgMap'); // Get the SVG document inside the Object tag
+	// Get the SVG document inside the Object tag
+	const MAP_SVG = MAP_OBJ.contentDocument.getElementById('svgMap');
+	const SVG_MAP = SVG_PATH_MAP.querySelector('#svgMap');
 
 	// Set this via QR or nav button
 	// *** Hard coded for testing purposes ***
@@ -74,22 +78,6 @@ window.onload = function() {
 		draw: () => {
 			removeCurrentAnimation();
 			TLM.fromTo(
-				MAP_SVG,
-				1,
-				{
-					x: '-65%',
-					y: '3%',
-					scaleX: 1.3,
-					scaleY: 1.3,
-				},
-				{
-					scaleX: 1.3,
-					scaleY: 1.3,
-					//ease: ExpoScaleEase.config(0.1, 1, Circ.easeIn),
-					ease: Expo.easeIn,
-				}
-			);
-			TLM.fromTo(
 				peonyToBridgePath,
 				5,
 				{
@@ -108,10 +96,25 @@ window.onload = function() {
 				}
 			);
 		},
+		zoom: () => {
+			// TweenMax.to(MAP_SVG, 4, {
+			TLM.to(MAP_SVG, 4, {
+				x: '-65%',
+				y: '1%',
+				scaleX: 1,
+				scaleY: 1,
+				transformOrigin: '50% 50%',
+				ease: Expo.easeOut,
+				// ease: ExpoScaleEase.config(0.8, 1, Circ.easeIn),
+			});
+		},
 	};
 
 	const DRAW = (pathList, index) => {
 		return pathList[index].draw();
+	};
+	const ZOOM = (pathList, index) => {
+		return pathList[index].zoom();
 	};
 
 	// if anywhere in the map is clicked the dropdown will close
@@ -143,8 +146,10 @@ window.onload = function() {
 						animatedZoom('moveTo-peony-waterfall');
 						// destination is set to Bridge
 					} else if (item.value === 3) {
-						//animatedZoom('moveTo-bridge-peony');
+						animatedZoom('moveTo-bridge-peony');
 						DRAW(pathList, 0);
+						ZOOM(pathList, 0);
+
 						// destination is set to DayLily Collection
 					} else if (item.value === 4) {
 						animatedZoom('moveTo-peony-daylily');
