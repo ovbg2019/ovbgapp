@@ -231,10 +231,8 @@ section #map {
 }
 
 #contentImageBox .galleryImage {
-	/* margin: 0 auto; */
 	width: 24%;
-	/* height: auto; */
-	height: calc(23% * 3 / 4);
+	height: auto;
 	border-radius: 1vh;
 	box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
 }
@@ -354,11 +352,10 @@ label h4 {
 
 #modalContent {
 	position: relative;
-	/*opacity: 0;*/
 	border-radius: 1vh;
 	width: 100%;
 	height: auto;
-	display: grid;
+	display: block;
 }
 
 .bigImage {
@@ -370,14 +367,14 @@ label h4 {
 .smImage {
 	width: 17.7%;
 	height: auto;
-	background-color: yellow;
 	display: flex;
 	flex-direction: column;
 	margin-left: 82%;
 	margin-bottom: 2%;
-	transition: animation ease-in-out 2s normal;
 }
-
+.smImage:active {
+	border: 1px solid #f7f2db;
+}
 .bigImage,
 .smImage {
 	border-radius: 1vh;

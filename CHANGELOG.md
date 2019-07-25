@@ -25,6 +25,12 @@
 -----------------------------------------------------------------------------------------------------------
 
 *** Updated on Monday, July 22, 2019 5:57PM ***
+app.js
+    -Fixed Animation/Scroll issue on Safari Desktop will be doing testing tomorrow on iOS
+park_map.svg
+    - updated the svg with river fixed
+
+*** Updated on Monday, July 22, 2019 5:57PM ***
     OBJECT_SCRIPT.JS
         - Animated the scaling of the map to match with the expanded info panel
         - Now the map object scale between 58.5% to 100%
