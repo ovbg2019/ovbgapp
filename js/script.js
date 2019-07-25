@@ -39,7 +39,7 @@ window.onload = function () {
         ['120%', 0.1, 0.40],
         ['140%', 0.1, 0.87],
         ['120%', 0.01, 0.60],
-        ['100%', 0, 0.33]
+        ['100%', 0, 0.4]
       ]
     },
     {
@@ -166,7 +166,7 @@ window.onload = function () {
   // variable to identify which tab to open 
   let id = 0;
 
-  // variable to store and read the state of the infoPanel (0: closed, 1: open)
+  // variable to store and read the state of the infoPanel (0: closed, 1: minimized, 2: open)
   let infoPanelState = 0;
 
   // This block of code will parse the data from the URL of the page and determine which tab to open when the app initially opens
@@ -187,7 +187,10 @@ window.onload = function () {
   // set destination position based on dropdown selection
   let destination = '';
 
-
+  // variables to store the zoom parameters
+  let leftScroll = '';
+  let topScroll = '';
+  let zoomLevel = '';
 
   /* FUNCTION DEFINITIONS */
 
@@ -439,34 +442,26 @@ window.onload = function () {
     // animating the panel while opening
     if (infoPanelState < 2) {
       if (infoPanelState === 0) {
-        TweenMax.fromTo("#infoPanel", 1, {
+        TweenMax.fromTo("#infoPanel", 0.75, {
           bottom: '-100vh',
         }, {
           delay: 0.5,
           bottom: '7vh',
-          ease: Expo.easeOut
+          ease: Sine.easeOut
         });
       } else if (infoPanelState === 1) {
-        TweenMax.fromTo("#infoPanel", 1, {
+        TweenMax.fromTo("#infoPanel", 0.75, {
           bottom: INFO_PANEL.style.bottom,
         }, {
-          delay: 0,
           bottom: '7vh',
-          ease: Expo.easeOut
+          ease: Sine.easeOut
         });
       }
 
       // scaling the map to compensate for the opening of the info panel
       // if condition to only make it work on mobile
       if (window.innerWidth < 769) {
-        TweenMax.to("section", 2, {
-          delay: 0.5,
-          height: '53.5%',
-          onComplete: function () {
-            // zooming in on the perticular park feature
-            featureZoomIn();
-          }
-        });
+        featureZoomIn();
       }
       // setting state of the info panel to OPEN
       infoPanelState = 2;
@@ -477,32 +472,23 @@ window.onload = function () {
   function closeInfoPanel() {
     // animating the info panel while closing
     if (infoPanelState > 0) {
-      TweenMax.fromTo("#infoPanel", 0.75, {
+      TweenMax.fromTo("#infoPanel", 1, {
         bottom: INFO_PANEL.style.bottom,
       }, {
         bottom: '-100vh',
-        ease: Circ.easeInOut,
-        onComplete: function() {
+        onComplete: function () {
           resetTabAppearance();
+          // scaling the map back to full height
+          // if condition to only make it work on mobile
+          if (window.innerWidth < 769) {
+            // zooming out to the full map
+            mapZoomOut(92);
+          }
         }
       });
 
-      // scaling the map back to full height
-      // if condition to only make it work on mobile
-      if (window.innerWidth < 769) {
-        TweenMax.to("section", 2, {
-          height: '92%',
-          onComplete: function () {
-            // zooming out to the full map
-            mapZoomOut();
-          }
-        });
-      }
       // setting state of the info panel to CLOSED
       infoPanelState = 0;
-
-      // resetting the tab appereance
-      // setTimeout(resetTabAppearance, 350);
     }
   }
 
@@ -513,60 +499,58 @@ window.onload = function () {
         bottom: INFO_PANEL.style.bottom,
       }, {
         bottom: '-24vh',
-        ease: Circ.easeOut
+        ease: Sine.easeOut,
+        onComplete: function () {
+          resetTabAppearance();
+          // scaling the map back to full height
+          // if condition to only make it work on mobile
+          if (window.innerWidth < 769) {
+            // zooming out to the full map
+            mapZoomOut(85);
+          }
+        }
       });
       TweenMax.to("#titleBar", 0.75, {
         backgroundColor: '#383838'
       });
 
-      // scaling the map back to full height
-      // if condition to only make it work on mobile
-      if (window.innerWidth < 769) {
-        TweenMax.to("section", 1, {
-          height: '85%',
-          onComplete: function () {
-            // zooming out to the full map
-            mapZoomOut();
-          }
-        });
-      }
-      // setting state of the info panel to CLOSED
+
+      // setting state of the info panel to MINIMIZED
       infoPanelState = 1;
 
-      // resetting the tab appereance
-      setTimeout(resetTabAppearance, 350);
     } else if (infoPanelState === 1) {
       setContent();
       openInfoPanel();
     }
   }
 
-  let leftScroll = '';
-  let topScroll = '';
-  let zoomLevel = '';
+ 
   // ZOOM IN: PARK FEATURES
   // this function takes the zoom level and scroll values to scroll and zoom the map to the visible area
   function featureZoomIn() {
     // variable to store the value to scroll from left
-    leftScroll = (parkFeature[id].featureZoomPoints[2] * window.innerHeight) + 'px';
+    leftScroll = (parkFeature[id].featureZoomPoints[2] * window.innerHeight);
 
     // variable to store the value to scroll from the top
-    topScroll = (parkFeature[id].featureZoomPoints[1] * window.innerHeight) + 'px';
+    topScroll = (parkFeature[id].featureZoomPoints[1] * window.innerHeight);
 
     // variable to store the zoom level
     zoomLevel = parkFeature[id].featureZoomPoints[0];
 
     // animating the zoom
-    TweenMax.to('#svgMapObj', 1, {
+    TweenMax.to('#svgMapObj', 1.75, {
       height: zoomLevel,
       ease: Sine.easeOut,
-      onComplete: function() {
-         // animating the scroll
-    $('section').animate({
-      scrollLeft: leftScroll,
-      scrollTop: topScroll
-    }, 1000, "easeInOutSine");
-      }
+    });
+
+    // animating the scroll
+    TweenMax.to('section', 1.75, {
+      height: '53.5%',
+      scrollTo: {
+        y: topScroll,
+        x: leftScroll
+      },
+      ease: Sine.easeOut
     });
   }
 
@@ -574,10 +558,10 @@ window.onload = function () {
   // this function takes the zoom level and scroll values to scroll and zoom the map to the visible area
   function pathZoomIn(end) {
     // variable to store the value to scroll from left
-    leftScroll = (parkFeature[id].pathZoomPoints[end][2] * window.innerHeight) + 'px';
+    leftScroll = (parkFeature[id].pathZoomPoints[end][2] * window.innerHeight);
 
     // variable to store the value to scroll from the top
-    topScroll = (parkFeature[id].pathZoomPoints[end][1] * window.innerHeight) + 'px';
+    topScroll = (parkFeature[id].pathZoomPoints[end][1] * window.innerHeight);
 
     // variable to store the zoom level
     zoomLevel = parkFeature[id].pathZoomPoints[end][0];
@@ -588,22 +572,29 @@ window.onload = function () {
     TweenMax.to('#svgMapObj', 1, {
       height: zoomLevel,
       ease: Sine.easeOut,
-      onComplete: function () {
-        // animating the scroll
-        $('section').animate({
-          scrollLeft: leftScroll,
-          scrollTop: topScroll
-        }, 1000, "easeInOutSine");
-      }
+    });
+
+    // animating the scroll
+    TweenMax.to('section', 1, {
+      scrollTo: {
+        y: topScroll,
+        x: leftScroll
+      },
+      ease: Sine.easeOut
     });
   }
 
   // this function animates the map back to fit the full screen 
-  function mapZoomOut() {
-    TweenMax.to('#svgMapObj', 1, {
-      delay: 0.5,
+  function mapZoomOut(mapHeight) {
+    // zooming out to the full map
+    // value passed is the visible height of the map
+    // TAKE FOOTER INTO ACCOUNT WHILE SETTING
+    TweenMax.to('#svgMapObj', 1.5, {
       height: '100%',
-      ease: Sine.easeOut
+    });
+
+    TweenMax.to("section", 1.25, {
+      height: mapHeight + '%',
     });
   }
 
@@ -668,10 +659,10 @@ window.onload = function () {
   function closeImgGallery() {
     expandedImg.style.display = "none";
     thumbnail.style.display = "none";
-    contentImg.style.display = "flex";
+    contentImg.style.display = "block";
   }
 
   // END IMAGE GALLERY SCRIPT ----------  
   // }
 
-}
+};
