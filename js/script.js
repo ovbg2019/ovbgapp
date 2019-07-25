@@ -198,128 +198,6 @@ window.onload = function () {
 
   /* FUNCTIONS FOR THE ANIMATING THE MAP USING CLASSES, SET THE START POINT AND DROP DOWN MENU */
 
-  // Animate zoom/ position of location
-  const animatedZoom = function (classes) {
-    // Reset Class List
-    MAP_SVG.removeAttribute('class');
-    // Add classes to SVG
-    MAP_SVG.classList.add(classes);
-  }
-
-  const setPath = function (start, end) {
-    // Bike Path
-    if (start === 0) {
-      if (end === 'peony') {
-        animatedZoom('moveTo-peony-bike');
-      } else if (end === 'waterfall') {
-        animatedZoom('moveTo-peony-waterfall');
-      } else if (end === 'bridge') {
-        animatedZoom('moveTo-bridge-peony');
-      } else if (end === 'daylily') {
-        animatedZoom('moveTo-peony-daylily');
-      } else if (end === 'bike') {
-        // 
-      } else if (end === 'memory') {
-        animatedZoom('moveTo-memory-peony');
-      }
-    }
-
-    // Waterfall Garden
-    if (start === 1) {
-      if (end === 'peony') {
-        animatedZoom('moveTo-peony-waterfall');
-      } else if (end === 'waterfall') {
-        // 
-      } else if (end === 'bridge') {
-        animatedZoom('moveTo-bridge-waterfall');
-      } else if (end === 'daylily') {
-        animatedZoom('moveTo-daylily-waterfall');
-      } else if (end === 'bike') {
-        animatedZoom('moveTo-waterfall-bike');
-      } else if (end === 'memory') {
-        animatedZoom('moveTo-memory-waterfall');
-      }
-    }
-
-    // Bridge
-    if (start === 2) {
-      if (end === 'peony') {
-        animatedZoom('moveTo-bridge-peony');
-      } else if (end === 'waterfall') {
-        animatedZoom('moveTo-bridge-waterfall');
-      } else if (end === 'bridge') {
-        // 
-      } else if (end === 'daylily') {
-        animatedZoom('moveTo-daylily-bridge');
-      } else if (end === 'bike') {
-        animatedZoom('moveTo-bridge-bike');
-      } else if (end === 'memory') {
-        animatedZoom('moveTo-memory-bridge');
-      }
-    }
-
-    // Daylily
-    if (start === 3) {
-      if (end === 'peony') {
-        animatedZoom('moveTo-peony-daylily');
-      } else if (end === 'waterfall') {
-        animatedZoom('moveTo-daylily-waterfall');
-      } else if (end === 'bridge') {
-        animatedZoom('moveTo-daylily-bridge');
-      } else if (end === 'daylily') {
-        // 
-      } else if (end === 'bike') {
-        animatedZoom('moveTo-bike-daylily');
-      } else if (end === 'memory') {
-        animatedZoom('moveTo-memory-daylily');
-      }
-    }
-
-    // Bike
-    if (start === 4) {
-      if (end === 'peony') {
-        animatedZoom('moveTo-peony-bike');
-      } else if (end === 'waterfall') {
-        animatedZoom('moveTo-waterfall-bike');
-      } else if (end === 'bridge') {
-        animatedZoom('moveTo-bridge-bike');
-      } else if (end === 'daylily') {
-        animatedZoom('moveTo-bike-daylily');
-      } else if (end === 'bike') {
-        // 
-      } else if (end === 'memory') {
-        animatedZoom('moveTo-memory-bike');
-      }
-    }
-
-    // Memory Garden
-    if (start === 5) {
-      if (end === 'peony') {
-        animatedZoom('moveTo-memory-peony');
-      } else if (end === 'waterfall') {
-        animatedZoom('moveTo-memory-waterfall');
-      } else if (end === 'bridge') {
-        animatedZoom('moveTo-memory-bridge');
-      } else if (end === 'daylily') {
-        animatedZoom('moveTo-memory-daylily');
-      } else if (end === 'bike') {
-        animatedZoom('moveTo-memory-bike');
-      } else if (end === 'memory') {
-        // 
-      }
-    }
-  }
-
-
-  // Set start value upon click of tab
-  TABS.forEach(tab => {
-    tab.addEventListener('click', function () {
-      // setStart(tab.id);
-      // decidePath(startPosition, destination, null, null);
-    })
-  });
-
-
   // if anywhere in the map is clicked the dropdown will close
   MAP_SVG.addEventListener('click', function (e) {
     DROP_DOWN_ITEM.forEach(item => {
@@ -345,7 +223,6 @@ window.onload = function () {
       // Add the event listener to the item
       item.addEventListener('click', function () {
         // will set destination location based item in dropdown being selected
-        // setPath(startPosition, item.value);
         if (item.value !== 0) {
           pathZoomIn((item.value - 1));
         }
