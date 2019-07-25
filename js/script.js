@@ -538,19 +538,21 @@ window.onload = function () {
     zoomLevel = parkFeature[id].featureZoomPoints[0];
 
     // animating the zoom
-    TweenMax.to('#svgMapObj', 1.75, {
+    TweenMax.to('#svgMapObj', 2.5, {
+      delay: 0.5,
       height: zoomLevel,
-      ease: Sine.easeOut,
+      // ease: Sine.easeOut,
     });
 
     // animating the scroll
-    TweenMax.to('section', 1.75, {
+    TweenMax.to('section', 2.5, {
+      delay: 0.5,
       height: '53.5%',
       scrollTo: {
         y: topScroll,
         x: leftScroll
       },
-      ease: Sine.easeOut
+      // ease: Sine.easeOut
     });
   }
 
@@ -569,13 +571,13 @@ window.onload = function () {
     console.log('Left Scroll: ' + leftScroll + '\nTop Scroll: ' + topScroll + '\nZoom: ' + zoomLevel);
 
     // animating the zoom
-    TweenMax.to('#svgMapObj', 1, {
+    TweenMax.to('#svgMapObj', 1.75, {
       height: zoomLevel,
       ease: Sine.easeOut,
     });
 
     // animating the scroll
-    TweenMax.to('section', 1, {
+    TweenMax.to('section', 1.75, {
       scrollTo: {
         y: topScroll,
         x: leftScroll
