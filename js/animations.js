@@ -1,4 +1,4 @@
-window.onload = function() {
+// window.onload = function() {
 	console.clear();
 	//declare consts and set DOM reference
 	// Get SVG document inside Object by ID
@@ -141,4 +141,4 @@ window.onload = function() {
 			});
 		});
 	});
-};
+// };
