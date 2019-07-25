@@ -95,6 +95,7 @@ header {
 	width: auto;
 	height: 100%;
 	overflow: scroll;
+	-webkit-overflow-scrolling: touch;
 }
 
 #svgMap {
@@ -136,6 +137,7 @@ section {
 	width: 100%;
 	height: 92%;
 	overflow: scroll;
+	-webkit-overflow-scrolling: touch;
 }
 
 /* #mapBox {
@@ -218,7 +220,7 @@ section #map {
 #contentImageBox {
 	width: 100%;
 	height: auto;
-	display: flex;
+	display: block;
 	justify-content: space-between;
 	align-content: center;
 	background: rgba(0, 0, 0, 0.05);
@@ -227,7 +229,7 @@ section #map {
 }
 
 #contentImageBox .galleryImage {
-	width: 23%;
+	width: 24%;
 	height: auto;
 	border-radius: 1vh;
 	/* border: 2px solid #ebebeb; */
@@ -359,11 +361,10 @@ input:checked+label {
 
 #modalContent {
 	position: relative;
-	/*opacity: 0;*/
 	border-radius: 1vh;
 	width: 100%;
 	height: auto;
-	display: grid;
+	display: block;
 }
 
 .bigImage {
@@ -375,14 +376,14 @@ input:checked+label {
 .smImage {
 	width: 17.7%;
 	height: auto;
-	background-color: yellow;
 	display: flex;
 	flex-direction: column;
 	margin-left: 82%;
 	margin-bottom: 2%;
-	transition: animation ease-in-out 2s normal;
 }
-
+.smImage:active {
+	border: 1px solid #f7f2db;
+}
 .bigImage,
 .smImage {
 	border-radius: 1vh;
