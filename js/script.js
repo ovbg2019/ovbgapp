@@ -282,7 +282,9 @@ window.onload = function() {
       // Reset dropdown text value to select destination
     document.querySelector('.endPoint').classList.toggle('hidden');
     
-		});
+    });
+    
+    PATH_FINDER.classList.add('hidden');
   });
   
   TOP_BAR.addEventListener('click', function() {
