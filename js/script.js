@@ -6,8 +6,8 @@ window.onload = function() {
 	// PLEASE MAKE CHANGES ACCORDINGLY IF NECESSASARY
 	const LOCATIONS = [
 		'Select Destination',
-		'Bike Path',
 		'Peony Garden',
+		'Bike Path',
 		'Waterfall Garden',
 		'Bridge',
 		'Daylily Collection',
@@ -15,14 +15,15 @@ window.onload = function() {
 	];
 
   // Constants for the dropdown
-  const TOP_BAR = document.getElementById('destination-menu');
-  const PATH_FINDER = document.querySelector('.pathfinder');
+  const TOP_BAR = document.getElementById('destination-menu'); // Initial top bar menu
+  const PATH_FINDER = document.querySelector('.pathfinder');  // secondary path finder menu to display when top bar is clicked
 	const DROP_DOWN_START = document.querySelector('.path-start-select'); // Select the drop down
   const DROP_DOWN_ITEM_START = document.querySelectorAll('.path-start-select li'); // Create array of li items in drop down list
   const DROP_DOWN_END = document.querySelector('.path-end-select'); // Select the drop down
 	const DROP_DOWN_ITEM_END = document.querySelectorAll('.path-end-select li'); // Create array of li items in drop down list
 	const MAP_OBJ = document.getElementById('svgMapObj'); // Target object element holding SVG of map
-	const MAP_SVG = MAP_OBJ.contentDocument.getElementById('svgMap'); // Get the SVG document inside the Object tag
+  const MAP_SVG = MAP_OBJ.contentDocument.getElementById('svgMap'); // Get the SVG document inside the Object tag
+  const GO_BTN = document.querySelector('.go-btn'); // go button inside the path finder menu
 
 	// Constants to access the tabs
 	const TABS = document.querySelectorAll('.tab');
@@ -270,6 +271,7 @@ window.onload = function() {
       document.querySelector('.endPoint').classList.toggle('hidden');			
 
     });
+
     DROP_DOWN_ITEM_END.forEach(item => {
 			// toggle the hidden class on each item in the list (unhiding them)
 			if (item.value !== 0) {
@@ -284,7 +286,7 @@ window.onload = function() {
   });
   
   TOP_BAR.addEventListener('click', function() {
-    this.classList.toggle('hidden');
+    // this.classList.toggle('hidden');
     PATH_FINDER.classList.toggle('hidden');
 
     document.querySelector('.placeholder-start').textContent = `${LOCATIONS[id + 1]}`;
@@ -292,6 +294,7 @@ window.onload = function() {
 
 	// Create event listener on drop down menu
 	DROP_DOWN_START.addEventListener('click', function() {
+    // Hide the endpoint select
     document.querySelector('.endPoint').classList.toggle('hidden');
 		// Loop through the elements in the drop down and add event listeners to them
 		DROP_DOWN_ITEM_START.forEach(item => {
@@ -322,14 +325,19 @@ window.onload = function() {
 			item.addEventListener('click', function() {
 				// will set destination location based item in dropdown being selected
 				if (item.value !== 0) {
-					pathZoomIn(item.value - 1);
+          // pathZoomIn(item.value - 1);
+          destination = item.value - 1;
 				}
 				// Upon clicking an item in the list set the displayed text to the selected location name
-        document.querySelector('.placeholder-end').textContent = `Go to: ${LOCATIONS[item.value]}`;
-        TOP_BAR.classList.toggle('hidden');
-        PATH_FINDER.classList.toggle('hidden');
+        document.querySelector('.placeholder-end').textContent = `${LOCATIONS[item.value]}`;
+        // TOP_BAR.classList.toggle('hidden');
+        // PATH_FINDER.classList.toggle('hidden');
 			});
 		});
+  });
+
+  GO_BTN.addEventListener('click', function() {
+      pathZoomIn(destination);
   });
 
 
