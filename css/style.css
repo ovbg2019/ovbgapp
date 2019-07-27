@@ -103,11 +103,45 @@ header {
 	height: 100%;
 }
 
+.pathfinder {
+  width: 80%;
+  height: 35vh;
+  background-color: var(--paths);
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  position: absolute;
+  top: 5vh;
+  left: 10vw;
+}
+
+.pathfinder ul li {
+  list-style: none;
+}
+
+.endPoint, .startPoint {
+  width: 70vw;
+	background: #EEE;
+	border-radius: 1.5vh;
+  border: 2px solid var(--concrete-path);
+  padding: 1vh;
+	font-size: 3vh;
+	font-family: "ButtonFont";
+}
+
+.startPoint {
+  margin-top: 2rem;
+}
+
+.endPoint {
+  margin-top: 2rem;
+}
+
 .destination-menu {
 	width: 100%;
 	height: 30rem;
 }
-
 
 .destination-select {
 	width: 80vw;
@@ -126,7 +160,6 @@ header {
 	padding: 1vh;
 	font-size: 3vh;
 	font-family: "ButtonFont";
-	
 }
 
 .hidden {

@@ -10,21 +10,37 @@
 
 <body>
 	<main>
-		<div id="destination-menu">
+		<div id="destination-menu" class="">
 			<ul class="destination-select">
-				<!-- 
-					 CAUTION: ORDER CHANGE
-					 PLEASE MAKE CHANGES ACCORDINGLY IF NECESSASARY
-				 -->
-				<li value="0" id="placeholder">Select Destination</li>
-				<li value="1" class="menuItem hidden">Peony Garden</li>
-				<li value="2" class="menuItem hidden">Bike Path</li>
-				<li value="3" class="menuItem hidden">Waterfall Garden</li>
-				<li value="4" class="menuItem hidden">Bridge</li>
-				<li value="5" class="menuItem hidden">Daylily Collection</li>
-				<li value="6" class="menuItem hidden">Memory Garden</li>
+				<li value="0" id="placeholder">Where to?</li>
 			</ul>
-		</div>
+    </div>
+    
+    <div class="pathfinder hidden">
+      <h2>Choose Your Path</h2>
+      <div class="startPoint">
+        <ul class="path-start-select">
+          <li value="0" class="menuItem placeholder-start">Your Location</li>
+          <li value="1" class="menuItem hidden">Peony Garden</li>
+          <li value="2" class="menuItem hidden">Bike Path</li>
+          <li value="3" class="menuItem hidden">Waterfall Garden</li>
+          <li value="4" class="menuItem hidden">Bridge</li>
+          <li value="5" class="menuItem hidden">Daylily Collection</li>
+          <li value="6" class="menuItem hidden">Memory Garden</li>
+        </ul>
+      </div>
+      <div class="endPoint">
+        <ul class="path-end-select">
+          <li value="0" class="menuItem placeholder-end">Where to?</li>
+          <li value="1" class="menuItem hidden">Peony Garden</li>
+          <li value="2" class="menuItem hidden">Bike Path</li>
+          <li value="3" class="menuItem hidden">Waterfall Garden</li>
+          <li value="4" class="menuItem hidden">Bridge</li>
+          <li value="5" class="menuItem hidden">Daylily Collection</li>
+          <li value="6" class="menuItem hidden">Memory Garden</li>
+        </ul>
+      </div>
+    </div>
 
 		<section id="mapBox">
 			<object id="svgMapObj" data="./images/park_map.svg" type="image/svg+xml" viewBox="0 0 1920 1080">

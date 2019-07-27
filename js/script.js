@@ -6,17 +6,21 @@ window.onload = function() {
 	// PLEASE MAKE CHANGES ACCORDINGLY IF NECESSASARY
 	const LOCATIONS = [
 		'Select Destination',
-		'Peony Garden',
 		'Bike Path',
+		'Peony Garden',
 		'Waterfall Garden',
 		'Bridge',
 		'Daylily Collection',
 		'Memory Garden',
 	];
 
-	// Constants for the dropdown
-	const DROP_DOWN = document.querySelector('.destination-select'); // Select the drop down
-	const DROP_DOWN_ITEM = document.querySelectorAll('.destination-select li'); // Create array of li items in drop down list
+  // Constants for the dropdown
+  const TOP_BAR = document.getElementById('destination-menu');
+  const PATH_FINDER = document.querySelector('.pathfinder');
+	const DROP_DOWN_START = document.querySelector('.path-start-select'); // Select the drop down
+  const DROP_DOWN_ITEM_START = document.querySelectorAll('.path-start-select li'); // Create array of li items in drop down list
+  const DROP_DOWN_END = document.querySelector('.path-end-select'); // Select the drop down
+	const DROP_DOWN_ITEM_END = document.querySelectorAll('.path-end-select li'); // Create array of li items in drop down list
 	const MAP_OBJ = document.getElementById('svgMapObj'); // Target object element holding SVG of map
 	const MAP_SVG = MAP_OBJ.contentDocument.getElementById('svgMap'); // Get the SVG document inside the Object tag
 
@@ -256,22 +260,61 @@ window.onload = function() {
 
 	// if anywhere in the map is clicked the dropdown will close
 	MAP_SVG.addEventListener('click', function(e) {
-		DROP_DOWN_ITEM.forEach(item => {
+		DROP_DOWN_ITEM_START.forEach(item => {
 			// toggle the hidden class on each item in the list (unhiding them)
 			if (item.value !== 0) {
 				item.classList.add('hidden');
 			} else {
 				item.classList.remove('hidden');
 			}
-			// Reset dropdown text value to select destination
-			document.getElementById('placeholder').textContent = `Select Destination`;
+      document.querySelector('.endPoint').classList.toggle('hidden');			
+
+    });
+    DROP_DOWN_ITEM_END.forEach(item => {
+			// toggle the hidden class on each item in the list (unhiding them)
+			if (item.value !== 0) {
+				item.classList.add('hidden');
+			} else {
+				item.classList.remove('hidden');
+			}
+      // Reset dropdown text value to select destination
+    document.querySelector('.endPoint').classList.toggle('hidden');
+    
 		});
-	});
+  });
+  
+  TOP_BAR.addEventListener('click', function() {
+    this.classList.toggle('hidden');
+    PATH_FINDER.classList.toggle('hidden');
+
+    document.querySelector('.placeholder-start').textContent = `${LOCATIONS[id + 1]}`;
+  });
 
 	// Create event listener on drop down menu
-	DROP_DOWN.addEventListener('click', function() {
+	DROP_DOWN_START.addEventListener('click', function() {
+    document.querySelector('.endPoint').classList.toggle('hidden');
 		// Loop through the elements in the drop down and add event listeners to them
-		DROP_DOWN_ITEM.forEach(item => {
+		DROP_DOWN_ITEM_START.forEach(item => {
+			// toggle the hidden class on each item in the list (unhiding them)
+			item.classList.toggle('hidden');
+      
+			// Add the event listener to the item
+			item.addEventListener('click', function() {
+        // will set destination location based item in dropdown being selected
+				if (item.value !== 0) {
+          id = item.value;
+        }
+        
+				// Upon clicking an item in the list set the displayed text to the selected location name
+				document.querySelector('.placeholder-start').textContent = `${LOCATIONS[item.value]}`;
+			});
+		});
+  });
+
+  	// Create event listener on drop down menu
+	DROP_DOWN_END.addEventListener('click', function() {
+		// Loop through the elements in the drop down and add event listeners to them
+		DROP_DOWN_ITEM_END.forEach(item => {
 			// toggle the hidden class on each item in the list (unhiding them)
 			item.classList.toggle('hidden');
 
@@ -282,10 +325,14 @@ window.onload = function() {
 					pathZoomIn(item.value - 1);
 				}
 				// Upon clicking an item in the list set the displayed text to the selected location name
-				document.getElementById('placeholder').textContent = `Go to: ${LOCATIONS[item.value]}`;
+        document.querySelector('.placeholder-end').textContent = `Go to: ${LOCATIONS[item.value]}`;
+        TOP_BAR.classList.toggle('hidden');
+        PATH_FINDER.classList.toggle('hidden');
 			});
 		});
-	});
+  });
+
+
 
 	/* OPENING AND CLOSING THE INFORMATION PANEL AND POPULATING IT WITH THE CONTENT */
 
@@ -331,7 +378,14 @@ window.onload = function() {
 			// setting the content in the info panel
 			setTimeout(setContent, 350);
 			// opening the panel with new content
-			openInfoPanel();
+      openInfoPanel();
+
+      let location = parseInt(id);
+      console.log(location + 1);
+      document.querySelector('.placeholder-start').textContent = LOCATIONS[location + 1];
+      console.log(currentLocation = LOCATIONS[parseInt(id) + 1]);
+      PATH_FINDER.classList.add('hidden');
+      TOP_BAR.classList.remove('hidden');
 		};
 	}
 
