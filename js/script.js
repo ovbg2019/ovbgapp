@@ -339,7 +339,8 @@ window.onload = function() {
   });
 
   GO_BTN.addEventListener('click', function() {
-      pathZoomIn(destination);
+    pathZoomIn(destination);
+    PATH_FINDER.classList.add('hidden');
   });
 
 
