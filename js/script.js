@@ -1,9 +1,9 @@
 // Put everything inside an onload to ensure that everything has loaded in before any code is executed
-window.onload = function() {
+window.onload = function () {
 	/* VARIABLE DECLARATIONS */
 	// List of items in the drop down (order matters)
 	// CAUTION: ORDER CHANGE
-	// PLEASE MAKE CHANGES ACCORDINGLY IF NECESSASARY
+	// PLEASE MAKE CHANGES ACCORDINGLY IF NECESSARY
 	const LOCATIONS = [
 		'Select Destination',
 		'Peony Garden',
@@ -14,11 +14,19 @@ window.onload = function() {
 		'Memory Garden',
 	];
 
+
+	/**********LIST OF DOM REFERENCES *********/
+	// Get SVG document inside Object by Object ID
+	const MAP_SVG = document.querySelector('#svgMapObj').contentDocument;
+
+
 	// Constants for the dropdown
-	const DROP_DOWN = document.querySelector('.destination-select'); // Select the drop down
-	const DROP_DOWN_ITEM = document.querySelectorAll('.destination-select li'); // Create array of li items in drop down list
-	const MAP_OBJ = document.getElementById('svgMapObj'); // Target object element holding SVG of map
-	const MAP_SVG = MAP_OBJ.contentDocument.getElementById('svgMap'); // Get the SVG document inside the Object tag
+	// Select the drop down
+	const DROP_DOWN = document.querySelector('.destination-select');
+	// Create array of li items in drop down list
+	const DROP_DOWN_ITEM = document.querySelectorAll('.destination-select li');
+
+
 
 	// Constants to access the tabs
 	const TABS = document.querySelectorAll('.tab');
@@ -39,6 +47,23 @@ window.onload = function() {
 	const contentImg = document.getElementById('contentImageBox');
 	const expandedImg = document.getElementById('expandedImg');
 	const thumbnail = document.getElementById('thumbnail');
+
+	//SVG Navigation Paths
+	const peonyToBridgePath = MAP_SVG.querySelector('#peony_to_bridge');
+	const peonyToBikePath = MAP_SVG.querySelector('#peony_to_bike_path');
+
+	//To Total Path Length
+	// console.log(`peonyToBridgePathLength: ${peonyToBridgePath.getTotalLength()}`);
+
+	//placeholder
+	const PLACE_HOLDER = document.querySelector('#placeholder');
+
+	//New TimeLine Max const for GSAP
+	const TLM = new TimelineMax({});
+	//Clears Current/Active Animation
+	const REMOVE_CURRENT_ANIMATION = function () {
+		TLM.progress(0).clear();
+	};
 
 	// variable to store the active colour to be set to the tabs
 	let activeColour = '';
@@ -72,14 +97,13 @@ window.onload = function() {
 	let topScroll = '';
 	let zoomLevel = '';
 
+
 	// declaring an array of object to to store the values
-	let parkFeature = [
-		{
+	let parkFeature = [{
 			name: 'Bike Trail',
 			colour: '#B15222',
 			icon: 'images/bike_path_icon.svg',
-			about:
-				'<p>This is a 7 km paved multi-use recreational trail that stretches from Lakeview Park to the Oshawa Valley Botanical Garden. Surrounded by lush vegetation the recreational trail meanders along the Oshawa Creek.</p><p> Along the recreational trail there are connections to other recreational trails including the Michael Starr Trail, Harmony Creek Trail, and other attractions including Oshawa Valley Botanical Garden and downtown Oshawa.</p> <p> Portions of the recreational trail travel close to the creek and has steep slopes, sharp turns and unprotected edges. Caution should be used when accessing and maneuvering the recreational trail.</p>',
+			about: '<p>This is a 7 km paved multi-use recreational trail that stretches from Lakeview Park to the Oshawa Valley Botanical Garden. Surrounded by lush vegetation the recreational trail meanders along the Oshawa Creek.</p><p> Along the recreational trail there are connections to other recreational trails including the Michael Starr Trail, Harmony Creek Trail, and other attractions including Oshawa Valley Botanical Garden and downtown Oshawa.</p> <p> Portions of the recreational trail travel close to the creek and has steep slopes, sharp turns and unprotected edges. Caution should be used when accessing and maneuvering the recreational trail.</p>',
 			galleryImages: [
 				'images/temp_pic1.jpg',
 				'images/temp_pic1.jpg',
@@ -103,8 +127,7 @@ window.onload = function() {
 			name: 'Peony Garden',
 			colour: '#B04A7F',
 			icon: 'images/peony_icon.svg',
-			about:
-				'<p>The Peony Garden is located within the Oshawa Valley Botanical Garden. In 2001, the Canadian Peony Society donated 100 plants from the Wally Gilbert Collection to the project. This contribution led to the official launch of the Oshawa Valley Botanical Garden.</p> <p>Further donations from peony breeders and suppliers across North America have led to the entire collection flourishing into the largest contemporary collection of peonies in North America. With more than 300 varieties in cultivation, the collection is truly impressive!</p> <p>The succession of blooms begins in late May and continues through to the last week of June. The Annual Peony Festival coincides with the climax of the bloom cycle in June.</p>',
+			about: '<p>The Peony Garden is located within the Oshawa Valley Botanical Garden. In 2001, the Canadian Peony Society donated 100 plants from the Wally Gilbert Collection to the project. This contribution led to the official launch of the Oshawa Valley Botanical Garden.</p> <p>Further donations from peony breeders and suppliers across North America have led to the entire collection flourishing into the largest contemporary collection of peonies in North America. With more than 300 varieties in cultivation, the collection is truly impressive!</p> <p>The succession of blooms begins in late May and continues through to the last week of June. The Annual Peony Festival coincides with the climax of the bloom cycle in June.</p>',
 			galleryImages: [
 				'images/temp_pic2.jpg',
 				'images/temp_pic2.jpg',
@@ -113,7 +136,23 @@ window.onload = function() {
 			],
 			bigImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
-			paths: ['peony_to_bike', 'peony_to_waterfall', 'peony_to_bridge', 'peony_to_daylily', 'peony_to_memory'],
+			/* DRAWING PATHS*/
+			paths: [{
+					0: 0
+				}, {
+					draw: () => {
+						DRAW(peonyToBikePath, 5, 608);
+					}
+				},
+				'peony_to_waterfall',
+				{
+					draw: () => {
+						DRAW(peonyToBridgePath, 5, 807);
+					}
+				},
+				'peony_to_daylily',
+				'peony_to_memory',
+			],
 			featureZoomPoints: ['180%', 0.4, 0.95],
 			pathZoomPoints: [
 				['180%', 0.4, 0.95],
@@ -122,14 +161,13 @@ window.onload = function() {
 				['140%', 0.1, 0.87],
 				['120%', 0.01, 0.6],
 				['100%', 0, 0.4],
-			],
+			]
 		},
 		{
 			name: 'Waterfall Garden',
 			colour: '#327687',
 			icon: 'images/water_feature_icon.svg',
-			about:
-				'<p>The Rockery Garden is located within Kinsman Valley Park of the Oshawa Valley Botanical Garden. It is just north of the Peony Garden and features a waterfall.</p> <p>The garden and its surroundings provides the perfect opportunity to enjoy nature and is a beautiful backdrop for any occasion.',
+			about: '<p>The Rockery Garden is located within Kinsman Valley Park of the Oshawa Valley Botanical Garden. It is just north of the Peony Garden and features a waterfall.</p> <p>The garden and its surroundings provides the perfect opportunity to enjoy nature and is a beautiful backdrop for any occasion.',
 			galleryImages: [
 				'images/temp_pic3.jpg',
 				'images/temp_pic3.jpg',
@@ -159,8 +197,7 @@ window.onload = function() {
 			name: 'Rotary Bridge',
 			colour: '#806B53',
 			icon: 'images/bridge_icon.svg',
-			about:
-				'<p>Rotary Bridge was dedicated by the Rotary Club Oshawa-Parkwood and opened in celebration of the 100th anniversary of Rotary International in 2006.</p> <p>It is located over The Oshawa Creek in The Oshawa Valley Botanical Gardens and it will serve to remind the citizens of Oshawa of the tremendous acts of service that both Rotary Clubs have performed for so many years.</p>',
+			about: '<p>Rotary Bridge was dedicated by the Rotary Club Oshawa-Parkwood and opened in celebration of the 100th anniversary of Rotary International in 2006.</p> <p>It is located over The Oshawa Creek in The Oshawa Valley Botanical Gardens and it will serve to remind the citizens of Oshawa of the tremendous acts of service that both Rotary Clubs have performed for so many years.</p>',
 			galleryImages: [
 				'images/temp_pic4.jpg',
 				'images/temp_pic4.jpg',
@@ -190,8 +227,7 @@ window.onload = function() {
 			name: 'Daylily Collection',
 			colour: '#7D6287',
 			icon: 'images/daylily_icon.svg',
-			about:
-				'<p>The one of a kind collection of locally hybridized daylilies addition to the already beautiful gardens was made possible by the generous donation from Henry Lorrain and the late Douglas Lycett, founders of We’re in the Hayfield Now.</p> <p>The City would like to thank the volunteers including the Oshawa Garden Club, Brooklin Horticulture Society and individual volunteers who dedicated their time to dig, transport, store and replant the daylilies to make this collection a reality.</p> <p>The 265 daylily collection was established in 2017 and can be found on the east side of the Oshawa Creek directly across from the Peony Garden with access to the Kolodzie Oshawa Creek Bike Path.</p>',
+			about: '<p>The one of a kind collection of locally hybridized daylilies addition to the already beautiful gardens was made possible by the generous donation from Henry Lorrain and the late Douglas Lycett, founders of We’re in the Hayfield Now.</p> <p>The City would like to thank the volunteers including the Oshawa Garden Club, Brooklin Horticulture Society and individual volunteers who dedicated their time to dig, transport, store and replant the daylilies to make this collection a reality.</p> <p>The 265 daylily collection was established in 2017 and can be found on the east side of the Oshawa Creek directly across from the Peony Garden with access to the Kolodzie Oshawa Creek Bike Path.</p>',
 			galleryImages: [
 				'images/temp_pic5.jpg',
 				'images/temp_pic5.jpg',
@@ -221,8 +257,7 @@ window.onload = function() {
 			name: 'Memory Garden',
 			colour: '#4571A2',
 			icon: 'images/memory_garden_icon.svg',
-			about:
-				'<p>The Memory Garden is comprised of several gardens and includes tree lined walkways and a central gathering area which provides a formal gathering space and opportunities for passive recreation. The Memory Garden provides an opportunity where residents can honour and remember loved ones through the Commemorative Tree and Bench program.</p> <p>Visitors to the Oshawa Valley Botanical Gardens can now enjoy a new shade structure thanks to donations from the Rotary Club of Oshawa and the Rotary Club of Oshawa-Parkwood.</p> <p>The shade structure is classically designed and features an antique bronze Rotary emblem in the center of the floor, perfect for quiet contemplation, as a centrepiece for photographs or as a formal wedding ceremony.</p>',
+			about: '<p>The Memory Garden is comprised of several gardens and includes tree lined walkways and a central gathering area which provides a formal gathering space and opportunities for passive recreation. The Memory Garden provides an opportunity where residents can honour and remember loved ones through the Commemorative Tree and Bench program.</p> <p>Visitors to the Oshawa Valley Botanical Gardens can now enjoy a new shade structure thanks to donations from the Rotary Club of Oshawa and the Rotary Club of Oshawa-Parkwood.</p> <p>The shade structure is classically designed and features an antique bronze Rotary emblem in the center of the floor, perfect for quiet contemplation, as a centrepiece for photographs or as a formal wedding ceremony.</p>',
 			galleryImages: [
 				'images/temp_pic6.jpg',
 				'images/temp_pic6.jpg',
@@ -250,39 +285,86 @@ window.onload = function() {
 		},
 	];
 
+
+
+
+
 	/* FUNCTION DEFINITIONS */
+
+
+	// Draw Function
+	const DRAW = (dpath, duration, length) => {
+		// let length = path.getTotalLength();
+		REMOVE_CURRENT_ANIMATION();
+		const LENGTH = length;
+		const STROKE_WIDTH = 20;
+		TLM.fromTo(
+			dpath,
+			duration, {
+				strokeWidth: STROKE_WIDTH,
+				strokeDasharray: LENGTH,
+				strokeDashoffset: LENGTH,
+			}, {
+				stroke: '#679DF6',
+				strokeWidth: STROKE_WIDTH,
+				strokeDasharray: LENGTH,
+				strokeDashoffset: 0,
+				repeat: -1,
+				ease: Sine.easeInOut,
+				repeatDelay: 1,
+			}
+		);
+	};
+
+	// const DRAW_PATH = (parkFeature, id, i) => {
+	const DRAW_PATH = (parkFeature, id, i) => {
+		console.log(parkFeature[id].paths[i]);
+		return parkFeature[id].paths[i].draw()
+	};
+
+
 
 	/* FUNCTIONS FOR THE ANIMATING THE MAP USING CLASSES, SET THE START POINT AND DROP DOWN MENU */
 
-	// if anywhere in the map is clicked the dropdown will close
-	MAP_SVG.addEventListener('click', function(e) {
+	// if anywhere in the map is clicked the drop down will close
+	MAP_SVG.addEventListener('click', function (e) {
 		DROP_DOWN_ITEM.forEach(item => {
-			// toggle the hidden class on each item in the list (unhiding them)
+			// toggle the hidden class on each item in the list (reveling them)
 			if (item.value !== 0) {
 				item.classList.add('hidden');
 			} else {
 				item.classList.remove('hidden');
 			}
 			// Reset dropdown text value to select destination
-			document.getElementById('placeholder').textContent = `Select Destination`;
+			PLACE_HOLDER.textContent = `Select Destination`;
 		});
 	});
 
 	// Create event listener on drop down menu
-	DROP_DOWN.addEventListener('click', function() {
+	DROP_DOWN.addEventListener('click', function () {
 		// Loop through the elements in the drop down and add event listeners to them
 		DROP_DOWN_ITEM.forEach(item => {
-			// toggle the hidden class on each item in the list (unhiding them)
+			// toggle the hidden class on each item in the list (reveling them)
 			item.classList.toggle('hidden');
 
 			// Add the event listener to the item
-			item.addEventListener('click', function() {
-				// will set destination location based item in dropdown being selected
+			item.addEventListener('click', function () {
+				// will set destination location based item in drop down being selected
 				if (item.value !== 0) {
 					pathZoomIn(item.value - 1);
+					//Draws the path based on the start and end locations
+					if (item.value === 2) {
+						DRAW_PATH(parkFeature, 1, 1);
+						// console.log(DRAW_PATH(parkFeature, 1, 0));
+					}
+					if (item.value === 4) {
+						DRAW_PATH(parkFeature, 1, 3);
+						// console.log(DRAW_PATH(parkFeature, 1, 2));
+					}
+
 				}
 				// Upon clicking an item in the list set the displayed text to the selected location name
-				document.getElementById('placeholder').textContent = `Go to: ${LOCATIONS[item.value]}`;
+				PLACE_HOLDER.textContent = `Go to: ${LOCATIONS[item.value]}`;
 			});
 		});
 	});
@@ -300,13 +382,13 @@ window.onload = function() {
 	// a user can use TAB key to bring focus to different tabs
 	// this loop changes the id based on the tab that is being focused
 	for (let i in TABS) {
-		TABS[i].onfocus = function() {
+		TABS[i].onfocus = function () {
 			id = i;
 		};
 	}
 
 	// this function opens the info panel when ENTER key is pressed
-	document.body.onkeyup = function(e) {
+	document.body.onkeyup = function (e) {
 		if (e.keyCode === 13) {
 			// closing the info panel before changing content
 			closeInfoPanel();
@@ -318,11 +400,11 @@ window.onload = function() {
 		}
 	};
 
-	// seting event listener on each tab using a loop (to reduce redundant code)
+	// setting event listener on each tab using a loop (to reduce redundant code)
 	// will allow the user to click each tab and based on the tab selected, it will populate the content
 	for (let i in TABS) {
 		// applying a function to onclick event of each tab
-		TABS[i].onclick = function() {
+		TABS[i].onclick = function () {
 			// setting the id and the content based on the id
 			id = i;
 			// closing the info panel before changing content
@@ -335,12 +417,12 @@ window.onload = function() {
 		};
 	}
 
-	TITLE_BAR.onclick = function() {
+	TITLE_BAR.onclick = function () {
 		minimizeInfoPanel();
 	};
 
 	// closing the tab on close button click
-	CLOSE_BUTTON.onclick = function() {
+	CLOSE_BUTTON.onclick = function () {
 		closeInfoPanel();
 	};
 
@@ -373,11 +455,9 @@ window.onload = function() {
 			if (infoPanelState === 0) {
 				TweenMax.fromTo(
 					'#infoPanel',
-					0.75,
-					{
+					0.75, {
 						bottom: '-100vh',
-					},
-					{
+					}, {
 						delay: 0.5,
 						bottom: '7vh',
 						ease: Sine.easeOut,
@@ -386,11 +466,9 @@ window.onload = function() {
 			} else if (infoPanelState === 1) {
 				TweenMax.fromTo(
 					'#infoPanel',
-					0.75,
-					{
+					0.75, {
 						bottom: INFO_PANEL.style.bottom,
-					},
-					{
+					}, {
 						bottom: '7vh',
 						ease: Sine.easeOut,
 					}
@@ -413,13 +491,11 @@ window.onload = function() {
 		if (infoPanelState > 0) {
 			TweenMax.fromTo(
 				'#infoPanel',
-				1,
-				{
+				1, {
 					bottom: INFO_PANEL.style.bottom,
-				},
-				{
+				}, {
 					bottom: '-100vh',
-					onComplete: function() {
+					onComplete: function () {
 						resetTabAppearance();
 						// scaling the map back to full height
 						// if condition to only make it work on mobile
@@ -441,14 +517,12 @@ window.onload = function() {
 		if (infoPanelState === 2) {
 			TweenMax.fromTo(
 				'#infoPanel',
-				0.75,
-				{
+				0.75, {
 					bottom: INFO_PANEL.style.bottom,
-				},
-				{
+				}, {
 					bottom: '-24vh',
 					ease: Sine.easeOut,
-					onComplete: function() {
+					onComplete: function () {
 						resetTabAppearance();
 						// scaling the map back to full height
 						// if condition to only make it work on mobile
@@ -514,7 +588,7 @@ window.onload = function() {
 		// variable to store the zoom level
 		zoomLevel = parkFeature[id].pathZoomPoints[end][0];
 
-		console.log('Left Scroll: ' + leftScroll + '\nTop Scroll: ' + topScroll + '\nZoom: ' + zoomLevel);
+		// console.log('Left Scroll: ' + leftScroll + '\nTop Scroll: ' + topScroll + '\nZoom: ' + zoomLevel);
 
 		// animating the zoom
 		TweenMax.to('#svgMapObj', 1.75, {

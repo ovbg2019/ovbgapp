@@ -2,9 +2,9 @@
     SCRIPT.JS
         - Added the new animations to zoom in/out of the map during the different stages of the app (THE JARRING ANIMATIONS FIXED)
         - Added zoom values in the parkFeature objects
-            - featureZoomPoints : zoom points to zoom on to park features 
+            - featureZoomPoints : zoom points to zoom on to park features
                 -- [zoom_amount, scroll_from_top, scroll_from_left]
-            - pathZoomPoints : set of 6 zoom points for each path starting at perticular location 
+            - pathZoomPoints : set of 6 zoom points for each path starting at perticular location
                 -- [zoom_amount, scroll_from_top, scroll_from_left]
         - Added zoom functions
             - featureZoomIn : Zooms in on to a park feature when a new tab is opened (grabs points from the objects)
@@ -20,7 +20,7 @@
 *** Updated on Monday, July 23, 2019 2:50AM ***
     SCRIPT.JS
         - Added the new zoom in/out animation
-	    - The values for the zoom [zoom level, top scroll, left scroll] added in the objects 
+	    - The values for the zoom [zoom level, top scroll, left scroll] added in the objects
 
 -----------------------------------------------------------------------------------------------------------
 
