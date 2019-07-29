@@ -61,8 +61,7 @@ window.onload = function() {
 	let parsed = params.get('id');
 
 	// storing the parsed id in the id variable
-	id = parseInt(parsed);
-
+  id = parseInt(parsed);
 	// Set this via QR or nav button
 	// *** Hard coded for testing purposes ***
 	let currentLocation = '';
@@ -283,9 +282,7 @@ window.onload = function() {
     document.querySelector('.endPoint').classList.toggle('hidden');
     
     });
-    
-    PATH_FINDER.classList.add('hidden');
-  });
+
   
   TOP_BAR.addEventListener('click', function() {
     // this.classList.toggle('hidden');
@@ -327,13 +324,10 @@ window.onload = function() {
 			item.addEventListener('click', function() {
 				// will set destination location based item in dropdown being selected
 				if (item.value !== 0) {
-          // pathZoomIn(item.value - 1);
           destination = item.value - 1;
 				}
 				// Upon clicking an item in the list set the displayed text to the selected location name
         document.querySelector('.placeholder-end').textContent = `${LOCATIONS[item.value]}`;
-        // TOP_BAR.classList.toggle('hidden');
-        // PATH_FINDER.classList.toggle('hidden');
 			});
 		});
   });
@@ -391,10 +385,7 @@ window.onload = function() {
 			// opening the panel with new content
       openInfoPanel();
 
-      let location = parseInt(id);
-      console.log(location + 1);
-      document.querySelector('.placeholder-start').textContent = LOCATIONS[location + 1];
-      console.log(currentLocation = LOCATIONS[parseInt(id) + 1]);
+      document.querySelector('.placeholder-start').textContent = LOCATIONS[parseInt(id) + 1];
       PATH_FINDER.classList.add('hidden');
       TOP_BAR.classList.remove('hidden');
 		};
