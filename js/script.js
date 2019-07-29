@@ -15,6 +15,7 @@ window.onload = function() {
 	];
 
   // Constants for the dropdown
+  const MAPBOX = document.getElementById('mapBox');
   const TOP_BAR = document.getElementById('destination-menu'); // Initial top bar menu
   const PATH_FINDER = document.querySelector('.pathfinder');  // secondary path finder menu to display when top bar is clicked
 	const DROP_DOWN_START = document.querySelector('.path-start-select'); // Select the drop down
@@ -266,7 +267,9 @@ window.onload = function() {
 				item.classList.add('hidden');
 			} else {
 				item.classList.remove('hidden');
-			}
+      }
+      PATH_FINDER.classList.add('hidden'); // hide pathfinder dropdown
+      
       document.querySelector('.endPoint').classList.toggle('hidden');			
 
     });
@@ -282,7 +285,8 @@ window.onload = function() {
     document.querySelector('.endPoint').classList.toggle('hidden');
     
     });
-
+    
+  });
   
   TOP_BAR.addEventListener('click', function() {
     // this.classList.toggle('hidden');
