@@ -1,9 +1,24 @@
 -----------------------------------------------------------------------------------------------------------
 
+
+*** Updated on Monday, July 29, 2019 3:20 PM ***
+    Removed
+        -disabled comments from the previous changelog
+
+    script.js
+        -Fixed the order of paths inside parkFeature to match the order or LOCATIONS
+        -Added function REMOVE_CURRENT_ANIMATION(); inside TABS[i] on click to remove the current/active path animation.
+        -Created 3 new variables for SVG PATHS
+        -Accessing to SVG path is now dynamic via paths array inside parkFeature
+        -Removed two old constants for the paths.
+        -Duration and Length is hardcoded for now, on the next stage it will be pull from 3d array inside parkFeature>paths
+
+-----------------------------------------------------------------------------------------------------------
+
 *** Updated on Sunday, July 28, 2019 8:30 PM ***
 
     ovbgapp
-        - Removed app.js , object.js and animation.js
+        -Removed app.js , object.js and animation.js
 
     css
         Removed:
