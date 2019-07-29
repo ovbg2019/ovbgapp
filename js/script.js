@@ -348,7 +348,14 @@ window.onload = function () {
       }
       PATH_FINDER.classList.add('hidden'); // hide pathfinder dropdown
       // hide endpoint menu while starting point is being selected
-      document.querySelector('.endPoint').classList.remove('hidden');			
+      document.querySelector('.endPoint').classList.remove('hidden');	
+
+      // Update to and from values to prevent errors when drop downs are left open upon outside click on map	
+      document.querySelector('.placeholder-start').textContent = LOCATIONS[item.value];
+      currentLocation = LOCATIONS[item.value];
+      // Reset destination display text 
+      document.querySelector('.placeholder-end').textContent = 'Where to?'
+            
     });
 
     DROP_DOWN_ITEM_END.forEach(item => {
@@ -365,9 +372,10 @@ window.onload = function () {
   });
   
   TOP_BAR.addEventListener('click', function() {
-    // this.classList.toggle('hidden');
     PATH_FINDER.classList.toggle('hidden');
+    if(parsed) {
     document.querySelector('.placeholder-start').textContent = currentLocation;
+    }
   });
 
 	// Create event listener on drop down menu
@@ -387,7 +395,7 @@ window.onload = function () {
         }
         
 				// Upon clicking an item in the list set the displayed text to the selected location name
-				document.querySelector('.placeholder-start').textContent =  LOCATIONS[item.value];
+				document.querySelector('.placeholder-start').textContent = LOCATIONS[item.value];
 			});
 		});
   });
@@ -468,8 +476,9 @@ window.onload = function () {
       openInfoPanel();
       //update current location value based on tab clicked
       currentLocation = LOCATIONS[parseInt(i) + 1];
+      console.log(currentLocation);
       //update starting point text to respresent new starting location
-      document.querySelector('.placeholder-start').textContent = currentLocation;
+      // document.querySelector('.placeholder-start').textContent = currentLocation;
       // hide the path finder menu
       PATH_FINDER.classList.add('hidden');
     };

@@ -78,7 +78,7 @@ main {
 
 header {
 	position: fixed;
-	top: 5vh;
+	top: 8vh;
 	left: 12.5vw;
 	transform: translateX(-3.5vw);
 	height: 7vh;
@@ -98,94 +98,100 @@ header {
 	-webkit-overflow-scrolling: touch;
 }
 
-/* #svgMap {
+#svgMap {
 	width: auto;
 	height: 100%;
-} */
+}
+
+.switchToggle{
+  width: 70%;
+  height: auto;
+  align-self: center;
+  grid-area: switchToggle;
+  margin-left: 1.5vw;
+  position: relative;
+}
 
 .pathfinder {
   width: 90%;
-  height: 20vh;
+  height: 15vh;
   background-color: var(--paths);
   display: grid;
-  grid-template-areas:  "start go-btn"
-                        "end go-btn";
-                        grid-template-columns: 80% 20%;
+  grid-template-areas:  "switchToggle startlabel start go-btn"
+                        "switchToggle endlabel end go-btn";
+  grid-template-columns: 7% 13% 65% 15%;
   position: absolute;
   top: 8vh;
-  left: 6vw;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  border: 2px solid black;
+  left: 5vw;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: 1.5px solid #383838;
+  font-family: "ButtonFont";
 }
 
 .pathfinder ul li {
   list-style: none;
+  background-color: #f7f2db;
+  padding: 0 0.5rem;
+  width: 100%;
 }
 
 .path-start-select, .path-end-select {
-  width: 48vw;
-  background: #EEE;
-	border-radius: 1.5vh;
-  border: 2px solid var(--concrete-path);
-  font-size: 3vh;
-  padding: 0.25rem;
+  width: 80%;
+  height: auto;
+  border-radius: 1vh;
+  border: 1.5px solid #707070;
+  font-size: 2.7vh;
+  background-color: #f7f2db;
+  padding: 1px 2px;
+  /* position: relative; */
 }
 
-.path-start-select li {
-  background-color: #EEE;
-  border-left: 2px solid black;
-  border-right: 2px solid black;
+.placeholder-end{
+  color: #707070;
+  font-family: "ButtonFont";
 }
 
-.path-start-select li:first-of-type {
-  border: none;
+.path-start-select {
+  position: absolute;
+  top: -2.25vh;
 }
 
-.path-start-select li:last-of-type {
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  border-bottom: 2px solid black;
-}
-
-.path-end-select li {
-  background-color: #EEE;
-  border-left: 2px solid black;
-  border-right: 2px solid black;
-}
-
-.path-end-select li:first-of-type {
-  border: none;
-}
-
-.path-end-select li:last-of-type {
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  border-bottom: 2px solid black;
+.path-end-select {
+  position: absolute;
+  top: -2.25vh;
 }
 
 .endPoint, .startPoint {
-  height: 2rem;
-  font-size: 3vh;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
+  align-content: center;
+  align-self: center;
+  width: 100%;
+  position: absolute;
 }
 
 .startPoint {
-  margin-top: 0.5rem;
-  width: 95%;
   grid-area: start;
+  margin-top: 1vh;
 }
 
 .label {
-  width: 50px;
+  width: 12vw;
   font-size: 18px;
+  margin-top: 1vh;
+}
+
+.label-start {
+  grid-area: startlabel;
+}
+
+.label-end {
+  grid-area: endlabel;
 }
 
 .endPoint {
-  margin-top: 1rem;
-  width: 95%;
   grid-area: end;
 }
 
@@ -193,26 +199,43 @@ header {
   display: flex;
   justify-content: center;
   align-content: center;
-  text-align: center;
+  text-align: center;    
   grid-area: go-btn;
   width: 100%;
   height: 100%;
-  background-color: #EEE;
+  background-color: #FAF7E9;
   border-bottom-right-radius: 5px;
-  border-left: 2px solid black;
-  font-size: 25px;
+  border-left: 1.5px solid #383838;
+  font-size: 20px;
+  cursor: pointer;
+  grid-template-areas:"goButtonIcon"
+                      "button";
+  
+  flex-direction: column;
+  align-items: flex-start;
+  
+}
+#goButtonIcon {
+  width: 40%;
+  align-self: center;
+  padding-bottom: 0.25rem
 }
 
-.destination-menu {
-	width: 100%;
-	height: 30rem;
+button {
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+  font-size: 20px;
+  align-self: center;
+  font-family: "ButtonFont"
 }
 
 .destination-select {
-	width: 95vw;
+  width: 95vw;
+  height: 6vh;
 	background: var(--paths);
-	border-radius: 1.5vh;
-	border: 2px solid var(--concrete-path);
+	border-radius: 1vh;
+	border: 1.5px solid var(--concrete-path);
 	z-index: 9000;
 	position: absolute;
 	top: 2.5%;
@@ -223,21 +246,24 @@ header {
   display: grid;
   grid-template-areas: "logo placeholder";
   grid-template-columns: 20% 80%;
-	text-align: center;
-	font-size: 16px;
+	text-align: right;
+	font-size: 15px;
 	font-family: "ButtonFont";
+  padding: 0rem 0.5rem;
 }
 
 .destination-select h2 {
   padding: 0.25rem 0;
   grid-area: placeholder;
+  width: 100%;
+  border-left: 1.5px solid #383838;
 }
 
 .topbar-logo {
-  padding: 0.25rem 0;
-
   grid-area: logo;
-  border-right: 2px solid black;
+  width: 100%;
+  align-content: center;
+  align-self: center;
 }
 
 .hidden {
@@ -251,22 +277,6 @@ section {
 	overflow: scroll;
 	-webkit-overflow-scrolling: touch;
 }
-
-/* #mapBox {
-	width: 100%;
-	height: 58%;
-	overflow: scroll;
-} */
-
-/*
-section svg {
-	width: auto;
-  height: 100%;
-
-section #map {
-	width: 1280px;
-	height: 720px;
-} */
 
 #infoPanel {
 	/* display: none; */
@@ -318,7 +328,7 @@ section #map {
 #closeButton {
 	height: 40%;
 	width: auto;
-	filter: drop-shadow(1px 1px 1px #383838);
+	filter:  drop-shadow(1px 1px 1px #383838);
 }
 
 #contentBox {
@@ -483,11 +493,9 @@ label h4 {
 	margin-left: 82%;
 	margin-bottom: 2%;
 }
-
 .smImage:active {
 	border: 1px solid #f7f2db;
 }
-
 .bigImage,
 .smImage {
 	border-radius: 1vh;
@@ -508,33 +516,45 @@ label h4 {
 	display: none;
 	position: relative;
 }
-
-/* STYLES FOR LARGE DISPLAYS */
+/* portrait tablets and large phones */
+@media only screen and (min-width: 600px) {
+    .destination-select, footer{
+		display: none !important;
+	}
+   
+    section{
+        margin: 0 auto;
+        width: 100%;
+    }
+}
+/* STYLES FOR LARGE DISPLAYS - landscape tablets, destop*/
 
 @media only screen and (min-width: 769px) {
-	.destination-select {
-		display: none;
+	.destination-select, footer {
+		display: none !important;
 	}
-
+ 
 	section {
 		position: absolute;
 		top: 0;
 		width: 100vw;
 		height: 100vh;
 		overflow: scroll;
+        
 	}
 
 	#svgMapObj {
 		position: relative;
-		left: 30vw;
 		width: auto;
 		height: 100%;
 		/* overflow: scroll; */
+        margin: 0 auto;
 	}
 
 	#svgMap {
 		width: auto;
 		height: 100%;
+        
 	}
 
 	#infoPanel {
@@ -586,7 +606,7 @@ label h4 {
 	#closeButton {
 		height: 40%;
 		width: auto;
-		filter: drop-shadow(1px 1px 1px #383838);
+		filter:  drop-shadow(1px 1px 1px #383838);
 	}
 
 	#contentBox {
@@ -670,4 +690,11 @@ label h4 {
 		height: 10vh;
 		width: 30vw;
 	}
+}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    #svgMapObj{
+        margin: 0 auto;
+        width: 100%;
+    }
 }

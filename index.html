@@ -15,14 +15,17 @@
 	<main>
 		<div id="destination-menu" class="">
       <div class="destination-select">
-        <h3 class="topbar-logo">LOGO</h3>
+        <img class="topbar-logo" src="images/ovbg_logo.svg" alt="OVBG Logo"/>
         <h2 id="placeholder">Where to?</h2>
         </div>
     </div>
     
     <div class="pathfinder hidden">
+      <div class="switchToggle">
+        <img src="images/toggle_switch_icon.svg" alt="Toggle Switch Icon"/>
+      </div>
+      <h3 class="label label-start">From</h3>
       <div class="startPoint">
-          <h3 class="label">From</h3>
         <ul class="path-start-select">
           <li value="0" class="menuItem placeholder-start">Your Location</li>
           <li value="1" class="menuItem hidden">Bike Path</li>
@@ -33,8 +36,8 @@
           <li value="6" class="menuItem hidden">Memory Garden</li>
         </ul>
       </div>
+      <h3 class="label label-end">To</h3>
       <div class="endPoint">
-      <h3 class="label">To</h3>
         <ul class="path-end-select">
           <li value="0" class="menuItem placeholder-end">Where to?</li>
           <li value="1" class="menuItem hidden">Bike Path</li>
@@ -47,6 +50,7 @@
       </div>
 
       <div class="go-btn">
+        <img id="goButtonIcon" src= "images/go_button_icon.svg"alt="Go Button"/>
         <button>Go</button>
       </div>
     </div>
