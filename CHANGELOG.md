@@ -3,14 +3,14 @@
 
 *** Updated on Monday, July 29, 2019 3:10 PM ***
     Removed
-        -disabled comments from pervious change log
+        -disabled comments from the previous changelog
 
     script.js
         -Fixed the order of paths inside parkFeature to match the order or LOCATIONS
         -Added function REMOVE_CURRENT_ANIMATION(); inside TABS[i] on click.
         -Created 3 new variables for SVG PATHS
         -Accessing to SVG path is now dynamic removed two old constants for the paths.
-        -Duration and Length is hard coded for now, on the next stage it will be pull from 3d array inside parkFeature>paths
+        -Duration and Length is hardcoded for now, on the next stage it will be pull from 3d array inside parkFeature>paths
 
 -----------------------------------------------------------------------------------------------------------
 
