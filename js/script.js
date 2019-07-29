@@ -6,24 +6,17 @@ window.onload = function () {
 	// PLEASE MAKE CHANGES ACCORDINGLY IF NECESSARY
 	const LOCATIONS = [
 		'Select Destination',
-		'Peony Garden',
 		'Bike Path',
+		'Peony Garden',
 		'Waterfall Garden',
 		'Bridge',
 		'Daylily Collection',
 		'Memory Garden',
 	];
 
-
 	/**********LIST OF DOM REFERENCES *********/
 	// Access SVG inside Object by using Object ID and .contentDocument
 	const MAP_SVG = document.querySelector('#svgMapObj').contentDocument;
-
-	/******* Replaced with above ******/
-	// Target object element holding SVG of map
-	// const MAP_OBJ = document.getElementById('svgMapObj');
-	// Get the SVG document inside the Object tag
-	// const MAP_SVG = MAP_OBJ.contentDocument.getElementById('svgMap');
 
 
 	// Constants for the drop down
@@ -58,6 +51,9 @@ window.onload = function () {
 	const peonyToBridgePath = MAP_SVG.querySelector('#peony_to_bridge');
 	const peonyToBikePath = MAP_SVG.querySelector('#peony_to_bike_path');
 
+
+
+
 	//To Total Path Length
 	// console.log(`peonyToBridgePathLength: ${peonyToBridgePath.getTotalLength()}`);
 
@@ -70,6 +66,12 @@ window.onload = function () {
 	const REMOVE_CURRENT_ANIMATION = function () {
 		TLM.progress(0).clear();
 	};
+
+	//SVG PATH VARIABLES
+	let pathToDraw = '';
+	let duration = 0;
+	let length = 0;
+
 
 	// variable to store the active colour to be set to the tabs
 	let activeColour = '';
@@ -106,6 +108,7 @@ window.onload = function () {
 
 	// declaring an array of object to to store the values
 	let parkFeature = [{
+			//0
 			name: 'Bike Trail',
 			colour: '#B15222',
 			icon: 'images/bike_path_icon.svg',
@@ -118,7 +121,10 @@ window.onload = function () {
 			],
 			bigImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
-			paths: ['bike_to_peony', 'bike_to_waterfall', 'bike_to_bridge', 'bike_to_daylily', 'bike_to_memory'],
+			paths: [
+				'',
+				'bike_path_to_peony', 'bike_path_to_waterfall', 'bike_path_to_bridge', 'bike_path_to_daylily', 'bike_path_to_memory_garden'
+			],
 			featureZoomPoints: ['180%', 0.2, 1],
 			pathZoomPoints: [
 				['180%', 0.4, 0.95],
@@ -129,7 +135,7 @@ window.onload = function () {
 				['100%', 0, 0.33],
 			],
 		},
-		{
+		{ //1
 			name: 'Peony Garden',
 			colour: '#B04A7F',
 			icon: 'images/peony_icon.svg',
@@ -143,21 +149,13 @@ window.onload = function () {
 			bigImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			/* DRAWING PATHS*/
-			paths: [{
-					0: 0
-				}, {
-					draw: () => {
-						DRAW(peonyToBikePath, 5, 608);
-					}
-				},
+			paths: [
+				'peony_to_bike_path',
+				'',
 				'peony_to_waterfall',
-				{
-					draw: () => {
-						DRAW(peonyToBridgePath, 5, 807);
-					}
-				},
+				'peony_to_bridge',
 				'peony_to_daylily',
-				'peony_to_memory',
+				'peony_to_memory_garden',
 			],
 			featureZoomPoints: ['180%', 0.4, 0.95],
 			pathZoomPoints: [
@@ -168,8 +166,7 @@ window.onload = function () {
 				['120%', 0.01, 0.6],
 				['100%', 0, 0.4],
 			]
-		},
-		{
+		}, { //2
 			name: 'Waterfall Garden',
 			colour: '#327687',
 			icon: 'images/water_feature_icon.svg',
@@ -183,11 +180,12 @@ window.onload = function () {
 			bigImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			paths: [
-				'waterfall_to_peony',
 				'waterfall_to_bike',
+				'waterfall_to_peony',
+				'',
 				'waterfall_to_bridge',
 				'waterfall_to_daylily',
-				'waterfall_to_memory',
+				'waterfall_to_memory_garden',
 			],
 			featureZoomPoints: ['170%', 0.35, 0.4],
 			pathZoomPoints: [
@@ -198,8 +196,7 @@ window.onload = function () {
 				['120%', 0.01, 0.6],
 				['100%', 0, 0.33],
 			],
-		},
-		{
+		}, { //3
 			name: 'Rotary Bridge',
 			colour: '#806B53',
 			icon: 'images/bridge_icon.svg',
@@ -213,11 +210,12 @@ window.onload = function () {
 			bigImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			paths: [
+				'bridge_to_bike_path',
 				'bridge_to_peony',
 				'bridge_to_waterfall',
-				'bridge_to_bike',
+				'',
 				'bridge_to_daylily',
-				'bridge_to_memory',
+				'bridge_to_memory_garden',
 			],
 			featureZoomPoints: ['200%', 0.145, 1.4],
 			pathZoomPoints: [
@@ -228,8 +226,8 @@ window.onload = function () {
 				['120%', 0.01, 0.6],
 				['100%', 0, 0.33],
 			],
-		},
-		{
+		}, {
+			//4
 			name: 'Daylily Collection',
 			colour: '#7D6287',
 			icon: 'images/daylily_icon.svg',
@@ -243,11 +241,12 @@ window.onload = function () {
 			bigImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			paths: [
+				'daylily_to_bike_path',
 				'daylily_to_peony',
 				'daylily_to_waterfall',
-				'daylily_to_beidge',
-				'daylily_to_bike',
-				'daylily_to_memory',
+				'daylily_to_bridge',
+				'',
+				'daylily_to_memory_garden',
 			],
 			featureZoomPoints: ['220%', 0, 1.33],
 			pathZoomPoints: [
@@ -258,8 +257,7 @@ window.onload = function () {
 				['120%', 0.01, 0.6],
 				['100%', 0, 0.33],
 			],
-		},
-		{
+		}, { //5
 			name: 'Memory Garden',
 			colour: '#4571A2',
 			icon: 'images/memory_garden_icon.svg',
@@ -273,11 +271,13 @@ window.onload = function () {
 			bigImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			paths: [
-				'memory_to_peony',
+				'memory_garden_bike_path',
+				'memory_garden_to_peony',
 				'memory_to_waterfall',
-				'memory_to_bridge',
-				'memory_to_daylily',
-				'memory_to_bike',
+				'memory_garden_to_bridge',
+				'memory_garden_to_daylily',
+				''
+
 			],
 			featureZoomPoints: ['170%', 0, 0.06],
 			pathZoomPoints: [
@@ -298,12 +298,24 @@ window.onload = function () {
 	/* FUNCTION DEFINITIONS */
 
 
+	// const SVG_PATH = (id, i) => {
+	// 	pathToDraw = MAP_SVG.querySelector('#' + parkFeature[id].paths[i][0]);
+	// 	console.log("something else here");
+
+	// }
+
+	// SVG_PATH(1, 2)
+
+	// DRAW(pathToDraw, 5, 680)
+	// console.log("drawing");
+
+
 	// MAIN DARW Function
 	const DRAW = (dpath, duration, length) => {
 		// let length = path.getTotalLength();
 		REMOVE_CURRENT_ANIMATION();
 		const LENGTH = length;
-		const STROKE_WIDTH = 20;
+		const STROKE_WIDTH = 18;
 		TLM.fromTo(
 			dpath,
 			duration, {
@@ -355,21 +367,18 @@ window.onload = function () {
 			// Add the event listener to the item
 			item.addEventListener('click', function () {
 				// will set destination location based item in drop down being selected
+
 				if (item.value !== 0) {
 					pathZoomIn(item.value - 1);
-					//Draws the path based on the start and end locations
-					if (item.value === 2) {
-						DRAW_PATH(parkFeature, 1, 1);
-						// console.log(DRAW_PATH(parkFeature, 1, 0));
+					if (id !== item.value - 1) {
+						pathToDraw = MAP_SVG.querySelector('#' + parkFeature[id].paths[item.value - 1]);
 					}
-					if (item.value === 4) {
-						DRAW_PATH(parkFeature, 1, 3);
-						// console.log(DRAW_PATH(parkFeature, 1, 2));
-					}
-
+					//Draws the path, duration and length is hard coded
+					DRAW(pathToDraw, 5, 3000)
 				}
 				// Upon clicking an item in the list set the displayed text to the selected location name
 				PLACE_HOLDER.textContent = `Go to: ${LOCATIONS[item.value]}`;
+
 			});
 		});
 	});
@@ -410,6 +419,7 @@ window.onload = function () {
 	for (let i in TABS) {
 		// applying a function to onclick event of each tab
 		TABS[i].onclick = function () {
+			REMOVE_CURRENT_ANIMATION();
 			// setting the id and the content based on the id
 			id = i;
 			// closing the info panel before changing content
