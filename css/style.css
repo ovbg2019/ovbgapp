@@ -98,10 +98,10 @@ header {
 	-webkit-overflow-scrolling: touch;
 }
 
-#svgMap {
+/* #svgMap {
 	width: auto;
 	height: 100%;
-}
+} */
 
 .pathfinder {
   width: 90%;
@@ -318,7 +318,7 @@ section #map {
 #closeButton {
 	height: 40%;
 	width: auto;
-	filter:  drop-shadow(1px 1px 1px #383838);
+	filter: drop-shadow(1px 1px 1px #383838);
 }
 
 #contentBox {
@@ -483,9 +483,11 @@ label h4 {
 	margin-left: 82%;
 	margin-bottom: 2%;
 }
+
 .smImage:active {
 	border: 1px solid #f7f2db;
 }
+
 .bigImage,
 .smImage {
 	border-radius: 1vh;
@@ -584,7 +586,7 @@ label h4 {
 	#closeButton {
 		height: 40%;
 		width: auto;
-		filter:  drop-shadow(1px 1px 1px #383838);
+		filter: drop-shadow(1px 1px 1px #383838);
 	}
 
 	#contentBox {
