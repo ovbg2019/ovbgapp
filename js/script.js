@@ -369,8 +369,6 @@ window.onload = function () {
   TOP_BAR.addEventListener('click', function() {
     // this.classList.toggle('hidden');
     PATH_FINDER.classList.toggle('hidden');
-
-    // document.querySelector('.placeholder-start').textContent = `${LOCATIONS[id + 1]}`;
     document.querySelector('.placeholder-start').textContent = currentLocation;
   });
 
@@ -391,7 +389,7 @@ window.onload = function () {
         }
         
 				// Upon clicking an item in the list set the displayed text to the selected location name
-				document.querySelector('.placeholder-start').textContent =  currentLocation;
+				document.querySelector('.placeholder-start').textContent =  LOCATIONS[item.value];
 			});
 		});
   });
@@ -407,10 +405,10 @@ window.onload = function () {
 			item.addEventListener('click', function () {
 				// will set destination location based item in drop down being selected
 				if (item.value !== 0) {
-          destination = item.value - 1;
+          destination = item.value - 1
 				}
 				// Upon clicking an item in the list set the displayed text to the selected location name
-        document.querySelector('.placeholder-end').textContent = `${LOCATIONS[item.value]}`;
+        document.querySelector('.placeholder-end').textContent = LOCATIONS[item.value];
 			});
 		});
   });
