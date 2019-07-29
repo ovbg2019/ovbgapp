@@ -347,9 +347,8 @@ window.onload = function () {
 				item.classList.remove('hidden');
       }
       PATH_FINDER.classList.add('hidden'); // hide pathfinder dropdown
-      
-      document.querySelector('.endPoint').classList.toggle('hidden');			
-
+      // hide endpoint menu while starting point is being selected
+      document.querySelector('.endPoint').classList.remove('hidden');			
     });
 
     DROP_DOWN_ITEM_END.forEach(item => {
@@ -360,8 +359,7 @@ window.onload = function () {
 				item.classList.remove('hidden');
 			}
       // Reset dropdown text value to select destination
-    document.querySelector('.endPoint').classList.toggle('hidden');
-    
+    document.querySelector('.endPoint').classList.remove('hidden');
     });
     
   });
@@ -413,8 +411,11 @@ window.onload = function () {
 		});
   });
 
+  // Handle Go button event, will execute zoom function upon click
   GO_BTN.addEventListener('click', function() {
+    // Call zoom function based on current destination selection
     pathZoomIn(destination);
+    // Hide with the path finder menu
     PATH_FINDER.classList.add('hidden');
   });
 
