@@ -6,8 +6,8 @@ window.onload = function () {
 	// PLEASE MAKE CHANGES ACCORDINGLY IF NECESSARY
 	const LOCATIONS = [
 		'Select Destination',
-		'Peony Garden',
 		'Bike Path',
+		'Peony Garden',
 		'Waterfall Garden',
 		'Bridge',
 		'Daylily Collection',
@@ -39,8 +39,6 @@ window.onload = function () {
   const DROP_DOWN_ITEM_START = document.querySelectorAll('.path-start-select li'); // Create array of li items in drop down list
   const DROP_DOWN_END = document.querySelector('.path-end-select'); // Select the drop down
 	const DROP_DOWN_ITEM_END = document.querySelectorAll('.path-end-select li'); // Create array of li items in drop down list
-	// const MAP_OBJ = document.getElementById('svgMapObj'); // Target object element holding SVG of map
-  // const MAP_SVG = MAP_OBJ.contentDocument.getElementById('svgMap'); // Get the SVG document inside the Object tag
   const GO_BTN = document.querySelector('.go-btn'); // go button inside the path finder menu
 
 	// Constants to access the tabs
@@ -84,7 +82,7 @@ window.onload = function () {
 	let activeColour = '';
 
 	// variable to identify which tab to open
-	let id = 0;
+  let id = 0;
 
 	// variable to store and read the state of the infoPanel (0: closed, 1: minimized, 2: open)
 	let infoPanelState = 0;
@@ -99,7 +97,7 @@ window.onload = function () {
   id = parseInt(parsed);
 	// Set this via QR or nav button
 	// *** Hard coded for testing purposes ***
-	let currentLocation = '';
+  let currentLocation = LOCATIONS[id + 1];
 
 	// set start position based on tab click
 	let startPosition = parseInt(parsed);
@@ -372,7 +370,8 @@ window.onload = function () {
     // this.classList.toggle('hidden');
     PATH_FINDER.classList.toggle('hidden');
 
-    document.querySelector('.placeholder-start').textContent = `${LOCATIONS[id + 1]}`;
+    // document.querySelector('.placeholder-start').textContent = `${LOCATIONS[id + 1]}`;
+    document.querySelector('.placeholder-start').textContent = currentLocation;
   });
 
 	// Create event listener on drop down menu
@@ -392,7 +391,7 @@ window.onload = function () {
         }
         
 				// Upon clicking an item in the list set the displayed text to the selected location name
-				document.querySelector('.placeholder-start').textContent = `${LOCATIONS[item.value]}`;
+				document.querySelector('.placeholder-start').textContent =  currentLocation;
 			});
 		});
   });
@@ -468,11 +467,13 @@ window.onload = function () {
 			setTimeout(setContent, 350);
 			// opening the panel with new content
       openInfoPanel();
-
-      document.querySelector('.placeholder-start').textContent = LOCATIONS[parseInt(id) + 1];
+      //update current location value based on tab clicked
+      currentLocation = LOCATIONS[parseInt(i) + 1];
+      //update starting point text to respresent new starting location
+      document.querySelector('.placeholder-start').textContent = currentLocation;
+      // hide the path finder menu
       PATH_FINDER.classList.add('hidden');
-      TOP_BAR.classList.remove('hidden');
-		};
+    };
 	}
 
 	TITLE_BAR.onclick = function () {
