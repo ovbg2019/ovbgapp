@@ -16,11 +16,17 @@ window.onload = function () {
 
 
 	/**********LIST OF DOM REFERENCES *********/
-	// Get SVG document inside Object by Object ID
+	// Access SVG inside Object by using Object ID and .contentDocument
 	const MAP_SVG = document.querySelector('#svgMapObj').contentDocument;
 
+	/******* Replaced with above ******/
+	// Target object element holding SVG of map
+	// const MAP_OBJ = document.getElementById('svgMapObj');
+	// Get the SVG document inside the Object tag
+	// const MAP_SVG = MAP_OBJ.contentDocument.getElementById('svgMap');
 
-	// Constants for the dropdown
+
+	// Constants for the drop down
 	// Select the drop down
 	const DROP_DOWN = document.querySelector('.destination-select');
 	// Create array of li items in drop down list
@@ -292,7 +298,7 @@ window.onload = function () {
 	/* FUNCTION DEFINITIONS */
 
 
-	// Draw Function
+	// MAIN DARW Function
 	const DRAW = (dpath, duration, length) => {
 		// let length = path.getTotalLength();
 		REMOVE_CURRENT_ANIMATION();
@@ -316,12 +322,11 @@ window.onload = function () {
 		);
 	};
 
-	// const DRAW_PATH = (parkFeature, id, i) => {
+	//Function to call the path from parkFeature array
 	const DRAW_PATH = (parkFeature, id, i) => {
-		console.log(parkFeature[id].paths[i]);
+		// console.log(parkFeature[id].paths[i]);
 		return parkFeature[id].paths[i].draw()
 	};
-
 
 
 	/* FUNCTIONS FOR THE ANIMATING THE MAP USING CLASSES, SET THE START POINT AND DROP DOWN MENU */
