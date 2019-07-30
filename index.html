@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>OVBG App</title>
+	<meta charset="utf-8">
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1">
+	<link href="./css/style.css"
+		  rel="stylesheet"
+		  type="text/css">
+</head>
+
+<body>
+	<main>
+		<div id="destination-menu" class="">
+      <div class="destination-select">
+        <img class="topbar-logo" src="images/ovbg_logo.svg" alt="OVBG Logo"/>
+        <h2 id="placeholder">Where to?</h2>
+        </div>
+    </div>
+    
+    <div class="pathfinder hidden">
+      <div class="switchToggle">
+        <img src="images/toggle_switch_icon.svg" alt="Toggle Switch Icon"/>
+      </div>
+      <h3 class="label label-start">From</h3>
+      <div class="startPoint">
+        <ul class="path-start-select">
+          <li value="0" class="menuItem placeholder-start">Your Location</li>
+          <li value="1" class="menuItem hidden">Bike Path</li>
+          <li value="2" class="menuItem hidden">Peony Garden</li>
+          <li value="3" class="menuItem hidden">Waterfall Garden</li>
+          <li value="4" class="menuItem hidden">Bridge</li>
+          <li value="5" class="menuItem hidden">Daylily Collection</li>
+          <li value="6" class="menuItem hidden">Memory Garden</li>
+        </ul>
+      </div>
+      <h3 class="label label-end">To</h3>
+      <div class="endPoint">
+        <ul class="path-end-select">
+          <li value="0" class="menuItem placeholder-end">Where to?</li>
+          <li value="1" class="menuItem hidden">Bike Path</li>
+          <li value="2" class="menuItem hidden">Peony Garden</li>
+          <li value="3" class="menuItem hidden">Waterfall Garden</li>
+          <li value="4" class="menuItem hidden">Bridge</li>
+          <li value="5" class="menuItem hidden">Daylily Collection</li>
+          <li value="6" class="menuItem hidden">Memory Garden</li>
+        </ul>
+      </div>
+
+      <div class="go-btn">
+        <img id="goButtonIcon" src= "images/go_button_icon.svg"alt="Go Button"/>
+        <button>Go</button>
+      </div>
+    </div>
+
+		<section id="mapBox">
+			<object id="svgMapObj"
+					data="./images/park_map.svg"
+					type="image/svg+xml"
+					viewBox="0 0 1920 1080">
+				Your browser doesn't support SVG
+			</object>
+
+			<div id="infoPanel">
+				<div id="titleBar">
+					<div>
+						<img id="titleBarIcon"
+							 src="images/temp_image.jpg"
+							 alt="Daylily Collection" />
+						<h1 id="title">Park Feature Title</h1>
+					</div>
+					<img id="closeButton"
+						 src="images/close_button.svg"
+						 alt="Close button" />
+				</div>
+				<div id="contentBox">
+					<div id="contentImageBox">
+						<img class="galleryImage"
+							 src="images/temp_image.jpg"
+							 onclick="currentSlide(1)" />
+						<img class="galleryImage"
+							 src="images/temp_image.jpg"
+							 onclick="currentSlide(2)" />
+						<img class="galleryImage"
+							 src="images/temp_image.jpg"
+							 onclick="currentSlide(3)" />
+						<img class="galleryImage"
+							 src="images/temp_image.jpg"
+							 onclick="currentSlide(4)" />
+					</div>
+					<!--gallery new update-->
+					<div id=modalContent>
+						<div id="expandedImg">
+							<img class="bigImage"
+								 src="images/temp_image.jpg" />
+							<img class="bigImage"
+								 src="images/temp_image.jpg" />
+							<img class="bigImage"
+								 src="images/temp_image.jpg" />
+							<img class="bigImage"
+								 src="images/temp_image.jpg" />
+						</div>
+						<div id="thumbnail">
+							<img class="smImage"
+								 src="images/temp_image.jpg"
+								 onclick="currentSlide(1)" />
+							<img class="smImage"
+								 src="images/temp_image.jpg"
+								 onclick="currentSlide(2)" />
+							<img class="smImage"
+								 src="images/temp_image.jpg"
+								 onclick="currentSlide(3)" />
+							<img class="smImage"
+								 src="images/temp_image.jpg"
+								 onclick="currentSlide(4)" />
+
+						</div>
+					</div>
+
+					<div id="contentTextBox">
+						<label for="tab1"><img id="tabIcon"
+								 src="images/about_icon.svg"
+								 alt="about icon">
+							<h4>About</h4>
+						</label>
+						<div id="about"
+							 class="content">
+							<p>
+								About paragraph goes here
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<footer>
+			<div class="tab"
+				 id='tab1BikeTrail'
+				 tabindex="1">
+				<img src="images/bike_path_icon.svg"
+					 alt="Bike Trail" />
+			</div>
+			<div class="tab"
+				 id="tab2Peony"
+				 tabindex="2">
+				<img src="images/peony_icon.svg"
+					 alt="Peony Garden" />
+			</div>
+			<div class="tab"
+				 id="tab3WaterFeature"
+				 tabindex="3">
+				<img src="images/water_feature_icon.svg"
+					 alt="Water Feature" />
+			</div>
+			<div class="tab"
+				 id="tab4Bridge"
+				 tabindex="4">
+				<img src="images/bridge_icon.svg"
+					 alt="Rotary Bridge" />
+			</div>
+			<div class="tab"
+				 id="tab5Daylily"
+				 tabindex="5">
+				<img src="images/daylily_icon.svg"
+					 alt="Daylily Collection" />
+			</div>
+			<div class="tab"
+				 id="tab6MemoryGarden"
+				 tabindex="6">
+				<img src="images/memory_garden_icon.svg"
+					 alt="Memory Garden" />
+			</div>
+
+		</footer>
+	</main>
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/plugins/CSSPlugin.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/plugins/ScrollToPlugin.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+
+	<script src="js/script.js"></script>
+</body>
+
+</html>
