@@ -47,15 +47,6 @@ window.onload = function () {
 	const expandedImg = document.getElementById('expandedImg');
 	const thumbnail = document.getElementById('thumbnail');
 
-	//SVG Navigation Paths
-	const peonyToBridgePath = MAP_SVG.querySelector('#peony_to_bridge');
-	const peonyToBikePath = MAP_SVG.querySelector('#peony_to_bike_path');
-
-
-
-
-	//To Total Path Length
-	// console.log(`peonyToBridgePathLength: ${peonyToBridgePath.getTotalLength()}`);
 
 	//placeholder
 	const PLACE_HOLDER = document.querySelector('#placeholder');
@@ -123,7 +114,7 @@ window.onload = function () {
 			smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			paths: [
 				'',
-				'bike_path_to_peony', 'bike_path_to_waterfall', 'bike_path_to_bridge', 'bike_path_to_daylily', 'bike_path_to_memory_garden'
+				'bike_path_to_peony', 'bike_path_to_waterfall_garden', 'bike_path_to_bridge', 'bike_path_to_daylily', 'bike_path_to_memory_garden',
 			],
 			featureZoomPoints: ['180%', 0.2, 1],
 			pathZoomPoints: [
@@ -152,7 +143,7 @@ window.onload = function () {
 			paths: [
 				'peony_to_bike_path',
 				'',
-				'peony_to_waterfall',
+				'peony_to_waterfall_garden',
 				'peony_to_bridge',
 				'peony_to_daylily',
 				'peony_to_memory_garden',
@@ -180,12 +171,12 @@ window.onload = function () {
 			bigImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			paths: [
-				'waterfall_to_bike',
-				'waterfall_to_peony',
+				'waterfall_garden_to_bike_path',
+				'waterfall_garden_to_peony',
 				'',
-				'waterfall_to_bridge',
-				'waterfall_to_daylily',
-				'waterfall_to_memory_garden',
+				'waterfall_garden_to_bridge',
+				'waterfall_garden_to_daylily',
+				'waterfall_garden_to_memory_garden',
 			],
 			featureZoomPoints: ['170%', 0.35, 0.4],
 			pathZoomPoints: [
@@ -212,7 +203,7 @@ window.onload = function () {
 			paths: [
 				'bridge_to_bike_path',
 				'bridge_to_peony',
-				'bridge_to_waterfall',
+				'bridge_to_waterfall_garden',
 				'',
 				'bridge_to_daylily',
 				'bridge_to_memory_garden',
@@ -243,7 +234,7 @@ window.onload = function () {
 			paths: [
 				'daylily_to_bike_path',
 				'daylily_to_peony',
-				'daylily_to_waterfall',
+				'daylily_to_waterfall_garden',
 				'daylily_to_bridge',
 				'',
 				'daylily_to_memory_garden',
@@ -271,9 +262,9 @@ window.onload = function () {
 			bigImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			paths: [
-				'memory_garden_bike_path',
+				'memory_garden_to_bike_path',
 				'memory_garden_to_peony',
-				'memory_to_waterfall',
+				'memory_garden_to_waterfall_garden',
 				'memory_garden_to_bridge',
 				'memory_garden_to_daylily',
 				''
@@ -315,7 +306,7 @@ window.onload = function () {
 		// let length = path.getTotalLength();
 		REMOVE_CURRENT_ANIMATION();
 		const LENGTH = length;
-		const STROKE_WIDTH = 18;
+		const STROKE_WIDTH = 15;
 		TLM.fromTo(
 			dpath,
 			duration, {
@@ -658,11 +649,14 @@ window.onload = function () {
 	}
 	contentImg.addEventListener('click', openModal);
 
+	console.log('clicked');
+
+
 	//set the slide index to loop through thumbnail
 	let slideIndex = 1;
 	showSlides(slideIndex);
 
-	// fuction identify the current image - n is the number of current image slide
+	// function identify the current image - n is the number of current image slide
 	function currentSlide(n) {
 		showSlides((slideIndex = n));
 	}

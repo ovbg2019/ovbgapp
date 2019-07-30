@@ -1,7 +1,7 @@
 -----------------------------------------------------------------------------------------------------------
 
 
-*** Updated on Monday, July 29, 2019 3:20 PM ***
+*** Updated on Tuesday, July 30, 2019 3:20 PM ***
     Removed
         -disabled comments from the previous changelog
 
@@ -12,6 +12,12 @@
         -Accessing to SVG path is now dynamic via paths array inside parkFeature
         -Removed two old constants for the paths.
         -Duration and Length is hardcoded for now, on the next stage it will be pull from 3d array inside parkFeature>paths
+        -Updated 3 (contentImg, expandedImg, thumbnail) lowers case constants to UPPERCASE (CONTENTIMG, EXPANDEDIMG, THUMBNAIL)
+    park_map.svg
+        -Updated to latest svg
+
+    index.html
+        -spelling correction NECESSARY
 
 -----------------------------------------------------------------------------------------------------------
 
@@ -24,7 +30,7 @@
         Removed:
         -removed zoom.css no longer being used.
 
-        Disbaled
+        Disabled
         -#svgMap {width: auto;height: 100%;} not being used, needs to removed in the    coming up versions.
 
 
