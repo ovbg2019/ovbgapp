@@ -424,14 +424,8 @@ window.onload = function () {
   GO_BTN.addEventListener('click', function() {
     // Call zoom function based on current destination selection
     pathZoomIn(destination);
-    // console.log(destination);
-    // console.log(currentLocation);
 
       // Drawpath function call here **
-
-          // destination variable represents the numerical value and index of the destination location
-          // currentLocation variable represents the numerical value and index of the starting/ current location
-
       // DRAW_PATH(parkFeature, id, i);
 
     // Hide with the path finder menu
@@ -478,6 +472,8 @@ window.onload = function () {
 		TABS[i].onclick = function () {
 			// setting the id and the content based on the id
 			id = i;
+      //update current location value based on tab clicked
+      currentLocation = LOCATIONS[parseInt(i) + 1];
 			// closing the info panel before changing content
 			closeInfoPanel();
 			// using the setTimeout to delay and sync the loading of content with the animation
@@ -485,10 +481,8 @@ window.onload = function () {
 			setTimeout(setContent, 350);
 			// opening the panel with new content
       openInfoPanel();
-      //update current location value based on tab clicked
-      currentLocation = LOCATIONS[parseInt(i) + 1];
       //update starting point text to respresent new starting location
-      // document.querySelector('.placeholder-start').textContent = currentLocation;
+      document.querySelector('.placeholder-start').textContent = currentLocation;
       // hide the path finder menu
       PATH_FINDER.classList.add('hidden');
     };
