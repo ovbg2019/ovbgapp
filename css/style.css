@@ -100,7 +100,8 @@ header {
 	width: auto;
 	height: 100%;
 	overflow: scroll;
-	-webkit-overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch;
+  z-index: 200;
 }
 
 #svgMap {
@@ -132,7 +133,8 @@ header {
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	border: 1px solid var(--concrete-path);
-	font-family: "ButtonFont";
+  font-family: "ButtonFont";
+  z-index: 800;
 }
 
 .pathfinder ul li {
@@ -209,7 +211,6 @@ header {
 
 .endPoint {
 	grid-area: end;
-    
 }
 
 .go-btn {
@@ -219,7 +220,7 @@ header {
 	text-align: center;    
 	grid-area: go-btn;
 	width: 102%;
-    height: 100.5%;
+  height: 100.5%;
 	background-color: var(--go-button);
 	border-bottom-right-radius: 10px;
 	border-left: 1px solid var(--concrete-path);
@@ -254,7 +255,7 @@ button {
 	background: var(--paths);
 	border-radius: 1vh;
 	border: 1px solid var(--concrete-path);
-	z-index: 9000;
+	z-index: 900;
 	position: absolute;
 	top: 2.5%;
 	left: 2.6%;
@@ -310,7 +311,8 @@ section {
 	background: #F7F2DB;
 	border-top-left-radius: 2vh;
 	border-top-right-radius: 2vh;
-	box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.2);
+  z-index: 700;
 }
 
 #titleBar {
@@ -405,7 +407,8 @@ footer {
 	position: fixed;
 	bottom: 0px;
 	height: 9vh;
-	width: 100vw;
+  width: 100vw;
+  z-index: 800;
 }
 
 footer .tab {
@@ -419,7 +422,7 @@ footer .tab {
 	border-bottom: none;
 	border-top-left-radius: 1.5vh;
 	border-top-right-radius: 1.5vh;
-	box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.15);
 }
 
 footer .tab:hover {
@@ -542,9 +545,10 @@ footer img {
 }
 /* portrait tablets and large phones */
 @media only screen and (min-width: 600px) {
-    .destination-select, footer{
+    /* .destination-select, */
+     /* footer{
 		display: none !important;
-	}
+	} */
    
     section{
         margin: 0 auto;
@@ -554,9 +558,10 @@ footer img {
 /* STYLES FOR LARGE DISPLAYS - landscape tablets, destop*/
 
 @media only screen and (min-width: 769px) {
-	.destination-select, footer {
+  /* .destination-select,  */
+  /* footer {
 		display: none !important;
-	}
+	} */
  
 	section {
 		position: absolute;
@@ -572,7 +577,7 @@ footer img {
 		width: auto;
 		height: 100%;
 		/* overflow: scroll; */
-        margin: 0 auto;
+    margin: 0 auto;
 	}
 
 	#svgMap {
