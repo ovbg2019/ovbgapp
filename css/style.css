@@ -139,7 +139,7 @@ header {
 #infoBox {
 	/* top: 0; */
 	width: 100%;
-	height: auto;
+	height: 40vh;
 	overflow: scroll;
 	-webkit-overflow-scrolling: touch;
 }
