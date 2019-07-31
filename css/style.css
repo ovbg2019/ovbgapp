@@ -256,12 +256,15 @@ button {
 	font-size: 15px;
 	font-family: "ButtonFont";
   padding: 0rem 0.5rem;
+  align-content: center;
 }
 
 .destination-select h2 {
-  padding: 0.25rem 0;
+  height: 100%;
   grid-area: placeholder;
   width: 100%;
+  align-self: center;
+  align-content: center;
   border-left: 1.5px solid #383838;
 }
 
