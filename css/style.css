@@ -134,6 +134,7 @@ header {
 	height: 92%;
 	overflow: scroll;
 	-webkit-overflow-scrolling: touch;
+	z-index: 1;
 }
 
 #infoBox {
