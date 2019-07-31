@@ -128,7 +128,7 @@ header {
 	display: none;
 }
 
-section {
+#mapBox {
 	top: 0;
 	width: 100%;
 	height: 92%;
@@ -136,21 +136,14 @@ section {
 	-webkit-overflow-scrolling: touch;
 }
 
-/* #mapBox {
+#infoBox {
+	/* top: 0; */
 	width: 100%;
-	height: 58%;
+	height: auto;
 	overflow: scroll;
-} */
+	-webkit-overflow-scrolling: touch;
+}
 
-/*
-section svg {
-	width: auto;
-  height: 100%;
-
-section #map {
-	width: 1280px;
-	height: 720px;
-} */
 
 #infoPanel {
 	/* display: none; */
@@ -400,7 +393,7 @@ label h4 {
 		display: none;
 	}
 
-	section {
+	#mapBox {
 		position: absolute;
 		top: 0;
 		width: 100vw;

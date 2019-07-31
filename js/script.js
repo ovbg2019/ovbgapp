@@ -578,7 +578,7 @@ window.onload = function () {
 		});
 
 		// animating the scroll
-		TweenMax.to('section', 2.5, {
+		TweenMax.to('#mapBox', 2.5, {
 			delay: 0.5,
 			height: '53.5%',
 			scrollTo: {
@@ -610,7 +610,7 @@ window.onload = function () {
 		});
 
 		// animating the scroll
-		TweenMax.to('section', 1.75, {
+		TweenMax.to('#mapBox', 1.75, {
 			scrollTo: {
 				y: topScroll,
 				x: leftScroll,
@@ -628,7 +628,7 @@ window.onload = function () {
 			height: '100%',
 		});
 
-		TweenMax.to('section', 1.25, {
+		TweenMax.to('#mapBox', 1.25, {
 			height: mapHeight + '%',
 		});
 	}
