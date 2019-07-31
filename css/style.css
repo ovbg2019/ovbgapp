@@ -101,7 +101,7 @@ header {
 	height: 100%;
 	overflow: scroll;
   -webkit-overflow-scrolling: touch;
-  z-index: 200;
+  z-index: 1;
 }
 
 #svgMap {
