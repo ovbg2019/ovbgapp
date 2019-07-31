@@ -7,14 +7,13 @@
 }
 
 body {
-	background: var(--paths);
+	background: #f7f2db;
 }
 
 :root {
 
 	/* /* NEW COLORS */
 	--paths: #f7f2db;
-	--paths-light: #fffbe7;
 	--concrete-path: #383838;
 	--map-green: #88b086;
 	--peony: #B04A7F;
@@ -23,8 +22,9 @@ body {
 	--bridge: #806B53;
 	--bike-path: #B15222;
 	--day-lily: #7D6287;
-  --map: #707070;
-  --go-button: #FAF7E9;
+	--map: #707070;
+  	--go-button: #FAF7E9;
+
 }
 
 /* FONT DECLARATION */
@@ -76,7 +76,24 @@ header {
 	border-radius: 3vh;
 	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
 }
-
+/*SPLASH SCREEN*/
+#splash{
+	background-image: url(../images/welcome_bg.jpg);
+	background-repeat: no-repeat;
+	position: fixed;
+	overflow: none;
+	background-size: cover;
+}
+#slashLogo{
+	width: 70%;
+	height: auto;
+	position: absolute;
+	top: 0;
+	bottom:0;
+	left: 0;
+	right:0;
+	margin: auto;
+}
 /* Dropdown and SVG styles */
 
 #svgMapObj {
@@ -91,188 +108,185 @@ header {
 	height: 100%;
 }
 
-#placeholder {
-  padding-right: 1rem;
-  color: var(--concrete-path);
-}
-
-#destination-menu {
-  /* display: flex;
-  flex-direction: column; */
-  /* justify-content: center; */
-  /* align-items: flex-start; */
-  /* height: auto;
-  width: 100%; */
-}
-
 .switchToggle{
-  width: 70%;
-  height: auto;
-  align-self: center;
-  grid-area: switchToggle;
-  margin-left: 1.5vw;
-  position: relative;
+	width: 55%;
+	height: auto;
+	align-self: center;
+	grid-area: switchToggle;
+	margin-left: 1vw;
+	position: relative;
+    top: 0.5vh
 }
 
 .pathfinder {
-  z-index: 5000;
-  width: 90%;
-  height: 100px;
-  background-color: var(--paths);
-  display: grid;
-  grid-template-areas:  "switchToggle startlabel start go-btn"
-                        "switchToggle endlabel end go-btn";
-  grid-template-columns: 7% 13% 65% 15%;
-  position: absolute;
-  top: 63px;
-  left: 5vw;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  border: 1.5px solid var(--concrete-path);
-  font-family: "ButtonFont";
+	width: 90%;
+	height: 17vh;
+	background-color: var(--paths);
+	display: grid;
+	grid-template-areas:  "switchToggle startlabel start go-btn"
+			"switchToggle endlabel end go-btn";
+	grid-template-columns: 7% 13% 65% 15%;
+	position: absolute;
+	top: 8vh;
+	left: 5vw;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border: 1px solid var(--concrete-path);
+	font-family: "ButtonFont";
 }
 
 .pathfinder ul li {
-  list-style: none;
-  background-color: var(--go-button);
-  padding: 0 0.5rem;
-  width: 100%;
-  border-radius: 5px;
+	list-style: none;
+	background-color: var(--go-button);
+	padding: 0 0.5rem;
+	width: 100%;
+     
 }
-
 .pathfinder ul li:hover, .pathfinder ul li:focus {
-  background-color: #e7e1c6;
+	  background-color: #e7e1c6;
 }
-
 .path-start-select, .path-end-select {
-  width: 85%;
-  height: auto;
-  border-radius: 1vh;
-  border: 1.5px solid var(--concrete-path);
-  font-size: 2.5vh;
-  background-color: var(--paths-light);
-  padding: 1px 2px;
+	width: 85%;
+	height: auto;
+	border-radius: 1vh;
+	border: 1px solid var(--concrete-path);
+	font-size: 3vh;
+	background-color: var(--paths);
+	padding: 4px 2px;
+	/* position: relative; */
 }
-
-.placeholder-end, .placeholder-start{
-  color: var(--concrete-path);
-  font-family: "ButtonFont";
+.placeholder-end{
+	color: var(--concrete-path);
+	font-family: "ButtonFont";
 }
 
 .path-start-select {
-  position: absolute;
-  top: -2.25vh;
+	position: absolute;
+	top: -2.25vh;
 }
 
 .path-end-select {
-  position: absolute;
-  top: -2.25vh;
+	position: absolute;
+	top: -3.25vh;
 }
 
 .endPoint, .startPoint {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-content: center;
-  align-self: center;
-  width: 100%;
-  position: absolute;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-content: center;
+	align-self: center;
+	width: 100%;
+	position: absolute;
 }
 
 .startPoint {
-  grid-area: start;
-  margin-top: 1vh;
+	grid-area: start;
+	margin-top: 1vh;
 }
 
-.label {
-  width: 12vw;
-  font-size: 18px;
-  margin-top: 1vh;
+.pathfinder .label {
+	width: 12vw;
+	font-size: 20px;
+	position: absolute;
+	display: flex;
+	align-items: center;
+	text-align: left;
+	height: 5vh;
+	width: 100%;
+    
 }
 
 .label-start {
-  grid-area: startlabel;
+	grid-area: startlabel;
+	top: 2.7vh;
 }
 
 .label-end {
-  grid-area: endlabel;
+	grid-area: endlabel;
+	top: 1vh;
 }
 
 .endPoint {
-  grid-area: end;
+	grid-area: end;
+    
 }
 
 .go-btn {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  text-align: center;    
-  grid-area: go-btn;
-  width: 100%;
-  height: 100%;
-  background-color: var(--go-button);
-  border-bottom-right-radius: 5px;
-  border-left: 1.5px solid #383838;
-  font-size: 20px;
-  cursor: pointer;
-  grid-template-areas:"goButtonIcon"
-                      "button";
-  flex-direction: column;
-  align-items: flex-start;
-  
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	text-align: center;    
+	grid-area: go-btn;
+	width: 102%;
+    height: 100.5%;
+	background-color: var(--go-button);
+	border-bottom-right-radius: 10px;
+	border-left: 1px solid var(--concrete-path);
+	border-right: 1px solid var(--concrete-path);
+	border-bottom: 1px solid var(--concrete-path);
+	font-size: 25px;
+	cursor: pointer;
+	grid-template-areas:"goButtonIcon"
+		      "button";
+
+	flex-direction: column;
+	align-items: flex-start;
 }
 #goButtonIcon {
-  width: 40%;
-  align-self: center;
-  padding-bottom: 0.25rem
+	width: 50%;
+	align-self: center;
+	padding-bottom: 0.25rem;
 }
 
 button {
-  border: none;
-  background-color: inherit;
-  cursor: pointer;
-  font-size: 20px;
-  align-self: center;
-  font-family: "ButtonFont"
+	border: none;
+	background-color: inherit;
+	cursor: pointer;
+	font-size: 20px;
+	align-self: center;
+	font-family: "ButtonFont"
 }
 
 .destination-select {
-  width: 95vw;
-  height: 30px;
-  min-height: 50px;
+	width: 95vw;
+	height: 6vh;
 	background: var(--paths);
 	border-radius: 1vh;
-	border: 1.5px solid var(--concrete-path);
-	position: fixed;
-	top: 15px;
-	left: 2.5vw;
+	border: 1px solid var(--concrete-path);
+	z-index: 9000;
+	position: absolute;
+	top: 2.5%;
+	left: 2.6%;
+	overflow: hidden;
 }
 
 .destination-select  {
-  display: grid;
-  grid-template-areas: "logo placeholder";
-  grid-template-columns: 20% 80%;
-	text-align: right;
+	/*display: grid;
+	grid-template-areas: "logo placeholder";
+	grid-template-columns: 20% 80%;*/
 	font-size: 15px;
 	font-family: "ButtonFont";
-  padding: 0rem 0.5rem;
-  align-content: center;
+   
 }
 
 .destination-select h2 {
-  height: 100%;
-  grid-area: placeholder;
-  width: 100%;
-  align-self: center;
-  align-content: center;
-  border-left: 1.5px solid #383838;
+	padding-right: 2vh;
+	/* grid-area: placeholder;*/
+	height: inherit;
+	align-items: center;
+	display: flex;
+	float: right;
 }
 
 .topbar-logo {
-  grid-area: logo;
-  width: 100%;
-  align-content: center;
-  align-self: center;
+	/* grid-area: logo;*/
+	width:20%;
+	height: inherit;
+	display: flex;
+	float: left;
+	align-items: center;
+	border-right: 1px solid #383838;
 }
 
 .hidden {
@@ -361,7 +375,7 @@ section {
 }
 
 #contentImageBox .galleryImage {
-	width: 24%;
+	width: 23%;
 	height: auto;
 	border-radius: 1vh;
 	box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
@@ -453,9 +467,9 @@ footer img {
 	max-width: 75%;
 }
 
-label {
-	display: flex;
-	flex-direction: row;
+#contentTextBox h3 {
+	/*display: flex;
+	flex-direction: row;*/
 	padding: 10px 20px;
 	margin-bottom: 2vh;
 	font-size: 3vh;
@@ -465,12 +479,13 @@ label {
 	width: 100%;
 	justify-content: center;
 	align-items: center;
+	 text-align: center;
 	border-radius: 1vh;
 }
 
-label h4 {
+/*label h4 {
 	margin-left: 1vw;
-}
+}*/
 
 #tabIcon {
 	width: auto;
@@ -527,7 +542,7 @@ label h4 {
 }
 /* portrait tablets and large phones */
 @media only screen and (min-width: 600px) {
-    .destination-select, .pathfinder, footer{
+    .destination-select, footer{
 		display: none !important;
 	}
    
@@ -539,7 +554,7 @@ label h4 {
 /* STYLES FOR LARGE DISPLAYS - landscape tablets, destop*/
 
 @media only screen and (min-width: 769px) {
-	.destination-select, .pathfinder, footer {
+	.destination-select, footer {
 		display: none !important;
 	}
  
@@ -664,7 +679,7 @@ label h4 {
 		padding: 2vh 1.5vw;
 	}
 
-	label {
+	h4 {
 		display: flex;
 		flex-direction: row;
 		padding: 10px 20px;
@@ -679,9 +694,9 @@ label h4 {
 		border-radius: 1vh;
 	}
 
-	label h4 {
+	/*label h4 {
 		margin-left: 0.5vw;
-	}
+	}*/
 
 	#tabIcon {
 		width: auto;
