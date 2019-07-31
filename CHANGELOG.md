@@ -1,3 +1,9 @@
+*** Updated on Tuesday, July 30, 2019 3:20 PM ***
+
+    SCRIPT.JS
+        - added pinch and zoom functionality
+        - added "touchstart", "touchmove", and "touchend" event handlers on the map to register the touch and pinch and control zoom
+
 -----------------------------------------------------------------------------------------------------------
 
 
