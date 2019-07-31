@@ -73,7 +73,8 @@ window.onload = function () {
 
 	// Set this via QR or nav button
 	// *** Hard coded for testing purposes ***
-  let currentLocation = id;
+  // currently defaults to 0 if ID is not set
+  let currentLocation = id ? id : 0;
 
   let placeholderStart = document.querySelector('.placeholder-start');
   let placeholderEnd = document.querySelector('.placeholder-end');
