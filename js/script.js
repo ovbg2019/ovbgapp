@@ -366,9 +366,10 @@ window.onload = function () {
 					}
 					//Draws the path, duration and length is hard coded
 					DRAW(pathToDraw, 5, 3000)
+					PLACE_HOLDER.textContent = 'Go to: ' + LOCATIONS[item.value];
 				}
 				// Upon clicking an item in the list set the displayed text to the selected location name
-				PLACE_HOLDER.textContent = `Go to: ${LOCATIONS[item.value]}`;
+				// PLACE_HOLDER.textContent = 'Go to: ' + LOCATIONS[item.value];
 
 			});
 		});
@@ -665,13 +666,13 @@ window.onload = function () {
 			let curDiff = Math.abs(evCache[0].touches[0].clientX - evCache[0].touches[1].clientX);
 
 			if (prevDiff > 0) {
-				if (curDiff > prevDiff && height < 299) {
+				if (curDiff > prevDiff && height < 298) {
 					// console.log('Zoom IN');
-					height = height + 1;
+					height = height + 2;
 				}
-				if (curDiff < prevDiff && height >= 101) {
+				if (curDiff < prevDiff && height >= 102) {
 					// console.log('Zoom OUT');
-					height = height - 1;
+					height = height - 2;
 				}
 			}
 
