@@ -123,7 +123,7 @@ header {
   grid-template-areas:  "switchToggle startlabel start go-btn"
                         "switchToggle endlabel end go-btn";
   grid-template-columns: 7% 13% 65% 15%;
-  position: fixed;
+  position: absolute;
   top: 63px;
   left: 5vw;
   border-bottom-left-radius: 10px;
