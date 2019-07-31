@@ -626,6 +626,68 @@ window.onload = function () {
 		});
 	}
 
+
+	/* PINCH AND ZOOM */
+	let MAP_SVG_OBJ = document.querySelector('#svgMapObj');
+	MAP_SVG_OBJ.style.height = '100%';
+	let evCache = new Array();
+	let prevDiff = -1;
+
+	MAP_SVG.addEventListener('touchstart', function (e) {
+		evCache.push(e);
+		// console.log('start');
+		height = parseInt(MAP_SVG_OBJ.style.height.replace('%', ''));
+	});
+
+	MAP_SVG.addEventListener('touchend', function (e) {
+		// console.log('end');
+
+		if (evCache.length < 2)
+			prevDiff = -1;
+
+		for (let i = 0; i < evCache.length; i++) {
+			evCache = [];
+		}
+	});
+
+	MAP_SVG.addEventListener('touchmove', function (e) {
+
+		// console.log('height: ' + height);
+		// console.log('move');
+		for (let i = 0; i < evCache.length; i++) {
+			if (e.pointerId == evCache[i].pointerId) {
+				evCache[i] = e;
+				break;
+			}
+		}
+
+		if (evCache.length == 2) {
+			let curDiff = Math.abs(evCache[0].touches[0].clientX - evCache[0].touches[1].clientX);
+
+			if (prevDiff > 0) {
+				if (curDiff > prevDiff && height < 299) {
+					// console.log('Zoom IN');
+					height = height + 1;
+				}
+				if (curDiff < prevDiff && height >= 101) {
+					// console.log('Zoom OUT');
+					height = height - 1;
+				}
+			}
+
+			TweenMax.to('#svgMapObj', 0.05, {
+				height: height + '%',
+				// ease: Circ.easeOut
+			});
+			prevDiff = curDiff;
+		}
+	});
+
+
+
+
+
+
 	/* EXPANDING THE IMAGE GALLERY */
 
 	// function expand the image gallery
@@ -648,8 +710,6 @@ window.onload = function () {
 		});
 	}
 	contentImg.addEventListener('click', openModal);
-
-	console.log('clicked');
 
 
 	//set the slide index to loop through thumbnail
