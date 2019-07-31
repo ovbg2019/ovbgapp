@@ -10,6 +10,8 @@
         -Added function REMOVE_CURRENT_ANIMATION(); inside TABS[i] on click to remove the current/active path animation.
         -Created 3 new variables for SVG PATHS
         -Accessing to SVG path is now dynamic via paths array inside parkFeature
+        -Corrected path names to match SVG name
+        -Arranged the order of the path to match LOACTIONS.
         -Removed two old constants for the paths.
         -Duration and Length is hardcoded for now, on the next stage it will be pull from 3d array inside parkFeature>paths
         -Updated 3 (contentImg, expandedImg, thumbnail) lowers case constants to UPPERCASE (CONTENTIMG, EXPANDEDIMG, THUMBNAIL)
