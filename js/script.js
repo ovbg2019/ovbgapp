@@ -580,7 +580,7 @@ window.onload = function () {
 		// animating the scroll
 		TweenMax.to('#mapBox', 2.5, {
 			delay: 0.5,
-			height: '53.5%',
+			height: '53.5vh',
 			scrollTo: {
 				y: topScroll,
 				x: leftScroll,
@@ -629,7 +629,7 @@ window.onload = function () {
 		});
 
 		TweenMax.to('#mapBox', 1.25, {
-			height: mapHeight + '%',
+			height: mapHeight + 'vh',
 		});
 	}
 
