@@ -290,8 +290,6 @@ window.onload = function () {
 
 
 
-
-
 	/* FUNCTION DEFINITIONS */
 
 
@@ -675,25 +673,29 @@ window.onload = function () {
 		// to be executed when two touches are detected simultaneously
 		if (evCache.length == 2) {
 			// get the distance between two touches
-			let curDiff = Math.abs(evCache[0].touches[0].clientX - evCache[0].touches[1].clientX);
+			let curDiffX = Math.abs(evCache[0].touches[0].clientX - evCache[0].touches[1].clientX);
+			let curDiffY = Math.abs(evCache[0].touches[0].clientY - evCache[0].touches[1].clientY);
+
+			let curDiff = Math.hypot(curDiffX, curDiffY);
 
 			if (prevDiff > 0) {
 				// to be executed only when the distance is increasing and only if the map height is less than 298%
 				if (curDiff > prevDiff && height < 298) {
 					// console.log('Zoom IN');
-					height = height + 2;
+					height = height + curDiff * 0.004;
 				}
 
 				// to be executed only when the distance is decreasing and only if the map height is more than 102%
 				if (curDiff < prevDiff && height >= 102) {
 					// console.log('Zoom OUT');
-					height = height - 2;
+					height = height - curDiff * 0.007;
 				}
 			}
 
 			// animate the zoom
-			TweenMax.to('#svgMapObj', 0.05, {
+			TweenMax.to('#svgMapObj', 0.1, {
 				height: height + '%',
+				ease: Sine.easeInOut
 			});
 
 			// set prevDiff to currDiff to check the increase/decrease in pinch
