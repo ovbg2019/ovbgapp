@@ -92,6 +92,8 @@ header {
 /* Dropdown and SVG styles */
 
 #svgMapObj {
+	position: absolute;
+	top: 0;
 	width: auto;
 	height: 100%;
 	overflow: scroll;
@@ -129,19 +131,20 @@ header {
 }
 
 #mapBox {
+	position: absolute;
 	top: 0;
 	width: 100%;
 	height: 92%;
 	overflow: scroll;
 	-webkit-overflow-scrolling: touch;
-	z-index: 1;
 }
 
 #infoBox {
-	/* top: 0; */
+	bottom: 0;
+	position: relative;
 	width: 100%;
-	height: 40vh;
-	overflow: scroll;
+	height: 0;
+	overflow: visible;
 	-webkit-overflow-scrolling: touch;
 }
 
@@ -251,6 +254,7 @@ footer {
 	bottom: 0px;
 	height: 9vh;
 	width: 100vw;
+	z-index: 200;
 }
 
 footer .tab {
