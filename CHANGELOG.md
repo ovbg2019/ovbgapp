@@ -1,4 +1,40 @@
-*** Updated on Tuesday, July 30, 2019 3:20 PM ***
+-----------------------------------------------------------------------------------------------------------
+
+*** Updated onThursday, August 1, 2019 11:25 PM ***
+
+
+HTML
+	-added missing alt tag = alt=”tempAlt”
+	-Fixed comment out on on clicks inside img tags, ! 	was missing
+	-
+	REMOVED:
+	-closing brackets from img tags
+	-H4 About
+	-viewBox="0 0 1920 1080 from Object
+
+JS
+	ADDED:
+	- animation duration, svg path length and repeat
+	   properties inside a 3d array, initially just
+            the svg path was id inside an array (parkFeautre[].paths[]). Now, each path can have different animation duration, length and repeat value. If needed in future we can add width-size and colour as well.
+	TempFixed:
+	  -When start and from locations are the
+	    same, icons circles of the location will animate once and clear after (i.e go back to their old state),  in case of Memory Garden there was no circle around it so the Memory Garden icon.
+
+	DRAW()
+	-added 2s delay
+	-increased repayDelay to 1.3s from 1s.
+
+ -Updated 3 (contentImg, expandedImg, thumbnail) lowers case constants to UPPERCASE (CONTENT_IMG, EXPANDED_IMG, THUMBNAIL)
+
+
+	REMOVED
+	 -Old disabled draw functions
+
+
+
+-----------------------------------------------------------------------------------------------------------
+*** Updated on Tuesday, July 31, 2019 3:20 PM ***
 
     SCRIPT.JS
         - added pinch and zoom functionality
@@ -17,10 +53,9 @@
         -Created 3 new variables for SVG PATHS
         -Accessing to SVG path is now dynamic via paths array inside parkFeature
         -Corrected path names to match SVG name
-        -Arranged the order of the path to match LOACTIONS.
+        -Arranged the order of the path to match LOCATIONS.
         -Removed two old constants for the paths.
         -Duration and Length is hardcoded for now, on the next stage it will be pull from 3d array inside parkFeature>paths
-        -Updated 3 (contentImg, expandedImg, thumbnail) lowers case constants to UPPERCASE (CONTENTIMG, EXPANDEDIMG, THUMBNAIL)
     park_map.svg
         -Updated to latest svg
 
