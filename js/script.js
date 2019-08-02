@@ -43,9 +43,9 @@ window.onload = function () {
 	// Image Gallery elements
 	const BIG_IMAGES = document.querySelectorAll('.bigImage');
 	const SMALL_IMAGES = document.querySelectorAll('.smImage');
-	const contentImg = document.getElementById('contentImageBox');
-	const expandedImg = document.getElementById('expandedImg');
-	const thumbnail = document.getElementById('thumbnail');
+	const CONTENT_IMG = document.getElementById('contentImageBox');
+	const EXPANDED_IMG = document.getElementById('expandedImg');
+	const THUMBNAIL = document.getElementById('thumbnail');
 
 
 	//placeholder
@@ -62,6 +62,7 @@ window.onload = function () {
 	let pathToDraw = '';
 	let duration = 0;
 	let length = 0;
+	let repeat = 0;
 
 
 	// variable to store the active colour to be set to the tabs
@@ -88,6 +89,7 @@ window.onload = function () {
 
 	// set start position based on tab click
 	let startPosition = parseInt(parsed);
+
 	// set destination position based on dropdown selection
 	let destination = '';
 
@@ -119,8 +121,12 @@ window.onload = function () {
 			bigImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			paths: [
-				'',
-				'bike_path_to_peony', 'bike_path_to_waterfall_garden', 'bike_path_to_bridge', 'bike_path_to_daylily', 'bike_path_to_memory_garden',
+				['pin', 10, 500, 0],
+				['bike_path_to_peony', 5, 608, -1],
+				['bike_path_to_waterfall_garden', 5, 915, -1],
+				['bike_path_to_bridge', 7, 199, -1],
+				['bike_path_to_daylily', 8, 630, -1],
+				['bike_path_to_memory_garden', 8, 1829, -1],
 			],
 			featureZoomPoints: ['180%', 0.2, 1],
 			pathZoomPoints: [
@@ -147,12 +153,12 @@ window.onload = function () {
 			smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			/* DRAWING PATHS*/
 			paths: [
-				'peony_to_bike_path',
-				'',
-				'peony_to_waterfall_garden',
-				'peony_to_bridge',
-				'peony_to_daylily',
-				'peony_to_memory_garden',
+				['peony_to_bike_path', 5, 608, -1],
+				['pin-5', 3, 300, 0],
+				['peony_to_waterfall_garden', 5, 866, -1],
+				['peony_to_bridge', 5, 807, -1],
+				['peony_to_daylily', 8, 1272, -1],
+				['peony_to_memory_garden', 12, 2472, -1],
 			],
 			featureZoomPoints: ['180%', 0.4, 0.95],
 			pathZoomPoints: [
@@ -177,12 +183,12 @@ window.onload = function () {
 			bigImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			paths: [
-				'waterfall_garden_to_bike_path',
-				'waterfall_garden_to_peony',
-				'',
-				'waterfall_garden_to_bridge',
-				'waterfall_garden_to_daylily',
-				'waterfall_garden_to_memory_garden',
+				['waterfall_garden_to_bike_path', 5, 915, -1],
+				['waterfall_garden_to_peony', 5, 866, -1],
+				['pin-3', 3, 300, 0],
+				['waterfall_garden_to_bridge', 7, 1118, -1],
+				['waterfall_garden_to_daylily', 7, 1580, -1],
+				['waterfall_garden_to_memory_garden', 10, 2779, -1],
 			],
 			featureZoomPoints: ['170%', 0.35, 0.4],
 			pathZoomPoints: [
@@ -207,12 +213,12 @@ window.onload = function () {
 			bigImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			paths: [
-				'bridge_to_bike_path',
-				'bridge_to_peony',
-				'bridge_to_waterfall_garden',
-				'',
-				'bridge_to_daylily',
-				'bridge_to_memory_garden',
+				['bridge_to_bike_path', 7, 199, -1],
+				['bridge_to_peony', 5, 807, -1],
+				['bridge_to_waterfall_garden', 7, 1118, -1],
+				['pin-4', 3, 300, 0],
+				['bridge_to_daylily', 5, 615, -1],
+				['bridge_to_memory_garden', 8, 1814, -1],
 			],
 			featureZoomPoints: ['200%', 0.145, 1.4],
 			pathZoomPoints: [
@@ -238,12 +244,13 @@ window.onload = function () {
 			bigImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			paths: [
-				'daylily_to_bike_path',
-				'daylily_to_peony',
-				'daylily_to_waterfall_garden',
-				'daylily_to_bridge',
-				'',
-				'daylily_to_memory_garden',
+				['daylily_to_bike_path', 8, 630, -1],
+				['daylily_to_peony', 8, 1272, -1],
+				['daylily_to_waterfall_garden', 7, 1580, -1],
+				['daylily_to_bridge', 5, 615, -1],
+				['pin-2', 3, 300, -1],
+				['daylily_to_memory_garden', 6, 1214, -1],
+
 			],
 			featureZoomPoints: ['220%', 0, 1.33],
 			pathZoomPoints: [
@@ -268,13 +275,12 @@ window.onload = function () {
 			bigImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			paths: [
-				'memory_garden_to_bike_path',
-				'memory_garden_to_peony',
-				'memory_garden_to_waterfall_garden',
-				'memory_garden_to_bridge',
-				'memory_garden_to_daylily',
-				''
-
+				['memory_garden_to_bike_path', 8, 1829, -1],
+				['memory_garden_to_peony', 10, 2472, -1],
+				['memory_garden_to_waterfall_garden', 12, 2779, -1],
+				['memory_garden_to_bridge', 8, 1814, -1],
+				['memory_garden_to_daylily', 6, 1214, -1],
+				['memory_gazebo_icon', 15, 500, 0],
 			],
 			featureZoomPoints: ['170%', 0, 0.06],
 			pathZoomPoints: [
@@ -290,51 +296,34 @@ window.onload = function () {
 
 
 
-
-
 	/* FUNCTION DEFINITIONS */
 
-
-	// const SVG_PATH = (id, i) => {
-	// 	pathToDraw = MAP_SVG.querySelector('#' + parkFeature[id].paths[i][0]);
-	// 	console.log("something else here");
-
-	// }
-
-	// SVG_PATH(1, 2)
-
-	// DRAW(pathToDraw, 5, 680)
-	// console.log("drawing");
-
-
-	// MAIN DARW Function
-	const DRAW = (dpath, duration, length) => {
-		// let length = path.getTotalLength();
+	// MAIN DRAW Function
+	const DRAW = (path, duration, length, repeat) => {
 		REMOVE_CURRENT_ANIMATION();
-		const LENGTH = length;
 		const STROKE_WIDTH = 15;
 		TLM.fromTo(
-			dpath,
+			path,
 			duration, {
 				strokeWidth: STROKE_WIDTH,
-				strokeDasharray: LENGTH,
-				strokeDashoffset: LENGTH,
+				strokeDasharray: length,
+				strokeDashoffset: length,
 			}, {
+				delay: 2,
 				stroke: '#679DF6',
 				strokeWidth: STROKE_WIDTH,
-				strokeDasharray: LENGTH,
+				strokeDasharray: length,
 				strokeDashoffset: 0,
-				repeat: -1,
+				repeat: repeat,
 				ease: Sine.easeInOut,
-				repeatDelay: 1,
+				repeatDelay: 1.3,
+				onComplete: () => {
+					if (repeat === 0) {
+						REMOVE_CURRENT_ANIMATION();
+					}
+				}
 			}
 		);
-	};
-
-	//Function to call the path from parkFeature array
-	const DRAW_PATH = (parkFeature, id, i) => {
-		// console.log(parkFeature[id].paths[i]);
-		return parkFeature[id].paths[i].draw()
 	};
 
 
@@ -367,16 +356,19 @@ window.onload = function () {
 
 				if (item.value !== 0) {
 					pathZoomIn(item.value - 1);
+
+					//Draws the path based on the start and end locations
 					if (id !== item.value - 1) {
-						pathToDraw = MAP_SVG.querySelector('#' + parkFeature[id].paths[item.value - 1]);
+						pathToDraw = MAP_SVG.querySelector('#' + parkFeature[id].paths[item.value - 1][0]);
+						duration = parkFeature[id].paths[item.value - 1][1]
+						length = parkFeature[id].paths[item.value - 1][2]
+						repeat = parkFeature[id].paths[item.value - 1][3]
 					}
-					//Draws the path, duration and length is hard coded
-					DRAW(pathToDraw, 5, 3000)
-					PLACE_HOLDER.textContent = 'Go to: ' + LOCATIONS[item.value];
+
+					DRAW(pathToDraw, duration, length, repeat)
 				}
 				// Upon clicking an item in the list set the displayed text to the selected location name
-				// PLACE_HOLDER.textContent = 'Go to: ' + LOCATIONS[item.value];
-
+				PLACE_HOLDER.textContent = `Go to: ${LOCATIONS[item.value]}`;
 			});
 		});
 	});
@@ -705,7 +697,7 @@ window.onload = function () {
 
 	// function expand the image gallery
 	function openModal() {
-		contentImg.style.display = 'none';
+		CONTENT_IMG.style.display = 'none';
 
 		for (let i in BIG_IMAGES) {
 			BIG_IMAGES[i].src = parkFeature[id].bigImages[i];
@@ -714,15 +706,15 @@ window.onload = function () {
 			SMALL_IMAGES[i].src = parkFeature[id].bigImages[i];
 		}
 
-		expandedImg.style.display = 'block';
-		thumbnail.style.display = 'block';
+		EXPANDED_IMG.style.display = 'block';
+		THUMBNAIL.style.display = 'block';
 
 		// animate the image content once expanded
 		TweenMax.from('#modalContent', 1, {
 			opacity: 0,
 		});
 	}
-	contentImg.addEventListener('click', openModal);
+	CONTENT_IMG.addEventListener('click', openModal);
 
 
 	//set the slide index to loop through thumbnail
@@ -759,9 +751,9 @@ window.onload = function () {
 
 	// function to reset image gallery
 	function closeImgGallery() {
-		expandedImg.style.display = 'none';
-		thumbnail.style.display = 'none';
-		contentImg.style.display = 'block';
+		EXPANDED_IMG.style.display = 'none';
+		THUMBNAIL.style.display = 'none';
+		CONTENT_IMG.style.display = 'block';
 	}
 
 	// END IMAGE GALLERY SCRIPT ----------
