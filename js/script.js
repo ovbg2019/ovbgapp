@@ -363,7 +363,9 @@ window.onload = function () {
       
     PATH_FINDER.classList.toggle('hidden');
       placeholderStart.textContent = parkFeature[currentLocation].name;
-      placeholderEnd.textContent = parkFeature[destination].name;
+      if(destination) {
+        placeholderEnd.textContent = parkFeature[destination].name;
+      }
   });
 
 
