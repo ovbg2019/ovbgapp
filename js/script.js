@@ -32,9 +32,9 @@ window.onload = function () {
 	// Image Gallery elements
 	const BIG_IMAGES = document.querySelectorAll('.bigImage');
 	const SMALL_IMAGES = document.querySelectorAll('.smImage');
-	const contentImg = document.getElementById('contentImageBox');
-	const expandedImg = document.getElementById('expandedImg');
-	const thumbnail = document.getElementById('thumbnail');
+	const CONTENT_IMG = document.getElementById('contentImageBox');
+	const EXPANDED_IMG = document.getElementById('expandedImg');
+	const THUMBNAIL = document.getElementById('thumbnail');
 
 
 	//placeholder
@@ -51,6 +51,7 @@ window.onload = function () {
 	let pathToDraw = '';
 	let duration = 0;
 	let length = 0;
+	let repeat = 0;
 
 
 	// variable to store the active colour to be set to the tabs
@@ -110,8 +111,12 @@ window.onload = function () {
 			bigImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			paths: [
-				'',
-				'bike_path_to_peony', 'bike_path_to_waterfall_garden', 'bike_path_to_bridge', 'bike_path_to_daylily', 'bike_path_to_memory_garden',
+				['pin', 10, 500, 0],
+				['bike_path_to_peony', 5, 608, -1],
+				['bike_path_to_waterfall_garden', 5, 915, -1],
+				['bike_path_to_bridge', 7, 199, -1],
+				['bike_path_to_daylily', 8, 630, -1],
+				['bike_path_to_memory_garden', 8, 1829, -1],
 			],
 			featureZoomPoints: ['180%', 0.2, 1],
 			pathZoomPoints: [
@@ -138,12 +143,12 @@ window.onload = function () {
 			smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			/* DRAWING PATHS*/
 			paths: [
-				'peony_to_bike_path',
-				'',
-				'peony_to_waterfall_garden',
-				'peony_to_bridge',
-				'peony_to_daylily',
-				'peony_to_memory_garden',
+				['peony_to_bike_path', 5, 608, -1],
+				['pin-5', 3, 300, 0],
+				['peony_to_waterfall_garden', 5, 866, -1],
+				['peony_to_bridge', 5, 807, -1],
+				['peony_to_daylily', 8, 1272, -1],
+				['peony_to_memory_garden', 12, 2472, -1],
 			],
 			featureZoomPoints: ['180%', 0.4, 0.95],
 			pathZoomPoints: [
@@ -168,12 +173,12 @@ window.onload = function () {
 			bigImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			paths: [
-				'waterfall_garden_to_bike_path',
-				'waterfall_garden_to_peony',
-				'',
-				'waterfall_garden_to_bridge',
-				'waterfall_garden_to_daylily',
-				'waterfall_garden_to_memory_garden',
+				['waterfall_garden_to_bike_path', 5, 915, -1],
+				['waterfall_garden_to_peony', 5, 866, -1],
+				['pin-3', 3, 300, 0],
+				['waterfall_garden_to_bridge', 7, 1118, -1],
+				['waterfall_garden_to_daylily', 7, 1580, -1],
+				['waterfall_garden_to_memory_garden', 10, 2779, -1],
 			],
 			featureZoomPoints: ['170%', 0.35, 0.4],
 			pathZoomPoints: [
@@ -198,12 +203,12 @@ window.onload = function () {
 			bigImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			paths: [
-				'bridge_to_bike_path',
-				'bridge_to_peony',
-				'bridge_to_waterfall_garden',
-				'',
-				'bridge_to_daylily',
-				'bridge_to_memory_garden',
+				['bridge_to_bike_path', 7, 199, -1],
+				['bridge_to_peony', 5, 807, -1],
+				['bridge_to_waterfall_garden', 7, 1118, -1],
+				['pin-4', 3, 300, 0],
+				['bridge_to_daylily', 5, 615, -1],
+				['bridge_to_memory_garden', 8, 1814, -1],
 			],
 			featureZoomPoints: ['200%', 0.145, 1.4],
 			pathZoomPoints: [
@@ -229,12 +234,13 @@ window.onload = function () {
 			bigImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			paths: [
-				'daylily_to_bike_path',
-				'daylily_to_peony',
-				'daylily_to_waterfall_garden',
-				'daylily_to_bridge',
-				'',
-				'daylily_to_memory_garden',
+				['daylily_to_bike_path', 8, 630, -1],
+				['daylily_to_peony', 8, 1272, -1],
+				['daylily_to_waterfall_garden', 7, 1580, -1],
+				['daylily_to_bridge', 5, 615, -1],
+				['pin-2', 3, 300, -1],
+				['daylily_to_memory_garden', 6, 1214, -1],
+
 			],
 			featureZoomPoints: ['220%', 0, 1.33],
 			pathZoomPoints: [
@@ -259,13 +265,12 @@ window.onload = function () {
 			bigImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			smImages: ['images/temp_pic1.jpg', 'images/temp_pic2.jpg', 'images/temp_pic3.jpg', 'images/temp_pic4.jpg'],
 			paths: [
-				'memory_garden_to_bike_path',
-				'memory_garden_to_peony',
-				'memory_garden_to_waterfall_garden',
-				'memory_garden_to_bridge',
-				'memory_garden_to_daylily',
-				''
-
+				['memory_garden_to_bike_path', 8, 1829, -1],
+				['memory_garden_to_peony', 10, 2472, -1],
+				['memory_garden_to_waterfall_garden', 12, 2779, -1],
+				['memory_garden_to_bridge', 8, 1814, -1],
+				['memory_garden_to_daylily', 6, 1214, -1],
+				['memory_gazebo_icon', 15, 500, 0],
 			],
 			featureZoomPoints: ['170%', 0, 0.06],
 			pathZoomPoints: [
@@ -282,47 +287,32 @@ window.onload = function () {
 
 	/* FUNCTION DEFINITIONS */
 
-
-	// const SVG_PATH = (id, i) => {
-	// 	pathToDraw = MAP_SVG.querySelector('#' + parkFeature[id].paths[i][0]);
-	// 	console.log("something else here");
-
-	// }
-
-	// SVG_PATH(1, 2)
-
-	// DRAW(pathToDraw, 5, 680)
-	// console.log("drawing");
-
-
-	// MAIN DARW Function
-	const DRAW = (dpath, duration, length) => {
-		// let length = path.getTotalLength();
+	// MAIN DRAW Function
+	const DRAW = (path, duration, length, repeat) => {
 		REMOVE_CURRENT_ANIMATION();
-		const LENGTH = length;
 		const STROKE_WIDTH = 15;
 		TLM.fromTo(
-			dpath,
+			path,
 			duration, {
 				strokeWidth: STROKE_WIDTH,
-				strokeDasharray: LENGTH,
-				strokeDashoffset: LENGTH,
+				strokeDasharray: length,
+				strokeDashoffset: length,
 			}, {
+				delay: 2,
 				stroke: '#679DF6',
 				strokeWidth: STROKE_WIDTH,
-				strokeDasharray: LENGTH,
+				strokeDasharray: length,
 				strokeDashoffset: 0,
-				repeat: -1,
+				repeat: repeat,
 				ease: Sine.easeInOut,
-				repeatDelay: 1,
+				repeatDelay: 1.3,
+				onComplete: () => {
+					if (repeat === 0) {
+						REMOVE_CURRENT_ANIMATION();
+					}
+				}
 			}
 		);
-	};
-
-	//Function to call the path from parkFeature array
-	const DRAW_PATH = (parkFeature, id, i) => {
-		// console.log(parkFeature[id].paths[i]);
-		return parkFeature[id].paths[i].draw()
 	};
 
 
@@ -422,73 +412,21 @@ window.onload = function () {
 
     console.log('Loc: ' + currentLocation + ' ' + parkFeature[currentLocation].name);
     console.log('Dest: ' + destination + ' ' + parkFeature[destination].name);
-      pathZoomIn(destination);
-      
-      pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[destination]);
-        
-      //Draws the path, duration and length is hard coded
-      DRAW(pathToDraw, 5, 3000)
+    pathZoomIn(destination);
     
-    // Upon clicking an item in the list set the displayed text to the selected location name
-    // PLACE_HOLDER.textContent = 'Go to: ' + LOCATIONS[item.value];
-
-
-      // Drawpath function call here **
-      // DRAW_PATH(parkFeature, id, i);
+    pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[destination][0]);
+    duration = parkFeature[currentLocation].paths[destination][1];
+    length = parkFeature[currentLocation].paths[destination][2];
+    repeat = parkFeature[currentLocation].paths[destination][3];
+    
+    //Draws the path, duration and length is hard coded
+    DRAW(pathToDraw, duration, length, repeat);
 
     // Hide with the path finder menu
     PATH_FINDER.classList.add('hidden');
   });
 
   // NEW DROP DOWN CODE ********* END
-  // ************************************************************************************************
-
-
-
-  // ************************************************************************************************
-  // OLD DROP DOWN *****************
-
-	// // if anywhere in the map is clicked the drop down will close
-	// MAP_SVG.addEventListener('click', function (e) {
-	// 	DROP_DOWN_ITEM.forEach(item => {
-	// 		// toggle the hidden class on each item in the list (reveling them)
-	// 		if (item.value !== 0) {
-	// 			item.classList.add('hidden');
-	// 		} else {
-	// 			item.classList.remove('hidden');
-	// 		}
-	// 		// Reset dropdown text value to select destination
-	// 		PLACE_HOLDER.textContent = `Select Destination`;
-	// 	});
-	// });
-
-	// // Create event listener on drop down menu
-	// DROP_DOWN.addEventListener('click', function () {
-	// 	// Loop through the elements in the drop down and add event listeners to them
-	// 	DROP_DOWN_ITEM.forEach(item => {
-	// 		// toggle the hidden class on each item in the list (reveling them)
-	// 		item.classList.toggle('hidden');
-
-	// 		// Add the event listener to the item
-	// 		item.addEventListener('click', function () {
-	// 			// will set destination location based item in drop down being selected
-
-	// 			if (item.value !== 0) {
-	// 				pathZoomIn(item.value - 1);
-	// 				if (id !== item.value - 1) {
-	// 					pathToDraw = MAP_SVG.querySelector('#' + parkFeature[id].paths[item.value - 1]);
-	// 				}
-	// 				//Draws the path, duration and length is hard coded
-	// 				DRAW(pathToDraw, 5, 3000)
-	// 				PLACE_HOLDER.textContent = 'Go to: ' + LOCATIONS[item.value];
-	// 			}
-	// 			// Upon clicking an item in the list set the displayed text to the selected location name
-	// 			// PLACE_HOLDER.textContent = 'Go to: ' + LOCATIONS[item.value];
-
-	// 		});
-	// 	});
-  // });
-  // ************************************************************************************************
   // ************************************************************************************************
 
 	/* OPENING AND CLOSING THE INFORMATION PANEL AND POPULATING IT WITH THE CONTENT */
@@ -694,9 +632,9 @@ window.onload = function () {
 		});
 
 		// animating the scroll
-		TweenMax.to('section', 2.5, {
+		TweenMax.to('#mapBox', 2.5, {
 			delay: 0.5,
-			height: '53.5%',
+			height: '53.5vh',
 			scrollTo: {
 				y: topScroll,
 				x: leftScroll,
@@ -726,7 +664,7 @@ window.onload = function () {
 		});
 
 		// animating the scroll
-		TweenMax.to('section', 1.75, {
+		TweenMax.to('#mapBox', 1.75, {
 			scrollTo: {
 				y: topScroll,
 				x: leftScroll,
@@ -744,26 +682,105 @@ window.onload = function () {
 			height: '100%',
 		});
 
-		TweenMax.to('section', 1.25, {
-			height: mapHeight + '%',
+		TweenMax.to('#mapBox', 1.25, {
+			height: mapHeight + 'vh',
 		});
 	}
 
 
 	/* PINCH AND ZOOM */
 
+		// function to register touch when it starts
+		MAP_SVG.addEventListener('touchstart', function (e) {
+			// pushes the event in the array
+			evCache.push(e);
+			// console.log('start');
+			// gets the existing height of the map
+			height = parseInt(MAP_SVG_OBJ.style.height.replace('%', ''));
+		});
+
+		// function to register the end when the user stops the interaction
+		MAP_SVG.addEventListener('touchend', function (e) {
+			// console.log('end');
+
+			// reset the difference variable to prepare for the next pinch
+			if (evCache.length < 2)
+				prevDiff = -1;
+			// reset the event cache for the next pinch
+			for (let i = 0; i < evCache.length; i++) {
+				evCache = [];
+			}
+		});
+
+		// function to register the pinch and then implement the zoom
+		MAP_SVG.addEventListener('touchmove', function (e) {
+			// console.log('height: ' + height);
+			// console.log('move');
+
+			// inserting the event in the event cache array
+			for (let i = 0; i < evCache.length; i++) {
+				if (e.pointerId == evCache[i].pointerId) {
+					evCache[i] = e;
+					break;
+				}
+			}
+
+			// to be executed when two touches are detected simultaneously
+			if (evCache.length == 2) {
+				console.log(e);
+				// get the distance between two touches
+				let curDiffX = 0;
+				let curDiffY = 0;
+
+				var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+				if (!(isSafari)) {
+					curDiffX = Math.abs(evCache[0].touches[0].clientX - evCache[0].touches[1].clientX);
+					curDiffY = Math.abs(evCache[0].touches[0].clientY - evCache[0].touches[1].clientY);
+				}
+
+				let curDiff = Math.hypot(curDiffX, curDiffY);
+
+				if (prevDiff > 0) {
+					// to be executed only when the distance is increasing and only if the map height is less than 298%
+					if (curDiff > prevDiff && height < 298) {
+						// console.log('Zoom IN');
+						height = height + curDiff * 0.025;
+					}
+
+					// to be executed only when the distance is decreasing and only if the map height is more than 102%
+					if (curDiff < prevDiff && height >= 105) {
+						// console.log('Zoom OUT');
+						height = height - curDiff * 0.02;
+					}
+				}
+
+				// animate the zoom
+				TweenMax.to('#svgMapObj', 0.4, {
+					height: height + '%',
+					ease: Sine.easeOut
+				});
+
+				// set prevDiff to currDiff to check the increase/decrease in pinch
+				prevDiff = curDiff;
+			}
+		}, {
+			passive: false
+		});
+
+		/* PINCH AND ZOOM -- FOR iDevices */
+
 	// function to register touch when it starts
-	MAP_SVG.addEventListener('touchstart', function (e) {
+	MAP_SVG.addEventListener('gesturestart', function (e) {
 		// pushes the event in the array
 		evCache.push(e);
-		// console.log('start');
+		// console.log('ipad start');
 		// gets the existing height of the map
 		height = parseInt(MAP_SVG_OBJ.style.height.replace('%', ''));
 	});
 
 	// function to register the end when the user stops the interaction
-	MAP_SVG.addEventListener('touchend', function (e) {
-		// console.log('end');
+	MAP_SVG.addEventListener('gestureend', function (e) {
+		// console.log('ipad end');
 
 		// reset the difference variable to prepare for the next pinch
 		if (evCache.length < 2)
@@ -775,53 +792,38 @@ window.onload = function () {
 	});
 
 	// function to register the pinch and then implement the zoom
-	MAP_SVG.addEventListener('touchmove', function (e) {
-
+	MAP_SVG.addEventListener('gesturechange', function (e) {
 		// console.log('height: ' + height);
-		// console.log('move');
+		// console.log('ipad change');
+		// console.log(e);
+		e.preventDefault();
+		// console.log('before: ' + height);
 
-		// inserting the event in the event cache array
-		for (let i = 0; i < evCache.length; i++) {
-			if (e.pointerId == evCache[i].pointerId) {
-				evCache[i] = e;
-				break;
-			}
-		}
+		if (height >= 90 && height <= 300) {
+			let scale = parseFloat(e.scale);
+			console.log(scale);
+			height = 100 * scale;
+			if (height < 100)
+				height = 100;
+			else if (height > 300)
+				height = 300;
+			console.log(height);
 
-		// to be executed when two touches are detected simultaneously
-		if (evCache.length == 2) {
-			// get the distance between two touches
-			let curDiff = Math.abs(evCache[0].touches[0].clientX - evCache[0].touches[1].clientX);
-
-			if (prevDiff > 0) {
-				// to be executed only when the distance is increasing and only if the map height is less than 298%
-				if (curDiff > prevDiff && height < 298) {
-					// console.log('Zoom IN');
-					height = height + 2;
-				}
-
-				// to be executed only when the distance is decreasing and only if the map height is more than 102%
-				if (curDiff < prevDiff && height >= 102) {
-					// console.log('Zoom OUT');
-					height = height - 2;
-				}
-			}
-
-			// animate the zoom
-			TweenMax.to('#svgMapObj', 0.05, {
+			TweenMax.to('#svgMapObj', 0.2, {
 				height: height + '%',
+				ease: Sine.easeOut
 			});
-
-			// set prevDiff to currDiff to check the increase/decrease in pinch
-			prevDiff = curDiff;
 		}
+	}, {
+		passive: false
 	});
+
 
 	/* EXPANDING THE IMAGE GALLERY */
 
 	// function expand the image gallery
 	function openModal() {
-		contentImg.style.display = 'none';
+		CONTENT_IMG.style.display = 'none';
 
 		for (let i in BIG_IMAGES) {
 			BIG_IMAGES[i].src = parkFeature[id].bigImages[i];
@@ -830,15 +832,15 @@ window.onload = function () {
 			SMALL_IMAGES[i].src = parkFeature[id].bigImages[i];
 		}
 
-		expandedImg.style.display = 'block';
-		thumbnail.style.display = 'block';
+		EXPANDED_IMG.style.display = 'block';
+		THUMBNAIL.style.display = 'block';
 
 		// animate the image content once expanded
 		TweenMax.from('#modalContent', 1, {
 			opacity: 0,
 		});
 	}
-	contentImg.addEventListener('click', openModal);
+	CONTENT_IMG.addEventListener('click', openModal);
 
 
 	//set the slide index to loop through thumbnail
@@ -875,9 +877,9 @@ window.onload = function () {
 
 	// function to reset image gallery
 	function closeImgGallery() {
-		expandedImg.style.display = 'none';
-		thumbnail.style.display = 'none';
-		contentImg.style.display = 'block';
+		EXPANDED_IMG.style.display = 'none';
+		THUMBNAIL.style.display = 'none';
+		CONTENT_IMG.style.display = 'block';
 	}
 
 	// END IMAGE GALLERY SCRIPT ----------
