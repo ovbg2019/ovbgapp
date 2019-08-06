@@ -316,7 +316,7 @@ footer img {
 	max-width: 75%;
 }
 
-label {
+#contentTextBox h4 {
 	display: flex;
 	flex-direction: row;
 	padding: 10px 20px;
@@ -329,10 +329,6 @@ label {
 	justify-content: center;
 	align-items: center;
 	border-radius: 1vh;
-}
-
-label h4 {
-	margin-left: 1vw;
 }
 
 #tabIcon {
