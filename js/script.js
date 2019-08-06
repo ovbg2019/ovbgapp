@@ -81,7 +81,8 @@ window.onload = function () {
   let placeholderEnd = document.querySelector('.placeholder-end');
 
 	// set destination position based on dropdown selection, initially based on id
-	let destination = '';
+  let destination = '';
+  
 
 	// variables to store the zoom parameters
 	let leftScroll = '';
@@ -362,7 +363,7 @@ window.onload = function () {
       
     PATH_FINDER.classList.toggle('hidden');
       placeholderStart.textContent = parkFeature[currentLocation].name;
-
+      placeholderEnd.textContent = parkFeature[destination].name;
   });
 
 
@@ -373,8 +374,10 @@ window.onload = function () {
     // Loop through the elements in the drop down and add event listeners to them
     // i represents index of item in array
 		DROP_DOWN_ITEM_START.forEach((item, i) => {
-			// toggle the hidden class on each item in the list (unhiding them)
-			item.classList.toggle('hidden');
+      // toggle the hidden class on each item in the list (unhiding them)
+      if(destination !== i-1) {
+        item.classList.toggle('hidden');
+      }
 			// Add the event listener to the item
 			item.addEventListener('click', function() {
         // will set destination location based item in dropdown being selected
@@ -392,8 +395,10 @@ window.onload = function () {
 	DROP_DOWN_END.addEventListener('click', function() {
 		// Loop through the elements in the drop down and add event listeners to them
 		DROP_DOWN_ITEM_END.forEach((item, i) => {
-			// toggle the hidden class on each item in the list (unhiding them)
-			item.classList.toggle('hidden');
+      // toggle the hidden class on each item in the list (unhiding them)
+      if(currentLocation !== i-1) {
+        item.classList.toggle('hidden');
+      }
 			// Add the event listener to the item
 			item.addEventListener('click', function () {
 				// will set destination location based item in drop down being selected
@@ -463,7 +468,8 @@ window.onload = function () {
 	// setting event listener on each tab using a loop (to reduce redundant code)
 	// will allow the user to click each tab and based on the tab selected, it will populate the content
 	for (let i in TABS) {
-		// applying a function to onclick event of each tab
+
+    // applying a function to onclick event of each tab
 		TABS[i].onclick = function () {
 			REMOVE_CURRENT_ANIMATION();
 			// setting the id and the content based on the id
