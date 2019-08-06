@@ -123,10 +123,10 @@ window.onload = function () {
 			pathZoomPoints: [
 				['100%', 0.4, 0.95],
 				['100%', 0.3, 1.05],
-				['100%', 0.1, 0.4],
-				['100%', 0.1, 0.87],
-				['100%', 0.01, 0.6],
-				['100%', 0, 0.33],
+				['100%', 0.1, 0.9], 
+				['100%', 0.1, 1.05], 
+				['100%', 0.01, 1], 
+				['100%', 0, 1], 
 			],
 		},
 		{ //1
@@ -154,11 +154,11 @@ window.onload = function () {
 			featureZoomPoints: ['180%', 0.4, 0.95],
 			pathZoomPoints: [
 				['100%', 0.4, 0.95],
-				['100%', 0.3, 1.05],
-				['100%', 0.1, 0.4],
-				['100%', 0.1, 0.87],
-				['100%', 0.01, 0.6],
-				['100%', 0, 0.4],
+				['100%', 0.3, 1.05], 
+				['100%', 0.1, 0.7],
+				['100%', 0.1, 1],
+				['100%', 0.01, 1],
+				['100%', 0, 1],
 			]
 		}, { //2
 			name: 'Waterfall Garden',
@@ -183,12 +183,12 @@ window.onload = function () {
 			],
 			featureZoomPoints: ['170%', 0.35, 0.4],
 			pathZoomPoints: [
-				['100%', 0.4, 0.95],
-				['100%', 0.3, 1.05],
-				['100%', 0.1, 0.4],
-				['100%', 0.1, 0.87],
+				['100%', 0.4, 0.55], 
+				['100%', 0.3, 0.65], 
+				['100%', 0.1, 0.4], 
+				['100%', 0.1, 0.6], 
 				['100%', 0.01, 0.6],
-				['100%', 0, 0.33],
+				['100%', 0, 0.55], 
 			],
 		}, { //3
 			name: 'Rotary Bridge',
@@ -213,12 +213,12 @@ window.onload = function () {
 			],
 			featureZoomPoints: ['200%', 0.145, 1.4],
 			pathZoomPoints: [
-				['100%', 0.4, 0.95],
-				['100%', 0.3, 1.05],
-				['100%', 0.1, 0.4],
-				['100%', 0.1, 0.87],
-				['100%', 0.01, 0.6],
-				['100%', 0, 0.33],
+				['100%', 0.4, 1], 
+				['100%', 0.3, 1], 
+				['100%', 0.1, 1], 
+				['100%', 0.1, 0.87], 
+				['100%', 0.01, 1], 
+				['100%', 0, 1], 
 			],
 		}, {
 			//4
@@ -245,12 +245,12 @@ window.onload = function () {
 			],
 			featureZoomPoints: ['220%', 0, 1.33],
 			pathZoomPoints: [
-				['100%', 0.4, 0.95],
-				['100%', 0.3, 1.05],
-				['100%', 0.1, 0.4],
-				['100%', 0.1, 0.87],
+				['100%', 0.4, 1], 
+				['100%', 0.3, 1], 
+				['100%', 0.1, 1],
+				['100%', 0.1, 1],
 				['100%', 0.01, 0.6],
-				['100%', 0, 0.33],
+				['100%', 0, 0.83],
 			],
 		}, { //5
 			name: 'Memory Garden',
@@ -275,11 +275,11 @@ window.onload = function () {
 			],
 			featureZoomPoints: ['170%', 0, 0.06],
 			pathZoomPoints: [
-				['100%', 0.4, 0.95],
-				['100%', 0.3, 1.05],
-				['100%', 0.1, 0.4],
-				['100%', 0.1, 0.87],
-				['100%', 0.01, 0.6],
+				['100%', 0.4, 0.2],
+				['100%', 0.3, 0.2],
+				['100%', 0.1, 0.2],
+				['100%', 0.1, 0.2],
+				['100%', 0.01, 0.2],
 				['100%', 0, 0.33],
 			],
 		},
@@ -363,9 +363,10 @@ window.onload = function () {
       
     PATH_FINDER.classList.toggle('hidden');
       placeholderStart.textContent = parkFeature[currentLocation].name;
-      if(destination) {
-        placeholderEnd.textContent = parkFeature[destination].name;
-      }
+      // To accomidate the dropdowns removing redundent locations
+      // if(destination) {
+      //   placeholderEnd.textContent = parkFeature[destination].name;
+      // }
   });
 
 
@@ -377,9 +378,11 @@ window.onload = function () {
     // i represents index of item in array
 		DROP_DOWN_ITEM_START.forEach((item, i) => {
       // toggle the hidden class on each item in the list (unhiding them)
-      if(destination !== i-1) {
-        item.classList.toggle('hidden');
-      }
+      // hide destination from starting list
+        // if(destination !== i-1) {
+          item.classList.toggle('hidden');
+        // }
+
 			// Add the event listener to the item
 			item.addEventListener('click', function() {
         // will set destination location based item in dropdown being selected
@@ -398,9 +401,10 @@ window.onload = function () {
 		// Loop through the elements in the drop down and add event listeners to them
 		DROP_DOWN_ITEM_END.forEach((item, i) => {
       // toggle the hidden class on each item in the list (unhiding them)
-      if(currentLocation !== i-1) {
-        item.classList.toggle('hidden');
-      }
+      // hide destination if it has been selected as start position
+        // if(currentLocation !== i-1) {
+          item.classList.toggle('hidden');
+        // }
 			// Add the event listener to the item
 			item.addEventListener('click', function () {
 				// will set destination location based item in drop down being selected
@@ -419,7 +423,7 @@ window.onload = function () {
 
     console.log('Loc: ' + currentLocation + ' ' + parkFeature[currentLocation].name);
     console.log('Dest: ' + destination + ' ' + parkFeature[destination].name);
-    pathZoomIn(destination);
+    pathZoomIn(currentLocation, destination);
     
     pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[destination][0]);
     duration = parkFeature[currentLocation].paths[destination][1];
@@ -652,16 +656,17 @@ window.onload = function () {
 	}
 
 	// ZOOM IN: NAVIGATION PATHS
-	// this function takes the zoom level and scroll values to scroll and zoom the map to the visible area
-	function pathZoomIn(end) {
+  // this function takes the zoom level and scroll values to scroll and zoom the map to the visible area
+  // ** added a start argument as parkfeature was not being updated dynamically before
+	function pathZoomIn(start, end) {
 		// variable to store the value to scroll from left
-		leftScroll = parkFeature[id].pathZoomPoints[end][2] * window.innerHeight;
+		leftScroll = parkFeature[start].pathZoomPoints[end][2] * window.innerHeight;
 
 		// variable to store the value to scroll from the top
-		topScroll = parkFeature[id].pathZoomPoints[end][1] * window.innerHeight;
+		topScroll = parkFeature[start].pathZoomPoints[end][1] * window.innerHeight;
 
 		// variable to store the zoom level
-		zoomLevel = parkFeature[id].pathZoomPoints[end][0];
+		zoomLevel = parkFeature[start].pathZoomPoints[end][0];
 
 		// console.log('Left Scroll: ' + leftScroll + '\nTop Scroll: ' + topScroll + '\nZoom: ' + zoomLevel);
 
