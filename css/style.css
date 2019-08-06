@@ -456,9 +456,15 @@ footer img {
 	max-width: 75%;
 }
 
+<<<<<<< HEAD
 #contentTextBox h3 {
 	/*display: flex;
 	flex-direction: row;*/
+=======
+#contentTextBox h4 {
+	display: flex;
+	flex-direction: row;
+>>>>>>> cd1064c02eb89a29e806d519b1092f8da0fbdf3c
 	padding: 10px 20px;
 	margin-bottom: 2vh;
 	font-size: 3vh;
@@ -472,10 +478,13 @@ footer img {
 	border-radius: 1vh;
 }
 
+<<<<<<< HEAD
 /*label h4 {
 	margin-left: 1vw;
 }*/
 
+=======
+>>>>>>> cd1064c02eb89a29e806d519b1092f8da0fbdf3c
 #tabIcon {
 	width: auto;
 	height: 2.5vh;
