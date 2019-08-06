@@ -570,9 +570,9 @@ window.onload = function () {
 		});
 
 		// animating the scroll
-		TweenMax.to('section', 2.5, {
+		TweenMax.to('#mapBox', 2.5, {
 			delay: 0.5,
-			height: '53.5%',
+			height: '53.5vh',
 			scrollTo: {
 				y: topScroll,
 				x: leftScroll,
@@ -602,7 +602,7 @@ window.onload = function () {
 		});
 
 		// animating the scroll
-		TweenMax.to('section', 1.75, {
+		TweenMax.to('#mapBox', 1.75, {
 			scrollTo: {
 				y: topScroll,
 				x: leftScroll,
@@ -620,26 +620,105 @@ window.onload = function () {
 			height: '100%',
 		});
 
-		TweenMax.to('section', 1.25, {
-			height: mapHeight + '%',
+		TweenMax.to('#mapBox', 1.25, {
+			height: mapHeight + 'vh',
 		});
 	}
 
 
 	/* PINCH AND ZOOM */
 
+		// function to register touch when it starts
+		MAP_SVG.addEventListener('touchstart', function (e) {
+			// pushes the event in the array
+			evCache.push(e);
+			// console.log('start');
+			// gets the existing height of the map
+			height = parseInt(MAP_SVG_OBJ.style.height.replace('%', ''));
+		});
+
+		// function to register the end when the user stops the interaction
+		MAP_SVG.addEventListener('touchend', function (e) {
+			// console.log('end');
+
+			// reset the difference variable to prepare for the next pinch
+			if (evCache.length < 2)
+				prevDiff = -1;
+			// reset the event cache for the next pinch
+			for (let i = 0; i < evCache.length; i++) {
+				evCache = [];
+			}
+		});
+
+		// function to register the pinch and then implement the zoom
+		MAP_SVG.addEventListener('touchmove', function (e) {
+			// console.log('height: ' + height);
+			// console.log('move');
+
+			// inserting the event in the event cache array
+			for (let i = 0; i < evCache.length; i++) {
+				if (e.pointerId == evCache[i].pointerId) {
+					evCache[i] = e;
+					break;
+				}
+			}
+
+			// to be executed when two touches are detected simultaneously
+			if (evCache.length == 2) {
+				console.log(e);
+				// get the distance between two touches
+				let curDiffX = 0;
+				let curDiffY = 0;
+
+				var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+				if (!(isSafari)) {
+					curDiffX = Math.abs(evCache[0].touches[0].clientX - evCache[0].touches[1].clientX);
+					curDiffY = Math.abs(evCache[0].touches[0].clientY - evCache[0].touches[1].clientY);
+				}
+
+				let curDiff = Math.hypot(curDiffX, curDiffY);
+
+				if (prevDiff > 0) {
+					// to be executed only when the distance is increasing and only if the map height is less than 298%
+					if (curDiff > prevDiff && height < 298) {
+						// console.log('Zoom IN');
+						height = height + curDiff * 0.025;
+					}
+
+					// to be executed only when the distance is decreasing and only if the map height is more than 102%
+					if (curDiff < prevDiff && height >= 105) {
+						// console.log('Zoom OUT');
+						height = height - curDiff * 0.02;
+					}
+				}
+
+				// animate the zoom
+				TweenMax.to('#svgMapObj', 0.4, {
+					height: height + '%',
+					ease: Sine.easeOut
+				});
+
+				// set prevDiff to currDiff to check the increase/decrease in pinch
+				prevDiff = curDiff;
+			}
+		}, {
+			passive: false
+		});
+
+		/* PINCH AND ZOOM -- FOR iDevices */
+
 	// function to register touch when it starts
-	MAP_SVG.addEventListener('touchstart', function (e) {
+	MAP_SVG.addEventListener('gesturestart', function (e) {
 		// pushes the event in the array
 		evCache.push(e);
-		// console.log('start');
+		// console.log('ipad start');
 		// gets the existing height of the map
 		height = parseInt(MAP_SVG_OBJ.style.height.replace('%', ''));
 	});
 
 	// function to register the end when the user stops the interaction
-	MAP_SVG.addEventListener('touchend', function (e) {
-		// console.log('end');
+	MAP_SVG.addEventListener('gestureend', function (e) {
+		// console.log('ipad end');
 
 		// reset the difference variable to prepare for the next pinch
 		if (evCache.length < 2)
@@ -651,47 +730,32 @@ window.onload = function () {
 	});
 
 	// function to register the pinch and then implement the zoom
-	MAP_SVG.addEventListener('touchmove', function (e) {
-
+	MAP_SVG.addEventListener('gesturechange', function (e) {
 		// console.log('height: ' + height);
-		// console.log('move');
+		// console.log('ipad change');
+		// console.log(e);
+		e.preventDefault();
+		// console.log('before: ' + height);
 
-		// inserting the event in the event cache array
-		for (let i = 0; i < evCache.length; i++) {
-			if (e.pointerId == evCache[i].pointerId) {
-				evCache[i] = e;
-				break;
-			}
-		}
+		if (height >= 90 && height <= 300) {
+			let scale = parseFloat(e.scale);
+			console.log(scale);
+			height = 100 * scale;
+			if (height < 100)
+				height = 100;
+			else if (height > 300)
+				height = 300;
+			console.log(height);
 
-		// to be executed when two touches are detected simultaneously
-		if (evCache.length == 2) {
-			// get the distance between two touches
-			let curDiff = Math.abs(evCache[0].touches[0].clientX - evCache[0].touches[1].clientX);
-
-			if (prevDiff > 0) {
-				// to be executed only when the distance is increasing and only if the map height is less than 298%
-				if (curDiff > prevDiff && height < 298) {
-					// console.log('Zoom IN');
-					height = height + 2;
-				}
-
-				// to be executed only when the distance is decreasing and only if the map height is more than 102%
-				if (curDiff < prevDiff && height >= 102) {
-					// console.log('Zoom OUT');
-					height = height - 2;
-				}
-			}
-
-			// animate the zoom
-			TweenMax.to('#svgMapObj', 0.05, {
+			TweenMax.to('#svgMapObj', 0.2, {
 				height: height + '%',
+				ease: Sine.easeOut
 			});
-
-			// set prevDiff to currDiff to check the increase/decrease in pinch
-			prevDiff = curDiff;
 		}
+	}, {
+		passive: false
 	});
+
 
 	/* EXPANDING THE IMAGE GALLERY */
 

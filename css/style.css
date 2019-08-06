@@ -63,7 +63,7 @@ body {
 
 @font-face {
 	font-family: "ParaFontItalic";
-	src: url(../fonts/Lato-Italic.ttf);
+	src: url(../fonts/Lato-MediumItalic.ttf);
 }
 
 
@@ -92,6 +92,8 @@ header {
 /* Dropdown and SVG styles */
 
 #svgMapObj {
+	position: absolute;
+	top: 0;
 	width: auto;
 	height: 100%;
 	overflow: scroll;
@@ -128,29 +130,24 @@ header {
 	display: none;
 }
 
-section {
+#mapBox {
+	position: absolute;
 	top: 0;
 	width: 100%;
-	height: 92%;
+	height: 92vh;
 	overflow: scroll;
 	-webkit-overflow-scrolling: touch;
 }
 
-/* #mapBox {
+#infoBox {
+	bottom: 0;
+	position: relative;
 	width: 100%;
-	height: 58%;
-	overflow: scroll;
-} */
+	height: 0;
+	overflow: visible;
+	-webkit-overflow-scrolling: touch;
+}
 
-/*
-section svg {
-	width: auto;
-  height: 100%;
-
-section #map {
-	width: 1280px;
-	height: 720px;
-} */
 
 #infoPanel {
 	/* display: none; */
@@ -257,6 +254,7 @@ footer {
 	bottom: 0px;
 	height: 9vh;
 	width: 100vw;
+	z-index: 200;
 }
 
 footer .tab {
@@ -400,7 +398,7 @@ label h4 {
 		display: none;
 	}
 
-	section {
+	#mapBox {
 		position: absolute;
 		top: 0;
 		width: 100vw;
