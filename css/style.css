@@ -239,9 +239,6 @@ button {
 	top: 2.5%;
 	left: 2.6%;
 	overflow: hidden;
-}
-
-.destination-select  {
 	font-size: 15px;
 	font-family: "ButtonFont";
    	cursor: pointer;
