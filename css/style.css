@@ -103,7 +103,6 @@ header {
 	height: 100%;
 	overflow: scroll;
 	-webkit-overflow-scrolling: touch;
-	z-index: 1;
 }
 
 #svgMap {
@@ -298,7 +297,6 @@ button {
 	border-top-left-radius: 2vh;
 	border-top-right-radius: 2vh;
 	box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.2);
-	z-index: 700;
 }
 
 #titleBar {
