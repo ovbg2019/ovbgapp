@@ -19,13 +19,12 @@
           <h2 id="placeholder">Where to?</h2>
         </div>
     </div>
-    
+     
     <div class="pathfinder hidden">
-      <div class="switchToggle">
-        <img src="images/toggle_switch_icon.svg" alt="Toggle Switch Icon">
-      </div>
-      <h3 class="label label-start">From</h3>
+    <div class="input"> 
       <div class="startPoint">
+        <div class="fromCircle"></div>
+        <h3 class="label label-start">From</h3>
         <ul class="path-start-select">
           <li class="menuItem placeholder-start">Your Location</li>
           <li class="menuItem hidden">Bike Trail</li>
@@ -36,8 +35,9 @@
           <li class="menuItem hidden">Memory Garden</li>
         </ul>
       </div>
-      <h3 class="label label-end">To</h3>
       <div class="endPoint">
+        <div class="toCircle"></div>
+        <h3 class="label label-end">To</h3>
         <ul class="path-end-select">
           <li class="menuItem placeholder-end">Where to?</li>
           <li class="menuItem hidden">Bike Trail</li>
@@ -48,11 +48,12 @@
           <li class="menuItem hidden">Memory Garden</li>
         </ul>
       </div>
-
+    </div>   
       <div class="go-btn">
         <img id="goButtonIcon" src= "images/go_button_icon.svg"alt="Go Button">
         <button>Go</button>
       </div>
+        
     </div>
 
 		<section id="mapBox">
@@ -112,8 +113,7 @@
 					</div>
 
 					<div id="contentTextBox">
-						<label for="tab1">
-						</label>
+							<h3>You are here!</h3>
 						<div id="about"
 							 class="content">
 							<p>

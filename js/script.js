@@ -332,6 +332,9 @@ window.onload = function () {
 
 	// if anywhere in the map is clicked the dropdown will close
 	MAP_SVG.addEventListener('click', function(e) {
+        //reset the place holder text to where to?
+        PLACE_HOLDER.textContent = "Where to?";
+        
 		DROP_DOWN_ITEM_START.forEach((item, i) => {
 			// toggle the hidden class on each item in the list (unhiding them)
 			if (i !== 0) {
@@ -364,12 +367,12 @@ window.onload = function () {
   });
   
   TOP_BAR.addEventListener('click', function() {
+    // change the text on place holder
+    PLACE_HOLDER.textContent = "Select Destination";  
+      
     PATH_FINDER.classList.toggle('hidden');
-    if(parsed && currentLocation) {
       placeholderStart.textContent = parkFeature[currentLocation].name;
-    } else {
-      placeholderStart.textContent = parkFeature[id].name;
-    } 
+
   });
 
 

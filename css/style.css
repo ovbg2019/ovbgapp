@@ -77,7 +77,7 @@ header {
 	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
 }
 /*SPLASH SCREEN*/
-#splash{
+/*#splash{
 	background-image: url(../images/welcome_bg.jpg);
 	background-repeat: no-repeat;
 	position: fixed;
@@ -93,15 +93,15 @@ header {
 	left: 0;
 	right:0;
 	margin: auto;
-}
+}*/
 /* Dropdown and SVG styles */
 
 #svgMapObj {
 	width: auto;
 	height: 100%;
 	overflow: scroll;
-  -webkit-overflow-scrolling: touch;
-  z-index: 200;
+	-webkit-overflow-scrolling: touch;
+	z-index: 1;
 }
 
 #svgMap {
@@ -109,135 +109,113 @@ header {
 	height: 100%;
 }
 
-.switchToggle{
-	width: 55%;
-	height: auto;
-	align-self: center;
-	grid-area: switchToggle;
-	margin-left: 1vw;
-	position: relative;
-    top: 0.5vh
+.fromCircle, .toCircle{
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background-color: red;
+	display: flex;
+	justify-content: center;
+	margin: 2%;
+}
+.fromCircle{
+	background-color: #000;
+	border: 1px solid var(--concrete-path);
 }
 
+.toCircle{
+	background-color: #2381ff;
+	border: 1px solid var(--concrete-path);
+}
+#placeholder{
+	font-size: 3.2vh;
+}
 .pathfinder {
 	width: 90%;
-	height: 17vh;
+	height: 16.5vh;
 	background-color: var(--paths);
-	display: grid;
-	grid-template-areas:  "switchToggle startlabel start go-btn"
-			"switchToggle endlabel end go-btn";
-	grid-template-columns: 7% 13% 65% 15%;
+	display: flex;
 	position: absolute;
 	top: 8vh;
 	left: 5vw;
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	border: 1px solid var(--concrete-path);
-  font-family: "ButtonFont";
-  z-index: 800;
+	font-family: "ButtonFont";
+	z-index: 800;
+	font-size: 3vh;
+    
 }
-
+.pathfinder ul{
+    	background-color: var(--go-button);
+}
 .pathfinder ul li {
 	list-style: none;
-	background-color: var(--go-button);
-	padding: 0 0.5rem;
-	width: 100%;
-     
+	padding: 0 0.3rem;
+	
+    
 }
 .pathfinder ul li:hover, .pathfinder ul li:focus {
-	  background-color: #e7e1c6;
+	background-color: #e7e1c6;
 }
 .path-start-select, .path-end-select {
-	width: 85%;
-	height: auto;
 	border-radius: 1vh;
 	border: 1px solid var(--concrete-path);
-	font-size: 3vh;
 	background-color: var(--paths);
-	padding: 4px 2px;
-	/* position: relative; */
+	padding: 1vw 1vh;
+	width: 75%;
+	height: 100%;
+}
+.path-start-select{
+	margin-bottom: 1.5vh;
 }
 .placeholder-end{
 	color: var(--concrete-path);
 	font-family: "ButtonFont";
 }
 
-.path-start-select {
-	position: absolute;
-	top: -2.25vh;
-}
-
-.path-end-select {
-	position: absolute;
-	top: -3.25vh;
-}
-
-.endPoint, .startPoint {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-content: center;
-	align-self: center;
+.input{
 	width: 100%;
-	position: absolute;
+	height: auto;
+	flex-direction: column;
+	padding: 1vh;
+}
+.endPoint, .startPoint {
+	width: 100%;
+	display: flex;
+	flex-direction:row;
+	align-items: baseline;
+	padding-right: 2vw;
 }
 
 .startPoint {
-	grid-area: start;
 	margin-top: 1vh;
 }
-
-.pathfinder .label {
-	width: 12vw;
-	font-size: 20px;
-	position: absolute;
+.label{
 	display: flex;
-	align-items: center;
-	text-align: left;
-	height: 5vh;
-	width: 100%;
-    
+	width: 15vw;
+	height: 100%;
+	font-size: 2.8vh;
 }
-
-.label-start {
-	grid-area: startlabel;
-	top: 2.7vh;
-}
-
-.label-end {
-	grid-area: endlabel;
-	top: 1vh;
-}
-
-.endPoint {
-	grid-area: end;
-}
-
 .go-btn {
 	display: flex;
 	justify-content: center;
 	align-content: center;
-	text-align: center;    
-	grid-area: go-btn;
-	width: 102%;
-  height: 100.5%;
+	text-align: center;
+	width:15vw;
+	height: 100%;
 	background-color: var(--go-button);
 	border-bottom-right-radius: 10px;
 	border-left: 1px solid var(--concrete-path);
-	border-right: 1px solid var(--concrete-path);
-	border-bottom: 1px solid var(--concrete-path);
-	font-size: 25px;
+	font-size: 2vh;
 	cursor: pointer;
-	grid-template-areas:"goButtonIcon"
-		      "button";
-
 	flex-direction: column;
 	align-items: flex-start;
+    
 }
 #goButtonIcon {
 	width: 50%;
 	align-self: center;
-	padding-bottom: 0.25rem;
 }
 
 button {
@@ -263,12 +241,9 @@ button {
 }
 
 .destination-select  {
-	/*display: grid;
-	grid-template-areas: "logo placeholder";
-	grid-template-columns: 20% 80%;*/
 	font-size: 15px;
 	font-family: "ButtonFont";
-   
+   	cursor: pointer;
 }
 
 .destination-select h2 {
@@ -281,8 +256,6 @@ button {
 }
 
 .topbar-logo {
-	/* grid-area: logo;*/
-	width:20%;
 	height: inherit;
 	display: flex;
 	float: left;
@@ -311,8 +284,8 @@ section {
 	background: #F7F2DB;
 	border-top-left-radius: 2vh;
 	border-top-right-radius: 2vh;
-  box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.2);
-  z-index: 700;
+	box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.2);
+	z-index: 700;
 }
 
 #titleBar {
@@ -407,8 +380,8 @@ footer {
 	position: fixed;
 	bottom: 0px;
 	height: 9vh;
-  width: 100vw;
-  z-index: 800;
+	width: 100vw;
+	z-index: 800;
 }
 
 footer .tab {
@@ -422,7 +395,7 @@ footer .tab {
 	border-bottom: none;
 	border-top-left-radius: 1.5vh;
 	border-top-right-radius: 1.5vh;
-  box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.15);
+        box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.15);
 }
 
 footer .tab:hover {
@@ -545,23 +518,39 @@ footer img {
 }
 /* portrait tablets and large phones */
 @media only screen and (min-width: 600px) {
-    /* .destination-select, */
-     /* footer{
-		display: none !important;
-	} */
-   
-    section{
+      section{
         margin: 0 auto;
         width: 100%;
+    }
+     .fromCircle, .toCircle{
+        width: 10px;
+        height: 10px;
+    }
+    .pathfinder{
+        height: 16vh;
+	font-size: 2.7vh; 
+    }
+    .path-start-select, .path-end-select{
+        width: 80%;
+    }
+    .label{
+        width: 15%;
+    }
+    .go-btn{
+        width: 13%;
+        height: 100%;
+    }
+    button{
+        font-size: 2.7vh;
     }
 }
 /* STYLES FOR LARGE DISPLAYS - landscape tablets, destop*/
 
 @media only screen and (min-width: 769px) {
-  /* .destination-select,  */
-  /* footer {
+	.destination-select, 
+	footer {
 		display: none !important;
-	} */
+	} 
  
 	section {
 		position: absolute;
@@ -569,7 +558,7 @@ footer img {
 		width: 100vw;
 		height: 100vh;
 		overflow: scroll;
-        
+
 	}
 
 	#svgMapObj {
@@ -577,13 +566,13 @@ footer img {
 		width: auto;
 		height: 100%;
 		/* overflow: scroll; */
-    margin: 0 auto;
+		margin: 0 auto;
 	}
 
 	#svgMap {
 		width: auto;
 		height: 100%;
-        
+
 	}
 
 	#infoPanel {
@@ -722,8 +711,8 @@ footer img {
 }
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-    #svgMapObj{
-        margin: 0 auto;
-        width: 100%;
-    }
+	#svgMapObj{
+		margin: 0 auto;
+		width: 100%;
+	}
 }
