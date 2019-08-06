@@ -5,7 +5,7 @@
 	<title>OVBG App</title>
 	<meta charset="utf-8">
 	<meta name="viewport"
-		  content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		  content="width=device-width, initial-scale=1">
 	<link href="./css/style.css"
 		  rel="stylesheet"
 		  type="text/css">
@@ -13,28 +13,48 @@
 
 <body>
 	<main>
-		<div id="destination-menu">
-			<ul class="destination-select">
-				<!--
-					 CAUTION: ORDER CHANGE
-					 PLEASE MAKE CHANGES ACCORDINGLY IF NECESSARY
-				 -->
-				<li value="0"
-					id="placeholder">Select Destination</li>
-				<li value="1"
-					class="menuItem hidden">Bike Path</li>
-				<li value="2"
-					class="menuItem hidden">Peony Garden</li>
-				<li value="3"
-					class="menuItem hidden">Waterfall Garden</li>
-				<li value="4"
-					class="menuItem hidden">Bridge</li>
-				<li value="5"
-					class="menuItem hidden">Daylily Collection</li>
-				<li value="6"
-					class="menuItem hidden">Memory Garden</li>
-			</ul>
-		</div>
+		<div id="destination-menu" class="">
+      <div class="destination-select">
+        <img class="topbar-logo" src="images/ovbg_logo.svg" alt="OVBG Logo">
+          <h2 id="placeholder">Where to?</h2>
+        </div>
+    </div>
+     
+    <div class="pathfinder hidden">
+    <div class="input"> 
+      <div class="startPoint">
+        <div class="fromCircle"></div>
+        <h3 class="label label-start">From</h3>
+        <ul class="path-start-select">
+          <li class="menuItem placeholder-start">Your Location</li>
+          <li class="menuItem hidden">Bike Trail</li>
+          <li class="menuItem hidden">Peony Garden</li>
+          <li class="menuItem hidden">Waterfall Garden</li>
+          <li class="menuItem hidden">Rotary Bridge</li>
+          <li class="menuItem hidden">Daylily Collection</li>
+          <li class="menuItem hidden">Memory Garden</li>
+        </ul>
+      </div>
+      <div class="endPoint">
+        <div class="toCircle"></div>
+        <h3 class="label label-end">To</h3>
+        <ul class="path-end-select">
+          <li class="menuItem placeholder-end">Where to?</li>
+          <li class="menuItem hidden">Bike Trail</li>
+          <li class="menuItem hidden">Peony Garden</li>
+          <li class="menuItem hidden">Waterfall Garden</li>
+          <li class="menuItem hidden">Rotary Bridge</li>
+          <li class="menuItem hidden">Daylily Collection</li>
+          <li class="menuItem hidden">Memory Garden</li>
+        </ul>
+      </div>
+    </div>   
+      <div class="go-btn">
+        <img id="goButtonIcon" src= "images/go_button_icon.svg"alt="Go Button">
+        <button>Go</button>
+      </div>
+        
+    </div>
 
 		<section id="mapBox">
 			<object id="svgMapObj"

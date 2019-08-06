@@ -1,31 +1,20 @@
 // Put everything inside an onload to ensure that everything has loaded in before any code is executed
 window.onload = function () {
 	/* VARIABLE DECLARATIONS */
-	// List of items in the drop down (order matters)
-	// CAUTION: ORDER CHANGE
-	// PLEASE MAKE CHANGES ACCORDINGLY IF NECESSARY
-	const LOCATIONS = [
-		'Select Destination',
-		'Bike Path',
-		'Peony Garden',
-		'Waterfall Garden',
-		'Bridge',
-		'Daylily Collection',
-		'Memory Garden',
-	];
 
 	/**********LIST OF DOM REFERENCES *********/
 	// Access SVG inside Object by using Object ID and .contentDocument
 	const MAP_SVG = document.querySelector('#svgMapObj').contentDocument;
 
-
-	// Constants for the drop down
-	// Select the drop down
-	const DROP_DOWN = document.querySelector('.destination-select');
-	// Create array of li items in drop down list
-	const DROP_DOWN_ITEM = document.querySelectorAll('.destination-select li');
-
-
+  // NEW DROPDOWN
+  const TOP_BAR = document.getElementById('destination-menu'); // Initial top bar menu
+  const PATH_FINDER = document.querySelector('.pathfinder');  // secondary path finder menu to display when top bar is clicked
+  const DROP_DOWN_START = document.querySelector('.path-start-select'); // Select the drop down
+  const DROP_DOWN_ITEM_START = document.querySelectorAll('.path-start-select li'); // Create array of li items in drop down list
+  const DROP_DOWN_END = document.querySelector('.path-end-select'); // Select the drop down
+  const DROP_DOWN_ITEM_END = document.querySelectorAll('.path-end-select li'); // Create array of li items in drop down list
+  const GO_BTN = document.querySelector('.go-btn'); // go button inside the path finder menu
+  const END_POINT = document.querySelector('.endPoint');
 
 	// Constants to access the tabs
 	const TABS = document.querySelectorAll('.tab');
@@ -85,12 +74,13 @@ window.onload = function () {
 
 	// Set this via QR or nav button
 	// *** Hard coded for testing purposes ***
-	let currentLocation = '';
+  // currently defaults to 0 if ID is not set
+  let currentLocation = id ? id : 0;
 
-	// set start position based on tab click
-	let startPosition = parseInt(parsed);
+  let placeholderStart = document.querySelector('.placeholder-start');
+  let placeholderEnd = document.querySelector('.placeholder-end');
 
-	// set destination position based on dropdown selection
+	// set destination position based on dropdown selection, initially based on id
 	let destination = '';
 
 	// variables to store the zoom parameters
@@ -295,7 +285,6 @@ window.onload = function () {
 	];
 
 
-
 	/* FUNCTION DEFINITIONS */
 
 	// MAIN DRAW Function
@@ -329,49 +318,116 @@ window.onload = function () {
 
 	/* FUNCTIONS FOR THE ANIMATING THE MAP USING CLASSES, SET THE START POINT AND DROP DOWN MENU */
 
-	// if anywhere in the map is clicked the drop down will close
-	MAP_SVG.addEventListener('click', function (e) {
-		DROP_DOWN_ITEM.forEach(item => {
-			// toggle the hidden class on each item in the list (reveling them)
-			if (item.value !== 0) {
+// NEW DROP DOWN CODE ********* START
+
+	// if anywhere in the map is clicked the dropdown will close
+	MAP_SVG.addEventListener('click', function(e) {
+        //reset the place holder text to where to?
+        PLACE_HOLDER.textContent = "Where to?";
+        
+		DROP_DOWN_ITEM_START.forEach((item, i) => {
+			// toggle the hidden class on each item in the list (unhiding them)
+			if (i !== 0) {
+				item.classList.add('hidden');
+			} else {
+				item.classList.remove('hidden');
+      }
+      PATH_FINDER.classList.add('hidden'); // hide pathfinder dropdown
+      // hide endpoint menu while starting point is being selected
+      END_POINT.classList.remove('hidden');	
+
+      // Update to and from values to prevent errors when drop downs are left open upon outside click on map	
+      placeholderStart.textContent = parkFeature[i].name;
+      // Reset destination display text 
+      placeholderEnd.textContent = 'Where to?'
+            
+    });
+
+    DROP_DOWN_ITEM_END.forEach((item, i) => {
+			// toggle the hidden class on each item in the list (unhiding them)
+			if (i !== 0) {
 				item.classList.add('hidden');
 			} else {
 				item.classList.remove('hidden');
 			}
-			// Reset dropdown text value to select destination
-			PLACE_HOLDER.textContent = `Select Destination`;
-		});
-	});
+      // Reset dropdown text value to select destination
+      END_POINT.classList.remove('hidden');
+    });
+    
+  });
+  
+  TOP_BAR.addEventListener('click', function() {
+    // change the text on place holder
+    PLACE_HOLDER.textContent = "Select Destination";  
+      
+    PATH_FINDER.classList.toggle('hidden');
+      placeholderStart.textContent = parkFeature[currentLocation].name;
+
+  });
+
 
 	// Create event listener on drop down menu
-	DROP_DOWN.addEventListener('click', function () {
-		// Loop through the elements in the drop down and add event listeners to them
-		DROP_DOWN_ITEM.forEach(item => {
-			// toggle the hidden class on each item in the list (reveling them)
+	DROP_DOWN_START.addEventListener('click', function() {
+    // Hide the endpoint select
+    END_POINT.classList.toggle('hidden');
+    // Loop through the elements in the drop down and add event listeners to them
+    // i represents index of item in array
+		DROP_DOWN_ITEM_START.forEach((item, i) => {
+			// toggle the hidden class on each item in the list (unhiding them)
 			item.classList.toggle('hidden');
+			// Add the event listener to the item
+			item.addEventListener('click', function() {
+        // will set destination location based item in dropdown being selected
+				if (i !== 0) {
+          currentLocation = i - 1;
+        }
+        
+				// Upon clicking an item in the list set the displayed text to the selected location name
+				placeholderStart.textContent = parkFeature[currentLocation].name;
+			});
+		});
+  });
 
+  	// Create event listener on drop down menu
+	DROP_DOWN_END.addEventListener('click', function() {
+		// Loop through the elements in the drop down and add event listeners to them
+		DROP_DOWN_ITEM_END.forEach((item, i) => {
+			// toggle the hidden class on each item in the list (unhiding them)
+			item.classList.toggle('hidden');
 			// Add the event listener to the item
 			item.addEventListener('click', function () {
 				// will set destination location based item in drop down being selected
-
-				if (item.value !== 0) {
-					pathZoomIn(item.value - 1);
-
-					//Draws the path based on the start and end locations
-					if (id !== item.value - 1) {
-						pathToDraw = MAP_SVG.querySelector('#' + parkFeature[id].paths[item.value - 1][0]);
-						duration = parkFeature[id].paths[item.value - 1][1];
-						length = parkFeature[id].paths[item.value - 1][2];
-						repeat = parkFeature[id].paths[item.value - 1][3];
-					}
-
-					DRAW(pathToDraw, duration, length, repeat)
-				}
+				if (i !== 0) {
+          destination = i - 1;
+        }
 				// Upon clicking an item in the list set the displayed text to the selected location name
-				PLACE_HOLDER.textContent = `Go to: ${LOCATIONS[item.value]}`;
+        placeholderEnd.textContent = parkFeature[destination].name;
 			});
 		});
-	});
+  });
+
+  // Handle Go button event, will execute zoom function upon click
+  GO_BTN.addEventListener('click', function() {
+    // Call zoom function based on current destination selection
+
+    console.log('Loc: ' + currentLocation + ' ' + parkFeature[currentLocation].name);
+    console.log('Dest: ' + destination + ' ' + parkFeature[destination].name);
+    pathZoomIn(destination);
+    
+    pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[destination][0]);
+    duration = parkFeature[currentLocation].paths[destination][1];
+    length = parkFeature[currentLocation].paths[destination][2];
+    repeat = parkFeature[currentLocation].paths[destination][3];
+    
+    //Draws the path, duration and length is hard coded
+    DRAW(pathToDraw, duration, length, repeat);
+
+    // Hide with the path finder menu
+    PATH_FINDER.classList.add('hidden');
+  });
+
+  // NEW DROP DOWN CODE ********* END
+  // ************************************************************************************************
 
 	/* OPENING AND CLOSING THE INFORMATION PANEL AND POPULATING IT WITH THE CONTENT */
 
@@ -411,14 +467,20 @@ window.onload = function () {
 		TABS[i].onclick = function () {
 			REMOVE_CURRENT_ANIMATION();
 			// setting the id and the content based on the id
-			id = i;
+      id = i;
+      //update current location value based on tab clicked
+      currentLocation = parseInt(i);
 			// closing the info panel before changing content
 			closeInfoPanel();
 			// using the setTimeout to delay and sync the loading of content with the animation
 			// setting the content in the info panel
 			setTimeout(setContent, 350);
 			// opening the panel with new content
-			openInfoPanel();
+      openInfoPanel();
+      //update starting point text to respresent new starting location
+      placeholderStart.textContent = parkFeature[currentLocation].name;
+      // hide the path finder menu
+      PATH_FINDER.classList.add('hidden');
 		};
 	}
 
