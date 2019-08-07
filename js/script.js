@@ -364,9 +364,9 @@ window.onload = function () {
     PATH_FINDER.classList.toggle('hidden');
       placeholderStart.textContent = parkFeature[currentLocation].name;
       // To accomidate the dropdowns removing redundent locations
-      // if(destination) {
-      //   placeholderEnd.textContent = parkFeature[destination].name;
-      // }
+      if(destination) {
+        placeholderEnd.textContent = parkFeature[destination].name;
+      }
   });
 
 
