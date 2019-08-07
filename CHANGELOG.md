@@ -1,5 +1,37 @@
 -----------------------------------------------------------------------------------------------------------
 
+*** Updated onThursday, August 7, 2019 2:56 AM ***
+
+HTML
+    - ADDED: the new image gallery section
+    - ADDED: the new drop down elements
+    - REMOVED: old dropdown menu
+    - REMOVED: the old image gallery components
+    - UPDATED: the <meta> tag to stop the scaling of the app
+    - UPDATED: File locations/links updated
+
+CSS
+    - cleaned up CSS after adding the new dropdown
+    - ADDED: new image gallery styles
+    - ADDED: new dropdown styles
+    - minor changes to existing styles
+    - Fixed weird map overlap on the iPhone/iPad
+
+JS
+    - ADDED: New image gallery event handlers
+    - ADDED: New dropdown menu with ability to select start and end point on the map
+    - ADDED: the pinch and zoom for iPhone/iPad (added 'gesturestart', 'gesturechange', 'gestureend' event handlers)
+    - UPDATED: the touch detection event handlers to stop them from working on iPhone/iPad
+    - UPDATED: the zoom parameters for all the paths (now zooms the map to 100% and scrolls to the starting point for any path)
+    - UPDATED: File locations/links updated (check arrays)
+
+FILES
+    - Park Images: created folder for each feature and added pictures
+    - Tab Icons: moved to a folder
+    - REMOVED: Unnecessary/old image files
+
+-----------------------------------------------------------------------------------------------------------
+
 *** Updated onThursday, August 1, 2019 11:25 PM ***
 
 
