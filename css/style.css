@@ -504,11 +504,11 @@ footer img {
     transition: all 1s ease-out;
     /*padding-top: 25vh;*/
     /*opacity: 0;*/
+    flex: 1;
 }
 
 #expandedImg {
     width: 100%;
-    height: auto;
     /*display: flex;*/
     /*align-content: center;
     justify-content: center;*/
@@ -517,7 +517,6 @@ footer img {
 
 #bigImage {
     width: 100%;
-    height: auto;
     
 }
 

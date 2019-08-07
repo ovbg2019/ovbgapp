@@ -826,7 +826,7 @@ window.onload = function () {
         BIG_IMAGES.src = parkFeature[id].galleryImages[index];
         
         //animate the image gallery
-        TweenMax.from('expandedImg', 0.5,{
+        TweenMax.from('#expandedImg', 0.5,{
             opacity:1,
             ease: Sine.easeOut
         });
