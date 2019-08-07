@@ -519,13 +519,12 @@ footer img {
 }
 
 #closeGallery {
-	width: 7%;
+	width: 10%;
 	height: auto;
 	position: absolute;
 	display: flex;
 	z-index: 9000;
 	bottom: 0.5vh;
-	margin: 1vh;
 	transition: 0.3s ease-out;
 }
 

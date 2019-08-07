@@ -205,12 +205,12 @@ window.onload = function () {
 			],
 			featureZoomPoints: ['200%', 0.145, 1.4],
 			pathZoomPoints: [
-				['100%', 0.4, 1],
-				['100%', 0.3, 1],
-				['100%', 0.1, 1],
-				['100%', 0.1, 0.87],
-				['100%', 0.01, 1],
-				['100%', 0, 1],
+				['100%', 0.4, 1.3],
+				['100%', 0.3, 1.3],
+				['100%', 0.1, 1.3],
+				['100%', 0.1, 1.3],
+				['100%', 0.01, 1.3],
+				['100%', 0, 1.3],
 			],
 		}, {
 			//4
@@ -569,7 +569,13 @@ window.onload = function () {
 						// if condition to only make it work on mobile
 						if (window.innerWidth < 769) {
 							// zooming out to the full map
-							mapZoomOut(92);
+							console.log(destination);
+							if (destination) {
+								mapZoomOut(92);
+								pathZoomIn(currentLocation, destination);
+							}
+							else
+								mapZoomOut(92);
 						}
 					},
 				}
@@ -596,7 +602,12 @@ window.onload = function () {
 						// if condition to only make it work on mobile
 						if (window.innerWidth < 769) {
 							// zooming out to the full map
-							mapZoomOut(85);
+							if (destination) {
+								mapZoomOut(85);
+								pathZoomIn(currentLocation, destination);
+							}
+							else
+								mapZoomOut(85);
 						}
 					},
 				}
@@ -875,6 +886,7 @@ window.onload = function () {
 		EXPANDED_IMG.style.display = "none";
 		CLOSE_GALLERY.style.display = "none";
 	}
+
 	CLOSE_GALLERY.addEventListener('click', function () {
 		closeImgGallery();
 	});
