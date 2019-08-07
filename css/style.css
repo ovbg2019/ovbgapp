@@ -503,15 +503,15 @@ footer img {
     -o-transition: all 1s ease-out;
     transition: all 1s ease-out;
     /*padding-top: 25vh;*/
-    
+    /*opacity: 0;*/
 }
 
 #expandedImg {
     width: 100%;
     height: auto;
-    display: flex;
-    align-content: center;
-    justify-content: center;
+    /*display: flex;*/
+    /*align-content: center;
+    justify-content: center;*/
     align-self: center;
 }
 

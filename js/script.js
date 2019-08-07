@@ -820,13 +820,14 @@ window.onload = function () {
         MODAL_CONTENT.style.display = "flex";
         EXPANDED_IMG.style.display = "flex";
         CLOSE_GALLERY.style.display = "flex";
+        
 
         console.log(parkFeature[id].galleryImages[index]);
         BIG_IMAGES.src = parkFeature[id].galleryImages[index];
         
         //animate the image gallery
-        TweenMax.from('#expandedImg', 0.5,{
-            opacity:0,
+        TweenMax.from('expandedImg', 0.5,{
+            opacity:1,
             ease: Sine.easeOut
         });
         
@@ -839,6 +840,7 @@ window.onload = function () {
             GALLERY_IMAGES[i].onclick = function () {
                 //pick the number of image
                 openModal(parseInt(i));
+                
             };
         }
 
