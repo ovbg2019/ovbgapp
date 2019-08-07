@@ -5,7 +5,8 @@
 	<title>OVBG App</title>
 	<meta charset="utf-8">
 	<meta name="viewport"
-		  content="width=device-width, initial-scale=1">
+		  content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
 	<link href="./css/style.css"
 		  rel="stylesheet"
 		  type="text/css">
@@ -55,65 +56,53 @@
       </div>
         
     </div>
-
+        
+        <section id="modalContent">
+            <div id="expandedImg">
+                <img id="closeGallery" src= "images/close_button_black.svg" alt="Go Button">
+                <img id="bigImage"
+                     src="images/temp_image.jpg" >
+            </div>
+            <div id="prev">&#10094;</div>
+            <div id="next">&#10095;</div>
+        </section>
 		<section id="mapBox">
 			<object id="svgMapObj"
 					data="./images/park_map.svg"
-					type="image/svg+xml"
-					viewBox="0 0 1920 1080">
-				Your browser doesn't support SVG
+					type="image/svg+xml">
+				Your browser doesn't support SVG format
 			</object>
-
+		</section>
+		<section id="infoBox">
 			<div id="infoPanel">
 				<div id="titleBar">
 					<div>
 						<img id="titleBarIcon"
 							 src="images/temp_image.jpg"
-							 alt="Daylily Collection" >
+							 alt="Daylily Collection">
 						<h1 id="title">Park Feature Title</h1>
 					</div>
 					<img id="closeButton"
 						 src="images/close_button.svg"
-						 alt="Close button" >
+						 alt="Close button">
 				</div>
 				<div id="contentBox">
 					<div id="contentImageBox">
 						<img class="galleryImage"
-							 src="images/temp_image.jpg" >
+							 src="images/temp_image.jpg"
+							 alt=”tempAlt”>
 						<img class="galleryImage"
-							 src="images/temp_image.jpg" >
+							 src="images/temp_image.jpg"
+							 alt=”tempAlt”>
 						<img class="galleryImage"
-							 src="images/temp_image.jpg" >
+							 src="images/temp_image.jpg"
+							 alt=”tempAlt”>
 						<img class="galleryImage"
-							 src="images/temp_image.jpg" >
+							 src="images/temp_image.jpg"
+							 alt=”tempAlt”>
 					</div>
-					<!--gallery new update-->
-					<div id="modalContent">
-						<div id="expandedImg">
-							<img class="bigImage"
-								 src="images/temp_image.jpg" >
-							<img class="bigImage"
-								 src="images/temp_image.jpg" >
-							<img class="bigImage"
-								 src="images/temp_image.jpg" >
-							<img class="bigImage"
-								 src="images/temp_image.jpg" >
-						</div>
-						<div id="thumbnail">
-							<img class="smImage"
-								 src="images/temp_image.jpg" >
-							<img class="smImage"
-								 src="images/temp_image.jpg" >
-							<img class="smImage"
-								 src="images/temp_image.jpg" >
-							<img class="smImage"
-								 src="images/temp_image.jpg" >
-
-						</div>
-					</div>
-
 					<div id="contentTextBox">
-							<h3>You are here!</h3>
+							<h4>You are here!</h4>
 						<div id="about"
 							 class="content">
 							<p>
@@ -130,42 +119,41 @@
 				 id='tab1BikeTrail'
 				 tabindex="1">
 				<img src="images/bike_path_icon.svg"
-					 alt="Bike Trail" >
+					 alt="Bike Trail">
 			</div>
 			<div class="tab"
 				 id="tab2Peony"
 				 tabindex="2">
 				<img src="images/peony_icon.svg"
-					 alt="Peony Garden" >
+					 alt="Peony Garden">
 			</div>
 			<div class="tab"
 				 id="tab3WaterFeature"
 				 tabindex="3">
 				<img src="images/water_feature_icon.svg"
-					 alt="Water Feature" >
+					 alt="Water Feature">
 			</div>
 			<div class="tab"
 				 id="tab4Bridge"
 				 tabindex="4">
-        <img src="images/bridge_icon.svg" 
-          alt="Rotary Bridge" >
+				<img src="images/bridge_icon.svg"
+					 alt="Rotary Bridge">
 			</div>
 			<div class="tab"
 				 id="tab5Daylily"
 				 tabindex="5">
 				<img src="images/daylily_icon.svg"
-					 alt="Daylily Collection" >
+					 alt="Daylily Collection">
 			</div>
 			<div class="tab"
 				 id="tab6MemoryGarden"
 				 tabindex="6">
 				<img src="images/memory_garden_icon.svg"
-					 alt="Memory Garden" >
+					 alt="Memory Garden">
 			</div>
 
 		</footer>
 	</main>
-
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/plugins/CSSPlugin.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/plugins/ScrollToPlugin.min.js"></script>
