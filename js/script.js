@@ -419,22 +419,23 @@ window.onload = function () {
 
   // Handle Go button event, will execute zoom function upon click
   GO_BTN.addEventListener('click', function() {
-    // Call zoom function based on current destination selection
+	// Call zoom function based on current destination selection
+	if(destination) {
+		console.log('Loc: ' + currentLocation + ' ' + parkFeature[currentLocation].name);
+		console.log('Dest: ' + destination + ' ' + parkFeature[destination].name);
+		pathZoomIn(currentLocation, destination);
+		
+		pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[destination][0]);
+		duration = parkFeature[currentLocation].paths[destination][1];
+		length = parkFeature[currentLocation].paths[destination][2];
+		repeat = parkFeature[currentLocation].paths[destination][3];
+		
+		//Draws the path, duration and length is hard coded
+		DRAW(pathToDraw, duration, length, repeat);
 
-    console.log('Loc: ' + currentLocation + ' ' + parkFeature[currentLocation].name);
-    console.log('Dest: ' + destination + ' ' + parkFeature[destination].name);
-    pathZoomIn(currentLocation, destination);
-    
-    pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[destination][0]);
-    duration = parkFeature[currentLocation].paths[destination][1];
-    length = parkFeature[currentLocation].paths[destination][2];
-    repeat = parkFeature[currentLocation].paths[destination][3];
-    
-    //Draws the path, duration and length is hard coded
-    DRAW(pathToDraw, duration, length, repeat);
-
-    // Hide with the path finder menu
-    PATH_FINDER.classList.add('hidden');
+		// Hide with the path finder menu
+		PATH_FINDER.classList.add('hidden');
+	}
   });
 
   // NEW DROP DOWN CODE ********* END
