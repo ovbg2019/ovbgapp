@@ -114,13 +114,13 @@ header {
 	width: 7px;
 	height: 7px;
 	border-radius: 50%;
+	background-color: red;
+	display: flex;
+	justify-content: center;
 	margin: 2%;
-	margin-top: 2.25vh;
-	align-self: flex-start;
 }
-
 .fromCircle{
-	background-color: var(--concrete-path);
+	background-color: #000;
 	border: 1px solid var(--concrete-path);
 }
 
@@ -128,11 +128,9 @@ header {
 	background-color: #2381ff;
 	border: 1px solid var(--concrete-path);
 }
-
 #placeholder{
-	font-size: 2.8vh;
+	font-size: 3.2vh;
 }
-
 .pathfinder {
 	width: 90%;
 	height: 16.5vh;
@@ -147,36 +145,31 @@ header {
 	font-family: "ButtonFont";
 	z-index: 800;
 	font-size: 3vh;
+    
 }
-
+.pathfinder ul{
+    	background-color: var(--go-button);
+}
 .pathfinder ul li {
 	list-style: none;
-	padding: 0.3vh 2vh;
-	font-size: 2.4vh;
-	border-radius: 5px;
+	padding: 0 0.3rem;
+	
+    
 }
-
 .pathfinder ul li:hover, .pathfinder ul li:focus {
 	background-color: #e7e1c6;
 }
-
 .path-start-select, .path-end-select {
 	border-radius: 1vh;
 	border: 1px solid var(--concrete-path);
 	background-color: var(--paths);
-	padding: 0.5vh 0.5vh;
+	padding: 1vw 1vh;
 	width: 75%;
-	background-color: var(--go-button);
+	height: 100%;
 }
-
-.path-start-select:hover, .path-end-select:hover {
-	cursor: pointer;
-}
-
-.path-start-select {
+.path-start-select{
 	margin-bottom: 1.5vh;
 }
-
 .placeholder-end{
 	color: var(--concrete-path);
 	font-family: "ButtonFont";
@@ -192,22 +185,19 @@ header {
 	width: 100%;
 	display: flex;
 	flex-direction:row;
-	align-items: center;
+	align-items: baseline;
 	padding-right: 2vw;
 }
 
 .startPoint {
 	margin-top: 1vh;
 }
-
 .label{
-	display: inline-block;
-	width: 13vw;
-	font-size: 2.4vh;
-	margin-top: 1.2vh;
-	align-self: flex-start;
+	display: flex;
+	width: 15vw;
+	height: 100%;
+	font-size: 2.8vh;
 }
-
 .go-btn {
 	display: flex;
 	justify-content: center;
