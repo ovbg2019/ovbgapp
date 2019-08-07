@@ -8,6 +8,7 @@ HTML
     - REMOVED: old dropdown menu
     - REMOVED: the old image gallery components
     - UPDATED: the <meta> tag to stop the scaling of the app
+    - UPDATED: File locations/links updated
 
 CSS
     - cleaned up CSS after adding the new dropdown
@@ -22,6 +23,12 @@ JS
     - ADDED: the pinch and zoom for iPhone/iPad (added 'gesturestart', 'gesturechange', 'gestureend' event handlers)
     - UPDATED: the touch detection event handlers to stop them from working on iPhone/iPad
     - UPDATED: the zoom parameters for all the paths (now zooms the map to 100% and scrolls to the starting point for any path)
+    - UPDATED: File locations/links updated (check arrays)
+
+FILES
+    - Park Images: created folder for each feature and added pictures
+    - Tab Icons: moved to a folder
+    - REMOVED: Unnecessary/old image files
 
 -----------------------------------------------------------------------------------------------------------
 
