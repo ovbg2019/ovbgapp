@@ -1,5 +1,30 @@
 // Put everything inside an onload to ensure that everything has loaded in before any code is executed
 window.onload = function () {
+    
+    /*ANIMATE SLASH SCREEN*/   
+    $("#splash").show();
+
+    TweenMax.from("#splash", 0.5, {
+        delay: 0.5,
+        opacity: 0,
+        ease: Sine.easeIn
+    });
+    
+    TweenMax.from("#welcomeText p", 1 ,{
+        delay: 1,
+        ease: Sine.easeInOut,
+        opacity: 0
+    });
+    
+    TweenMax.to("#welcomeText, #welcomeBg", 1, {
+        delay: 4,
+        opacity: 0,
+        ease: Sine.easeIn,
+        onComplete: function () {
+            $("main").show()
+        }
+    });
+    
 	/* VARIABLE DECLARATIONS */
 
 	/**********LIST OF DOM REFERENCES *********/
@@ -303,7 +328,7 @@ window.onload = function () {
 			}
 		);
 	};
-
+    
 
 	/* FUNCTIONS FOR THE ANIMATING THE MAP USING CLASSES, SET THE START POINT AND DROP DOWN MENU */
 
@@ -892,4 +917,5 @@ window.onload = function () {
 	});
 
 	// END IMAGE GALLERY SCRIPT ----------
+    
 };
