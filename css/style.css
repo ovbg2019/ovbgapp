@@ -141,7 +141,7 @@ header {
     to {
         top: -100%;
         left: -80%;
-        transform: scale(0.2);
+        transform: scale(0);
         opacity: 0;
     }
 }
