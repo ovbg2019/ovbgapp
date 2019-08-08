@@ -85,7 +85,7 @@ header {
 #welcomeBg {
     /*background-image: url(../images/welcome_bg.jpg);*/
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: bottom;
     background-size: cover;
     width: 100%;
     height: 100%;
@@ -115,8 +115,7 @@ header {
     font-family: "ButtonFont";
     padding: 0 20vw;
     color: #383838;
-    width: 100%;
-    height: auto;
+    z-index: 1;
 
 }
 
@@ -143,6 +142,7 @@ header {
         top: -100%;
         left: -80%;
         transform: scale(0.3);
+        opacity: 0;
     }
 }
 
