@@ -112,7 +112,7 @@ header {
     margin: 0 auto;
     position: absolute;
     bottom: 10vh;
-    font-size: 2.7vh;
+    font-size: 3.2vh;
     font-family: "ButtonFont";
     padding: 0 20vw;
     color: #383838;
@@ -140,9 +140,8 @@ header {
 
     to {
         top: -100%;
-        left: -80%;
-        transform: scale(0.3);
-        opacity: 0;
+        left: -79%;
+        transform: scale(0.2);
     }
 }
 
@@ -659,10 +658,6 @@ footer img {
         border-radius: 5px;
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
         object-fit: cover;
-    }
-
-    #welcomeText p {
-        font-size: 3vh;
     }
 
     #slashLogo {
