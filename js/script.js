@@ -13,7 +13,8 @@ window.onload = function () {
     TweenMax.from("#welcomeText p", 1 ,{
         delay: 1,
         ease: Sine.easeInOut,
-        opacity: 0
+        opacity: 0,
+        y: "-1vh"
     });
     
     TweenMax.to("#welcomeText, #welcomeBg", 1, {
