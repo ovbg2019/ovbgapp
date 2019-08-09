@@ -14,7 +14,7 @@ window.onload = function () {
         delay: 1,
         ease: Sine.easeInOut,
         opacity: 0,
-        y: "-1vh"
+        y: "-10vh"
     });
     
     TweenMax.to("#welcomeText, #welcomeBg", 1, {
