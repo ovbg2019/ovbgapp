@@ -139,10 +139,10 @@ header {
     }
 
     to {
-        top: -95%;
+        top: -90%;
         left: -80%;
         transform: scale(0.25);
-        opacity: 1;
+        opacity: 0;
     }
 }
 
