@@ -10,7 +10,7 @@ window.onload = function () {
         ease: Sine.easeIn
     });
     
-    TweenMax.fromTo("#welcomeText p", 1 ,{
+    TweenMax.fromTo("#welcomeText p", 1.5 ,{
         ease: Sine.easeInOut,
         opacity: 0,
         scale:0
