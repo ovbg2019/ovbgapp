@@ -1,7 +1,7 @@
 // Put everything inside an onload to ensure that everything has loaded in before any code is executed
 window.onload = function () {
     
-    /*ANIMATE SLASH SCREEN*/   
+    /*ANIMATE SPLASH SCREEN*/   
     $("#splash").show();
 
     TweenMax.from("#splash", 0.5, {
@@ -11,7 +11,7 @@ window.onload = function () {
     });
     
     TweenMax.from("#welcomeText p", 1 ,{
-        delay: 1,
+        delay: 2,
         ease: Sine.easeInOut,
         opacity: 0,
         y: "-10vh"
