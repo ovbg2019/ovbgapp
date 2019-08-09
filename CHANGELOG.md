@@ -1,5 +1,18 @@
 -----------------------------------------------------------------------------------------------------------
 
+*** Updated onThursday, August 9, 2019 2:16 AM ***
+
+CSS
+    - Minor UI tweaks
+
+JS
+    - ADDED: Code to force the app to full screen whenever user interacts with the visible elements (still buggy)
+
+FILES
+    - Replaced old images with new Hi-Res images
+
+-----------------------------------------------------------------------------------------------------------
+
 *** Updated onThursday, August 7, 2019 2:56 AM ***
 
 HTML

@@ -311,6 +311,7 @@ window.onload = function () {
 
 	// if anywhere in the map is clicked the dropdown will close
 	MAP_SVG.addEventListener('click', function (e) {
+		openFullScreen();
 		//reset the place holder text to where to?
 		PLACE_HOLDER.textContent = "Where to?";
 
@@ -346,6 +347,7 @@ window.onload = function () {
 	});
 
 	TOP_BAR.addEventListener('click', function () {
+		openFullScreen();
 		// change the text on place holder
 		PLACE_HOLDER.textContent = "Select Destination";
 
@@ -423,6 +425,8 @@ window.onload = function () {
 
 			// Hide with the path finder menu
 			PATH_FINDER.classList.add('hidden');
+
+			PLACE_HOLDER.textContent = "Navigating...";
 		}
 	});
 
@@ -465,6 +469,7 @@ window.onload = function () {
 	for (let i in TABS) {
 		// applying a function to onclick event of each tab
 		TABS[i].onclick = function () {
+			openFullScreen();
 			REMOVE_CURRENT_ANIMATION();
 			// setting the id and the content based on the id
 			id = i;
@@ -555,6 +560,7 @@ window.onload = function () {
 
 	// this function animates the infoPanel and its contents when it closes
 	function closeInfoPanel() {
+		openFullScreen();
 		// animating the info panel while closing
 		if (infoPanelState > 0) {
 			TweenMax.fromTo(
@@ -573,8 +579,7 @@ window.onload = function () {
 							if (destination) {
 								mapZoomOut(92);
 								pathZoomIn(currentLocation, destination);
-							}
-							else
+							} else
 								mapZoomOut(92);
 						}
 					},
@@ -587,6 +592,7 @@ window.onload = function () {
 	}
 
 	function minimizeInfoPanel() {
+		openFullScreen();
 		// animating the info panel while closing
 		if (infoPanelState === 2) {
 			TweenMax.fromTo(
@@ -605,8 +611,7 @@ window.onload = function () {
 							if (destination) {
 								mapZoomOut(85);
 								pathZoomIn(currentLocation, destination);
-							}
-							else
+							} else
 								mapZoomOut(85);
 						}
 					},
@@ -890,6 +895,27 @@ window.onload = function () {
 	CLOSE_GALLERY.addEventListener('click', function () {
 		closeImgGallery();
 	});
+
+	let fullScreen = false;
+
+	function openFullScreen() {
+		const PAGE = document.documentElement;
+		if (!fullScreen) {
+			if (PAGE.requestFullscreen) {
+				PAGE.requestFullscreen();
+			} else if (PAGE.mozRequestFullScreen) {
+				/* Firefox */
+				PAGE.mozRequestFullScreen();
+			} else if (PAGE.webkitRequestFullscreen) {
+				/* Chrome, Safari and Opera */
+				PAGE.webkitRequestFullscreen();
+			} else if (PAGE.msRequestFullscreen) {
+				/* IE/Edge */
+				PAGE.msRequestFullscreen();
+			}
+			// fullScreen = true;
+		}
+	}
 
 	// END IMAGE GALLERY SCRIPT ----------
 };
