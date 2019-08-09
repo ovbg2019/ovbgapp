@@ -85,13 +85,12 @@ header {
 }
 
 #welcomeBg {
-    background-image: url(../images/welcome_bg.jpg);
+    /*background-image: url(../images/welcome_bg.jpg);*/
     background-repeat: no-repeat;
     background-position: bottom;
     background-size: cover;
     width: 100%;
 }
-
 #slashLogo {
     width: 70%;
     position: absolute;
@@ -112,9 +111,9 @@ header {
     margin: 0 auto;
     position: absolute;
     bottom: 10vh;
-    font-size: 3.2vh;
+    font-size: 3vh;
     font-family: "ButtonFont";
-    padding: 0 20vw;
+    padding: 0 15vw;
     color: #383838;
     width: 100%;
 }
@@ -143,7 +142,7 @@ header {
         top: -100%;
         left: -80%;
         transform: scale(0.25);
-        opacity: 0;
+        /*opacity: 0;*/
     }
 }
 
