@@ -46,7 +46,16 @@ window.onload = function () {
 	//Clears Current/Active Animation
 	const REMOVE_CURRENT_ANIMATION = function () {
 		TLM.progress(0).clear();
-	};
+  };
+  
+  const BACKGROUND_COLORS = [
+    '#B15222',
+    '#B04A7F',
+    '#327687',
+    '#806B53',
+    '#7D6287',
+    '#4571A2'
+  ]
 
 	//SVG PATH VARIABLES
 	let pathToDraw = '';
@@ -78,8 +87,14 @@ window.onload = function () {
 	// currently defaults to 0 if ID is not set
 	let currentLocation = id ? id : 0;
 
+  // drop down elements for styling background upon click events
 	let placeholderStart = document.querySelector('.placeholder-start');
-	let placeholderEnd = document.querySelector('.placeholder-end');
+  let placeholderEnd = document.querySelector('.placeholder-end');
+  // drop down state management
+  let startDropDownState = false;
+  let endDropDownState = false;
+  let selectedItem = currentLocation;
+
 
 	// set destination position based on dropdown selection, initially based on id
 	let destination = '';
@@ -93,7 +108,7 @@ window.onload = function () {
 	let MAP_SVG_OBJ = document.querySelector('#svgMapObj');
 	MAP_SVG_OBJ.style.height = '100%';
 	let evCache = new Array();
-	let prevDiff = -1;
+  let prevDiff = -1;
 
 
 	// declaring an array of object to to store the values
@@ -309,6 +324,34 @@ window.onload = function () {
 
 	// NEW DROP DOWN CODE ********* START
 
+  // Dropdown opens on page load// or at end of splash animation, then closes again
+
+  function sneakPeakDropDown() {
+    PATH_FINDER.classList.remove('hidden');
+    TweenMax
+    .from(PATH_FINDER, 1, {
+      delay: 0.5,
+      opacity: 0,
+      top: 10,
+      onComplete:  function() {
+        TweenMax
+        .to(PATH_FINDER, 0.8, {
+          delay: 3,
+          opacity: 0,
+          top: 0,
+          onComplete:  function() {
+            PATH_FINDER.classList.add('hidden');
+            PATH_FINDER.style.opacity = 1;
+            PATH_FINDER.style.top = "9vh";
+          }
+        });
+      }  
+    });
+  }
+
+  sneakPeakDropDown();
+
+
 	// if anywhere in the map is clicked the dropdown will close
 	MAP_SVG.addEventListener('click', function (e) {
 		//reset the place holder text to where to?
@@ -350,7 +393,8 @@ window.onload = function () {
 		PLACE_HOLDER.textContent = "Select Destination";
 
 		PATH_FINDER.classList.toggle('hidden');
-		placeholderStart.textContent = parkFeature[currentLocation].name;
+    placeholderStart.textContent = parkFeature[currentLocation].name;
+    
 		// To accomidate the dropdowns removing redundent locations
 		if (destination) {
 			placeholderEnd.textContent = parkFeature[destination].name;
@@ -360,28 +404,40 @@ window.onload = function () {
 
 	// Create event listener on drop down menu
 	DROP_DOWN_START.addEventListener('click', function () {
-		// Hide the endpoint select
-		END_POINT.classList.toggle('hidden');
-		// Loop through the elements in the drop down and add event listeners to them
-		// i represents index of item in array
-		DROP_DOWN_ITEM_START.forEach((item, i) => {
-			// toggle the hidden class on each item in the list (unhiding them)
-			// hide destination from starting list
-			// if(destination !== i-1) {
-			item.classList.toggle('hidden');
-			// }
+      // Hide the endpoint select
+      END_POINT.classList.toggle('hidden');
+      // DROP_DOWN_START.style.backgroundColor = "#f7f2db";
 
-			// Add the event listener to the item
-			item.addEventListener('click', function () {
-				// will set destination location based item in dropdown being selected
+      // Loop through the elements in the drop down and add event listeners to them
+      // i represents index of item in array
+      DROP_DOWN_ITEM_START.forEach((item, i) => {
+
+        // toggle the hidden class on each item in the list (unhiding them)
+        // hide destination from starting list
+        item.classList.toggle('hidden');
+        // Add the event listener to the item
+        item.addEventListener('click', function () {
+          startDropDownState = !startDropDownState;
+          selectedItem = i - 1;
+        // will set destination location based item in dropdown being selected
 				if (i !== 0) {
-					currentLocation = i - 1;
-				}
+          currentLocation = i - 1;
+        }
 
-				// Upon clicking an item in the list set the displayed text to the selected location name
-				placeholderStart.textContent = parkFeature[currentLocation].name;
+        // Upon clicking an item in the list set the displayed text to the selected location name
+        if(startDropDownState) {
+          DROP_DOWN_START.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
+          placeholderStart.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
+          placeholderStart.style.color = "#f7f2db";
+        } else {
+          DROP_DOWN_START.style.backgroundColor = "#f7f2db";
+
+        }
+        placeholderStart.textContent = parkFeature[currentLocation].name;
 			});
-		});
+    });
+    startDropDownState = false;
+    
 	});
 
 	// Create event listener on drop down menu
@@ -390,19 +446,27 @@ window.onload = function () {
 		DROP_DOWN_ITEM_END.forEach((item, i) => {
 			// toggle the hidden class on each item in the list (unhiding them)
 			// hide destination if it has been selected as start position
-			// if(currentLocation !== i-1) {
 			item.classList.toggle('hidden');
-			// }
 			// Add the event listener to the item
 			item.addEventListener('click', function () {
+        endDropDownState = !endDropDownState;
 				// will set destination location based item in drop down being selected
 				if (i !== 0) {
 					destination = i - 1;
-				}
-				// Upon clicking an item in the list set the displayed text to the selected location name
-				placeholderEnd.textContent = parkFeature[destination].name;
+        }
+        
+        // Upon clicking an item in the list set the displayed text to the selected location name
+        if(endDropDownState) {
+          DROP_DOWN_END.style.backgroundColor = BACKGROUND_COLORS[destination];
+          placeholderEnd.style.backgroundColor = BACKGROUND_COLORS[destination];
+          placeholderEnd.style.color = "#f7f2db";
+        } else {
+          DROP_DOWN_END.style.backgroundColor = "#f7f2db";
+        }
+        placeholderEnd.textContent = parkFeature[destination].name;
 			});
-		});
+    });
+    endDropDownState = false;
 	});
 
 	// Handle Go button event, will execute zoom function upon click
@@ -478,7 +542,9 @@ window.onload = function () {
 			// opening the panel with new content
 			openInfoPanel();
 			//update starting point text to respresent new starting location
-			placeholderStart.textContent = parkFeature[currentLocation].name;
+      placeholderStart.textContent = parkFeature[currentLocation].name;
+      placeholderStart.style.backgroundColor = BACKGROUND_COLORS[currentLocation];  
+      DROP_DOWN_START.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
 			// hide the path finder menu
 			PATH_FINDER.classList.add('hidden');
 		};
