@@ -2,48 +2,30 @@
 window.onload = function () {
     
     /*ANIMATE SPLASH SCREEN*/   
-    $("#splash, #splashLogo").show();
+    $("#splash").show();
 
     TweenMax.from("#splash", 0.5, {
         delay: 0.5,
         opacity: 0,
         ease: Sine.easeIn
     });
-    
-    /*TweenMax.fromTo("#welcomeText p", 1.5 ,{
-        ease: Sine.easeInOut,
-        opacity: 0,
-        scale:0,
-        x: 20
-        
-    },{
-        delay:0.5,
-        scale:1,
-        ease: Sine.easeInOut,
-        opacity: 1,
-       
-    });*/
     TweenMax.fromTo("#welcomeText p", 2 ,{
         delay: 1,
         ease: Back.easeInOut,
         opacity: 0,
-       y: "-5vh"
+        y: "-5vh"
         
     },{
         delay: 2,
         ease: Sine.easeInOut,
         opacity: 1,
-        
-         y:"0vh"
+        y:"0vh"
     });
-    
-    
     TweenMax.to("#welcomeText, #welcomeBg", 1, {
         delay: 5.5,
         opacity: 0,
         ease: Sine.easeIn,
         onComplete: function () {
-            $("main:gt(0)").hide();
             $("main").show()
         }
     });
