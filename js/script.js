@@ -110,7 +110,7 @@ window.onload = function () {
 				'images/bike_path/image4.jpg',
 			],
 			paths: [
-				['pin', 10, 500, -1],
+				['pin', 5, 500, -1],
 				['bike_path_to_peony', 5, 608, -1],
 				['bike_path_to_waterfall_garden', 5, 915, -1],
 				['bike_path_to_bridge', 3, 199, -1],
@@ -141,7 +141,7 @@ window.onload = function () {
 			/* DRAWING PATHS*/
 			paths: [
 				['peony_to_bike_path', 5, 608, -1],
-				['pin-2', 3, 375, -1],
+				['pin-2', 5, 375, -1],
 				['peony_to_waterfall_garden', 5, 866, -1],
 				['peony_to_bridge', 5, 807, -1],
 				['peony_to_daylily', 8, 1272, -1],
@@ -170,7 +170,7 @@ window.onload = function () {
 			paths: [
 				['waterfall_garden_to_bike_path', 5, 915, -1],
 				['waterfall_garden_to_peony', 5, 866, -1],
-				['pin-3', 3, 375, -1],
+				['pin-3', 5, 375, -1],
 				['waterfall_garden_to_bridge', 7, 1118, -1],
 				['waterfall_garden_to_daylily', 7, 1580, -1],
 				['waterfall_garden_to_memory_garden', 10, 2779, -1],
@@ -199,7 +199,7 @@ window.onload = function () {
 				['bridge_to_bike_path', 3, 199, -1],
 				['bridge_to_peony', 5, 807, -1],
 				['bridge_to_waterfall_garden', 7, 1118, -1],
-				['pin-4', 3, 375, -1],
+				['pin-4', 5, 375, -1],
 				['bridge_to_daylily', 5, 615, -1],
 				['bridge_to_memory_garden', 8, 1814, -1],
 			],
@@ -229,7 +229,7 @@ window.onload = function () {
 				['daylily_to_peony', 8, 1272, -1],
 				['daylily_to_waterfall_garden', 7, 1580, -1],
 				['daylily_to_bridge', 5, 615, -1],
-				['pin-5', 3, 375, -1],
+				['pin-5', 5, 375, -1],
 				['daylily_to_memory_garden', 6, 1214, -1],
 
 			],
@@ -259,7 +259,7 @@ window.onload = function () {
 				['memory_garden_to_waterfall_garden', 12, 2779, -1],
 				['memory_garden_to_bridge', 8, 1814, -1],
 				['memory_garden_to_daylily', 6, 1214, -1],
-				['memory_gazebo_icon', 15, 500, 0],
+				['memory_gazebo_icon', 5, 500, 0],
 			],
 			featureZoomPoints: ['170%', 0, 0.06],
 			pathZoomPoints: [
