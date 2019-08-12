@@ -100,8 +100,8 @@ header {
     left: 0;
     right: 0;
     margin: auto;
-    animation: logoAppear 2s ease-in-out normal,
-               moveLogo 2.5s 5s ease-in-out normal;
+    animation: logoAppear 2s ease-in-out forwards,
+               moveLogo 2.5s 5s ease-in-out forwards;
 }
 
 #welcomeText p {
@@ -887,7 +887,7 @@ footer img {
         width: 100%;
     }
     #welcomeBg {
-        height: 100%;
+        width: 100%;
     }
     #splashLogo{
         width: 30%;
