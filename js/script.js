@@ -113,7 +113,7 @@ window.onload = function () {
 				['pin', 10, 500, 0],
 				['bike_path_to_peony', 5, 608, -1],
 				['bike_path_to_waterfall_garden', 5, 915, -1],
-				['bike_path_to_bridge', 7, 199, -1],
+				['bike_path_to_bridge', 3, 199, -1],
 				['bike_path_to_daylily', 8, 630, -1],
 				['bike_path_to_memory_garden', 8, 1829, -1],
 			],
@@ -196,7 +196,7 @@ window.onload = function () {
 				'images/bridge/image4.jpg',
 			],
 			paths: [
-				['bridge_to_bike_path', 7, 199, -1],
+				['bridge_to_bike_path', 3, 199, -1],
 				['bridge_to_peony', 5, 807, -1],
 				['bridge_to_waterfall_garden', 7, 1118, -1],
 				['pin-4', 3, 300, 0],
@@ -325,9 +325,9 @@ window.onload = function () {
 			// hide endpoint menu while starting point is being selected
 			END_POINT.classList.remove('hidden');
 
-			// Update to and from values to prevent errors when drop downs are left open upon outside click on map	
+			// Update to and from values to prevent errors when drop downs are left open upon outside click on map
 			placeholderStart.textContent = parkFeature[id].name;
-			// Reset destination display text 
+			// Reset destination display text
 			placeholderEnd.textContent = 'Where to?'
 
 		});
@@ -417,6 +417,7 @@ window.onload = function () {
 			duration = parkFeature[currentLocation].paths[destination][1];
 			length = parkFeature[currentLocation].paths[destination][2];
 			repeat = parkFeature[currentLocation].paths[destination][3];
+
 
 			//Draws the path, duration and length is hard coded
 			DRAW(pathToDraw, duration, length, repeat);
@@ -573,8 +574,7 @@ window.onload = function () {
 							if (destination) {
 								mapZoomOut(92);
 								pathZoomIn(currentLocation, destination);
-							}
-							else
+							} else
 								mapZoomOut(92);
 						}
 					},
@@ -605,8 +605,7 @@ window.onload = function () {
 							if (destination) {
 								mapZoomOut(85);
 								pathZoomIn(currentLocation, destination);
-							}
-							else
+							} else
 								mapZoomOut(85);
 						}
 					},
