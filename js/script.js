@@ -110,7 +110,7 @@ window.onload = function () {
 				'images/bike_path/image4.jpg',
 			],
 			paths: [
-				['pin', 10, 500, 0],
+				['pin', 10, 500, -1],
 				['bike_path_to_peony', 5, 608, -1],
 				['bike_path_to_waterfall_garden', 5, 915, -1],
 				['bike_path_to_bridge', 3, 199, -1],
@@ -141,7 +141,7 @@ window.onload = function () {
 			/* DRAWING PATHS*/
 			paths: [
 				['peony_to_bike_path', 5, 608, -1],
-				['pin-5', 3, 300, 0],
+				['pin-2', 3, 375, -1],
 				['peony_to_waterfall_garden', 5, 866, -1],
 				['peony_to_bridge', 5, 807, -1],
 				['peony_to_daylily', 8, 1272, -1],
@@ -170,7 +170,7 @@ window.onload = function () {
 			paths: [
 				['waterfall_garden_to_bike_path', 5, 915, -1],
 				['waterfall_garden_to_peony', 5, 866, -1],
-				['pin-3', 3, 300, 0],
+				['pin-3', 3, 375, -1],
 				['waterfall_garden_to_bridge', 7, 1118, -1],
 				['waterfall_garden_to_daylily', 7, 1580, -1],
 				['waterfall_garden_to_memory_garden', 10, 2779, -1],
@@ -199,7 +199,7 @@ window.onload = function () {
 				['bridge_to_bike_path', 3, 199, -1],
 				['bridge_to_peony', 5, 807, -1],
 				['bridge_to_waterfall_garden', 7, 1118, -1],
-				['pin-4', 3, 300, 0],
+				['pin-4', 3, 375, -1],
 				['bridge_to_daylily', 5, 615, -1],
 				['bridge_to_memory_garden', 8, 1814, -1],
 			],
@@ -229,7 +229,7 @@ window.onload = function () {
 				['daylily_to_peony', 8, 1272, -1],
 				['daylily_to_waterfall_garden', 7, 1580, -1],
 				['daylily_to_bridge', 5, 615, -1],
-				['pin-2', 3, 300, -1],
+				['pin-5', 3, 375, -1],
 				['daylily_to_memory_garden', 6, 1214, -1],
 
 			],
@@ -351,7 +351,7 @@ window.onload = function () {
 
 		PATH_FINDER.classList.toggle('hidden');
 		placeholderStart.textContent = parkFeature[currentLocation].name;
-		// To accomidate the dropdowns removing redundent locations
+		// To accommodate the dropdowns removing redundant locations
 		if (destination) {
 			placeholderEnd.textContent = parkFeature[destination].name;
 		}
@@ -413,13 +413,13 @@ window.onload = function () {
 			console.log('Dest: ' + destination + ' ' + parkFeature[destination].name);
 			pathZoomIn(currentLocation, destination);
 
+			//retrieves the path name,duration, length and repeat info from paths array inside the parkFeature array.
 			pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[destination][0]);
 			duration = parkFeature[currentLocation].paths[destination][1];
 			length = parkFeature[currentLocation].paths[destination][2];
 			repeat = parkFeature[currentLocation].paths[destination][3];
 
-
-			//Draws the path, duration and length is hard coded
+			//Animates the path
 			DRAW(pathToDraw, duration, length, repeat);
 
 			// Hide with the path finder menu
@@ -436,6 +436,7 @@ window.onload = function () {
 	if (!isNaN(id)) {
 		setContent();
 		openInfoPanel();
+
 	} else {
 		id = 0;
 	}
@@ -482,11 +483,22 @@ window.onload = function () {
 			placeholderStart.textContent = parkFeature[currentLocation].name;
 			// hide the path finder menu
 			PATH_FINDER.classList.add('hidden');
+
+			//retrieves the path name,duration, length and repeat info from paths array inside the parkFeature array.
+			pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[id][0]);
+			duration = parkFeature[currentLocation].paths[id][1];
+			length = parkFeature[currentLocation].paths[id][2];
+			repeat = parkFeature[currentLocation].paths[id][3];
+
+			//Animates the path
+			DRAW(pathToDraw, duration, length, repeat);
 		};
 	}
 
 	TITLE_BAR.onclick = function () {
 		minimizeInfoPanel();
+
+
 	};
 
 	// closing the tab on close button click
@@ -515,6 +527,14 @@ window.onload = function () {
 		TITLE_BAR_ICON.src = parkFeature[id].icon;
 		for (let j in GALLERY_IMAGES) GALLERY_IMAGES[j].src = parkFeature[id].galleryImages[j];
 		ABOUT_TEXT.innerHTML = parkFeature[id].about;
+
+
+		// pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation][id].paths[0]);
+		// duration = parkFeature[currentLocation][id].paths[1];
+		// length = parkFeature[currentLocation][id][id].paths[2];
+		// repeat = parkFeature[currentLocation][id].paths[3];
+
+
 	}
 
 	// this function animates the infoPanel and its contents when it opens up

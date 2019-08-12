@@ -1,6 +1,24 @@
 -----------------------------------------------------------------------------------------------------------
 
-*** Updated onThursday, August 7, 2019 2:56 AM ***
+*** Updated on Monday, August 12, 2019 4:30 PM ***
+
+Branch - Animation Duration
+SVG
+	-updated SVG to latest
+JS
+	-Changed Duration to 3 sec from 7 for Bike To Bridge and Bridge to Bike Paths
+
+Branch - onTabAnimation
+JS
+    -Enabled repeat for icons animations (when from and to locations are same the icon for them animates).
+	-Animated park feature icons when the tab is click (When bike tab is open, the bike icons animates).
+    -Some icon name (pins) were changed in the latest svg, updated the name in JS.
+
+
+
+-----------------------------------------------------------------------------------------------------------
+
+*** Updated on Thursday, August 7, 2019 2:56 AM ***
 
 HTML
     - ADDED: the new image gallery section
