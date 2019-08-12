@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------------------------
 
-*** Updated on Monday, August 12, 2019 4:20 PM ***
+*** Updated on Monday, August 12, 2019 4:30 PM ***
 
 Branch - Animation Duration
 SVG
@@ -10,8 +10,9 @@ JS
 
 Branch - onTabAnimation
 JS
-	-Animated park feature icons on Click
-    -Some icon name (pins) were changed in latest svg, updated the name in JS.
+    -Enabled repeat for icons animations (when from and to locations are same the icon for them animates).
+	-Animated park feature icons when the tab is click (if Bike is click, bike icons animates).
+    -Some icon name (pins) were changed in the latest svg, updated the name in JS.
 
 
 
