@@ -2,15 +2,14 @@
 window.onload = function () {
     
     /*ANIMATE SPLASH SCREEN*/   
-    $("#splash").show();
+    $("#splash, #splashLogo").show();
 
     TweenMax.from("#splash", 0.5, {
         delay: 0.5,
         opacity: 0,
         ease: Sine.easeIn
     });
-    
-    TweenMax.fromTo("#welcomeText p", 1.5 ,{
+    TweenMax.fromTo("#welcomeText p", 2 ,{
         delay: 1,
         ease: Back.easeInOut,
         opacity: 0,
@@ -137,7 +136,7 @@ window.onload = function () {
 			name: 'Bike Trail',
 			colour: '#B15222',
 			icon: 'images/icons/bike_path_icon.svg',
-			about: '<p>This is a 7 km paved multi-use recreational trail that stretches from Lakeview Park to the Oshawa Valley Botanical Garden. Surrounded by lush vegetation the recreational trail meanders along the Oshawa Creek.</p><p> Along the recreational trail there are connections to other recreational trails including the Michael Starr Trail, Harmony Creek Trail, and other attractions including Oshawa Valley Botanical Garden and downtown Oshawa.</p> <p> Portions of the recreational trail travel close to the creek and has steep slopes, sharp turns and unprotected edges. Caution should be used when accessing and maneuvering the recreational trail.</p>',
+			about: '<p>This is a 7 km paved multi-use recreational trail that stretches from Lakeview Park to the Oshawa Valley Botanical Gardens. Surrounded by lush vegetation the recreational trail meanders along the Oshawa Creek.</p><p> Along the recreational trail there are connections to other recreational trails including the Michael Starr Trail, Harmony Creek Trail, and other attractions including Oshawa Valley Botanical Gardens and downtown Oshawa.</p> <p> Portions of the recreational trail travel close to the creek and has steep slopes, sharp turns and unprotected edges. Caution should be used when accessing and maneuvering the recreational trail.</p>',
 			galleryImages: [
 				'images/bike_path/image1.jpg',
 				'images/bike_path/image2.jpg',
@@ -166,7 +165,7 @@ window.onload = function () {
 			name: 'Peony Garden',
 			colour: '#B04A7F',
 			icon: 'images/icons/peony_icon.svg',
-			about: '<p>The Peony Garden is located within the Oshawa Valley Botanical Garden. In 2001, the Canadian Peony Society donated 100 plants from the Wally Gilbert Collection to the project. This contribution led to the official launch of the Oshawa Valley Botanical Garden.</p> <p>Further donations from peony breeders and suppliers across North America have led to the entire collection flourishing into the largest contemporary collection of peonies in North America. With more than 300 varieties in cultivation, the collection is truly impressive!</p> <p>The succession of blooms begins in late May and continues through to the last week of June. The Annual Peony Festival coincides with the climax of the bloom cycle in June.</p>',
+			about: '<p>The Peony Garden is located within the Oshawa Valley Botanical Gardens. In 2001, the Canadian Peony Society donated 100 plants from the Wally Gilbert Collection to the project. This contribution led to the official launch of the Oshawa Valley Botanical Gardens.</p> <p>Further donations from peony breeders and suppliers across North America have led to have led to an impressive collection with over 300 varieties.</p><p>In 2014 the garden was renamed in honour of  two major contributors - Michael and Judi Denny.</p> <p>The central gazebo was created for the 75th anniversary of the Oshawa Garden Club and is the work of metal artist James Pronk.</p>',
 			galleryImages: [
 				'images/peony/image1.jpg',
 				'images/peony/image2.jpg',
@@ -195,7 +194,7 @@ window.onload = function () {
 			name: 'Waterfall Garden',
 			colour: '#327687',
 			icon: 'images/icons/water_feature_icon.svg',
-			about: '<p>The Rockery Garden is located within Kinsman Valley Park of the Oshawa Valley Botanical Garden. It is just north of the Peony Garden and features a waterfall.</p> <p>The garden and its surroundings provides the perfect opportunity to enjoy nature and is a beautiful backdrop for any occasion.',
+			about: '<p>The Rockery Garden is located within Kinsman Valleyview Park of the Oshawa Valley Botanical Gardens. It is just north of the Peony Garden and features a waterfall.</p> <p>The garden and its surroundings provides the perfect opportunity to enjoy nature and is a beautiful backdrop for any occasion. - donated by Ron & Marilyn Bilsky.',
 			galleryImages: [
 				'images/waterfall_garden/image1.jpg',
 				'images/waterfall_garden/image2.jpg',
@@ -223,7 +222,7 @@ window.onload = function () {
 			name: 'Rotary Bridge',
 			colour: '#806B53',
 			icon: 'images/icons/bridge_icon.svg',
-			about: '<p>Rotary Bridge was dedicated by the Rotary Club Oshawa-Parkwood and opened in celebration of the 100th anniversary of Rotary International in 2006.</p> <p>It is located over The Oshawa Creek in The Oshawa Valley Botanical Gardens and it will serve to remind the citizens of Oshawa of the tremendous acts of service that both Rotary Clubs have performed for so many years.</p>',
+			about: '<p>Rotary Bridge was dedicated by the Rotary Club Oshawa-Parkwood and opened in celebration of the 100th anniversary of Rotary International in 2006.</p> <p>It is located over The Oshawa Creek in The Oshawa Valley Botanical Gardens and it will serve to remind the citizens of Oshawa of the tremendous acts of service that both Rotary Clubs have performed for so many years.</p> <p>The metal work on the bridge was created by James Pronk , the artist responsible for the Peony Garden gazebo.</p>',
 			galleryImages: [
 				'images/bridge/image1.jpg',
 				'images/bridge/image2.jpg',
