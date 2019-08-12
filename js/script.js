@@ -504,6 +504,7 @@ window.onload = function () {
 	// closing the tab on close button click
 	CLOSE_BUTTON.onclick = function () {
 		closeInfoPanel();
+		REMOVE_CURRENT_ANIMATION();
 	};
 
 	// Functions to reset the appearance of the tabs
@@ -527,14 +528,6 @@ window.onload = function () {
 		TITLE_BAR_ICON.src = parkFeature[id].icon;
 		for (let j in GALLERY_IMAGES) GALLERY_IMAGES[j].src = parkFeature[id].galleryImages[j];
 		ABOUT_TEXT.innerHTML = parkFeature[id].about;
-
-
-		// pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation][id].paths[0]);
-		// duration = parkFeature[currentLocation][id].paths[1];
-		// length = parkFeature[currentLocation][id][id].paths[2];
-		// repeat = parkFeature[currentLocation][id].paths[3];
-
-
 	}
 
 	// this function animates the infoPanel and its contents when it opens up
