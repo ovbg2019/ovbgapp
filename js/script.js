@@ -11,22 +11,26 @@ window.onload = function () {
     });
     
     TweenMax.fromTo("#welcomeText p", 1.5 ,{
-        ease: Sine.easeInOut,
+        delay: 1,
+        ease: Back.easeInOut,
         opacity: 0,
-        scale:0
+       y: "-5vh"
         
     },{
-        delay:0.5,
-        scale:1,
+        delay: 2,
         ease: Sine.easeInOut,
-        opacity: 1
+        opacity: 1,
+        
+         y:"0vh"
     });
     
+    
     TweenMax.to("#welcomeText, #welcomeBg", 1, {
-        delay: 4.2,
+        delay: 5.5,
         opacity: 0,
         ease: Sine.easeIn,
         onComplete: function () {
+            $("main:gt(0)").hide();
             $("main").show()
         }
     });
