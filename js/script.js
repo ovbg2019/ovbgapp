@@ -161,7 +161,7 @@ window.onload = function () {
 			name: 'Peony Garden',
 			colour: '#B04A7F',
 			icon: 'images/icons/peony_icon.svg',
-			about: '<p>The Peony Garden is located within the Oshawa Valley Botanical Gardens. In 2001, the Canadian Peony Society donated 100 plants from the Wally Gilbert Collection to the project. This contribution led to the official launch of the Oshawa Valley Botanical Gardens.</p> <p>Further donations from peony breeders and suppliers across North America have led to have led to an impressive collection with over 300 varieties.</p><p>In 2014 the garden was renamed in honour of  two major contributors - Michael and Judi Denny.</p> <p>The central gazebo was created for the 75th anniversary of the Oshawa Garden Club and is the work of metal artist James Pronk.</p>',
+			about: '<p>The Peony Garden is located within the Oshawa Valley Botanical Gardens. In 2001, the Canadian Peony Society donated 100 plants from the Wally Gilbert Collection to the project. This contribution led to the official launch of the Oshawa Valley Botanical Gardens.</p> <p>Further donations from peony breeders and suppliers across North America have led to have led to an impressive collection with over 300 varieties. In 2014 the garden was renamed in honour of  two major contributors - Michael and Judi Denny.</p> <p>The succession of blooms begins in late May and continues through to the last week of June. The Annual Peony Festival coincides with the climax of the bloom cycle in June.</p><p>The central gazebo was created for the 75th anniversary of the Oshawa Garden Club and is the work of metal artist James Pronk.</p>',
 			galleryImages: [
 				'images/peony/image1.jpg',
 				'images/peony/image2.jpg',
@@ -190,7 +190,7 @@ window.onload = function () {
 			name: 'Waterfall Garden',
 			colour: '#327687',
 			icon: 'images/icons/water_feature_icon.svg',
-			about: '<p>The Rockery Garden is located within Kinsman Valleyview Park of the Oshawa Valley Botanical Gardens. It is just north of the Peony Garden and features a waterfall.</p> <p>The garden and its surroundings provides the perfect opportunity to enjoy nature and is a beautiful backdrop for any occasion. - donated by Ron & Marilyn Bilsky.',
+			about: '<p>The Rockery Garden is located within Kinsman Valleyview Park of the Oshawa Valley Botanical Gardens. It is just north of the Peony Garden and features a waterfall donated by Ron & Marilyn Bilsky.</p> <p>The garden and its surroundings provides the perfect opportunity to enjoy nature and is a beautiful backdrop for any occasion.',
 			galleryImages: [
 				'images/waterfall_garden/image1.jpg',
 				'images/waterfall_garden/image2.jpg',
