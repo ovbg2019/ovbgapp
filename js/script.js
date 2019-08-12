@@ -911,25 +911,22 @@ window.onload = function () {
 		closeImgGallery();
 	});
 
-	let fullScreen = false;
-
 	function openFullScreen() {
-		const PAGE = document.documentElement;
-		if (!fullScreen) {
-			if (PAGE.requestFullscreen) {
-				PAGE.requestFullscreen();
-			} else if (PAGE.mozRequestFullScreen) {
-				/* Firefox */
-				PAGE.mozRequestFullScreen();
-			} else if (PAGE.webkitRequestFullscreen) {
-				/* Chrome, Safari and Opera */
-				PAGE.webkitRequestFullscreen();
-			} else if (PAGE.msRequestFullscreen) {
-				/* IE/Edge */
-				PAGE.msRequestFullscreen();
-			}
-			// fullScreen = true;
-		}
+		// const PAGE = document.documentElement;
+		// if (!fullScreen) {
+		// 	if (PAGE.requestFullscreen) {
+		// 		PAGE.requestFullscreen();
+		// 	} else if (PAGE.mozRequestFullScreen) {
+		// 		/* Firefox */
+		// 		PAGE.mozRequestFullScreen();
+		// 	} else if (PAGE.webkitRequestFullscreen) {
+		// 		/* Chrome, Safari and Opera */
+		// 		PAGE.webkitRequestFullscreen();
+		// 	} else if (PAGE.msRequestFullscreen) {
+		// 		/* IE/Edge */
+		// 		PAGE.msRequestFullscreen();
+		// 	}
+		// }
 	}
 
 	// END IMAGE GALLERY SCRIPT ----------
