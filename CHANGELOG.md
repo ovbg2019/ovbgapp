@@ -1,6 +1,14 @@
 -----------------------------------------------------------------------------------------------------------
 
-*** Updated on Monday, August 12, 2019 4:35 PM ***
+*** Updated on Monday, August 12, 2019 7:55 PM ***
+Branch - onTabAnimation
+JS
+    -Removed REMOVE_CURRENT_ANIMATION(); from function that closes tab, so the icon animation does not stop after the tab is closed.
+
+
+-----------------------------------------------------------------------------------------------------------
+
+*** Updated on Monday, August 12, 2019 7:00 PM ***
 
 Branch - Animation Duration
 SVG
