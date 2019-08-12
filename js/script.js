@@ -489,6 +489,21 @@ window.onload = function () {
 		};
 	}
 
+	// setting event listeners on each of the icons on the map
+	// selects the icons from the map using their IDs
+	// goes through a loop to open the specific tab
+
+	MAP_ICONS = MAP_SVG.querySelectorAll('#bike_path_icon, #peony_icon, #water_feature_icon, #bridge_icon, #daylily_icon, #memory_gazebo_icon');
+
+	MAP_ICONS[0].addEventListener('click', function() {
+		console.log(this);
+		closeInfoPanel();
+		id = 5;
+		setContent();
+		openInfoPanel();
+	});
+
+	// minimizing/maximizing the infoPanel on clicking the title bar
 	TITLE_BAR.onclick = function () {
 		minimizeInfoPanel();
 	};
