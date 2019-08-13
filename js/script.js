@@ -93,7 +93,6 @@ window.onload = function () {
   // drop down state management
   let startDropDownState = false;
   let endDropDownState = false;
-  let selectedItem = currentLocation;
 
 
 	// set destination position based on dropdown selection, initially based on id
@@ -325,32 +324,7 @@ window.onload = function () {
 	// NEW DROP DOWN CODE ********* START
 
   // Dropdown opens on page load// or at end of splash animation, then closes again
-
-  function sneakPeakDropDown() {
-    PATH_FINDER.classList.remove('hidden');
-    TweenMax
-    .from(PATH_FINDER, 1, {
-      delay: 0.5,
-      opacity: 0,
-      top: 10,
-      onComplete:  function() {
-        TweenMax
-        .to(PATH_FINDER, 0.8, {
-          delay: 3,
-          opacity: 0,
-          top: 0,
-          onComplete:  function() {
-            PATH_FINDER.classList.add('hidden');
-            PATH_FINDER.style.opacity = 1;
-            PATH_FINDER.style.top = "9vh";
-          }
-        });
-      }  
-    });
-  }
-
   sneakPeakDropDown();
-
 
 	// if anywhere in the map is clicked the dropdown will close
 	MAP_SVG.addEventListener('click', function (e) {
@@ -394,6 +368,9 @@ window.onload = function () {
 
 		PATH_FINDER.classList.toggle('hidden');
     placeholderStart.textContent = parkFeature[currentLocation].name;
+    placeholderStart.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
+    placeholderStart.style.color = "#f7f2db";
+
     
 		// To accomidate the dropdowns removing redundent locations
 		if (destination) {
@@ -406,11 +383,21 @@ window.onload = function () {
 	DROP_DOWN_START.addEventListener('click', function () {
       // Hide the endpoint select
       END_POINT.classList.toggle('hidden');
-      // DROP_DOWN_START.style.backgroundColor = "#f7f2db";
 
       // Loop through the elements in the drop down and add event listeners to them
       // i represents index of item in array
       DROP_DOWN_ITEM_START.forEach((item, i) => {
+
+        if(i - 1 === currentLocation) {
+          item.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
+          item.style.color = '#f7f2db';
+          placeholderStart.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
+          placeholderStart.style.color = "#f7f2db";
+
+        } else {
+          item.style.backgroundColor = "#FAF7E9";
+          item.style.color = '#383838';
+        }
 
         // toggle the hidden class on each item in the list (unhiding them)
         // hide destination from starting list
@@ -418,21 +405,11 @@ window.onload = function () {
         // Add the event listener to the item
         item.addEventListener('click', function () {
           startDropDownState = !startDropDownState;
-          selectedItem = i - 1;
         // will set destination location based item in dropdown being selected
 				if (i !== 0) {
           currentLocation = i - 1;
         }
 
-        // Upon clicking an item in the list set the displayed text to the selected location name
-        if(startDropDownState) {
-          DROP_DOWN_START.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
-          placeholderStart.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
-          placeholderStart.style.color = "#f7f2db";
-        } else {
-          DROP_DOWN_START.style.backgroundColor = "#f7f2db";
-
-        }
         placeholderStart.textContent = parkFeature[currentLocation].name;
 			});
     });
@@ -444,6 +421,18 @@ window.onload = function () {
 	DROP_DOWN_END.addEventListener('click', function () {
 		// Loop through the elements in the drop down and add event listeners to them
 		DROP_DOWN_ITEM_END.forEach((item, i) => {
+
+      if(i - 1 === destination) {
+        item.style.backgroundColor = BACKGROUND_COLORS[destination];
+        item.style.color = '#f7f2db';
+        placeholderEnd.style.backgroundColor = BACKGROUND_COLORS[destination];
+        placeholderEnd.style.color = "#f7f2db";
+
+      } else {
+        item.style.backgroundColor = "#FAF7E9";
+        item.style.color = '#383838';
+      }
+
 			// toggle the hidden class on each item in the list (unhiding them)
 			// hide destination if it has been selected as start position
 			item.classList.toggle('hidden');
@@ -454,15 +443,7 @@ window.onload = function () {
 				if (i !== 0) {
 					destination = i - 1;
         }
-        
-        // Upon clicking an item in the list set the displayed text to the selected location name
-        if(endDropDownState) {
-          DROP_DOWN_END.style.backgroundColor = BACKGROUND_COLORS[destination];
-          placeholderEnd.style.backgroundColor = BACKGROUND_COLORS[destination];
-          placeholderEnd.style.color = "#f7f2db";
-        } else {
-          DROP_DOWN_END.style.backgroundColor = "#f7f2db";
-        }
+
         placeholderEnd.textContent = parkFeature[destination].name;
 			});
     });
@@ -471,8 +452,10 @@ window.onload = function () {
 
 	// Handle Go button event, will execute zoom function upon click
 	GO_BTN.addEventListener('click', function () {
-		// Call zoom function based on current destination selection
-		if (destination) {
+    // Call zoom function based on current destination selection
+    if(!destination) {
+      destination = 0;
+    }
 			console.log('Loc: ' + currentLocation + ' ' + parkFeature[currentLocation].name);
 			console.log('Dest: ' + destination + ' ' + parkFeature[destination].name);
 			pathZoomIn(currentLocation, destination);
@@ -486,8 +469,14 @@ window.onload = function () {
 			DRAW(pathToDraw, duration, length, repeat);
 
 			// Hide with the path finder menu
-			PATH_FINDER.classList.add('hidden');
-		}
+      PATH_FINDER.classList.add('hidden');
+
+      //** Uncomment below for bike path animation **/
+        // if(destination === 0 || currentLocation === 0) {
+        //   colorBikePath();
+        // } else {
+        //   resetBikePath();
+        // }
 	});
 
 	// NEW DROP DOWN CODE ********* END
@@ -543,8 +532,9 @@ window.onload = function () {
 			openInfoPanel();
 			//update starting point text to respresent new starting location
       placeholderStart.textContent = parkFeature[currentLocation].name;
-      placeholderStart.style.backgroundColor = BACKGROUND_COLORS[currentLocation];  
-      DROP_DOWN_START.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
+      placeholderStart.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
+      placeholderStart.style.color = "#f7f2db";
+      // DROP_DOWN_START.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
 			// hide the path finder menu
 			PATH_FINDER.classList.add('hidden');
 		};
@@ -955,7 +945,44 @@ window.onload = function () {
 
 	CLOSE_GALLERY.addEventListener('click', function () {
 		closeImgGallery();
-	});
+  });
+  
+  function sneakPeakDropDown() {
+    PATH_FINDER.classList.remove('hidden');
+    TweenMax
+    .from(PATH_FINDER, 1, {
+      delay: 0.5,
+      opacity: 0,
+      top: 10,
+      onComplete:  function() {
+        TweenMax
+        .to(PATH_FINDER, 0.8, {
+          delay: 3,
+          opacity: 0,
+          top: 0,
+          onComplete:  function() {
+            PATH_FINDER.classList.add('hidden');
+            PATH_FINDER.style.opacity = 1;
+            PATH_FINDER.style.top = "9vh";
+          }
+        });
+      }  
+    });
+  }
+
+// Testing animating the bike path
+
+function colorBikePath() {
+  TweenMax.to(MAP_SVG.getElementById('bike_path'), 2, {
+    stroke: 'orange',
+  });
+}
+
+function resetBikePath() {
+  TweenMax.to(MAP_SVG.getElementById('bike_path'), 2, {
+    stroke: '#f7f2db',
+  })
+}
 
 	// END IMAGE GALLERY SCRIPT ----------
 };

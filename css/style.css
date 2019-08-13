@@ -168,7 +168,8 @@ header {
 	border-radius: 1vh;
 	border: 1px solid var(--concrete-path);
 	background-color: var(--paths);
-	padding: 0.5vh 0.5vh;
+  /* padding: 0.5vh 0.5vh; */
+  line-height: 1.5;
 	width: 75%;
 	background-color: var(--go-button);
 }
