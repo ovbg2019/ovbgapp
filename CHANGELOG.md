@@ -1,5 +1,3 @@
-*** Updated onThursday, August 7, 2019 2:56 AM ***
-=======
 *** Updated on Monday, August 12, 2019 7:55 PM ***
 Branch - onTabAnimation
 JS
