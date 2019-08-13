@@ -3,7 +3,7 @@
 *** Updated on Monday, August 12, 2019 7:55 PM ***
 Branch - onTabAnimation
 JS
-    -Removed REMOVE_CURRENT_ANIMATION(); from function that closes tab, so the icon animation does not stop after the tab is closed.
+    -Removed REMOVE_CURRENT_ANIMATION(); from the function that closes the tab, so the icon animation does not stop after the tab is closed.
 
 
 -----------------------------------------------------------------------------------------------------------
