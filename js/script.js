@@ -6,6 +6,9 @@ window.onload = function () {
 	// Access SVG inside Object by using Object ID and .contentDocument
 	const MAP_SVG = document.querySelector('#svgMapObj').contentDocument;
 
+	// Accessing all the icons inside the SVG map
+	const MAP_ICONS = MAP_SVG.querySelectorAll('#bike_path_icon, #peony_icon, #water_feature_icon, #bridge_icon, #daylily_icon, #memory_gazebo_icon');
+
 	// NEW DROPDOWN
 	const TOP_BAR = document.getElementById('destination-menu'); // Initial top bar menu
 	const PATH_FINDER = document.querySelector('.pathfinder'); // secondary path finder menu to display when top bar is clicked
@@ -488,37 +491,24 @@ window.onload = function () {
 			placeholderStart.textContent = parkFeature[currentLocation].name;
 			// hide the path finder menu
 			PATH_FINDER.classList.add('hidden');
-
-			//retrieves the path name,duration, length and repeat info from paths array inside the parkFeature array.
-			pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[id][0]);
-			duration = parkFeature[currentLocation].paths[id][1];
-			length = parkFeature[currentLocation].paths[id][2];
-			repeat = parkFeature[currentLocation].paths[id][3];
-
-			//Animates the path
-			DRAW(pathToDraw, duration, length, repeat);
-		};
 	}
 
 	// setting event listeners on each of the icons on the map
 	// selects the icons from the map using their IDs
 	// goes through a loop to open the specific tab
-
-	MAP_ICONS = MAP_SVG.querySelectorAll('#bike_path_icon, #peony_icon, #water_feature_icon, #bridge_icon, #daylily_icon, #memory_gazebo_icon');
-
-	MAP_ICONS[0].addEventListener('click', function() {
-		console.log(this);
-		closeInfoPanel();
-		id = 5;
-		setContent();
-		openInfoPanel();
-	});
+	for (let i in MAP_ICONS) {
+		MAP_ICONS[i].onclick =  function () {
+			closeInfoPanel();
+			id = i;
+			currentLocation = i;
+			setContent();
+			openInfoPanel();
+		};
+	}
 
 	// minimizing/maximizing the infoPanel on clicking the title bar
 	TITLE_BAR.onclick = function () {
 		minimizeInfoPanel();
-
-
 	};
 
 	// closing the tab on close button click
@@ -548,6 +538,16 @@ window.onload = function () {
 		TITLE_BAR_ICON.src = parkFeature[id].icon;
 		for (let j in GALLERY_IMAGES) GALLERY_IMAGES[j].src = parkFeature[id].galleryImages[j];
 		ABOUT_TEXT.innerHTML = parkFeature[id].about;
+
+		//retrieves the path name,duration, length and repeat info from paths array inside the parkFeature array.
+		pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[id][0]);
+		duration = parkFeature[currentLocation].paths[id][1];
+		length = parkFeature[currentLocation].paths[id][2];
+		repeat = parkFeature[currentLocation].paths[id][3];
+
+		//Animates the path
+		DRAW(pathToDraw, duration, length, repeat);
+	};
 	}
 
 	// this function animates the infoPanel and its contents when it opens up
