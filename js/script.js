@@ -504,7 +504,7 @@ window.onload = function () {
 	// closing the tab on close button click
 	CLOSE_BUTTON.onclick = function () {
 		closeInfoPanel();
-		REMOVE_CURRENT_ANIMATION();
+
 	};
 
 	// Functions to reset the appearance of the tabs
