@@ -491,63 +491,54 @@ window.onload = function () {
 			placeholderStart.textContent = parkFeature[currentLocation].name;
 			// hide the path finder menu
 			PATH_FINDER.classList.add('hidden');
-	}
-
-	// setting event listeners on each of the icons on the map
-	// selects the icons from the map using their IDs
-	// goes through a loop to open the specific tab
-	for (let i in MAP_ICONS) {
-		MAP_ICONS[i].onclick =  function () {
-			closeInfoPanel();
-			id = i;
-			currentLocation = i;
-			setContent();
-			openInfoPanel();
-		};
-	}
-
-	// minimizing/maximizing the infoPanel on clicking the title bar
-	TITLE_BAR.onclick = function () {
-		minimizeInfoPanel();
-	};
-
-	// closing the tab on close button click
-	CLOSE_BUTTON.onclick = function () {
-		closeInfoPanel();
-
-	};
-
-	// Functions to reset the appearance of the tabs
-	function resetTabAppearance() {
-		for (let i = 0; i < 6; i++) {
-			TABS[i].style.backgroundColor = '';
-			TITLE_BAR.style.backgroundColor = '#383838';
 		}
 
-		//reset info to the top - the info will scroll to the top once click to other tab
-		document.getElementById('contentBox').scrollTop = 0;
-	}
+		// setting event listeners on each of the icons on the map
+		// selects the icons from the map using their IDs
+		// goes through a loop to open the specific tab
+		for (let i in MAP_ICONS) {
+			MAP_ICONS[i].onclick = function () {
+				closeInfoPanel();
+				id = i;
+				currentLocation = i;
+				setContent();
+				openInfoPanel();
+			};
+		}
 
-	// function to set all the content inside the info panel
-	function setContent() {
-		resetTabAppearance();
-		activeColour = parkFeature[id].colour;
-		TABS[id].style.backgroundColor = activeColour;
-		TITLE_BAR.style.backgroundColor = activeColour;
-		TITLE.textContent = parkFeature[id].name;
-		TITLE_BAR_ICON.src = parkFeature[id].icon;
-		for (let j in GALLERY_IMAGES) GALLERY_IMAGES[j].src = parkFeature[id].galleryImages[j];
-		ABOUT_TEXT.innerHTML = parkFeature[id].about;
+		// minimizing/maximizing the infoPanel on clicking the title bar
+		TITLE_BAR.onclick = function () {
+			minimizeInfoPanel();
+		};
 
-		//retrieves the path name,duration, length and repeat info from paths array inside the parkFeature array.
-		pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[id][0]);
-		duration = parkFeature[currentLocation].paths[id][1];
-		length = parkFeature[currentLocation].paths[id][2];
-		repeat = parkFeature[currentLocation].paths[id][3];
+		// closing the tab on close button click
+		CLOSE_BUTTON.onclick = function () {
+			closeInfoPanel();
 
-		//Animates the path
-		DRAW(pathToDraw, duration, length, repeat);
-	};
+		};
+
+		// Functions to reset the appearance of the tabs
+		function resetTabAppearance() {
+			for (let i = 0; i < 6; i++) {
+				TABS[i].style.backgroundColor = '';
+				TITLE_BAR.style.backgroundColor = '#383838';
+			}
+
+			//reset info to the top - the info will scroll to the top once click to other tab
+			document.getElementById('contentBox').scrollTop = 0;
+		}
+
+		// function to set all the content inside the info panel
+		function setContent() {
+			resetTabAppearance();
+			activeColour = parkFeature[id].colour;
+			TABS[id].style.backgroundColor = activeColour;
+			TITLE_BAR.style.backgroundColor = activeColour;
+			TITLE.textContent = parkFeature[id].name;
+			TITLE_BAR_ICON.src = parkFeature[id].icon;
+			for (let j in GALLERY_IMAGES) GALLERY_IMAGES[j].src = parkFeature[id].galleryImages[j];
+			ABOUT_TEXT.innerHTML = parkFeature[id].about;
+		};
 	}
 
 	// this function animates the infoPanel and its contents when it opens up
@@ -584,6 +575,15 @@ window.onload = function () {
 			}
 			// setting state of the info panel to OPEN
 			infoPanelState = 2;
+
+			//retrieves the path name,duration, length and repeat info from paths array inside the parkFeature array.
+			pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[id][0]);
+			duration = parkFeature[currentLocation].paths[id][1];
+			length = parkFeature[currentLocation].paths[id][2];
+			repeat = parkFeature[currentLocation].paths[id][3];
+
+			//Animates the path
+			DRAW(pathToDraw, duration, length, repeat);
 		}
 	}
 

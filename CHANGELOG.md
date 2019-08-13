@@ -1,3 +1,12 @@
+*** Updated on Monday, August 12, 2019 9:30 PM ***
+Branch - onTabAnimation
+JS
+    - Added: Constant MAP_ICONS to access all the icons inside the map SVG. (its an array similar to TABS and follows the same order as the tabs, menus)
+    - Added: Event handler to handle the click on the icons
+    - UPDATED: Moved the code to draw the animation for the icon from the tab click handler to the openInfoPanel function as the icons are needed to be animated whenever the panel opens wether through a link, tab click or icon click.
+
+-----------------------------------------------------------------------------------------------------------
+
 *** Updated on Monday, August 12, 2019 7:55 PM ***
 Branch - onTabAnimation
 JS
