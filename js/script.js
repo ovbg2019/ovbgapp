@@ -506,40 +506,40 @@ window.onload = function () {
 			};
 		}
 
-		// minimizing/maximizing the infoPanel on clicking the title bar
-		TITLE_BAR.onclick = function () {
-			minimizeInfoPanel();
-		};
+	}
+	// minimizing/maximizing the infoPanel on clicking the title bar
+	TITLE_BAR.onclick = function () {
+		minimizeInfoPanel();
+	};
 
-		// closing the tab on close button click
-		CLOSE_BUTTON.onclick = function () {
-			closeInfoPanel();
+	// closing the tab on close button click
+	CLOSE_BUTTON.onclick = function () {
+		closeInfoPanel();
 
-		};
+	};
 
-		// Functions to reset the appearance of the tabs
-		function resetTabAppearance() {
-			for (let i = 0; i < 6; i++) {
-				TABS[i].style.backgroundColor = '';
-				TITLE_BAR.style.backgroundColor = '#383838';
-			}
-
-			//reset info to the top - the info will scroll to the top once click to other tab
-			document.getElementById('contentBox').scrollTop = 0;
+	// Functions to reset the appearance of the tabs
+	function resetTabAppearance() {
+		for (let i = 0; i < 6; i++) {
+			TABS[i].style.backgroundColor = '';
+			TITLE_BAR.style.backgroundColor = '#383838';
 		}
 
-		// function to set all the content inside the info panel
-		function setContent() {
-			resetTabAppearance();
-			activeColour = parkFeature[id].colour;
-			TABS[id].style.backgroundColor = activeColour;
-			TITLE_BAR.style.backgroundColor = activeColour;
-			TITLE.textContent = parkFeature[id].name;
-			TITLE_BAR_ICON.src = parkFeature[id].icon;
-			for (let j in GALLERY_IMAGES) GALLERY_IMAGES[j].src = parkFeature[id].galleryImages[j];
-			ABOUT_TEXT.innerHTML = parkFeature[id].about;
-		};
+		//reset info to the top - the info will scroll to the top once click to other tab
+		document.getElementById('contentBox').scrollTop = 0;
 	}
+
+	// function to set all the content inside the info panel
+	function setContent() {
+		resetTabAppearance();
+		activeColour = parkFeature[id].colour;
+		TABS[id].style.backgroundColor = activeColour;
+		TITLE_BAR.style.backgroundColor = activeColour;
+		TITLE.textContent = parkFeature[id].name;
+		TITLE_BAR_ICON.src = parkFeature[id].icon;
+		for (let j in GALLERY_IMAGES) GALLERY_IMAGES[j].src = parkFeature[id].galleryImages[j];
+		ABOUT_TEXT.innerHTML = parkFeature[id].about;
+	};
 
 	// this function animates the infoPanel and its contents when it opens up
 	function openInfoPanel() {
