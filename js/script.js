@@ -494,7 +494,7 @@ window.onload = function () {
 	// opening the info panel and populating it with content based on the id and tab determined from the URL
 	if (!isNaN(id)) {
 		setContent();
-		openInfoPanel();
+    openInfoPanel();
 
 	} else {
 		id = 0;
@@ -987,13 +987,13 @@ window.onload = function () {
     .from(PATH_FINDER, 1, {
       delay: 0.5,
       opacity: 0,
-      top: 10,
+      top: 15,
       onComplete:  function() {
         TweenMax
         .to(PATH_FINDER, 0.8, {
-          delay: 3,
+          delay: 2,
           opacity: 0,
-          top: 0,
+          top: 15,
           onComplete:  function() {
             PATH_FINDER.classList.add('hidden');
             PATH_FINDER.style.opacity = 1;
@@ -1010,7 +1010,7 @@ window.onload = function () {
     .from(PATH_FINDER, 0.8, {
       delay: 0.2,
       opacity: 0,
-      top: 10,
+      top: 15,
       onComplete:  function() {
         PATH_FINDER.style.opacity = 1;
         PATH_FINDER.style.top = "10vh";
@@ -1021,10 +1021,10 @@ window.onload = function () {
 // dropdown animation to close
   function closeDropDown() {
     TweenMax
-    .to(PATH_FINDER, 0.8, {
+    .to(PATH_FINDER, 0.7, {
       delay: 0.2,
       opacity: 0,
-      top: 0,
+      top: 15,
       onComplete:  function() {
         PATH_FINDER.style.opacity = 1;
         PATH_FINDER.style.top = "10vh";
