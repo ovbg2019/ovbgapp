@@ -554,8 +554,8 @@ window.onload = function () {
 			};
 		}
 
-		//Animates the path
-		ICON_ANIMATION(pathToDraw, duration, length, repeat);
+		// //Animates the path
+		// ICON_ANIMATION(pathToDraw, duration, length, repeat);
 		// minimizing/maximizing the infoPanel on clicking the title bar
 		TITLE_BAR.onclick = function () {
 			minimizeInfoPanel();
@@ -606,6 +606,7 @@ window.onload = function () {
 						ease: Sine.easeOut,
 					}
 				);
+
 			} else if (infoPanelState === 1) {
 				TweenMax.fromTo(
 					'#infoPanel',
@@ -626,6 +627,7 @@ window.onload = function () {
 			// setting state of the info panel to OPEN
 			infoPanelState = 2;
 
+
 			//retrieves the path name,duration, length and repeat info from paths array inside the parkFeature array.
 			pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[id][0]);
 			duration = parkFeature[currentLocation].paths[id][1];
@@ -633,7 +635,8 @@ window.onload = function () {
 			repeat = parkFeature[currentLocation].paths[id][3];
 
 			//Animates the path
-			DRAW(pathToDraw, duration, length, repeat);
+			ICON_ANIMATION(pathToDraw, duration, length, repeat);
+
 		}
 	}
 
