@@ -1,3 +1,10 @@
+*** Updated on Monday, August 12, 2019 9:30 PM ***
+Branch - onTabAnimation
+JS
+    - Added: Constant MAP_ICONS to access all the icons inside the map SVG. (its an array similar to TABS and follows the same order as the tabs, menus)
+    - Added: Event handler to handle the click on the icons
+    - UPDATED: Moved the code to draw the animation for the icon from the tab click handler to the openInfoPanel function as the icons are needed to be animated whenever the panel opens wether through a link, tab click or icon click.
+
 -----------------------------------------------------------------------------------------------------------
 
 *** Updated on Monday, August 12, 2019 7:55 PM ***
@@ -24,7 +31,18 @@ JS
     -Duration is set to 5 sec for icon animations, expect for Memory Garden.
     -Some icon name (pins) were changed in the latest svg, updated the name in JS.
 
+-----------------------------------------------------------------------------------------------------------
 
+*** Updated onThursday, August 9, 2019 2:16 AM ***
+
+CSS
+    - Minor UI tweaks
+
+JS
+    - ADDED: Code to force the app to full screen whenever user interacts with the visible elements (still buggy)
+
+FILES
+    - Replaced old images with new Hi-Res images
 
 -----------------------------------------------------------------------------------------------------------
 
