@@ -333,17 +333,18 @@ window.onload = function () {
 	// if anywhere in the map is clicked the dropdown will close
 	MAP_SVG.addEventListener('click', function (e) {
 		openFullScreen();
-		//reset the place holder text to where to?
+    closeDropDown();
+    //reset the place holder text to where to?
 		PLACE_HOLDER.textContent = "Where to?";
-
+    
 		DROP_DOWN_ITEM_START.forEach((item, i) => {
-			// toggle the hidden class on each item in the list (unhiding them)
+      // toggle the hidden class on each item in the list (unhiding them)
 			if (i !== 0) {
-				item.classList.add('hidden');
+        item.classList.add('hidden');
 			} else {
-				item.classList.remove('hidden');
+        item.classList.remove('hidden');
 			}
-			PATH_FINDER.classList.add('hidden'); // hide pathfinder dropdown
+			// PATH_FINDER.classList.add('hidden'); // hide pathfinder dropdown
 			// hide endpoint menu while starting point is being selected
 			END_POINT.classList.remove('hidden');
 
@@ -543,10 +544,10 @@ window.onload = function () {
       placeholderStart.textContent = parkFeature[currentLocation].name;
       placeholderStart.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
       placeholderStart.style.color = "#f7f2db";
-      // DROP_DOWN_START.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
 			// hide the path finder menu
 			PATH_FINDER.classList.add('hidden');
-		}
+    }
+  };
 
 		// setting event listeners on each of the icons on the map
 		// selects the icons from the map using their IDs
@@ -594,7 +595,7 @@ window.onload = function () {
 			for (let j in GALLERY_IMAGES) GALLERY_IMAGES[j].src = parkFeature[id].galleryImages[j];
 			ABOUT_TEXT.innerHTML = parkFeature[id].about;
 		};
-	}
+	
 
 	// this function animates the infoPanel and its contents when it opens up
 	function openInfoPanel() {
