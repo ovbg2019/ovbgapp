@@ -53,6 +53,7 @@ window.onload = function () {
 	let duration = 0;
 	let length = 0;
 	let repeat = 0;
+	let strokeColor = "#000";
 
 
 	// variable to store the active colour to be set to the tabs
@@ -110,7 +111,7 @@ window.onload = function () {
 				'images/bike_path/image4.jpg',
 			],
 			paths: [
-				['pin', 5, 500, -1],
+				['bike_path_icon', 2, 500, -1],
 				['bike_path_to_peony', 5, 608, -1],
 				['bike_path_to_waterfall_garden', 5, 915, -1],
 				['bike_path_to_bridge', 3, 199, -1],
@@ -303,6 +304,53 @@ window.onload = function () {
 			}
 		);
 	};
+	// MAIN DRAW Function
+	const ICON_ANIMATION = (path, duration, length, repeat) => {
+		REMOVE_CURRENT_ANIMATION();
+		const STROKE_WIDTH = 8;
+		TLM.to(path, duration, {
+			strokeWidth: STROKE_WIDTH,
+			// strokeDasharray: length,
+			// strokeDashoffset: 0,
+			// x: -5,
+			// x: 10,
+			repeat: repeat,
+			scale: 1.2,
+			y: -35,
+			// stroke: "#B15222",
+			repeatDelay: 1,
+			yoyo: true,
+			ease: Sine.easeInOut,
+			onComplete: () => {
+				if (repeat === 0) {
+					REMOVE_CURRENT_ANIMATION();
+				}
+			}
+
+		})
+		// TLM.fromTo(
+		// 	path,
+		// 	duration, {
+		// 		strokeWidth: STROKE_WIDTH,
+		// 		strokeDasharray: length,
+		// 		strokeDashoffset: length,
+		// 	}, {
+		// 		delay: 2,
+		// 		stroke: '#000',
+		// 		strokeWidth: STROKE_WIDTH,
+		// 		strokeDasharray: length,
+		// 		strokeDashoffset: 0,
+		// 		repeat: repeat,
+		// 		ease: Sine.easeInOut,
+		// 		repeatDelay: 1.3,
+		// onComplete: () => {
+		// 	if (repeat === 0) {
+		// 		REMOVE_CURRENT_ANIMATION();
+		// 	}
+		// }
+		// 	}
+		// );
+	};
 
 
 	/* FUNCTIONS FOR THE ANIMATING THE MAP USING CLASSES, SET THE START POINT AND DROP DOWN MENU */
@@ -491,7 +539,7 @@ window.onload = function () {
 			repeat = parkFeature[currentLocation].paths[id][3];
 
 			//Animates the path
-			DRAW(pathToDraw, duration, length, repeat);
+			ICON_ANIMATION(pathToDraw, duration, length, repeat);
 		};
 	}
 
