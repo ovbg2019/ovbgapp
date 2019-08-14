@@ -554,14 +554,11 @@ window.onload = function () {
 			};
 		}
 
-<<<<<<< HEAD
-			//Animates the path
-			ICON_ANIMATION(pathToDraw, duration, length, repeat);
-=======
+		//Animates the path
+		ICON_ANIMATION(pathToDraw, duration, length, repeat);
 		// minimizing/maximizing the infoPanel on clicking the title bar
 		TITLE_BAR.onclick = function () {
 			minimizeInfoPanel();
->>>>>>> master
 		};
 
 		// closing the tab on close button click
