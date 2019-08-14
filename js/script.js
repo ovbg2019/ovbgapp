@@ -6,6 +6,9 @@ window.onload = function () {
 	// Access SVG inside Object by using Object ID and .contentDocument
 	const MAP_SVG = document.querySelector('#svgMapObj').contentDocument;
 
+	// Accessing all the icons inside the SVG map
+	const MAP_ICONS = MAP_SVG.querySelectorAll('#bike_path_icon, #peony_icon, #water_feature_icon, #bridge_icon, #daylily_icon, #memory_gazebo_icon');
+
 	// NEW DROPDOWN
 	const TOP_BAR = document.getElementById('destination-menu'); // Initial top bar menu
 	const PATH_FINDER = document.querySelector('.pathfinder'); // secondary path finder menu to display when top bar is clicked
@@ -117,7 +120,7 @@ window.onload = function () {
 			name: 'Bike Trail',
 			colour: '#B15222',
 			icon: 'images/icons/bike_path_icon.svg',
-			about: '<p>This is a 7 km paved multi-use recreational trail that stretches from Lakeview Park to the Oshawa Valley Botanical Garden. Surrounded by lush vegetation the recreational trail meanders along the Oshawa Creek.</p><p> Along the recreational trail there are connections to other recreational trails including the Michael Starr Trail, Harmony Creek Trail, and other attractions including Oshawa Valley Botanical Garden and downtown Oshawa.</p> <p> Portions of the recreational trail travel close to the creek and has steep slopes, sharp turns and unprotected edges. Caution should be used when accessing and maneuvering the recreational trail.</p>',
+			about: '<p>This is a 7 km paved multi-use recreational trail that stretches from Lakeview Park to the Oshawa Valley Botanical Gardens. Surrounded by lush vegetation the recreational trail meanders along the Oshawa Creek.</p><p> Along the recreational trail there are connections to other recreational trails including the Michael Starr Trail, Harmony Creek Trail, and other attractions including Oshawa Valley Botanical Gardens and downtown Oshawa.</p> <p> Portions of the recreational trail travel close to the creek and has steep slopes, sharp turns and unprotected edges. Caution should be used when accessing and maneuvering the recreational trail.</p>',
 			galleryImages: [
 				'images/bike_path/image1.jpg',
 				'images/bike_path/image2.jpg',
@@ -125,10 +128,10 @@ window.onload = function () {
 				'images/bike_path/image4.jpg',
 			],
 			paths: [
-				['pin', 10, 500, 0],
+				['pin', 5, 500, -1],
 				['bike_path_to_peony', 5, 608, -1],
 				['bike_path_to_waterfall_garden', 5, 915, -1],
-				['bike_path_to_bridge', 7, 199, -1],
+				['bike_path_to_bridge', 3, 199, -1],
 				['bike_path_to_daylily', 8, 630, -1],
 				['bike_path_to_memory_garden', 8, 1829, -1],
 			],
@@ -146,7 +149,7 @@ window.onload = function () {
 			name: 'Peony Garden',
 			colour: '#B04A7F',
 			icon: 'images/icons/peony_icon.svg',
-			about: '<p>The Peony Garden is located within the Oshawa Valley Botanical Garden. In 2001, the Canadian Peony Society donated 100 plants from the Wally Gilbert Collection to the project. This contribution led to the official launch of the Oshawa Valley Botanical Garden.</p> <p>Further donations from peony breeders and suppliers across North America have led to the entire collection flourishing into the largest contemporary collection of peonies in North America. With more than 300 varieties in cultivation, the collection is truly impressive!</p> <p>The succession of blooms begins in late May and continues through to the last week of June. The Annual Peony Festival coincides with the climax of the bloom cycle in June.</p>',
+			about: '<p>The Peony Garden is located within the Oshawa Valley Botanical Gardens. In 2001, the Canadian Peony Society donated 100 plants from the Wally Gilbert Collection to the project. This contribution led to the official launch of the Oshawa Valley Botanical Gardens.</p> <p>Further donations from peony breeders and suppliers across North America have led to an impressive collection with over 300 varieties. In 2014 the garden was renamed in honour of two major contributors - Michael and Judi Denny.</p> <p>The succession of blooms begins in late May and continues through to the last week of June. The Annual Peony Festival coincides with the climax of the bloom cycle in June.</p> <p>The central gazebo was created for the 75th anniversary of the Oshawa Garden Club and is the work of metal artist James Pronk.</p>',
 			galleryImages: [
 				'images/peony/image1.jpg',
 				'images/peony/image2.jpg',
@@ -156,7 +159,7 @@ window.onload = function () {
 			/* DRAWING PATHS*/
 			paths: [
 				['peony_to_bike_path', 5, 608, -1],
-				['pin-5', 3, 300, 0],
+				['pin-2', 5, 375, -1],
 				['peony_to_waterfall_garden', 5, 866, -1],
 				['peony_to_bridge', 5, 807, -1],
 				['peony_to_daylily', 8, 1272, -1],
@@ -175,7 +178,7 @@ window.onload = function () {
 			name: 'Waterfall Garden',
 			colour: '#327687',
 			icon: 'images/icons/water_feature_icon.svg',
-			about: '<p>The Rockery Garden is located within Kinsman Valley Park of the Oshawa Valley Botanical Garden. It is just north of the Peony Garden and features a waterfall.</p> <p>The garden and its surroundings provides the perfect opportunity to enjoy nature and is a beautiful backdrop for any occasion.',
+			about: '<p>The Rockery Garden is located within Kinsmen Valleyview Park of the Oshawa Valley Botanical Gardens. It is just north of the Peony Garden and features a waterfall donated by Ron & Marilyn Bilsky.</p> <p>The garden and its surroundings provides the perfect opportunity to enjoy nature and is a beautiful backdrop for any occasion.',
 			galleryImages: [
 				'images/waterfall_garden/image1.jpg',
 				'images/waterfall_garden/image2.jpg',
@@ -185,7 +188,7 @@ window.onload = function () {
 			paths: [
 				['waterfall_garden_to_bike_path', 5, 915, -1],
 				['waterfall_garden_to_peony', 5, 866, -1],
-				['pin-3', 3, 300, 0],
+				['pin-3', 5, 375, -1],
 				['waterfall_garden_to_bridge', 7, 1118, -1],
 				['waterfall_garden_to_daylily', 7, 1580, -1],
 				['waterfall_garden_to_memory_garden', 10, 2779, -1],
@@ -203,7 +206,7 @@ window.onload = function () {
 			name: 'Rotary Bridge',
 			colour: '#806B53',
 			icon: 'images/icons/bridge_icon.svg',
-			about: '<p>Rotary Bridge was dedicated by the Rotary Club Oshawa-Parkwood and opened in celebration of the 100th anniversary of Rotary International in 2006.</p> <p>It is located over The Oshawa Creek in The Oshawa Valley Botanical Gardens and it will serve to remind the citizens of Oshawa of the tremendous acts of service that both Rotary Clubs have performed for so many years.</p>',
+			about: '<p>Rotary Bridge was dedicated by the Rotary Club Oshawa-Parkwood and opened in celebration of the 100th anniversary of Rotary International in 2006.</p> <p>It is located over The Oshawa Creek in The Oshawa Valley Botanical Gardens and it will serve to remind the citizens of Oshawa of the tremendous acts of service that both Rotary Clubs have performed for so many years.</p> <p>The metal work on the bridge was created by James Pronk, the artist responsible for the Peony Garden gazebo.</p>',
 			galleryImages: [
 				'images/bridge/image1.jpg',
 				'images/bridge/image2.jpg',
@@ -211,10 +214,10 @@ window.onload = function () {
 				'images/bridge/image4.jpg',
 			],
 			paths: [
-				['bridge_to_bike_path', 7, 199, -1],
+				['bridge_to_bike_path', 3, 199, -1],
 				['bridge_to_peony', 5, 807, -1],
 				['bridge_to_waterfall_garden', 7, 1118, -1],
-				['pin-4', 3, 300, 0],
+				['pin-4', 5, 375, -1],
 				['bridge_to_daylily', 5, 615, -1],
 				['bridge_to_memory_garden', 8, 1814, -1],
 			],
@@ -244,7 +247,7 @@ window.onload = function () {
 				['daylily_to_peony', 8, 1272, -1],
 				['daylily_to_waterfall_garden', 7, 1580, -1],
 				['daylily_to_bridge', 5, 615, -1],
-				['pin-2', 3, 300, -1],
+				['pin-5', 5, 375, -1],
 				['daylily_to_memory_garden', 6, 1214, -1],
 
 			],
@@ -274,7 +277,7 @@ window.onload = function () {
 				['memory_garden_to_waterfall_garden', 12, 2779, -1],
 				['memory_garden_to_bridge', 8, 1814, -1],
 				['memory_garden_to_daylily', 6, 1214, -1],
-				['memory_gazebo_icon', 15, 500, 0],
+				['memory_gazebo_icon', 5, 500, 0],
 			],
 			featureZoomPoints: ['170%', 0, 0.06],
 			pathZoomPoints: [
@@ -329,6 +332,7 @@ window.onload = function () {
 
 	// if anywhere in the map is clicked the dropdown will close
 	MAP_SVG.addEventListener('click', function (e) {
+		openFullScreen();
 		//reset the place holder text to where to?
 		PLACE_HOLDER.textContent = "Where to?";
 
@@ -343,9 +347,9 @@ window.onload = function () {
 			// hide endpoint menu while starting point is being selected
 			END_POINT.classList.remove('hidden');
 
-			// Update to and from values to prevent errors when drop downs are left open upon outside click on map	
+			// Update to and from values to prevent errors when drop downs are left open upon outside click on map
 			placeholderStart.textContent = parkFeature[id].name;
-			// Reset destination display text 
+			// Reset destination display text
 			placeholderEnd.textContent = 'Where to?'
 
 		});
@@ -364,6 +368,7 @@ window.onload = function () {
 	});
 
 	TOP_BAR.addEventListener('click', function () {
+		openFullScreen();
 		// change the text on place holder
 		PLACE_HOLDER.textContent = "Select Destination";
 
@@ -466,23 +471,19 @@ window.onload = function () {
 			console.log('Dest: ' + destination + ' ' + parkFeature[destination].name);
 			pathZoomIn(currentLocation, destination);
 
+			//retrieves the path name,duration, length and repeat info from paths array inside the parkFeature array.
 			pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[destination][0]);
 			duration = parkFeature[currentLocation].paths[destination][1];
 			length = parkFeature[currentLocation].paths[destination][2];
 			repeat = parkFeature[currentLocation].paths[destination][3];
 
-			//Draws the path, duration and length is hard coded
+			//Animates the path
 			DRAW(pathToDraw, duration, length, repeat);
 
 			// Hide with the path finder menu
-      // PATH_FINDER.classList.add('hidden');
       closeDropDown();
 
-        // if(destination === 0 || currentLocation === 0) {
-        //   colorBikePath();
-        // } else {
-        //   resetBikePath();
-        // }
+			PLACE_HOLDER.textContent = "Navigating...";
 	});
 
 	// NEW DROP DOWN CODE ********* END
@@ -494,6 +495,7 @@ window.onload = function () {
 	if (!isNaN(id)) {
 		setContent();
 		openInfoPanel();
+
 	} else {
 		id = 0;
 	}
@@ -524,6 +526,7 @@ window.onload = function () {
 	for (let i in TABS) {
 		// applying a function to onclick event of each tab
 		TABS[i].onclick = function () {
+			openFullScreen();
 			REMOVE_CURRENT_ANIMATION();
 			// setting the id and the content based on the id
 			id = i;
@@ -543,39 +546,54 @@ window.onload = function () {
       // DROP_DOWN_START.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
 			// hide the path finder menu
 			PATH_FINDER.classList.add('hidden');
-		};
-	}
-
-	TITLE_BAR.onclick = function () {
-		minimizeInfoPanel();
-	};
-
-	// closing the tab on close button click
-	CLOSE_BUTTON.onclick = function () {
-		closeInfoPanel();
-	};
-
-	// Functions to reset the appearance of the tabs
-	function resetTabAppearance() {
-		for (let i = 0; i < 6; i++) {
-			TABS[i].style.backgroundColor = '';
-			TITLE_BAR.style.backgroundColor = '#383838';
 		}
 
-		//reset info to the top - the info will scroll to the top once click to other tab
-		document.getElementById('contentBox').scrollTop = 0;
-	}
+		// setting event listeners on each of the icons on the map
+		// selects the icons from the map using their IDs
+		// goes through a loop to open the specific tab
+		for (let i in MAP_ICONS) {
+			MAP_ICONS[i].onclick = function () {
+				closeInfoPanel();
+				id = i;
+				currentLocation = i;
+				setContent();
+				openInfoPanel();
+			};
+		}
 
-	// function to set all the content inside the info panel
-	function setContent() {
-		resetTabAppearance();
-		activeColour = parkFeature[id].colour;
-		TABS[id].style.backgroundColor = activeColour;
-		TITLE_BAR.style.backgroundColor = activeColour;
-		TITLE.textContent = parkFeature[id].name;
-		TITLE_BAR_ICON.src = parkFeature[id].icon;
-		for (let j in GALLERY_IMAGES) GALLERY_IMAGES[j].src = parkFeature[id].galleryImages[j];
-		ABOUT_TEXT.innerHTML = parkFeature[id].about;
+		// minimizing/maximizing the infoPanel on clicking the title bar
+		TITLE_BAR.onclick = function () {
+			minimizeInfoPanel();
+		};
+
+		// closing the tab on close button click
+		CLOSE_BUTTON.onclick = function () {
+			closeInfoPanel();
+
+		};
+
+		// Functions to reset the appearance of the tabs
+		function resetTabAppearance() {
+			for (let i = 0; i < 6; i++) {
+				TABS[i].style.backgroundColor = '';
+				TITLE_BAR.style.backgroundColor = '#383838';
+			}
+
+			//reset info to the top - the info will scroll to the top once click to other tab
+			document.getElementById('contentBox').scrollTop = 0;
+		}
+
+		// function to set all the content inside the info panel
+		function setContent() {
+			resetTabAppearance();
+			activeColour = parkFeature[id].colour;
+			TABS[id].style.backgroundColor = activeColour;
+			TITLE_BAR.style.backgroundColor = activeColour;
+			TITLE.textContent = parkFeature[id].name;
+			TITLE_BAR_ICON.src = parkFeature[id].icon;
+			for (let j in GALLERY_IMAGES) GALLERY_IMAGES[j].src = parkFeature[id].galleryImages[j];
+			ABOUT_TEXT.innerHTML = parkFeature[id].about;
+		};
 	}
 
 	// this function animates the infoPanel and its contents when it opens up
@@ -612,11 +630,21 @@ window.onload = function () {
 			}
 			// setting state of the info panel to OPEN
 			infoPanelState = 2;
+
+			//retrieves the path name,duration, length and repeat info from paths array inside the parkFeature array.
+			pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[id][0]);
+			duration = parkFeature[currentLocation].paths[id][1];
+			length = parkFeature[currentLocation].paths[id][2];
+			repeat = parkFeature[currentLocation].paths[id][3];
+
+			//Animates the path
+			DRAW(pathToDraw, duration, length, repeat);
 		}
 	}
 
 	// this function animates the infoPanel and its contents when it closes
 	function closeInfoPanel() {
+		openFullScreen();
 		// animating the info panel while closing
 		if (infoPanelState > 0) {
 			TweenMax.fromTo(
@@ -635,8 +663,7 @@ window.onload = function () {
 							if (destination) {
 								mapZoomOut(92);
 								pathZoomIn(currentLocation, destination);
-							}
-							else
+							} else
 								mapZoomOut(92);
 						}
 					},
@@ -649,6 +676,7 @@ window.onload = function () {
 	}
 
 	function minimizeInfoPanel() {
+		openFullScreen();
 		// animating the info panel while closing
 		if (infoPanelState === 2) {
 			TweenMax.fromTo(
@@ -667,8 +695,7 @@ window.onload = function () {
 							if (destination) {
 								mapZoomOut(85);
 								pathZoomIn(currentLocation, destination);
-							}
-							else
+							} else
 								mapZoomOut(85);
 						}
 					},
@@ -953,6 +980,7 @@ window.onload = function () {
 		closeImgGallery();
   });
   
+  // animation for dropdown on pageload
   function sneakPeakDropDown() {
     PATH_FINDER.classList.remove('hidden');
     TweenMax
@@ -969,13 +997,13 @@ window.onload = function () {
           onComplete:  function() {
             PATH_FINDER.classList.add('hidden');
             PATH_FINDER.style.opacity = 1;
-            PATH_FINDER.style.top = "9vh";
+            PATH_FINDER.style.top = "10vh";
           }
         });
       }  
     });
   }
-
+// dropdown animation to open
   function openDropDown() {
     PATH_FINDER.classList.remove('hidden');
     TweenMax
@@ -985,12 +1013,12 @@ window.onload = function () {
       top: 10,
       onComplete:  function() {
         PATH_FINDER.style.opacity = 1;
-        PATH_FINDER.style.top = "9vh";
+        PATH_FINDER.style.top = "10vh";
         dropdownState = true;
       }  
     });
   }
-
+// dropdown animation to close
   function closeDropDown() {
     TweenMax
     .to(PATH_FINDER, 0.8, {
@@ -999,25 +1027,30 @@ window.onload = function () {
       top: 0,
       onComplete:  function() {
         PATH_FINDER.style.opacity = 1;
-        PATH_FINDER.style.top = "9vh";
+        PATH_FINDER.style.top = "10vh";
         dropdownState = false;
         PATH_FINDER.classList.add('hidden');
       }  
     });
   }
 
-// Testing animating the bike path
-// function colorBikePath() {
-//   TweenMax.to(MAP_SVG.getElementById('bike_path'), 2, {
-//     stroke: 'orange',
-//   });
-// }
-
-// function resetBikePath() {
-//   TweenMax.to(MAP_SVG.getElementById('bike_path'), 2, {
-//     stroke: '#f7f2db',
-//   })
-// }
+	function openFullScreen() {
+		// const PAGE = document.documentElement;
+		// if (!fullScreen) {
+		// 	if (PAGE.requestFullscreen) {
+		// 		PAGE.requestFullscreen();
+		// 	} else if (PAGE.mozRequestFullScreen) {
+		// 		/* Firefox */
+		// 		PAGE.mozRequestFullScreen();
+		// 	} else if (PAGE.webkitRequestFullscreen) {
+		// 		/* Chrome, Safari and Opera */
+		// 		PAGE.webkitRequestFullscreen();
+		// 	} else if (PAGE.msRequestFullscreen) {
+		// 		/* IE/Edge */
+		// 		PAGE.msRequestFullscreen();
+		// 	}
+		// }
+	}
 
 	// END IMAGE GALLERY SCRIPT ----------
 };
