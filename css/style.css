@@ -217,14 +217,6 @@ header {
 
 .path-start-select,
 .path-end-select {
-<<<<<<< HEAD
-    border-radius: 1vh;
-    border: 1px solid var(--concrete-path);
-    background-color: var(--paths);
-    padding: 0.5vh 0.5vh;
-    width: 75%;
-    background-color: var(--go-button);
-=======
 	border-radius: 1vh;
 	border: 1px solid var(--concrete-path);
 	background-color: var(--paths);
@@ -232,7 +224,6 @@ header {
   line-height: 1.5;
 	width: 75%;
 	background-color: var(--go-button);
->>>>>>> cca4b44cd6429a19a444bddeb25da053eaf674b3
 }
 
 .path-start-select:hover,
@@ -699,7 +690,6 @@ footer img {
 
 /* portrait tablets and large phones */
 @media only screen and (min-width: 600px) {
-<<<<<<< HEAD
     section {
         margin: 0 auto;
         width: 100%;
@@ -759,50 +749,6 @@ footer img {
             opacity: 0;
         }
     }
-=======
-	section {
-		margin: 0 auto;
-		width: 100%;
-	}
-
-	.fromCircle,
-	.toCircle {
-		width: 10px;
-		height: 10px;
-	}
-
-	.pathfinder {
-		height: 15vh;
-		font-size: 2.7vh;
-	}
-
-	.path-start-select,
-	.path-end-select {
-		width: 80%;
-	}
-
-	.label {
-		width: 15%;
-	}
-
-	.go-btn {
-		width: 13%;
-		height: 100%;
-	}
-
-	button {
-		font-size: 2.7vh;
-	}
-
-	#bigImage {
-		width: auto;
-		height: auto;
-		border-radius: 5px;
-		box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-		object-fit: cover;
-	}
-
->>>>>>> cca4b44cd6429a19a444bddeb25da053eaf674b3
 }
 
 /* STYLES FOR LARGE DISPLAYS - landscape tablets, destop*/
@@ -1024,18 +970,6 @@ footer img {
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-<<<<<<< HEAD
-    #svgMapObj {
-        margin: 0 auto;
-        width: 100%;
-    }
-    #welcomeBg {
-        width: 100%;
-    }
-    #splashLogo{
-        width: 30%;
-    }
-=======
 	#svgMapObj {
 		margin: 0 auto;
 		width: 100%;
@@ -1049,13 +983,9 @@ footer img {
         width: 30%;
 	}
 	
->>>>>>> cca4b44cd6429a19a444bddeb25da053eaf674b3
     #mapBox{
         width: 100%;
         height: auto
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> cca4b44cd6429a19a444bddeb25da053eaf674b3
+
