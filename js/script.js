@@ -50,15 +50,6 @@ window.onload = function () {
 	const REMOVE_CURRENT_ANIMATION = function () {
 		TLM.progress(0).clear();
   };
-  
-  const BACKGROUND_COLORS = [
-    '#B15222',
-    '#B04A7F',
-    '#327687',
-    '#806B53',
-    '#7D6287',
-    '#4571A2'
-  ]
 
 	//SVG PATH VARIABLES
 	let pathToDraw = '';
@@ -380,7 +371,7 @@ window.onload = function () {
     }
 
     placeholderStart.textContent = parkFeature[currentLocation].name;
-    placeholderStart.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
+    placeholderStart.style.backgroundColor = parkFeature[currentLocation].colour;
     placeholderStart.style.color = "#f7f2db";
 
     
@@ -401,9 +392,9 @@ window.onload = function () {
       DROP_DOWN_ITEM_START.forEach((item, i) => {
 
         if(i - 1 === currentLocation) {
-          item.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
+          item.style.backgroundColor = parkFeature[currentLocation].colour;
           item.style.color = '#f7f2db';
-          placeholderStart.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
+          placeholderStart.style.backgroundColor = parkFeature[currentLocation].colour;
           placeholderStart.style.color = "#f7f2db";
 
         } else {
@@ -435,9 +426,9 @@ window.onload = function () {
 		DROP_DOWN_ITEM_END.forEach((item, i) => {
 
       if(i - 1 === destination) {
-        item.style.backgroundColor = BACKGROUND_COLORS[destination];
+        item.style.backgroundColor = parkFeature[destination].colour;
         item.style.color = '#f7f2db';
-        placeholderEnd.style.backgroundColor = BACKGROUND_COLORS[destination];
+        placeholderEnd.style.backgroundColor = parkFeature[destination].colour;
         placeholderEnd.style.color = "#f7f2db";
 
       } else {
@@ -481,7 +472,13 @@ window.onload = function () {
 			//Animates the path
 			DRAW(pathToDraw, duration, length, repeat);
 
-			// Hide with the path finder menu
+      // Hide with the path finder menu
+      if(destination === 0 || currentLocation === 0) {
+        colorBikePath();
+      } else {
+        resetBikePath();
+      }
+
       closeDropDown();
 
 			PLACE_HOLDER.textContent = "Navigating...";
@@ -542,7 +539,7 @@ window.onload = function () {
 			openInfoPanel();
 			//update starting point text to respresent new starting location
       placeholderStart.textContent = parkFeature[currentLocation].name;
-      placeholderStart.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
+      placeholderStart.style.backgroundColor = parkFeature[currentLocation].colour;
       placeholderStart.style.color = "#f7f2db";
 			// hide the path finder menu
 			PATH_FINDER.classList.add('hidden');
@@ -985,8 +982,8 @@ window.onload = function () {
   function sneakPeakDropDown() {
     PATH_FINDER.classList.remove('hidden');
     TweenMax
-    .from(PATH_FINDER, 1, {
-      delay: 0.5,
+    .from(PATH_FINDER, 0.6, {
+      delay: 0.3,
       opacity: 0,
       top: 15,
       onComplete:  function() {
@@ -1034,6 +1031,19 @@ window.onload = function () {
       }  
     });
   }
+
+function colorBikePath() {
+  TweenMax.to(MAP_SVG.getElementById('bike_path'), 2, {
+    stroke: '#efaa5f'
+  });
+}
+
+function resetBikePath() {
+  TweenMax.to(MAP_SVG.getElementById('bike_path'), 2, {
+    stroke: '#f7f2db',
+  });
+  
+}
 
 	function openFullScreen() {
 		// const PAGE = document.documentElement;
