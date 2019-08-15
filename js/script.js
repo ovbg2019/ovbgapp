@@ -1,35 +1,6 @@
 // Put everything inside an onload to ensure that everything has loaded in before any code is executed
 window.onload = function () {
     
-    /*ANIMATE SPLASH SCREEN*/   
-    $("#splash").show();
-
-    TweenMax.from("#splash", 0.5, {
-        delay: 0.5,
-        opacity: 0,
-        ease: Sine.easeIn
-    });
-    TweenMax.fromTo("#welcomeText p", 2 ,{
-        delay: 1,
-        ease: Back.easeInOut,
-        opacity: 0,
-        y: "-5vh"
-        
-    },{
-        delay: 2,
-        ease: Sine.easeInOut,
-        opacity: 1,
-        y:"0vh"
-    });
-    TweenMax.to("#welcomeText, #welcomeBg", 1, {
-        delay: 5.5,
-        opacity: 0,
-        ease: Sine.easeIn,
-        onComplete: function () {
-            $("main").show()
-        }
-    });
-    
 	/* VARIABLE DECLARATIONS */
 
 	/**********LIST OF DOM REFERENCES *********/
@@ -78,6 +49,15 @@ window.onload = function () {
 		TLM.progress(0).clear();
 	};
 
+	const BACKGROUND_COLORS = [
+		'#B15222',
+		'#B04A7F',
+		'#327687',
+		'#806B53',
+		'#7D6287',
+		'#4571A2'
+	]
+
 	//SVG PATH VARIABLES
 	let pathToDraw = '';
 	let duration = 0;
@@ -108,8 +88,14 @@ window.onload = function () {
 	// currently defaults to 0 if ID is not set
 	let currentLocation = id ? id : 0;
 
+	// drop down elements for styling background upon click events
 	let placeholderStart = document.querySelector('.placeholder-start');
 	let placeholderEnd = document.querySelector('.placeholder-end');
+	// drop down state management
+	let startDropDownState = false;
+	let endDropDownState = false;
+	let dropdownState = false;
+
 
 	// set destination position based on dropdown selection, initially based on id
 	let destination = '';
@@ -306,6 +292,41 @@ window.onload = function () {
 
 	/* FUNCTION DEFINITIONS */
 
+	// ANIMATING THE SPLASH SCREEN
+	function showSplashScreen() {
+		/*ANIMATE SPLASH SCREEN*/
+		$("#splash").show();
+
+		TweenMax.from("#splash", 0.5, {
+			delay: 0.5,
+			opacity: 0,
+			ease: Sine.easeIn
+		});
+		TweenMax.fromTo("#welcomeText p", 2, {
+			delay: 1,
+			ease: Back.easeInOut,
+			opacity: 0,
+			y: "-5vh"
+
+		}, {
+			delay: 2,
+			ease: Sine.easeInOut,
+			opacity: 1,
+			y: "0vh"
+		});
+		TweenMax.to("#welcomeText, #welcomeBg", 1, {
+			delay: 5,
+			opacity: 0,
+			ease: Sine.easeIn,
+			onComplete: function () {
+				$("main").show()
+			}
+		});
+	}
+
+	showSplashScreen();
+
+
 	// MAIN DRAW Function
 	const DRAW = (path, duration, length, repeat) => {
 		REMOVE_CURRENT_ANIMATION();
@@ -339,8 +360,13 @@ window.onload = function () {
 
 	// NEW DROP DOWN CODE ********* START
 
+	// Dropdown opens on page load// or at end of splash animation, then closes again
+	sneakPeakDropDown();
+
 	// if anywhere in the map is clicked the dropdown will close
 	MAP_SVG.addEventListener('click', function (e) {
+		openFullScreen();
+		closeDropDown();
 		//reset the place holder text to where to?
 		PLACE_HOLDER.textContent = "Where to?";
 
@@ -351,7 +377,7 @@ window.onload = function () {
 			} else {
 				item.classList.remove('hidden');
 			}
-			PATH_FINDER.classList.add('hidden'); // hide pathfinder dropdown
+			// PATH_FINDER.classList.add('hidden'); // hide pathfinder dropdown
 			// hide endpoint menu while starting point is being selected
 			END_POINT.classList.remove('hidden');
 
@@ -379,8 +405,17 @@ window.onload = function () {
 		// change the text on place holder
 		PLACE_HOLDER.textContent = "Select Destination";
 
-		PATH_FINDER.classList.toggle('hidden');
+		if (dropdownState) {
+			closeDropDown();
+		} else {
+			openDropDown();
+		}
+
 		placeholderStart.textContent = parkFeature[currentLocation].name;
+
+		placeholderStart.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
+		placeholderStart.style.color = "#f7f2db";
+
 		// To accomidate the dropdowns removing redundent locations
 		if (destination) {
 			placeholderEnd.textContent = parkFeature[destination].name;
@@ -392,68 +427,96 @@ window.onload = function () {
 	DROP_DOWN_START.addEventListener('click', function () {
 		// Hide the endpoint select
 		END_POINT.classList.toggle('hidden');
+
 		// Loop through the elements in the drop down and add event listeners to them
 		// i represents index of item in array
 		DROP_DOWN_ITEM_START.forEach((item, i) => {
+
+			if (i - 1 === currentLocation) {
+				item.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
+				item.style.color = '#f7f2db';
+				placeholderStart.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
+				placeholderStart.style.color = "#f7f2db";
+
+			} else {
+				item.style.backgroundColor = "#FAF7E9";
+				item.style.color = '#383838';
+			}
+
 			// toggle the hidden class on each item in the list (unhiding them)
 			// hide destination from starting list
-			// if(destination !== i-1) {
 			item.classList.toggle('hidden');
-			// }
-
 			// Add the event listener to the item
 			item.addEventListener('click', function () {
+				startDropDownState = !startDropDownState;
 				// will set destination location based item in dropdown being selected
 				if (i !== 0) {
 					currentLocation = i - 1;
 				}
 
-				// Upon clicking an item in the list set the displayed text to the selected location name
 				placeholderStart.textContent = parkFeature[currentLocation].name;
 			});
 		});
+		startDropDownState = false;
+
 	});
 
 	// Create event listener on drop down menu
 	DROP_DOWN_END.addEventListener('click', function () {
 		// Loop through the elements in the drop down and add event listeners to them
 		DROP_DOWN_ITEM_END.forEach((item, i) => {
+
+			if (i - 1 === destination) {
+				item.style.backgroundColor = BACKGROUND_COLORS[destination];
+				item.style.color = '#f7f2db';
+				placeholderEnd.style.backgroundColor = BACKGROUND_COLORS[destination];
+				placeholderEnd.style.color = "#f7f2db";
+
+			} else {
+				item.style.backgroundColor = "#FAF7E9";
+				item.style.color = '#383838';
+			}
+
 			// toggle the hidden class on each item in the list (unhiding them)
 			// hide destination if it has been selected as start position
-			// if(currentLocation !== i-1) {
 			item.classList.toggle('hidden');
-			// }
 			// Add the event listener to the item
 			item.addEventListener('click', function () {
+				endDropDownState = !endDropDownState;
 				// will set destination location based item in drop down being selected
 				if (i !== 0) {
 					destination = i - 1;
 				}
-				// Upon clicking an item in the list set the displayed text to the selected location name
+
 				placeholderEnd.textContent = parkFeature[destination].name;
 			});
 		});
+		endDropDownState = false;
 	});
 
 	// Handle Go button event, will execute zoom function upon click
 	GO_BTN.addEventListener('click', function () {
 		// Call zoom function based on current destination selection
-		if (destination) {
-			console.log('Loc: ' + currentLocation + ' ' + parkFeature[currentLocation].name);
-			console.log('Dest: ' + destination + ' ' + parkFeature[destination].name);
-			pathZoomIn(currentLocation, destination);
-
-			pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[destination][0]);
-			duration = parkFeature[currentLocation].paths[destination][1];
-			length = parkFeature[currentLocation].paths[destination][2];
-			repeat = parkFeature[currentLocation].paths[destination][3];
-
-			//Draws the path, duration and length is hard coded
-			DRAW(pathToDraw, duration, length, repeat);
-
-			// Hide with the path finder menu
-			PATH_FINDER.classList.add('hidden');
+		if (!destination) {
+			destination = 0;
 		}
+		console.log('Loc: ' + currentLocation + ' ' + parkFeature[currentLocation].name);
+		console.log('Dest: ' + destination + ' ' + parkFeature[destination].name);
+		pathZoomIn(currentLocation, destination);
+
+		//retrieves the path name,duration, length and repeat info from paths array inside the parkFeature array.
+		pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[destination][0]);
+		duration = parkFeature[currentLocation].paths[destination][1];
+		length = parkFeature[currentLocation].paths[destination][2];
+		repeat = parkFeature[currentLocation].paths[destination][3];
+
+		//Animates the path
+		DRAW(pathToDraw, duration, length, repeat);
+
+		// Hide with the path finder menu
+		closeDropDown();
+
+		PLACE_HOLDER.textContent = "Navigating...";
 	});
 
 	// NEW DROP DOWN CODE ********* END
@@ -509,11 +572,26 @@ window.onload = function () {
 			openInfoPanel();
 			//update starting point text to respresent new starting location
 			placeholderStart.textContent = parkFeature[currentLocation].name;
+			placeholderStart.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
+			placeholderStart.style.color = "#f7f2db";
 			// hide the path finder menu
 			PATH_FINDER.classList.add('hidden');
 		};
 	}
 
+	// setting event listeners on each of the icons on the map
+	// selects the icons from the map using their IDs
+	// goes through a loop to open the specific tab
+	for (let i in MAP_ICONS) {
+		MAP_ICONS[i].onclick = function () {
+			closeInfoPanel();
+			id = i;
+			currentLocation = i;
+			setContent();
+			openInfoPanel();
+		};
+	}
+	// minimizing/maximizing the infoPanel on clicking the title bar
 	TITLE_BAR.onclick = function () {
 		minimizeInfoPanel();
 	};
@@ -522,7 +600,7 @@ window.onload = function () {
 	CLOSE_BUTTON.onclick = function () {
 		closeInfoPanel();
 	};
-
+    
 	// Functions to reset the appearance of the tabs
 	function resetTabAppearance() {
 		for (let i = 0; i < 6; i++) {
@@ -922,5 +1000,80 @@ window.onload = function () {
 	});
 
 	// END IMAGE GALLERY SCRIPT ----------
+
     
+	// animation for dropdown on pageload
+	function sneakPeakDropDown() {
+		PATH_FINDER.classList.remove('hidden');
+		TweenMax
+			.from(PATH_FINDER, 1, {
+				delay: 0.5,
+				opacity: 0,
+				top: 15,
+				onComplete: function () {
+					TweenMax
+						.to(PATH_FINDER, 0.8, {
+							delay: 2,
+							opacity: 0,
+							top: 15,
+							onComplete: function () {
+								PATH_FINDER.classList.add('hidden');
+								PATH_FINDER.style.opacity = 1;
+								PATH_FINDER.style.top = "10vh";
+							}
+						});
+				}
+			});
+	}
+	// dropdown animation to open
+	function openDropDown() {
+		PATH_FINDER.classList.remove('hidden');
+		TweenMax
+			.from(PATH_FINDER, 0.8, {
+				delay: 0.2,
+				opacity: 0,
+				top: 15,
+				onComplete: function () {
+					PATH_FINDER.style.opacity = 1;
+					PATH_FINDER.style.top = "10vh";
+					dropdownState = true;
+				}
+			});
+	}
+	// dropdown animation to close
+	function closeDropDown() {
+		TweenMax
+			.to(PATH_FINDER, 0.7, {
+				delay: 0.2,
+				opacity: 0,
+				top: 15,
+				onComplete: function () {
+					PATH_FINDER.style.opacity = 1;
+					PATH_FINDER.style.top = "10vh";
+					dropdownState = false;
+					PATH_FINDER.classList.add('hidden');
+				}
+			});
+	}
+
+	function openFullScreen() {
+		// const PAGE = document.documentElement;
+		// if (!fullScreen) {
+		// 	if (PAGE.requestFullscreen) {
+		// 		PAGE.requestFullscreen();
+		// 	} else if (PAGE.mozRequestFullScreen) {
+		// 		/* Firefox */
+		// 		PAGE.mozRequestFullScreen();
+		// 	} else if (PAGE.webkitRequestFullscreen) {
+		// 		/* Chrome, Safari and Opera */
+		// 		PAGE.webkitRequestFullscreen();
+		// 	} else if (PAGE.msRequestFullscreen) {
+		// 		/* IE/Edge */
+		// 		PAGE.msRequestFullscreen();
+		// 	}
+		// }
+	}
+
+	// END IMAGE GALLERY SCRIPT ----------
+
 };
