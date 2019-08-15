@@ -1,11 +1,3 @@
-*** Updated on Monday, August 15, 2019 11:27 PM ***
-Branch - onTabAnimation
-JS
-    - MERGED: function for splash screen 
-    - MERGED: new drop down animation and color changed
-
------------------------------------------------------------------------------------------------------------
-
 *** Updated on Monday, August 12, 2019 9:30 PM ***
 Branch - onTabAnimation
 JS
