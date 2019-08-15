@@ -4,10 +4,11 @@ Branch - iconAnimation:
 SVG
 	-updated SVG to latest
 JS
-	- Updated Icon Animation, animating circle only.
+	-Updated Icon Animation, animating circle only.
     -Created separate fn “ICON_ANIMATION” icon animation.
     -Added if statement to Go so when starting and ending location are same,
      the icon Animation run, instead of path.
+     -Created separate functions for removing Icon Animation and Path Animation
 
 -----------------------------------------------------------------------------------------------------------
 
