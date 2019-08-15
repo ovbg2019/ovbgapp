@@ -1,1092 +1,1117 @@
-// Put everything inside an onload to ensure that everything has loaded in before any code is executed
-window.onload = function () {
+	// Put everything inside an onload to ensure that everything has loaded in before any code is executed
+	window.onload = function () {
 
-	/* VARIABLE DECLARATIONS */
+		/* VARIABLE DECLARATIONS */
 
-	/**********LIST OF DOM REFERENCES *********/
-	// Access SVG inside Object by using Object ID and .contentDocument
-	const MAP_SVG = document.querySelector('#svgMapObj').contentDocument;
+		/**********LIST OF DOM REFERENCES *********/
+		// Access SVG inside Object by using Object ID and .contentDocument
+		const MAP_SVG = document.querySelector('#svgMapObj').contentDocument;
 
-	// Accessing all the icons inside the SVG map
-	const MAP_ICONS = MAP_SVG.querySelectorAll('#bike_path_icon, #peony_icon, #water_feature_icon, #bridge_icon, #daylily_icon, #memory_gazebo_icon');
+		// Accessing all the icons inside the SVG map
+		const MAP_ICONS = MAP_SVG.querySelectorAll('#bike_path_icon, #peony_icon, #water_feature_icon, #bridge_icon, #daylily_icon, #memory_gazebo_icon');
 
-	// NEW DROPDOWN
-	const TOP_BAR = document.getElementById('destination-menu'); // Initial top bar menu
-	const PATH_FINDER = document.querySelector('.pathfinder'); // secondary path finder menu to display when top bar is clicked
-	const DROP_DOWN_START = document.querySelector('.path-start-select'); // Select the drop down
-	const DROP_DOWN_ITEM_START = document.querySelectorAll('.path-start-select li'); // Create array of li items in drop down list
-	const DROP_DOWN_END = document.querySelector('.path-end-select'); // Select the drop down
-	const DROP_DOWN_ITEM_END = document.querySelectorAll('.path-end-select li'); // Create array of li items in drop down list
-	const GO_BTN = document.querySelector('.go-btn'); // go button inside the path finder menu
-	const END_POINT = document.querySelector('.endPoint');
+		// NEW DROPDOWN
+		const TOP_BAR = document.getElementById('destination-menu'); // Initial top bar menu
+		const PATH_FINDER = document.querySelector('.pathfinder'); // secondary path finder menu to display when top bar is clicked
+		const DROP_DOWN_START = document.querySelector('.path-start-select'); // Select the drop down
+		const DROP_DOWN_ITEM_START = document.querySelectorAll('.path-start-select li'); // Create array of li items in drop down list
+		const DROP_DOWN_END = document.querySelector('.path-end-select'); // Select the drop down
+		const DROP_DOWN_ITEM_END = document.querySelectorAll('.path-end-select li'); // Create array of li items in drop down list
+		const GO_BTN = document.querySelector('.go-btn'); // go button inside the path finder menu
+		const END_POINT = document.querySelector('.endPoint');
 
-	// Constants to access the tabs
-	const TABS = document.querySelectorAll('.tab');
+		// Constants to access the tabs
+		const TABS = document.querySelectorAll('.tab');
 
-	// Info panel elements
-	const INFO_PANEL = document.querySelector('#infoPanel');
-	const TITLE_BAR = document.querySelector('#titleBar');
-	const TITLE = document.querySelector('#title');
-	const CLOSE_BUTTON = document.querySelector('#closeButton');
-	const TITLE_BAR_ICON = document.querySelector('#titleBarIcon');
-	const GALLERY_IMAGES = document.querySelectorAll('.galleryImage');
-	const ABOUT_TEXT = document.querySelector('#about');
-	const DESTINATIONS = document.querySelectorAll('.menuItem');
+		// Info panel elements
+		const INFO_PANEL = document.querySelector('#infoPanel');
+		const TITLE_BAR = document.querySelector('#titleBar');
+		const TITLE = document.querySelector('#title');
+		const CLOSE_BUTTON = document.querySelector('#closeButton');
+		const TITLE_BAR_ICON = document.querySelector('#titleBarIcon');
+		const GALLERY_IMAGES = document.querySelectorAll('.galleryImage');
+		const ABOUT_TEXT = document.querySelector('#about');
+		const DESTINATIONS = document.querySelectorAll('.menuItem');
 
-	// Image Gallery elements
-	const BIG_IMAGES = document.querySelector('#bigImage');
-	const CONTENT_IMG = document.querySelector('#contentImageBox');
-	const EXPANDED_IMG = document.querySelector('#expandedImg');
-	const MODAL_CONTENT = document.querySelector('#modalContent');
-	const CLOSE_GALLERY = document.querySelector('#closeGallery');
-	const PREV = document.querySelector('#prev');
-	const NEXT = document.querySelector('#next');
+		// Image Gallery elements
+		const BIG_IMAGES = document.querySelector('#bigImage');
+		const CONTENT_IMG = document.querySelector('#contentImageBox');
+		const EXPANDED_IMG = document.querySelector('#expandedImg');
+		const MODAL_CONTENT = document.querySelector('#modalContent');
+		const CLOSE_GALLERY = document.querySelector('#closeGallery');
+		const PREV = document.querySelector('#prev');
+		const NEXT = document.querySelector('#next');
 
-	//placeholder
-	const PLACE_HOLDER = document.querySelector('#placeholder');
+		//placeholder
+		const PLACE_HOLDER = document.querySelector('#placeholder');
 
-	//New TimeLine Max const for GSAP
-	const TLM = new TimelineMax({});
-	//Clears Current/Active Animation
-	const REMOVE_CURRENT_ANIMATION = function () {
-		TLM.progress(0).clear();
-	};
+		//New TimeLine Max const for GSAP
+		const TLM = new TimelineMax({});
+		//Clears Current/Active Animation
+		const REMOVE_CURRENT_ANIMATION = function () {
+			TLM.progress(0).clear();
+		};
 
-	const BACKGROUND_COLORS = [
-		'#B15222',
-		'#B04A7F',
-		'#327687',
-		'#806B53',
-		'#7D6287',
-		'#4571A2'
-	]
+		const BACKGROUND_COLORS = [
+			'#B15222',
+			'#B04A7F',
+			'#327687',
+			'#806B53',
+			'#7D6287',
+			'#4571A2'
+		]
 
-	//SVG PATH VARIABLES
-	let pathToDraw = '';
-	let duration = 0;
-	let length = 0;
-	let repeat = 0;
-
-
-	// variable to store the active colour to be set to the tabs
-	let activeColour = '';
-
-	// variable to identify which tab to open
-	let id = 0;
-
-	// variable to store and read the state of the infoPanel (0: closed, 1: minimized, 2: open)
-	let infoPanelState = 0;
-
-	// This block of code will parse the data from the URL of the page and determine which tab to open when the app initially opens
-
-	// parsing the id from the URL of the webpage
-	let params = new URLSearchParams(location.search);
-	let parsed = params.get('id');
-
-	// storing the parsed id in the id variable
-	id = parseInt(parsed);
-
-	// Set this via QR or nav button
-	// *** Hard coded for testing purposes ***
-	// currently defaults to 0 if ID is not set
-	let currentLocation = id ? id : 0;
-
-	// drop down elements for styling background upon click events
-	let placeholderStart = document.querySelector('.placeholder-start');
-	let placeholderEnd = document.querySelector('.placeholder-end');
-	// drop down state management
-	let startDropDownState = false;
-	let endDropDownState = false;
-	let dropdownState = false;
+		//SVG PATH VARIABLES
+		let pathToDraw = '';
+		let duration = 0;
+		let length = 0;
+		let repeat = 0;
 
 
-	// set destination position based on dropdown selection, initially based on id
-	let destination = '';
+		// variable to store the active colour to be set to the tabs
+		let activeColour = '';
 
-	// variables to store the zoom parameters
-	let leftScroll = '';
-	let topScroll = '';
-	let zoomLevel = '';
+		// variable to identify which tab to open
+		let id = 0;
 
-	// variables for the pinch zoom
-	let MAP_SVG_OBJ = document.querySelector('#svgMapObj');
-	MAP_SVG_OBJ.style.height = '100%';
-	let evCache = new Array();
-	let prevDiff = -1;
+		// variable to store and read the state of the infoPanel (0: closed, 1: minimized, 2: open)
+		let infoPanelState = 0;
 
+		// This block of code will parse the data from the URL of the page and determine which tab to open when the app initially opens
 
-	// declaring an array of object to to store the values
-	let parkFeature = [{
-			//0
-			name: 'Bike Trail',
-			colour: '#B15222',
-			icon: 'images/icons/bike_path_icon.svg',
-			about: '<p>This is a 7 km paved multi-use recreational trail that stretches from Lakeview Park to the Oshawa Valley Botanical Gardens. Surrounded by lush vegetation the recreational trail meanders along the Oshawa Creek.</p><p> Along the recreational trail there are connections to other recreational trails including the Michael Starr Trail, Harmony Creek Trail, and other attractions including Oshawa Valley Botanical Gardens and downtown Oshawa.</p> <p> Portions of the recreational trail travel close to the creek and has steep slopes, sharp turns and unprotected edges. Caution should be used when accessing and maneuvering the recreational trail.</p>',
-			galleryImages: [
-				'images/bike_path/image1.jpg',
-				'images/bike_path/image2.jpg',
-				'images/bike_path/image3.jpg',
-				'images/bike_path/image4.jpg',
-			],
-			paths: [
-				['pin', 5, 500, -1],
-				['bike_path_to_peony', 5, 608, -1],
-				['bike_path_to_waterfall_garden', 5, 915, -1],
-				['bike_path_to_bridge', 3, 199, -1],
-				['bike_path_to_daylily', 8, 630, -1],
-				['bike_path_to_memory_garden', 8, 1829, -1],
-			],
-			featureZoomPoints: ['180%', 0.2, 1],
-			pathZoomPoints: [
-				['100%', 0.4, 0.95],
-				['100%', 0.3, 1.05],
-				['100%', 0.1, 0.9],
-				['100%', 0.1, 1.05],
-				['100%', 0.01, 1],
-				['100%', 0, 1],
-			],
-		},
-		{ //1
-			name: 'Peony Garden',
-			colour: '#B04A7F',
-			icon: 'images/icons/peony_icon.svg',
-			about: '<p>The Peony Garden is located within the Oshawa Valley Botanical Gardens. In 2001, the Canadian Peony Society donated 100 plants from the Wally Gilbert Collection to the project. This contribution led to the official launch of the Oshawa Valley Botanical Gardens.</p> <p>Further donations from peony breeders and suppliers across North America have led to an impressive collection with over 300 varieties. In 2014 the garden was renamed in honour of two major contributors - Michael and Judi Denny.</p> <p>The succession of blooms begins in late May and continues through to the last week of June. The Annual Peony Festival coincides with the climax of the bloom cycle in June.</p> <p>The central gazebo was created for the 75th anniversary of the Oshawa Garden Club and is the work of metal artist James Pronk.</p>',
-			galleryImages: [
-				'images/peony/image1.jpg',
-				'images/peony/image2.jpg',
-				'images/peony/image3.jpg',
-				'images/peony/image4.jpg',
-			],
-			/* DRAWING PATHS*/
-			paths: [
-				['peony_to_bike_path', 5, 608, -1],
-				['pin-2', 5, 375, -1],
-				['peony_to_waterfall_garden', 5, 866, -1],
-				['peony_to_bridge', 5, 807, -1],
-				['peony_to_daylily', 8, 1272, -1],
-				['peony_to_memory_garden', 12, 2472, -1],
-			],
-			featureZoomPoints: ['180%', 0.4, 0.95],
-			pathZoomPoints: [
-				['100%', 0.4, 0.95],
-				['100%', 0.3, 1.05],
-				['100%', 0.1, 0.7],
-				['100%', 0.1, 1],
-				['100%', 0.01, 1],
-				['100%', 0, 1],
-			]
-		}, { //2
-			name: 'Waterfall Garden',
-			colour: '#327687',
-			icon: 'images/icons/water_feature_icon.svg',
-			about: '<p>The Rockery Garden is located within Kinsmen Valleyview Park of the Oshawa Valley Botanical Gardens. It is just north of the Peony Garden and features a waterfall donated by Ron & Marilyn Bilsky.</p> <p>The garden and its surroundings provides the perfect opportunity to enjoy nature and is a beautiful backdrop for any occasion.',
-			galleryImages: [
-				'images/waterfall_garden/image1.jpg',
-				'images/waterfall_garden/image2.jpg',
-				'images/waterfall_garden/image3.jpg',
-				'images/waterfall_garden/image4.jpg',
-			],
-			paths: [
-				['waterfall_garden_to_bike_path', 5, 915, -1],
-				['waterfall_garden_to_peony', 5, 866, -1],
-				['pin-3', 5, 375, -1],
-				['waterfall_garden_to_bridge', 7, 1118, -1],
-				['waterfall_garden_to_daylily', 7, 1580, -1],
-				['waterfall_garden_to_memory_garden', 10, 2779, -1],
-			],
-			featureZoomPoints: ['170%', 0.35, 0.4],
-			pathZoomPoints: [
-				['100%', 0.4, 0.55],
-				['100%', 0.3, 0.65],
-				['100%', 0.1, 0.4],
-				['100%', 0.1, 0.6],
-				['100%', 0.01, 0.6],
-				['100%', 0, 0.55],
-			],
-		}, { //3
-			name: 'Rotary Bridge',
-			colour: '#806B53',
-			icon: 'images/icons/bridge_icon.svg',
-			about: '<p>Rotary Bridge was dedicated by the Rotary Club Oshawa-Parkwood and opened in celebration of the 100th anniversary of Rotary International in 2006.</p> <p>It is located over The Oshawa Creek in The Oshawa Valley Botanical Gardens and it will serve to remind the citizens of Oshawa of the tremendous acts of service that both Rotary Clubs have performed for so many years.</p> <p>The metal work on the bridge was created by James Pronk, the artist responsible for the Peony Garden gazebo.</p>',
-			galleryImages: [
-				'images/bridge/image1.jpg',
-				'images/bridge/image2.jpg',
-				'images/bridge/image3.jpg',
-				'images/bridge/image4.jpg',
-			],
-			paths: [
-				['bridge_to_bike_path', 3, 199, -1],
-				['bridge_to_peony', 5, 807, -1],
-				['bridge_to_waterfall_garden', 7, 1118, -1],
-				['pin-4', 5, 375, -1],
-				['bridge_to_daylily', 5, 615, -1],
-				['bridge_to_memory_garden', 8, 1814, -1],
-			],
-			featureZoomPoints: ['200%', 0.145, 1.4],
-			pathZoomPoints: [
-				['100%', 0.4, 1.3],
-				['100%', 0.3, 1.3],
-				['100%', 0.1, 1.3],
-				['100%', 0.1, 1.3],
-				['100%', 0.01, 1.3],
-				['100%', 0, 1.3],
-			],
-		}, {
-			//4
-			name: 'Daylily Collection',
-			colour: '#7D6287',
-			icon: 'images/icons/daylily_icon.svg',
-			about: '<p>The one of a kind collection of locally hybridized daylilies addition to the already beautiful gardens was made possible by the generous donation from Henry Lorrain and the late Douglas Lycett, founders of We’re in the Hayfield Now.</p> <p>The City would like to thank the volunteers including the Oshawa Garden Club, Brooklin Horticulture Society and individual volunteers who dedicated their time to dig, transport, store and replant the daylilies to make this collection a reality.</p> <p>The 265 daylily collection was established in 2017 and can be found on the east side of the Oshawa Creek directly across from the Peony Garden with access to the Kolodzie Oshawa Creek Bike Path.</p>',
-			galleryImages: [
-				'images/daylily/image1.jpg',
-				'images/daylily/image2.jpg',
-				'images/daylily/image3.jpg',
-				'images/daylily/image4.jpg',
-			],
-			paths: [
-				['daylily_to_bike_path', 8, 630, -1],
-				['daylily_to_peony', 8, 1272, -1],
-				['daylily_to_waterfall_garden', 7, 1580, -1],
-				['daylily_to_bridge', 5, 615, -1],
-				['pin-5', 5, 375, -1],
-				['daylily_to_memory_garden', 6, 1214, -1],
+		// parsing the id from the URL of the webpage
+		let params = new URLSearchParams(location.search);
+		let parsed = params.get('id');
 
-			],
-			featureZoomPoints: ['220%', 0, 1.33],
-			pathZoomPoints: [
-				['100%', 0.4, 1],
-				['100%', 0.3, 1],
-				['100%', 0.1, 1],
-				['100%', 0.1, 1],
-				['100%', 0.01, 0.6],
-				['100%', 0, 0.83],
-			],
-		}, { //5
-			name: 'Memory Garden',
-			colour: '#4571A2',
-			icon: 'images/icons/memory_garden_icon.svg',
-			about: '<p>The Memory Garden is comprised of several gardens and includes tree lined walkways and a central gathering area which provides a formal gathering space and opportunities for passive recreation. The Memory Garden provides an opportunity where residents can honour and remember loved ones through the Commemorative Tree and Bench program.</p> <p>Visitors to the Oshawa Valley Botanical Gardens can now enjoy a new shade structure thanks to donations from the Rotary Club of Oshawa and the Rotary Club of Oshawa-Parkwood.</p> <p>The shade structure is classically designed and features an antique bronze Rotary emblem in the center of the floor, perfect for quiet contemplation, as a centrepiece for photographs or as a formal wedding ceremony.</p>',
-			galleryImages: [
-				'images/memory_garden/image1.jpg',
-				'images/memory_garden/image2.jpg',
-				'images/memory_garden/image3.jpg',
-				'images/memory_garden/image4.jpg',
-			],
-			paths: [
-				['memory_garden_to_bike_path', 8, 1829, -1],
-				['memory_garden_to_peony', 10, 2472, -1],
-				['memory_garden_to_waterfall_garden', 12, 2779, -1],
-				['memory_garden_to_bridge', 8, 1814, -1],
-				['memory_garden_to_daylily', 6, 1214, -1],
-				['memory_gazebo_icon', 5, 500, 0],
-			],
-			featureZoomPoints: ['170%', 0, 0.06],
-			pathZoomPoints: [
-				['100%', 0.4, 0.2],
-				['100%', 0.3, 0.2],
-				['100%', 0.1, 0.2],
-				['100%', 0.1, 0.2],
-				['100%', 0.01, 0.2],
-				['100%', 0, 0.33],
-			],
-		},
-	];
+		// storing the parsed id in the id variable
+		id = parseInt(parsed);
+
+		// Set this via QR or nav button
+		// *** Hard coded for testing purposes ***
+		// currently defaults to 0 if ID is not set
+		let currentLocation = id ? id : 0;
+
+		// drop down elements for styling background upon click events
+		let placeholderStart = document.querySelector('.placeholder-start');
+		let placeholderEnd = document.querySelector('.placeholder-end');
+		// drop down state management
+		let startDropDownState = false;
+		let endDropDownState = false;
+		let dropdownState = false;
 
 
-	/* FUNCTION DEFINITIONS */
+		// set destination position based on dropdown selection, initially based on id
+		let destination = '';
 
-	// ANIMATING THE SPLASH SCREEN
-	function showSplashScreen() {
-		/*ANIMATE SPLASH SCREEN*/
-		$("#splash").show();
+		// variables to store the zoom parameters
+		let leftScroll = '';
+		let topScroll = '';
+		let zoomLevel = '';
 
-		TweenMax.from("#splash", 0.5, {
-			delay: 0.5,
-			opacity: 0,
-			ease: Sine.easeIn
-		});
-		TweenMax.fromTo("#welcomeText p", 2, {
-			delay: 1,
-			ease: Back.easeInOut,
-			opacity: 0,
-			y: "-5vh"
-
-		}, {
-			delay: 2,
-			ease: Sine.easeInOut,
-			opacity: 1,
-			y: "0vh"
-		});
-		TweenMax.to("#welcomeText, #welcomeBg", 1, {
-			delay: 5,
-			opacity: 0,
-			ease: Sine.easeIn,
-			onComplete: function () {
-				$("main").show()
-			}
-		});
-	}
-
-	showSplashScreen();
+		// variables for the pinch zoom
+		let MAP_SVG_OBJ = document.querySelector('#svgMapObj');
+		MAP_SVG_OBJ.style.height = '100%';
+		let evCache = new Array();
+		let prevDiff = -1;
 
 
-	// MAIN DRAW Function
-	const DRAW = (path, duration, length, repeat) => {
-		REMOVE_CURRENT_ANIMATION();
-		const STROKE_WIDTH = 15;
-		TLM.fromTo(
-			path,
-			duration, {
-				strokeWidth: STROKE_WIDTH,
-				strokeDasharray: length,
-				strokeDashoffset: length,
+		// declaring an array of object to to store the values
+		let parkFeature = [{
+				//0
+				name: 'Bike Trail',
+				colour: '#B15222',
+				icon: 'images/icons/bike_path_icon.svg',
+				about: '<p>This is a 7 km paved multi-use recreational trail that stretches from Lakeview Park to the Oshawa Valley Botanical Gardens. Surrounded by lush vegetation the recreational trail meanders along the Oshawa Creek.</p><p> Along the recreational trail there are connections to other recreational trails including the Michael Starr Trail, Harmony Creek Trail, and other attractions including Oshawa Valley Botanical Gardens and downtown Oshawa.</p> <p> Portions of the recreational trail travel close to the creek and has steep slopes, sharp turns and unprotected edges. Caution should be used when accessing and maneuvering the recreational trail.</p>',
+				galleryImages: [
+					'images/bike_path/image1.jpg',
+					'images/bike_path/image2.jpg',
+					'images/bike_path/image3.jpg',
+					'images/bike_path/image4.jpg',
+				],
+				paths: [
+					['pin', 5, 500, -1],
+					['bike_path_to_peony', 5, 608, -1],
+					['bike_path_to_waterfall_garden', 5, 915, -1],
+					['bike_path_to_bridge', 3, 199, -1],
+					['bike_path_to_daylily', 8, 630, -1],
+					['bike_path_to_memory_garden', 8, 1829, -1],
+				],
+				featureZoomPoints: ['180%', 0.2, 1],
+				pathZoomPoints: [
+					['100%', 0.4, 0.95],
+					['100%', 0.3, 1.05],
+					['100%', 0.1, 0.9],
+					['100%', 0.1, 1.05],
+					['100%', 0.01, 1],
+					['100%', 0, 1],
+				],
+			},
+			{ //1
+				name: 'Peony Garden',
+				colour: '#B04A7F',
+				icon: 'images/icons/peony_icon.svg',
+				about: '<p>The Peony Garden is located within the Oshawa Valley Botanical Gardens. In 2001, the Canadian Peony Society donated 100 plants from the Wally Gilbert Collection to the project. This contribution led to the official launch of the Oshawa Valley Botanical Gardens.</p> <p>Further donations from peony breeders and suppliers across North America have led to an impressive collection with over 300 varieties. In 2014 the garden was renamed in honour of two major contributors - Michael and Judi Denny.</p> <p>The succession of blooms begins in late May and continues through to the last week of June. The Annual Peony Festival coincides with the climax of the bloom cycle in June.</p> <p>The central gazebo was created for the 75th anniversary of the Oshawa Garden Club and is the work of metal artist James Pronk.</p>',
+				galleryImages: [
+					'images/peony/image1.jpg',
+					'images/peony/image2.jpg',
+					'images/peony/image3.jpg',
+					'images/peony/image4.jpg',
+				],
+				/* DRAWING PATHS*/
+				paths: [
+					['peony_to_bike_path', 5, 608, -1],
+					['pin-2', 5, 375, -1],
+					['peony_to_waterfall_garden', 5, 866, -1],
+					['peony_to_bridge', 5, 807, -1],
+					['peony_to_daylily', 8, 1272, -1],
+					['peony_to_memory_garden', 12, 2472, -1],
+				],
+				featureZoomPoints: ['180%', 0.4, 0.95],
+				pathZoomPoints: [
+					['100%', 0.4, 0.95],
+					['100%', 0.3, 1.05],
+					['100%', 0.1, 0.7],
+					['100%', 0.1, 1],
+					['100%', 0.01, 1],
+					['100%', 0, 1],
+				]
+			}, { //2
+				name: 'Waterfall Garden',
+				colour: '#327687',
+				icon: 'images/icons/water_feature_icon.svg',
+				about: '<p>The Rockery Garden is located within Kinsmen Valleyview Park of the Oshawa Valley Botanical Gardens. It is just north of the Peony Garden and features a waterfall donated by Ron & Marilyn Bilsky.</p> <p>The garden and its surroundings provides the perfect opportunity to enjoy nature and is a beautiful backdrop for any occasion.',
+				galleryImages: [
+					'images/waterfall_garden/image1.jpg',
+					'images/waterfall_garden/image2.jpg',
+					'images/waterfall_garden/image3.jpg',
+					'images/waterfall_garden/image4.jpg',
+				],
+				paths: [
+					['waterfall_garden_to_bike_path', 5, 915, -1],
+					['waterfall_garden_to_peony', 5, 866, -1],
+					['pin-3', 5, 375, -1],
+					['waterfall_garden_to_bridge', 7, 1118, -1],
+					['waterfall_garden_to_daylily', 7, 1580, -1],
+					['waterfall_garden_to_memory_garden', 10, 2779, -1],
+				],
+				featureZoomPoints: ['170%', 0.35, 0.4],
+				pathZoomPoints: [
+					['100%', 0.4, 0.55],
+					['100%', 0.3, 0.65],
+					['100%', 0.1, 0.4],
+					['100%', 0.1, 0.6],
+					['100%', 0.01, 0.6],
+					['100%', 0, 0.55],
+				],
+			}, { //3
+				name: 'Rotary Bridge',
+				colour: '#806B53',
+				icon: 'images/icons/bridge_icon.svg',
+				about: '<p>Rotary Bridge was dedicated by the Rotary Club Oshawa-Parkwood and opened in celebration of the 100th anniversary of Rotary International in 2006.</p> <p>It is located over The Oshawa Creek in The Oshawa Valley Botanical Gardens and it will serve to remind the citizens of Oshawa of the tremendous acts of service that both Rotary Clubs have performed for so many years.</p> <p>The metal work on the bridge was created by James Pronk, the artist responsible for the Peony Garden gazebo.</p>',
+				galleryImages: [
+					'images/bridge/image1.jpg',
+					'images/bridge/image2.jpg',
+					'images/bridge/image3.jpg',
+					'images/bridge/image4.jpg',
+				],
+				paths: [
+					['bridge_to_bike_path', 3, 199, -1],
+					['bridge_to_peony', 5, 807, -1],
+					['bridge_to_waterfall_garden', 7, 1118, -1],
+					['pin-4', 5, 375, -1],
+					['bridge_to_daylily', 5, 615, -1],
+					['bridge_to_memory_garden', 8, 1814, -1],
+				],
+				featureZoomPoints: ['200%', 0.145, 1.4],
+				pathZoomPoints: [
+					['100%', 0.4, 1.3],
+					['100%', 0.3, 1.3],
+					['100%', 0.1, 1.3],
+					['100%', 0.1, 1.3],
+					['100%', 0.01, 1.3],
+					['100%', 0, 1.3],
+				],
 			}, {
-				delay: 2,
-				stroke: '#679DF6',
-				strokeWidth: STROKE_WIDTH,
-				strokeDasharray: length,
-				strokeDashoffset: 0,
-				repeat: repeat,
+				//4
+				name: 'Daylily Collection',
+				colour: '#7D6287',
+				icon: 'images/icons/daylily_icon.svg',
+				about: '<p>The one of a kind collection of locally hybridized daylilies addition to the already beautiful gardens was made possible by the generous donation from Henry Lorrain and the late Douglas Lycett, founders of We’re in the Hayfield Now.</p> <p>The City would like to thank the volunteers including the Oshawa Garden Club, Brooklin Horticulture Society and individual volunteers who dedicated their time to dig, transport, store and replant the daylilies to make this collection a reality.</p> <p>The 265 daylily collection was established in 2017 and can be found on the east side of the Oshawa Creek directly across from the Peony Garden with access to the Kolodzie Oshawa Creek Bike Path.</p>',
+				galleryImages: [
+					'images/daylily/image1.jpg',
+					'images/daylily/image2.jpg',
+					'images/daylily/image3.jpg',
+					'images/daylily/image4.jpg',
+				],
+				paths: [
+					['daylily_to_bike_path', 8, 630, -1],
+					['daylily_to_peony', 8, 1272, -1],
+					['daylily_to_waterfall_garden', 7, 1580, -1],
+					['daylily_to_bridge', 5, 615, -1],
+					['pin-5', 5, 375, -1],
+					['daylily_to_memory_garden', 6, 1214, -1],
+
+				],
+				featureZoomPoints: ['220%', 0, 1.33],
+				pathZoomPoints: [
+					['100%', 0.4, 1],
+					['100%', 0.3, 1],
+					['100%', 0.1, 1],
+					['100%', 0.1, 1],
+					['100%', 0.01, 0.6],
+					['100%', 0, 0.83],
+				],
+			}, { //5
+				name: 'Memory Garden',
+				colour: '#4571A2',
+				icon: 'images/icons/memory_garden_icon.svg',
+				about: '<p>The Memory Garden is comprised of several gardens and includes tree lined walkways and a central gathering area which provides a formal gathering space and opportunities for passive recreation. The Memory Garden provides an opportunity where residents can honour and remember loved ones through the Commemorative Tree and Bench program.</p> <p>Visitors to the Oshawa Valley Botanical Gardens can now enjoy a new shade structure thanks to donations from the Rotary Club of Oshawa and the Rotary Club of Oshawa-Parkwood.</p> <p>The shade structure is classically designed and features an antique bronze Rotary emblem in the center of the floor, perfect for quiet contemplation, as a centrepiece for photographs or as a formal wedding ceremony.</p>',
+				galleryImages: [
+					'images/memory_garden/image1.jpg',
+					'images/memory_garden/image2.jpg',
+					'images/memory_garden/image3.jpg',
+					'images/memory_garden/image4.jpg',
+				],
+				paths: [
+					['memory_garden_to_bike_path', 8, 1829, -1],
+					['memory_garden_to_peony', 10, 2472, -1],
+					['memory_garden_to_waterfall_garden', 12, 2779, -1],
+					['memory_garden_to_bridge', 8, 1814, -1],
+					['memory_garden_to_daylily', 6, 1214, -1],
+					['memory_gazebo_icon', 5, 500, 0],
+				],
+				featureZoomPoints: ['170%', 0, 0.06],
+				pathZoomPoints: [
+					['100%', 0.4, 0.2],
+					['100%', 0.3, 0.2],
+					['100%', 0.1, 0.2],
+					['100%', 0.1, 0.2],
+					['100%', 0.01, 0.2],
+					['100%', 0, 0.33],
+				],
+			},
+		];
+
+
+		/* FUNCTION DEFINITIONS */
+
+		// ANIMATING THE SPLASH SCREEN
+		
+		function showSplashScreen() {
+			const appScreen = document.querySelector('#app');
+		
+			//hide the app screen
+			appScreen.style.display = "none";
+
+			TweenMax.to("#splash", 0, {
 				ease: Sine.easeInOut,
-				repeatDelay: 1.3,
-				onComplete: () => {
-					if (repeat === 0) {
-						REMOVE_CURRENT_ANIMATION();
+				opacity: 1
+			});
+
+			TweenMax.fromTo("#splashLogo", 1, {
+				opacity: 0,
+				scale:0.3,
+				ease: Sine.easeInOut
+			},{
+				scale:1,
+				opacity: 1
+			});
+			
+			TweenMax.fromTo("#welcomeText p",1 ,{
+				
+				ease: Sine.easeIn,
+				opacity: 0,
+				scale: 0
+			},{
+				delay: 0.5,
+				ease: Sine.easeOut,
+				opacity: 1,
+				scale:1
+			});
+
+			TweenMax.to("#welcomeText p", 0.5, {
+				delay: 3.5,
+				opacity:0,
+				scale: 1,
+				ease: Sine.easeOut
+			});
+			TweenMax.to("#splashLogo", 0.5, {
+				delay: 4,
+				scale: 0,
+				ease: Sine.easeOut
+			});
+
+			TweenMax.to("#welcomeBg", 0.3, {
+				delay: 4,
+				opacity:0,
+				ease: Sine.easeInOut,
+				onComplete: function () {
+					appScreen.style.display = "";
+					appScreen.style.opacity = "1";
+				}
+			});
+		}
+
+		showSplashScreen();
+
+
+		// MAIN DRAW Function
+		const DRAW = (path, duration, length, repeat) => {
+			REMOVE_CURRENT_ANIMATION();
+			const STROKE_WIDTH = 15;
+			TLM.fromTo(
+				path,
+				duration, {
+					strokeWidth: STROKE_WIDTH,
+					strokeDasharray: length,
+					strokeDashoffset: length,
+				}, {
+					delay: 2,
+					stroke: '#679DF6',
+					strokeWidth: STROKE_WIDTH,
+					strokeDasharray: length,
+					strokeDashoffset: 0,
+					repeat: repeat,
+					ease: Sine.easeInOut,
+					repeatDelay: 1.3,
+					onComplete: () => {
+						if (repeat === 0) {
+							REMOVE_CURRENT_ANIMATION();
+						}
 					}
 				}
-			}
-		);
-	};
-
-
-	/* FUNCTIONS FOR THE ANIMATING THE MAP USING CLASSES, SET THE START POINT AND DROP DOWN MENU */
-
-	// NEW DROP DOWN CODE ********* START
-
-	// Dropdown opens on page load// or at end of splash animation, then closes again
-	sneakPeakDropDown();
-
-	// if anywhere in the map is clicked the dropdown will close
-	MAP_SVG.addEventListener('click', function (e) {
-		openFullScreen();
-		closeDropDown();
-		//reset the place holder text to where to?
-		PLACE_HOLDER.textContent = "Where to?";
-
-		DROP_DOWN_ITEM_START.forEach((item, i) => {
-			// toggle the hidden class on each item in the list (unhiding them)
-			if (i !== 0) {
-				item.classList.add('hidden');
-			} else {
-				item.classList.remove('hidden');
-			}
-			// PATH_FINDER.classList.add('hidden'); // hide pathfinder dropdown
-			// hide endpoint menu while starting point is being selected
-			END_POINT.classList.remove('hidden');
-
-			// Update to and from values to prevent errors when drop downs are left open upon outside click on map
-			placeholderStart.textContent = parkFeature[id].name;
-			// Reset destination display text
-			placeholderEnd.textContent = 'Where to?'
-
-		});
-
-		DROP_DOWN_ITEM_END.forEach((item, i) => {
-			// toggle the hidden class on each item in the list (unhiding them)
-			if (i !== 0) {
-				item.classList.add('hidden');
-			} else {
-				item.classList.remove('hidden');
-			}
-			// Reset dropdown text value to select destination
-			END_POINT.classList.remove('hidden');
-		});
-
-	});
-
-	TOP_BAR.addEventListener('click', function () {
-		openFullScreen();
-		// change the text on place holder
-		PLACE_HOLDER.textContent = "Select Destination";
-
-		if (dropdownState) {
-			closeDropDown();
-		} else {
-			openDropDown();
-		}
-
-		placeholderStart.textContent = parkFeature[currentLocation].name;
-		placeholderStart.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
-		placeholderStart.style.color = "#f7f2db";
-
-
-		// To accomidate the dropdowns removing redundent locations
-		if (destination) {
-			placeholderEnd.textContent = parkFeature[destination].name;
-		}
-	});
-
-
-	// Create event listener on drop down menu
-	DROP_DOWN_START.addEventListener('click', function () {
-		// Hide the endpoint select
-		END_POINT.classList.toggle('hidden');
-
-		// Loop through the elements in the drop down and add event listeners to them
-		// i represents index of item in array
-		DROP_DOWN_ITEM_START.forEach((item, i) => {
-
-			if (i - 1 === currentLocation) {
-				item.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
-				item.style.color = '#f7f2db';
-				placeholderStart.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
-				placeholderStart.style.color = "#f7f2db";
-
-			} else {
-				item.style.backgroundColor = "#FAF7E9";
-				item.style.color = '#383838';
-			}
-
-			// toggle the hidden class on each item in the list (unhiding them)
-			// hide destination from starting list
-			item.classList.toggle('hidden');
-			// Add the event listener to the item
-			item.addEventListener('click', function () {
-				startDropDownState = !startDropDownState;
-				// will set destination location based item in dropdown being selected
-				if (i !== 0) {
-					currentLocation = i - 1;
-				}
-
-				placeholderStart.textContent = parkFeature[currentLocation].name;
-			});
-		});
-		startDropDownState = false;
-
-	});
-
-	// Create event listener on drop down menu
-	DROP_DOWN_END.addEventListener('click', function () {
-		// Loop through the elements in the drop down and add event listeners to them
-		DROP_DOWN_ITEM_END.forEach((item, i) => {
-
-			if (i - 1 === destination) {
-				item.style.backgroundColor = BACKGROUND_COLORS[destination];
-				item.style.color = '#f7f2db';
-				placeholderEnd.style.backgroundColor = BACKGROUND_COLORS[destination];
-				placeholderEnd.style.color = "#f7f2db";
-
-			} else {
-				item.style.backgroundColor = "#FAF7E9";
-				item.style.color = '#383838';
-			}
-
-			// toggle the hidden class on each item in the list (unhiding them)
-			// hide destination if it has been selected as start position
-			item.classList.toggle('hidden');
-			// Add the event listener to the item
-			item.addEventListener('click', function () {
-				endDropDownState = !endDropDownState;
-				// will set destination location based item in drop down being selected
-				if (i !== 0) {
-					destination = i - 1;
-				}
-
-				placeholderEnd.textContent = parkFeature[destination].name;
-			});
-		});
-		endDropDownState = false;
-	});
-
-	// Handle Go button event, will execute zoom function upon click
-	GO_BTN.addEventListener('click', function () {
-		// Call zoom function based on current destination selection
-		if (!destination) {
-			destination = 0;
-		}
-		console.log('Loc: ' + currentLocation + ' ' + parkFeature[currentLocation].name);
-		console.log('Dest: ' + destination + ' ' + parkFeature[destination].name);
-		pathZoomIn(currentLocation, destination);
-
-		//retrieves the path name,duration, length and repeat info from paths array inside the parkFeature array.
-		pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[destination][0]);
-		duration = parkFeature[currentLocation].paths[destination][1];
-		length = parkFeature[currentLocation].paths[destination][2];
-		repeat = parkFeature[currentLocation].paths[destination][3];
-
-		//Animates the path
-		DRAW(pathToDraw, duration, length, repeat);
-
-		// Hide with the path finder menu
-		closeDropDown();
-
-		PLACE_HOLDER.textContent = "Navigating...";
-	});
-
-	// NEW DROP DOWN CODE ********* END
-	// ************************************************************************************************
-
-	/* OPENING AND CLOSING THE INFORMATION PANEL AND POPULATING IT WITH THE CONTENT */
-
-	// opening the info panel and populating it with content based on the id and tab determined from the URL
-	if (!isNaN(id)) {
-		setContent();
-		openInfoPanel();
-
-	} else {
-		id = 0;
-	}
-
-	// a user can use TAB key to bring focus to different tabs
-	// this loop changes the id based on the tab that is being focused
-	for (let i in TABS) {
-		TABS[i].onfocus = function () {
-			id = i;
+			);
 		};
-	}
 
-	// this function opens the info panel when ENTER key is pressed
-	document.body.onkeyup = function (e) {
-		if (e.keyCode === 13) {
-			// closing the info panel before changing content
-			closeInfoPanel();
-			// using the setTimeout to delay and sync the loading of content with the animation
-			// setting the content in the info panel
-			setTimeout(setContent, 350);
-			// opening the panel with new content
-			setTimeout(openInfoPanel, 500);
-		}
-	};
 
-	// setting event listener on each tab using a loop (to reduce redundant code)
-	// will allow the user to click each tab and based on the tab selected, it will populate the content
-	for (let i in TABS) {
-		// applying a function to onclick event of each tab
-		TABS[i].onclick = function () {
+		/* FUNCTIONS FOR THE ANIMATING THE MAP USING CLASSES, SET THE START POINT AND DROP DOWN MENU */
+
+		// NEW DROP DOWN CODE ********* START
+
+		// Dropdown opens on page load// or at end of splash animation, then closes again
+		sneakPeakDropDown();
+
+		// if anywhere in the map is clicked the dropdown will close
+		MAP_SVG.addEventListener('click', function (e) {
 			openFullScreen();
-			REMOVE_CURRENT_ANIMATION();
-			// setting the id and the content based on the id
-			id = i;
-			//update current location value based on tab clicked
-			currentLocation = parseInt(i);
-			// closing the info panel before changing content
-			closeInfoPanel();
-			// using the setTimeout to delay and sync the loading of content with the animation
-			// setting the content in the info panel
-			setTimeout(setContent, 350);
-			// opening the panel with new content
-			openInfoPanel();
-			//update starting point text to respresent new starting location
+			closeDropDown();
+			//reset the place holder text to where to?
+			PLACE_HOLDER.textContent = "Where to?";
+
+			DROP_DOWN_ITEM_START.forEach((item, i) => {
+				// toggle the hidden class on each item in the list (unhiding them)
+				if (i !== 0) {
+					item.classList.add('hidden');
+				} else {
+					item.classList.remove('hidden');
+				}
+				// PATH_FINDER.classList.add('hidden'); // hide pathfinder dropdown
+				// hide endpoint menu while starting point is being selected
+				END_POINT.classList.remove('hidden');
+
+				// Update to and from values to prevent errors when drop downs are left open upon outside click on map
+				placeholderStart.textContent = parkFeature[id].name;
+				// Reset destination display text
+				placeholderEnd.textContent = 'Where to?'
+
+			});
+
+			DROP_DOWN_ITEM_END.forEach((item, i) => {
+				// toggle the hidden class on each item in the list (unhiding them)
+				if (i !== 0) {
+					item.classList.add('hidden');
+				} else {
+					item.classList.remove('hidden');
+				}
+				// Reset dropdown text value to select destination
+				END_POINT.classList.remove('hidden');
+			});
+
+		});
+
+		TOP_BAR.addEventListener('click', function () {
+			openFullScreen();
+			// change the text on place holder
+			PLACE_HOLDER.textContent = "Select Destination";
+
+			if (dropdownState) {
+				closeDropDown();
+			} else {
+				openDropDown();
+			}
+
 			placeholderStart.textContent = parkFeature[currentLocation].name;
 			placeholderStart.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
 			placeholderStart.style.color = "#f7f2db";
-			// hide the path finder menu
-			PATH_FINDER.classList.add('hidden');
-		}
-	};
 
-	// setting event listeners on each of the icons on the map
-	// selects the icons from the map using their IDs
-	// goes through a loop to open the specific tab
-	for (let i in MAP_ICONS) {
-		MAP_ICONS[i].onclick = function () {
-			closeInfoPanel();
-			id = i;
-			currentLocation = i;
+
+			// To accomidate the dropdowns removing redundent locations
+			if (destination) {
+				placeholderEnd.textContent = parkFeature[destination].name;
+			}
+		});
+
+
+		// Create event listener on drop down menu
+		DROP_DOWN_START.addEventListener('click', function () {
+			// Hide the endpoint select
+			END_POINT.classList.toggle('hidden');
+
+			// Loop through the elements in the drop down and add event listeners to them
+			// i represents index of item in array
+			DROP_DOWN_ITEM_START.forEach((item, i) => {
+
+				if (i - 1 === currentLocation) {
+					item.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
+					item.style.color = '#f7f2db';
+					placeholderStart.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
+					placeholderStart.style.color = "#f7f2db";
+
+				} else {
+					item.style.backgroundColor = "#FAF7E9";
+					item.style.color = '#383838';
+				}
+
+				// toggle the hidden class on each item in the list (unhiding them)
+				// hide destination from starting list
+				item.classList.toggle('hidden');
+				// Add the event listener to the item
+				item.addEventListener('click', function () {
+					startDropDownState = !startDropDownState;
+					// will set destination location based item in dropdown being selected
+					if (i !== 0) {
+						currentLocation = i - 1;
+					}
+
+					placeholderStart.textContent = parkFeature[currentLocation].name;
+				});
+			});
+			startDropDownState = false;
+
+		});
+
+		// Create event listener on drop down menu
+		DROP_DOWN_END.addEventListener('click', function () {
+			// Loop through the elements in the drop down and add event listeners to them
+			DROP_DOWN_ITEM_END.forEach((item, i) => {
+
+				if (i - 1 === destination) {
+					item.style.backgroundColor = BACKGROUND_COLORS[destination];
+					item.style.color = '#f7f2db';
+					placeholderEnd.style.backgroundColor = BACKGROUND_COLORS[destination];
+					placeholderEnd.style.color = "#f7f2db";
+
+				} else {
+					item.style.backgroundColor = "#FAF7E9";
+					item.style.color = '#383838';
+				}
+
+				// toggle the hidden class on each item in the list (unhiding them)
+				// hide destination if it has been selected as start position
+				item.classList.toggle('hidden');
+				// Add the event listener to the item
+				item.addEventListener('click', function () {
+					endDropDownState = !endDropDownState;
+					// will set destination location based item in drop down being selected
+					if (i !== 0) {
+						destination = i - 1;
+					}
+
+					placeholderEnd.textContent = parkFeature[destination].name;
+				});
+			});
+			endDropDownState = false;
+		});
+
+		// Handle Go button event, will execute zoom function upon click
+		GO_BTN.addEventListener('click', function () {
+			// Call zoom function based on current destination selection
+			if (!destination) {
+				destination = 0;
+			}
+			console.log('Loc: ' + currentLocation + ' ' + parkFeature[currentLocation].name);
+			console.log('Dest: ' + destination + ' ' + parkFeature[destination].name);
+			pathZoomIn(currentLocation, destination);
+
+			//retrieves the path name,duration, length and repeat info from paths array inside the parkFeature array.
+			pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[destination][0]);
+			duration = parkFeature[currentLocation].paths[destination][1];
+			length = parkFeature[currentLocation].paths[destination][2];
+			repeat = parkFeature[currentLocation].paths[destination][3];
+
+			//Animates the path
+			DRAW(pathToDraw, duration, length, repeat);
+
+			// Hide with the path finder menu
+			closeDropDown();
+
+			PLACE_HOLDER.textContent = "Navigating...";
+		});
+
+		// NEW DROP DOWN CODE ********* END
+		// ************************************************************************************************
+
+		/* OPENING AND CLOSING THE INFORMATION PANEL AND POPULATING IT WITH THE CONTENT */
+
+		// opening the info panel and populating it with content based on the id and tab determined from the URL
+		if (!isNaN(id)) {
 			setContent();
 			openInfoPanel();
-		};
-	}
-	// minimizing/maximizing the infoPanel on clicking the title bar
-	TITLE_BAR.onclick = function () {
-		minimizeInfoPanel();
-	};
 
-	// closing the tab on close button click
-	CLOSE_BUTTON.onclick = function () {
-		closeInfoPanel();
-
-	};
-
-	// Functions to reset the appearance of the tabs
-	function resetTabAppearance() {
-		for (let i = 0; i < 6; i++) {
-			TABS[i].style.backgroundColor = '';
-			TITLE_BAR.style.backgroundColor = '#383838';
+		} else {
+			id = 0;
 		}
 
-		//reset info to the top - the info will scroll to the top once click to other tab
-		document.getElementById('contentBox').scrollTop = 0;
-	}
+		// a user can use TAB key to bring focus to different tabs
+		// this loop changes the id based on the tab that is being focused
+		for (let i in TABS) {
+			TABS[i].onfocus = function () {
+				id = i;
+			};
+		}
 
-	// function to set all the content inside the info panel
-	function setContent() {
-		resetTabAppearance();
-		activeColour = parkFeature[id].colour;
-		TABS[id].style.backgroundColor = activeColour;
-		TITLE_BAR.style.backgroundColor = activeColour;
-		TITLE.textContent = parkFeature[id].name;
-		TITLE_BAR_ICON.src = parkFeature[id].icon;
-		for (let j in GALLERY_IMAGES) GALLERY_IMAGES[j].src = parkFeature[id].galleryImages[j];
-		ABOUT_TEXT.innerHTML = parkFeature[id].about;
-	};
+		// this function opens the info panel when ENTER key is pressed
+		document.body.onkeyup = function (e) {
+			if (e.keyCode === 13) {
+				// closing the info panel before changing content
+				closeInfoPanel();
+				// using the setTimeout to delay and sync the loading of content with the animation
+				// setting the content in the info panel
+				setTimeout(setContent, 350);
+				// opening the panel with new content
+				setTimeout(openInfoPanel, 500);
+			}
+		};
 
-	// this function animates the infoPanel and its contents when it opens up
-	function openInfoPanel() {
-		// animating the panel while opening
-		if (infoPanelState < 2) {
-			if (infoPanelState === 0) {
+		// setting event listener on each tab using a loop (to reduce redundant code)
+		// will allow the user to click each tab and based on the tab selected, it will populate the content
+		for (let i in TABS) {
+			// applying a function to onclick event of each tab
+			TABS[i].onclick = function () {
+				openFullScreen();
+				REMOVE_CURRENT_ANIMATION();
+				// setting the id and the content based on the id
+				id = i;
+				//update current location value based on tab clicked
+				currentLocation = parseInt(i);
+				// closing the info panel before changing content
+				closeInfoPanel();
+				// using the setTimeout to delay and sync the loading of content with the animation
+				// setting the content in the info panel
+				setTimeout(setContent, 350);
+				// opening the panel with new content
+				openInfoPanel();
+				//update starting point text to respresent new starting location
+				placeholderStart.textContent = parkFeature[currentLocation].name;
+				placeholderStart.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
+				placeholderStart.style.color = "#f7f2db";
+				// hide the path finder menu
+				PATH_FINDER.classList.add('hidden');
+			}
+		};
+
+		// setting event listeners on each of the icons on the map
+		// selects the icons from the map using their IDs
+		// goes through a loop to open the specific tab
+		for (let i in MAP_ICONS) {
+			MAP_ICONS[i].onclick = function () {
+				closeInfoPanel();
+				id = i;
+				currentLocation = i;
+				setContent();
+				openInfoPanel();
+			};
+		}
+		// minimizing/maximizing the infoPanel on clicking the title bar
+		TITLE_BAR.onclick = function () {
+			minimizeInfoPanel();
+		};
+
+		// closing the tab on close button click
+		CLOSE_BUTTON.onclick = function () {
+			closeInfoPanel();
+
+		};
+
+		// Functions to reset the appearance of the tabs
+		function resetTabAppearance() {
+			for (let i = 0; i < 6; i++) {
+				TABS[i].style.backgroundColor = '';
+				TITLE_BAR.style.backgroundColor = '#383838';
+			}
+
+			//reset info to the top - the info will scroll to the top once click to other tab
+			document.getElementById('contentBox').scrollTop = 0;
+		}
+
+		// function to set all the content inside the info panel
+		function setContent() {
+			resetTabAppearance();
+			activeColour = parkFeature[id].colour;
+			TABS[id].style.backgroundColor = activeColour;
+			TITLE_BAR.style.backgroundColor = activeColour;
+			TITLE.textContent = parkFeature[id].name;
+			TITLE_BAR_ICON.src = parkFeature[id].icon;
+			for (let j in GALLERY_IMAGES) GALLERY_IMAGES[j].src = parkFeature[id].galleryImages[j];
+			ABOUT_TEXT.innerHTML = parkFeature[id].about;
+		};
+
+		// this function animates the infoPanel and its contents when it opens up
+		function openInfoPanel() {
+			// animating the panel while opening
+			if (infoPanelState < 2) {
+				if (infoPanelState === 0) {
+					TweenMax.fromTo(
+						'#infoPanel',
+						0.75, {
+							bottom: '-100vh',
+						}, {
+							delay: 0.5,
+							bottom: '7vh',
+							ease: Sine.easeOut,
+						}
+					);
+				} else if (infoPanelState === 1) {
+					TweenMax.fromTo(
+						'#infoPanel',
+						0.75, {
+							bottom: INFO_PANEL.style.bottom,
+						}, {
+							bottom: '7vh',
+							ease: Sine.easeOut,
+						}
+					);
+				}
+
+				// scaling the map to compensate for the opening of the info panel
+				// if condition to only make it work on mobile
+				if (window.innerWidth < 769) {
+					featureZoomIn();
+				}
+				// setting state of the info panel to OPEN
+				infoPanelState = 2;
+
+				//retrieves the path name,duration, length and repeat info from paths array inside the parkFeature array.
+				pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[id][0]);
+				duration = parkFeature[currentLocation].paths[id][1];
+				length = parkFeature[currentLocation].paths[id][2];
+				repeat = parkFeature[currentLocation].paths[id][3];
+
+				//Animates the path
+				DRAW(pathToDraw, duration, length, repeat);
+			}
+		}
+
+		// this function animates the infoPanel and its contents when it closes
+		function closeInfoPanel() {
+			openFullScreen();
+			// animating the info panel while closing
+			if (infoPanelState > 0) {
 				TweenMax.fromTo(
 					'#infoPanel',
-					0.75, {
-						bottom: '-100vh',
+					1, {
+						bottom: INFO_PANEL.style.bottom,
 					}, {
-						delay: 0.5,
-						bottom: '7vh',
-						ease: Sine.easeOut,
+						bottom: '-100vh',
+						onComplete: function () {
+							resetTabAppearance();
+							// scaling the map back to full height
+							// if condition to only make it work on mobile
+							if (window.innerWidth < 769) {
+								// zooming out to the full map
+								console.log(destination);
+								if (destination) {
+									mapZoomOut(92);
+									pathZoomIn(currentLocation, destination);
+								} else
+									mapZoomOut(92);
+							}
+						},
 					}
 				);
-			} else if (infoPanelState === 1) {
+
+				// setting state of the info panel to CLOSED
+				infoPanelState = 0;
+			}
+		}
+
+		function minimizeInfoPanel() {
+			openFullScreen();
+			// animating the info panel while closing
+			if (infoPanelState === 2) {
 				TweenMax.fromTo(
 					'#infoPanel',
 					0.75, {
 						bottom: INFO_PANEL.style.bottom,
 					}, {
-						bottom: '7vh',
+						bottom: '-24vh',
 						ease: Sine.easeOut,
+						onComplete: function () {
+							resetTabAppearance();
+							// scaling the map back to full height
+							// if condition to only make it work on mobile
+							if (window.innerWidth < 769) {
+								// zooming out to the full map
+								if (destination) {
+									mapZoomOut(85);
+									pathZoomIn(currentLocation, destination);
+								} else
+									mapZoomOut(85);
+							}
+						},
 					}
 				);
+				TweenMax.to('#titleBar', 0.75, {
+					backgroundColor: '#383838',
+				});
+
+				// setting state of the info panel to MINIMIZED
+				infoPanelState = 1;
+			} else if (infoPanelState === 1) {
+				setContent();
+				openInfoPanel();
 			}
-
-			// scaling the map to compensate for the opening of the info panel
-			// if condition to only make it work on mobile
-			if (window.innerWidth < 769) {
-				featureZoomIn();
-			}
-			// setting state of the info panel to OPEN
-			infoPanelState = 2;
-
-			//retrieves the path name,duration, length and repeat info from paths array inside the parkFeature array.
-			pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[id][0]);
-			duration = parkFeature[currentLocation].paths[id][1];
-			length = parkFeature[currentLocation].paths[id][2];
-			repeat = parkFeature[currentLocation].paths[id][3];
-
-			//Animates the path
-			DRAW(pathToDraw, duration, length, repeat);
 		}
-	}
 
-	// this function animates the infoPanel and its contents when it closes
-	function closeInfoPanel() {
-		openFullScreen();
-		// animating the info panel while closing
-		if (infoPanelState > 0) {
-			TweenMax.fromTo(
-				'#infoPanel',
-				1, {
-					bottom: INFO_PANEL.style.bottom,
-				}, {
-					bottom: '-100vh',
-					onComplete: function () {
-						resetTabAppearance();
-						// scaling the map back to full height
-						// if condition to only make it work on mobile
-						if (window.innerWidth < 769) {
-							// zooming out to the full map
-							console.log(destination);
-							if (destination) {
-								mapZoomOut(92);
-								pathZoomIn(currentLocation, destination);
-							} else
-								mapZoomOut(92);
-						}
-					},
-				}
-			);
+		// ZOOM IN: PARK FEATURES
+		// this function takes the zoom level and scroll values to scroll and zoom the map to the visible area
+		function featureZoomIn() {
+			// variable to store the value to scroll from left
+			leftScroll = parkFeature[id].featureZoomPoints[2] * window.innerHeight;
 
-			// setting state of the info panel to CLOSED
-			infoPanelState = 0;
-		}
-	}
+			// variable to store the value to scroll from the top
+			topScroll = parkFeature[id].featureZoomPoints[1] * window.innerHeight;
 
-	function minimizeInfoPanel() {
-		openFullScreen();
-		// animating the info panel while closing
-		if (infoPanelState === 2) {
-			TweenMax.fromTo(
-				'#infoPanel',
-				0.75, {
-					bottom: INFO_PANEL.style.bottom,
-				}, {
-					bottom: '-24vh',
-					ease: Sine.easeOut,
-					onComplete: function () {
-						resetTabAppearance();
-						// scaling the map back to full height
-						// if condition to only make it work on mobile
-						if (window.innerWidth < 769) {
-							// zooming out to the full map
-							if (destination) {
-								mapZoomOut(85);
-								pathZoomIn(currentLocation, destination);
-							} else
-								mapZoomOut(85);
-						}
-					},
-				}
-			);
-			TweenMax.to('#titleBar', 0.75, {
-				backgroundColor: '#383838',
+			// variable to store the zoom level
+			zoomLevel = parkFeature[id].featureZoomPoints[0];
+
+			// animating the zoom
+			TweenMax.to('#svgMapObj', 2.5, {
+				delay: 0.5,
+				height: zoomLevel,
+				// ease: Sine.easeOut,
 			});
 
-			// setting state of the info panel to MINIMIZED
-			infoPanelState = 1;
-		} else if (infoPanelState === 1) {
-			setContent();
-			openInfoPanel();
+			// animating the scroll
+			TweenMax.to('#mapBox', 2.5, {
+				delay: 0.5,
+				height: '53.5vh',
+				scrollTo: {
+					y: topScroll,
+					x: leftScroll,
+				},
+				// ease: Sine.easeOut
+			});
 		}
-	}
 
-	// ZOOM IN: PARK FEATURES
-	// this function takes the zoom level and scroll values to scroll and zoom the map to the visible area
-	function featureZoomIn() {
-		// variable to store the value to scroll from left
-		leftScroll = parkFeature[id].featureZoomPoints[2] * window.innerHeight;
+		// ZOOM IN: NAVIGATION PATHS
+		// this function takes the zoom level and scroll values to scroll and zoom the map to the visible area
+		// ** added a start argument as parkfeature was not being updated dynamically before
+		function pathZoomIn(start, end) {
+			// variable to store the value to scroll from left
+			leftScroll = parkFeature[start].pathZoomPoints[end][2] * window.innerHeight;
 
-		// variable to store the value to scroll from the top
-		topScroll = parkFeature[id].featureZoomPoints[1] * window.innerHeight;
+			// variable to store the value to scroll from the top
+			topScroll = parkFeature[start].pathZoomPoints[end][1] * window.innerHeight;
 
-		// variable to store the zoom level
-		zoomLevel = parkFeature[id].featureZoomPoints[0];
+			// variable to store the zoom level
+			zoomLevel = parkFeature[start].pathZoomPoints[end][0];
 
-		// animating the zoom
-		TweenMax.to('#svgMapObj', 2.5, {
-			delay: 0.5,
-			height: zoomLevel,
-			// ease: Sine.easeOut,
-		});
+			// console.log('Left Scroll: ' + leftScroll + '\nTop Scroll: ' + topScroll + '\nZoom: ' + zoomLevel);
 
-		// animating the scroll
-		TweenMax.to('#mapBox', 2.5, {
-			delay: 0.5,
-			height: '53.5vh',
-			scrollTo: {
-				y: topScroll,
-				x: leftScroll,
-			},
-			// ease: Sine.easeOut
-		});
-	}
+			// animating the zoom
+			TweenMax.to('#svgMapObj', 1.75, {
+				height: zoomLevel,
+				ease: Sine.easeOut,
+			});
 
-	// ZOOM IN: NAVIGATION PATHS
-	// this function takes the zoom level and scroll values to scroll and zoom the map to the visible area
-	// ** added a start argument as parkfeature was not being updated dynamically before
-	function pathZoomIn(start, end) {
-		// variable to store the value to scroll from left
-		leftScroll = parkFeature[start].pathZoomPoints[end][2] * window.innerHeight;
-
-		// variable to store the value to scroll from the top
-		topScroll = parkFeature[start].pathZoomPoints[end][1] * window.innerHeight;
-
-		// variable to store the zoom level
-		zoomLevel = parkFeature[start].pathZoomPoints[end][0];
-
-		// console.log('Left Scroll: ' + leftScroll + '\nTop Scroll: ' + topScroll + '\nZoom: ' + zoomLevel);
-
-		// animating the zoom
-		TweenMax.to('#svgMapObj', 1.75, {
-			height: zoomLevel,
-			ease: Sine.easeOut,
-		});
-
-		// animating the scroll
-		TweenMax.to('#mapBox', 1.75, {
-			scrollTo: {
-				y: topScroll,
-				x: leftScroll,
-			},
-			ease: Sine.easeOut,
-		});
-	}
-
-	// this function animates the map back to fit the full screen
-	function mapZoomOut(mapHeight) {
-		// zooming out to the full map
-		// value passed is the visible height of the map
-		// TAKE FOOTER INTO ACCOUNT WHILE SETTING
-		TweenMax.to('#svgMapObj', 1.5, {
-			height: '100%',
-		});
-
-		TweenMax.to('#mapBox', 1.25, {
-			height: mapHeight + 'vh',
-		});
-	}
-
-
-	/* PINCH AND ZOOM */
-
-	// function to register touch when it starts
-	MAP_SVG.addEventListener('touchstart', function (e) {
-		// pushes the event in the array
-		evCache.push(e);
-		// console.log('start');
-		// gets the existing height of the map
-		height = parseInt(MAP_SVG_OBJ.style.height.replace('%', ''));
-	});
-
-	// function to register the end when the user stops the interaction
-	MAP_SVG.addEventListener('touchend', function (e) {
-		// console.log('end');
-
-		// reset the difference variable to prepare for the next pinch
-		if (evCache.length < 2)
-			prevDiff = -1;
-		// reset the event cache for the next pinch
-		for (let i = 0; i < evCache.length; i++) {
-			evCache = [];
+			// animating the scroll
+			TweenMax.to('#mapBox', 1.75, {
+				scrollTo: {
+					y: topScroll,
+					x: leftScroll,
+				},
+				ease: Sine.easeOut,
+			});
 		}
-	});
 
-	// function to register the pinch and then implement the zoom
-	MAP_SVG.addEventListener('touchmove', function (e) {
-		// console.log('height: ' + height);
-		// console.log('move');
+		// this function animates the map back to fit the full screen
+		function mapZoomOut(mapHeight) {
+			// zooming out to the full map
+			// value passed is the visible height of the map
+			// TAKE FOOTER INTO ACCOUNT WHILE SETTING
+			TweenMax.to('#svgMapObj', 1.5, {
+				height: '100%',
+			});
 
-		// inserting the event in the event cache array
-		for (let i = 0; i < evCache.length; i++) {
-			if (e.pointerId == evCache[i].pointerId) {
-				evCache[i] = e;
-				break;
+			TweenMax.to('#mapBox', 1.25, {
+				height: mapHeight + 'vh',
+			});
+		}
+
+
+		/* PINCH AND ZOOM */
+
+		// function to register touch when it starts
+		MAP_SVG.addEventListener('touchstart', function (e) {
+			// pushes the event in the array
+			evCache.push(e);
+			// console.log('start');
+			// gets the existing height of the map
+			height = parseInt(MAP_SVG_OBJ.style.height.replace('%', ''));
+		});
+
+		// function to register the end when the user stops the interaction
+		MAP_SVG.addEventListener('touchend', function (e) {
+			// console.log('end');
+
+			// reset the difference variable to prepare for the next pinch
+			if (evCache.length < 2)
+				prevDiff = -1;
+			// reset the event cache for the next pinch
+			for (let i = 0; i < evCache.length; i++) {
+				evCache = [];
 			}
-		}
+		});
 
-		// to be executed when two touches are detected simultaneously
-		if (evCache.length == 2) {
-			console.log(e);
-			// get the distance between two touches
-			let curDiffX = 0;
-			let curDiffY = 0;
+		// function to register the pinch and then implement the zoom
+		MAP_SVG.addEventListener('touchmove', function (e) {
+			// console.log('height: ' + height);
+			// console.log('move');
 
-			var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
-			if (!(isSafari)) {
-				curDiffX = Math.abs(evCache[0].touches[0].clientX - evCache[0].touches[1].clientX);
-				curDiffY = Math.abs(evCache[0].touches[0].clientY - evCache[0].touches[1].clientY);
-			}
-
-			let curDiff = Math.hypot(curDiffX, curDiffY);
-
-			if (prevDiff > 0) {
-				// to be executed only when the distance is increasing and only if the map height is less than 298%
-				if (curDiff > prevDiff && height < 298) {
-					// console.log('Zoom IN');
-					height = height + curDiff * 0.025;
-				}
-
-				// to be executed only when the distance is decreasing and only if the map height is more than 102%
-				if (curDiff < prevDiff && height >= 105) {
-					// console.log('Zoom OUT');
-					height = height - curDiff * 0.02;
+			// inserting the event in the event cache array
+			for (let i = 0; i < evCache.length; i++) {
+				if (e.pointerId == evCache[i].pointerId) {
+					evCache[i] = e;
+					break;
 				}
 			}
 
-			// animate the zoom
-			TweenMax.to('#svgMapObj', 0.4, {
-				height: height + '%',
+			// to be executed when two touches are detected simultaneously
+			if (evCache.length == 2) {
+				console.log(e);
+				// get the distance between two touches
+				let curDiffX = 0;
+				let curDiffY = 0;
+
+				var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+				if (!(isSafari)) {
+					curDiffX = Math.abs(evCache[0].touches[0].clientX - evCache[0].touches[1].clientX);
+					curDiffY = Math.abs(evCache[0].touches[0].clientY - evCache[0].touches[1].clientY);
+				}
+
+				let curDiff = Math.hypot(curDiffX, curDiffY);
+
+				if (prevDiff > 0) {
+					// to be executed only when the distance is increasing and only if the map height is less than 298%
+					if (curDiff > prevDiff && height < 298) {
+						// console.log('Zoom IN');
+						height = height + curDiff * 0.025;
+					}
+
+					// to be executed only when the distance is decreasing and only if the map height is more than 102%
+					if (curDiff < prevDiff && height >= 105) {
+						// console.log('Zoom OUT');
+						height = height - curDiff * 0.02;
+					}
+				}
+
+				// animate the zoom
+				TweenMax.to('#svgMapObj', 0.4, {
+					height: height + '%',
+					ease: Sine.easeOut
+				});
+
+				// set prevDiff to currDiff to check the increase/decrease in pinch
+				prevDiff = curDiff;
+			}
+		}, {
+			passive: false
+		});
+
+		/* PINCH AND ZOOM -- FOR iDevices */
+
+		// function to register touch when it starts
+		MAP_SVG.addEventListener('gesturestart', function (e) {
+			// pushes the event in the array
+			evCache.push(e);
+			// console.log('ipad start');
+			// gets the existing height of the map
+			height = parseInt(MAP_SVG_OBJ.style.height.replace('%', ''));
+		});
+
+		// function to register the end when the user stops the interaction
+		MAP_SVG.addEventListener('gestureend', function (e) {
+			// console.log('ipad end');
+
+			// reset the difference variable to prepare for the next pinch
+			if (evCache.length < 2)
+				prevDiff = -1;
+			// reset the event cache for the next pinch
+			for (let i = 0; i < evCache.length; i++) {
+				evCache = [];
+			}
+		});
+
+		// function to register the pinch and then implement the zoom
+		MAP_SVG.addEventListener('gesturechange', function (e) {
+			// console.log('height: ' + height);
+			// console.log('ipad change');
+			// console.log(e);
+			e.preventDefault();
+			// console.log('before: ' + height);
+
+			if (height >= 90 && height <= 300) {
+				let scale = parseFloat(e.scale);
+				console.log(scale);
+				height = 100 * scale;
+				if (height < 100)
+					height = 100;
+				else if (height > 300)
+					height = 300;
+				console.log(height);
+
+				TweenMax.to('#svgMapObj', 0.2, {
+					height: height + '%',
+					ease: Sine.easeOut
+				});
+			}
+		}, {
+			passive: false
+		});
+
+
+		/* EXPANDING THE IMAGE GALLERY */
+
+		//set the slide Index (global image counter)
+		let slideIndex = 0;
+
+		// function open the image gallery in full size
+		function openModal(index) {
+			slideIndex = index;
+			MODAL_CONTENT.style.display = "flex";
+			EXPANDED_IMG.style.display = "flex";
+			CLOSE_GALLERY.style.display = "flex";
+
+			BIG_IMAGES.src = parkFeature[id].galleryImages[index];
+
+			//animate the image gallery
+			TweenMax.from('#expandedImg', 0.5, {
+				opacity: 0,
 				ease: Sine.easeOut
 			});
 
-			// set prevDiff to currDiff to check the increase/decrease in pinch
-			prevDiff = curDiff;
+		};
+
+		//identify which image selected by setting i on gallery images
+		for (let i in GALLERY_IMAGES) {
+			//set the image selected
+			if (!isNaN(i)) {
+				GALLERY_IMAGES[i].onclick = function () {
+					//pick the number of image
+					openModal(parseInt(i));
+				};
+			}
+
 		}
-	}, {
-		passive: false
-	});
-
-	/* PINCH AND ZOOM -- FOR iDevices */
-
-	// function to register touch when it starts
-	MAP_SVG.addEventListener('gesturestart', function (e) {
-		// pushes the event in the array
-		evCache.push(e);
-		// console.log('ipad start');
-		// gets the existing height of the map
-		height = parseInt(MAP_SVG_OBJ.style.height.replace('%', ''));
-	});
-
-	// function to register the end when the user stops the interaction
-	MAP_SVG.addEventListener('gestureend', function (e) {
-		// console.log('ipad end');
-
-		// reset the difference variable to prepare for the next pinch
-		if (evCache.length < 2)
-			prevDiff = -1;
-		// reset the event cache for the next pinch
-		for (let i = 0; i < evCache.length; i++) {
-			evCache = [];
+		//event handler to next image
+		NEXT.onclick = function () {
+			slideIndex++;
+			slideIndex = slideIndex % GALLERY_IMAGES.length;
+			openModal(slideIndex);
 		}
-	});
-
-	// function to register the pinch and then implement the zoom
-	MAP_SVG.addEventListener('gesturechange', function (e) {
-		// console.log('height: ' + height);
-		// console.log('ipad change');
-		// console.log(e);
-		e.preventDefault();
-		// console.log('before: ' + height);
-
-		if (height >= 90 && height <= 300) {
-			let scale = parseFloat(e.scale);
-			console.log(scale);
-			height = 100 * scale;
-			if (height < 100)
-				height = 100;
-			else if (height > 300)
-				height = 300;
-			console.log(height);
-
-			TweenMax.to('#svgMapObj', 0.2, {
-				height: height + '%',
-				ease: Sine.easeOut
-			});
+		//event handler to previous image
+		PREV.onclick = function () {
+			slideIndex--;
+			if (slideIndex < 0) {
+				slideIndex = GALLERY_IMAGES.length - 1;
+			}
+			openModal(slideIndex);
 		}
-	}, {
-		passive: false
-	});
 
+		//event handler close images window
+		function closeImgGallery() {
+			MODAL_CONTENT.style.display = "none";
+			EXPANDED_IMG.style.display = "none";
+			CLOSE_GALLERY.style.display = "none";
+		}
 
-	/* EXPANDING THE IMAGE GALLERY */
-
-	//set the slide Index (global image counter)
-	let slideIndex = 0;
-
-	// function open the image gallery in full size
-	function openModal(index) {
-		slideIndex = index;
-		MODAL_CONTENT.style.display = "flex";
-		EXPANDED_IMG.style.display = "flex";
-		CLOSE_GALLERY.style.display = "flex";
-
-		BIG_IMAGES.src = parkFeature[id].galleryImages[index];
-
-		//animate the image gallery
-		TweenMax.from('#expandedImg', 0.5, {
-			opacity: 0,
-			ease: Sine.easeOut
+		CLOSE_GALLERY.addEventListener('click', function () {
+			closeImgGallery();
 		});
+
+		// animation for dropdown on pageload
+		function sneakPeakDropDown() {
+			PATH_FINDER.classList.remove('hidden');
+			TweenMax
+				.from(PATH_FINDER, 1, {
+					delay: 0.5,
+					opacity: 0,
+					top: 15,
+					onComplete: function () {
+						TweenMax
+							.to(PATH_FINDER, 0.8, {
+								delay: 2,
+								opacity: 0,
+								top: 15,
+								onComplete: function () {
+									PATH_FINDER.classList.add('hidden');
+									PATH_FINDER.style.opacity = 1;
+									PATH_FINDER.style.top = "10vh";
+								}
+							});
+					}
+				});
+		}
+		// dropdown animation to open
+		function openDropDown() {
+			PATH_FINDER.classList.remove('hidden');
+			TweenMax
+				.from(PATH_FINDER, 0.8, {
+					delay: 0.2,
+					opacity: 0,
+					top: 15,
+					onComplete: function () {
+						PATH_FINDER.style.opacity = 1;
+						PATH_FINDER.style.top = "10vh";
+						dropdownState = true;
+					}
+				});
+		}
+		// dropdown animation to close
+		function closeDropDown() {
+			TweenMax
+				.to(PATH_FINDER, 0.7, {
+					delay: 0.2,
+					opacity: 0,
+					top: 15,
+					onComplete: function () {
+						PATH_FINDER.style.opacity = 1;
+						PATH_FINDER.style.top = "10vh";
+						dropdownState = false;
+						PATH_FINDER.classList.add('hidden');
+					}
+				});
+		}
+
+		function openFullScreen() {
+			// const PAGE = document.documentElement;
+			// if (!fullScreen) {
+			// 	if (PAGE.requestFullscreen) {
+			// 		PAGE.requestFullscreen();
+			// 	} else if (PAGE.mozRequestFullScreen) {
+			// 		/* Firefox */
+			// 		PAGE.mozRequestFullScreen();
+			// 	} else if (PAGE.webkitRequestFullscreen) {
+			// 		/* Chrome, Safari and Opera */
+			// 		PAGE.webkitRequestFullscreen();
+			// 	} else if (PAGE.msRequestFullscreen) {
+			// 		/* IE/Edge */
+			// 		PAGE.msRequestFullscreen();
+			// 	}
+			// }
+		}
+
+		// END IMAGE GALLERY SCRIPT ----------
 
 	};
-
-	//identify which image selected by setting i on gallery images
-	for (let i in GALLERY_IMAGES) {
-		//set the image selected
-		if (!isNaN(i)) {
-			GALLERY_IMAGES[i].onclick = function () {
-				//pick the number of image
-				openModal(parseInt(i));
-			};
-		}
-
-	}
-	//event handler to next image
-	NEXT.onclick = function () {
-		slideIndex++;
-		slideIndex = slideIndex % GALLERY_IMAGES.length;
-		openModal(slideIndex);
-	}
-	//event handler to previous image
-	PREV.onclick = function () {
-		slideIndex--;
-		if (slideIndex < 0) {
-			slideIndex = GALLERY_IMAGES.length - 1;
-		}
-		openModal(slideIndex);
-	}
-
-	//event handler close images window
-	function closeImgGallery() {
-		MODAL_CONTENT.style.display = "none";
-		EXPANDED_IMG.style.display = "none";
-		CLOSE_GALLERY.style.display = "none";
-	}
-
-	CLOSE_GALLERY.addEventListener('click', function () {
-		closeImgGallery();
-	});
-
-	// animation for dropdown on pageload
-	function sneakPeakDropDown() {
-		PATH_FINDER.classList.remove('hidden');
-		TweenMax
-			.from(PATH_FINDER, 1, {
-				delay: 0.5,
-				opacity: 0,
-				top: 15,
-				onComplete: function () {
-					TweenMax
-						.to(PATH_FINDER, 0.8, {
-							delay: 2,
-							opacity: 0,
-							top: 15,
-							onComplete: function () {
-								PATH_FINDER.classList.add('hidden');
-								PATH_FINDER.style.opacity = 1;
-								PATH_FINDER.style.top = "10vh";
-							}
-						});
-				}
-			});
-	}
-	// dropdown animation to open
-	function openDropDown() {
-		PATH_FINDER.classList.remove('hidden');
-		TweenMax
-			.from(PATH_FINDER, 0.8, {
-				delay: 0.2,
-				opacity: 0,
-				top: 15,
-				onComplete: function () {
-					PATH_FINDER.style.opacity = 1;
-					PATH_FINDER.style.top = "10vh";
-					dropdownState = true;
-				}
-			});
-	}
-	// dropdown animation to close
-	function closeDropDown() {
-		TweenMax
-			.to(PATH_FINDER, 0.7, {
-				delay: 0.2,
-				opacity: 0,
-				top: 15,
-				onComplete: function () {
-					PATH_FINDER.style.opacity = 1;
-					PATH_FINDER.style.top = "10vh";
-					dropdownState = false;
-					PATH_FINDER.classList.add('hidden');
-				}
-			});
-	}
-
-	function openFullScreen() {
-		// const PAGE = document.documentElement;
-		// if (!fullScreen) {
-		// 	if (PAGE.requestFullscreen) {
-		// 		PAGE.requestFullscreen();
-		// 	} else if (PAGE.mozRequestFullScreen) {
-		// 		/* Firefox */
-		// 		PAGE.mozRequestFullScreen();
-		// 	} else if (PAGE.webkitRequestFullscreen) {
-		// 		/* Chrome, Safari and Opera */
-		// 		PAGE.webkitRequestFullscreen();
-		// 	} else if (PAGE.msRequestFullscreen) {
-		// 		/* IE/Edge */
-		// 		PAGE.msRequestFullscreen();
-		// 	}
-		// }
-	}
-
-	// END IMAGE GALLERY SCRIPT ----------
-
-};
