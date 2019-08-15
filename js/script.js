@@ -44,8 +44,21 @@ window.onload = function () {
 	//placeholder
 	const PLACE_HOLDER = document.querySelector('#placeholder');
 
-	//New TimeLine Max const for GSAP
-	const TLM = new TimelineMax({});
+
+	//to be deleted
+	const TLM = new TimelineMax({
+
+	});
+	//GSAP TimeLine Max const for Path Animation
+	const TLM_PATH = new TimelineMax({
+		repeat: -1,
+		repeatDelay: 1
+	});
+
+	//GSAP TimeLine Max const for Icon Animation
+	const TLM_ICON = new TimelineMax({});
+
+
 	//Clears Current/Active Animation
 	const REMOVE_CURRENT_ANIMATION = function () {
 		TLM.progress(0).clear();
@@ -114,7 +127,7 @@ window.onload = function () {
 				'images/bike_path/image4.jpg',
 			],
 			paths: [
-				['bike_path_icon', 2, 500, -1],
+				['pin circle', 5, 500, -1],
 				['bike_path_to_peony', 5, 608, -1],
 				['bike_path_to_waterfall_garden', 5, 915, -1],
 				['bike_path_to_bridge', 3, 199, -1],
@@ -145,7 +158,7 @@ window.onload = function () {
 			/* DRAWING PATHS*/
 			paths: [
 				['peony_to_bike_path', 5, 608, -1],
-				['pin-2', 5, 375, -1],
+				['peony_icon g circle', 5, 375, -1],
 				['peony_to_waterfall_garden', 5, 866, -1],
 				['peony_to_bridge', 5, 807, -1],
 				['peony_to_daylily', 8, 1272, -1],
@@ -174,7 +187,7 @@ window.onload = function () {
 			paths: [
 				['waterfall_garden_to_bike_path', 5, 915, -1],
 				['waterfall_garden_to_peony', 5, 866, -1],
-				['pin-3', 5, 375, -1],
+				['water_feature_icon g circle', 5, 375, -1],
 				['waterfall_garden_to_bridge', 7, 1118, -1],
 				['waterfall_garden_to_daylily', 7, 1580, -1],
 				['waterfall_garden_to_memory_garden', 10, 2779, -1],
@@ -203,7 +216,7 @@ window.onload = function () {
 				['bridge_to_bike_path', 3, 199, -1],
 				['bridge_to_peony', 5, 807, -1],
 				['bridge_to_waterfall_garden', 7, 1118, -1],
-				['pin-4', 5, 375, -1],
+				['bridge_icon circle', 5, 375, -1],
 				['bridge_to_daylily', 5, 615, -1],
 				['bridge_to_memory_garden', 8, 1814, -1],
 			],
@@ -233,7 +246,7 @@ window.onload = function () {
 				['daylily_to_peony', 8, 1272, -1],
 				['daylily_to_waterfall_garden', 7, 1580, -1],
 				['daylily_to_bridge', 5, 615, -1],
-				['pin-5', 5, 375, -1],
+				['daylily_icon circle', 5, 375, -1],
 				['daylily_to_memory_garden', 6, 1214, -1],
 
 			],
@@ -263,7 +276,7 @@ window.onload = function () {
 				['memory_garden_to_waterfall_garden', 12, 2779, -1],
 				['memory_garden_to_bridge', 8, 1814, -1],
 				['memory_garden_to_daylily', 6, 1214, -1],
-				['memory_gazebo_icon', 5, 500, 0],
+				['memory_gazebo_icon circle', 5, 500, -1],
 			],
 			featureZoomPoints: ['170%', 0, 0.06],
 			pathZoomPoints: [
@@ -289,7 +302,7 @@ window.onload = function () {
 			duration, {
 				strokeWidth: STROKE_WIDTH,
 				strokeDasharray: length,
-				strokeDashoffset: length,
+				strokeDashoffset: length
 			}, {
 				delay: 2,
 				stroke: '#679DF6',
@@ -310,49 +323,31 @@ window.onload = function () {
 	// MAIN DRAW Function
 	const ICON_ANIMATION = (path, duration, length, repeat) => {
 		REMOVE_CURRENT_ANIMATION();
-		const STROKE_WIDTH = 8;
-		TLM.to(path, duration, {
-			strokeWidth: STROKE_WIDTH,
-			// strokeDasharray: length,
-			// strokeDashoffset: 0,
-			// x: -5,
-			// x: 10,
-			repeat: repeat,
-			scale: 1.2,
-			y: -35,
-			// stroke: "#B15222",
-			repeatDelay: 1,
-			yoyo: true,
-			ease: Sine.easeInOut,
-			onComplete: () => {
-				if (repeat === 0) {
-					REMOVE_CURRENT_ANIMATION();
+		const STROKE_WIDTH = 10;
+
+		TLM_ICON.fromTo(
+			path,
+			duration, {
+				strokeWidth: STROKE_WIDTH,
+				strokeDasharray: length,
+				strokeDashoffset: length
+			}, {
+				delay: 2,
+				stroke: '#000',
+				strokeWidth: STROKE_WIDTH,
+				strokeDasharray: length,
+				strokeDashoffset: 0,
+				// repeat: repeat,
+				ease: Sine.easeInOut,
+				// repeatDelay: 1.3
+				// strokeCap: "round",
+				onComplete: () => {
+					if (repeat === 0) {
+						REMOVE_CURRENT_ANIMATION();
+					}
 				}
 			}
-
-		})
-		// TLM.fromTo(
-		// 	path,
-		// 	duration, {
-		// 		strokeWidth: STROKE_WIDTH,
-		// 		strokeDasharray: length,
-		// 		strokeDashoffset: length,
-		// 	}, {
-		// 		delay: 2,
-		// 		stroke: '#000',
-		// 		strokeWidth: STROKE_WIDTH,
-		// 		strokeDasharray: length,
-		// 		strokeDashoffset: 0,
-		// 		repeat: repeat,
-		// 		ease: Sine.easeInOut,
-		// 		repeatDelay: 1.3,
-		// onComplete: () => {
-		// 	if (repeat === 0) {
-		// 		REMOVE_CURRENT_ANIMATION();
-		// 	}
-		// }
-		// 	}
-		// );
+		);
 	};
 
 
@@ -472,8 +467,14 @@ window.onload = function () {
 			length = parkFeature[currentLocation].paths[destination][2];
 			repeat = parkFeature[currentLocation].paths[destination][3];
 
-			//Animates the path
-			DRAW(pathToDraw, duration, length, repeat);
+			if (currentLocation === destination) {
+				ICON_ANIMATION(pathToDraw, duration, length, repeat);
+			} else {
+				//Animates the path
+				DRAW(pathToDraw, duration, length, repeat);
+			}
+
+
 
 			// Hide with the path finder menu
 			PATH_FINDER.classList.add('hidden');
@@ -551,6 +552,7 @@ window.onload = function () {
 				currentLocation = i;
 				setContent();
 				openInfoPanel();
+
 			};
 		}
 
