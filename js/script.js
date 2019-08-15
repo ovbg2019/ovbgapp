@@ -1,5 +1,6 @@
 // Put everything inside an onload to ensure that everything has loaded in before any code is executed
 window.onload = function () {
+
 	/* VARIABLE DECLARATIONS */
 
 	/**********LIST OF DOM REFERENCES *********/
@@ -278,6 +279,41 @@ window.onload = function () {
 
 
 	/* FUNCTION DEFINITIONS */
+
+	// ANIMATING THE SPLASH SCREEN
+	function showSplashScreen() {
+		/*ANIMATE SPLASH SCREEN*/
+		$("#splash").show();
+
+		TweenMax.from("#splash", 0.5, {
+			delay: 0.5,
+			opacity: 0,
+			ease: Sine.easeIn
+		});
+		TweenMax.fromTo("#welcomeText p", 2, {
+			delay: 1,
+			ease: Back.easeInOut,
+			opacity: 0,
+			y: "-5vh"
+
+		}, {
+			delay: 2,
+			ease: Sine.easeInOut,
+			opacity: 1,
+			y: "0vh"
+		});
+		TweenMax.to("#welcomeText, #welcomeBg", 1, {
+			delay: 5,
+			opacity: 0,
+			ease: Sine.easeIn,
+			onComplete: function () {
+				$("main").show()
+			}
+		});
+	}
+
+	showSplashScreen();
+
 
 	// MAIN DRAW Function
 	const DRAW = (path, duration, length, repeat) => {
@@ -944,4 +980,5 @@ window.onload = function () {
 	}
 
 	// END IMAGE GALLERY SCRIPT ----------
+
 };

@@ -10,6 +10,17 @@
 </head>
 
 <body>
+	<!-- SPLASH SCREEN -->
+	<main id="splash">
+		<div>
+			<img id="welcomeBg" src="images/welcome_bg.svg" alt="OVBG Welcome Background">
+			<img id="splashLogo" src="images/ovbg_full_name_logo.svg" alt="OVBG Logo">
+			<div id="welcomeText">
+				<p>Concept began in 1999<br> as a proposal from Oshawa Garden Club</p>
+			</div>
+		</div>
+	</main>
+
 	<main>
 		<div id="destination-menu" class="">
 			<div class="destination-select">
@@ -130,6 +141,9 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
 
 	<script src="js/script.js"></script>
+	<script>
+			$("main:gt(0)").hide();
+		</script>	
 </body>
 
 </html>
