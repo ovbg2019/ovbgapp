@@ -44,27 +44,45 @@ window.onload = function () {
 	//placeholder
 	const PLACE_HOLDER = document.querySelector('#placeholder');
 
-	//New TimeLine Max const for GSAP
-	const TLM = new TimelineMax({});
-	//Clears Current/Active Animation
-	const REMOVE_CURRENT_ANIMATION = function () {
-		TLM.progress(0).clear();
-  };
-  
-  const BACKGROUND_COLORS = [
-    '#B15222',
-    '#B04A7F',
-    '#327687',
-    '#806B53',
-    '#7D6287',
-    '#4571A2'
-  ]
+
+	//to be deleted
+	const TLM = new TimelineMax({
+
+	});
+	//GSAP TimeLine Max const for Path Animation
+	const TLM_PATH = new TimelineMax({
+		repeat: -1,
+		repeatDelay: 1
+	});
+
+	//GSAP TimeLine Max const for Icon Animation
+	const TLM_ICON = new TimelineMax({});
+
+
+	//Clears Current/Active Path Animation
+	const REMOVE_CURRENT_ANIMATION_PATH = function () {
+		TLM_ICON.progress(0).clear();
+	};
+	//Clears Current/Active Icon Animation
+	const REMOVE_CURRENT_ANIMATION_ICON = function () {
+		TLM_ICON.progress(0).clear();
+	};
+
+	const BACKGROUND_COLORS = [
+		'#B15222',
+		'#B04A7F',
+		'#327687',
+		'#806B53',
+		'#7D6287',
+		'#4571A2'
+	]
 
 	//SVG PATH VARIABLES
 	let pathToDraw = '';
 	let duration = 0;
 	let length = 0;
 	let repeat = 0;
+	let strokeColor = "#000";
 
 
 	// variable to store the active colour to be set to the tabs
@@ -90,13 +108,13 @@ window.onload = function () {
 	// currently defaults to 0 if ID is not set
 	let currentLocation = id ? id : 0;
 
-  // drop down elements for styling background upon click events
+	// drop down elements for styling background upon click events
 	let placeholderStart = document.querySelector('.placeholder-start');
-  let placeholderEnd = document.querySelector('.placeholder-end');
-  // drop down state management
-  let startDropDownState = false;
-  let endDropDownState = false;
-  let dropdownState = false;
+	let placeholderEnd = document.querySelector('.placeholder-end');
+	// drop down state management
+	let startDropDownState = false;
+	let endDropDownState = false;
+	let dropdownState = false;
 
 
 	// set destination position based on dropdown selection, initially based on id
@@ -111,7 +129,7 @@ window.onload = function () {
 	let MAP_SVG_OBJ = document.querySelector('#svgMapObj');
 	MAP_SVG_OBJ.style.height = '100%';
 	let evCache = new Array();
-  let prevDiff = -1;
+	let prevDiff = -1;
 
 
 	// declaring an array of object to to store the values
@@ -128,7 +146,7 @@ window.onload = function () {
 				'images/bike_path/image4.jpg',
 			],
 			paths: [
-				['pin', 5, 500, -1],
+				['pin circle', 5, 500, -1],
 				['bike_path_to_peony', 5, 608, -1],
 				['bike_path_to_waterfall_garden', 5, 915, -1],
 				['bike_path_to_bridge', 3, 199, -1],
@@ -159,7 +177,7 @@ window.onload = function () {
 			/* DRAWING PATHS*/
 			paths: [
 				['peony_to_bike_path', 5, 608, -1],
-				['pin-2', 5, 375, -1],
+				['peony_icon g circle', 5, 375, -1],
 				['peony_to_waterfall_garden', 5, 866, -1],
 				['peony_to_bridge', 5, 807, -1],
 				['peony_to_daylily', 8, 1272, -1],
@@ -188,7 +206,7 @@ window.onload = function () {
 			paths: [
 				['waterfall_garden_to_bike_path', 5, 915, -1],
 				['waterfall_garden_to_peony', 5, 866, -1],
-				['pin-3', 5, 375, -1],
+				['water_feature_icon g circle', 5, 375, -1],
 				['waterfall_garden_to_bridge', 7, 1118, -1],
 				['waterfall_garden_to_daylily', 7, 1580, -1],
 				['waterfall_garden_to_memory_garden', 10, 2779, -1],
@@ -217,7 +235,7 @@ window.onload = function () {
 				['bridge_to_bike_path', 3, 199, -1],
 				['bridge_to_peony', 5, 807, -1],
 				['bridge_to_waterfall_garden', 7, 1118, -1],
-				['pin-4', 5, 375, -1],
+				['bridge_icon circle', 5, 375, -1],
 				['bridge_to_daylily', 5, 615, -1],
 				['bridge_to_memory_garden', 8, 1814, -1],
 			],
@@ -247,7 +265,7 @@ window.onload = function () {
 				['daylily_to_peony', 8, 1272, -1],
 				['daylily_to_waterfall_garden', 7, 1580, -1],
 				['daylily_to_bridge', 5, 615, -1],
-				['pin-5', 5, 375, -1],
+				['daylily_icon circle', 5, 375, -1],
 				['daylily_to_memory_garden', 6, 1214, -1],
 
 			],
@@ -277,7 +295,7 @@ window.onload = function () {
 				['memory_garden_to_waterfall_garden', 12, 2779, -1],
 				['memory_garden_to_bridge', 8, 1814, -1],
 				['memory_garden_to_daylily', 6, 1214, -1],
-				['memory_gazebo_icon', 5, 500, 0],
+				['memory_gazebo_icon circle', 5, 500, -1],
 			],
 			featureZoomPoints: ['170%', 0, 0.06],
 			pathZoomPoints: [
@@ -296,14 +314,14 @@ window.onload = function () {
 
 	// MAIN DRAW Function
 	const DRAW = (path, duration, length, repeat) => {
-		REMOVE_CURRENT_ANIMATION();
+		REMOVE_CURRENT_ANIMATION_PATH();
 		const STROKE_WIDTH = 15;
 		TLM.fromTo(
 			path,
 			duration, {
 				strokeWidth: STROKE_WIDTH,
 				strokeDasharray: length,
-				strokeDashoffset: length,
+				strokeDashoffset: length
 			}, {
 				delay: 2,
 				stroke: '#679DF6',
@@ -315,7 +333,36 @@ window.onload = function () {
 				repeatDelay: 1.3,
 				onComplete: () => {
 					if (repeat === 0) {
-						REMOVE_CURRENT_ANIMATION();
+						REMOVE_CURRENT_ANIMATION_PATH();
+					}
+				}
+			}
+		);
+	};
+	// MAIN DRAW Function
+	const ICON_ANIMATION = (path, duration, length, repeat) => {
+		REMOVE_CURRENT_ANIMATION_ICON();
+		const STROKE_WIDTH = 10;
+
+		TLM_ICON.fromTo(
+			path,
+			duration, {
+				strokeWidth: STROKE_WIDTH,
+				strokeDasharray: length,
+				strokeDashoffset: length
+			}, {
+				delay: 2,
+				stroke: '#000',
+				strokeWidth: STROKE_WIDTH,
+				strokeDasharray: length,
+				strokeDashoffset: 0,
+				// repeat: repeat,
+				ease: Sine.easeInOut,
+				// repeatDelay: 1.3
+				// strokeCap: "round",
+				onComplete: () => {
+					if (repeat === 0) {
+						REMOVE_CURRENT_ANIMATION_ICON();
 					}
 				}
 			}
@@ -327,22 +374,22 @@ window.onload = function () {
 
 	// NEW DROP DOWN CODE ********* START
 
-  // Dropdown opens on page load// or at end of splash animation, then closes again
-  sneakPeakDropDown();
+	// Dropdown opens on page load// or at end of splash animation, then closes again
+	sneakPeakDropDown();
 
 	// if anywhere in the map is clicked the dropdown will close
 	MAP_SVG.addEventListener('click', function (e) {
 		openFullScreen();
-    closeDropDown();
-    //reset the place holder text to where to?
+		closeDropDown();
+		//reset the place holder text to where to?
 		PLACE_HOLDER.textContent = "Where to?";
-    
+
 		DROP_DOWN_ITEM_START.forEach((item, i) => {
-      // toggle the hidden class on each item in the list (unhiding them)
+			// toggle the hidden class on each item in the list (unhiding them)
 			if (i !== 0) {
-        item.classList.add('hidden');
+				item.classList.add('hidden');
 			} else {
-        item.classList.remove('hidden');
+				item.classList.remove('hidden');
 			}
 			// PATH_FINDER.classList.add('hidden'); // hide pathfinder dropdown
 			// hide endpoint menu while starting point is being selected
@@ -373,17 +420,17 @@ window.onload = function () {
 		// change the text on place holder
 		PLACE_HOLDER.textContent = "Select Destination";
 
-    if(dropdownState) {
-      closeDropDown();
-    } else  {
-      openDropDown();
-    }
+		if (dropdownState) {
+			closeDropDown();
+		} else {
+			openDropDown();
+		}
 
-    placeholderStart.textContent = parkFeature[currentLocation].name;
-    placeholderStart.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
-    placeholderStart.style.color = "#f7f2db";
+		placeholderStart.textContent = parkFeature[currentLocation].name;
+		placeholderStart.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
+		placeholderStart.style.color = "#f7f2db";
 
-    
+
 		// To accomidate the dropdowns removing redundent locations
 		if (destination) {
 			placeholderEnd.textContent = parkFeature[destination].name;
@@ -393,40 +440,40 @@ window.onload = function () {
 
 	// Create event listener on drop down menu
 	DROP_DOWN_START.addEventListener('click', function () {
-      // Hide the endpoint select
-      END_POINT.classList.toggle('hidden');
+		// Hide the endpoint select
+		END_POINT.classList.toggle('hidden');
 
-      // Loop through the elements in the drop down and add event listeners to them
-      // i represents index of item in array
-      DROP_DOWN_ITEM_START.forEach((item, i) => {
+		// Loop through the elements in the drop down and add event listeners to them
+		// i represents index of item in array
+		DROP_DOWN_ITEM_START.forEach((item, i) => {
 
-        if(i - 1 === currentLocation) {
-          item.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
-          item.style.color = '#f7f2db';
-          placeholderStart.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
-          placeholderStart.style.color = "#f7f2db";
+			if (i - 1 === currentLocation) {
+				item.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
+				item.style.color = '#f7f2db';
+				placeholderStart.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
+				placeholderStart.style.color = "#f7f2db";
 
-        } else {
-          item.style.backgroundColor = "#FAF7E9";
-          item.style.color = '#383838';
-        }
+			} else {
+				item.style.backgroundColor = "#FAF7E9";
+				item.style.color = '#383838';
+			}
 
-        // toggle the hidden class on each item in the list (unhiding them)
-        // hide destination from starting list
-        item.classList.toggle('hidden');
-        // Add the event listener to the item
-        item.addEventListener('click', function () {
-          startDropDownState = !startDropDownState;
-        // will set destination location based item in dropdown being selected
+			// toggle the hidden class on each item in the list (unhiding them)
+			// hide destination from starting list
+			item.classList.toggle('hidden');
+			// Add the event listener to the item
+			item.addEventListener('click', function () {
+				startDropDownState = !startDropDownState;
+				// will set destination location based item in dropdown being selected
 				if (i !== 0) {
-          currentLocation = i - 1;
-        }
+					currentLocation = i - 1;
+				}
 
-        placeholderStart.textContent = parkFeature[currentLocation].name;
+				placeholderStart.textContent = parkFeature[currentLocation].name;
 			});
-    });
-    startDropDownState = false;
-    
+		});
+		startDropDownState = false;
+
 	});
 
 	// Create event listener on drop down menu
@@ -434,57 +481,63 @@ window.onload = function () {
 		// Loop through the elements in the drop down and add event listeners to them
 		DROP_DOWN_ITEM_END.forEach((item, i) => {
 
-      if(i - 1 === destination) {
-        item.style.backgroundColor = BACKGROUND_COLORS[destination];
-        item.style.color = '#f7f2db';
-        placeholderEnd.style.backgroundColor = BACKGROUND_COLORS[destination];
-        placeholderEnd.style.color = "#f7f2db";
+			if (i - 1 === destination) {
+				item.style.backgroundColor = BACKGROUND_COLORS[destination];
+				item.style.color = '#f7f2db';
+				placeholderEnd.style.backgroundColor = BACKGROUND_COLORS[destination];
+				placeholderEnd.style.color = "#f7f2db";
 
-      } else {
-        item.style.backgroundColor = "#FAF7E9";
-        item.style.color = '#383838';
-      }
+			} else {
+				item.style.backgroundColor = "#FAF7E9";
+				item.style.color = '#383838';
+			}
 
 			// toggle the hidden class on each item in the list (unhiding them)
 			// hide destination if it has been selected as start position
 			item.classList.toggle('hidden');
 			// Add the event listener to the item
 			item.addEventListener('click', function () {
-        endDropDownState = !endDropDownState;
+				endDropDownState = !endDropDownState;
 				// will set destination location based item in drop down being selected
 				if (i !== 0) {
 					destination = i - 1;
-        }
+				}
 
-        placeholderEnd.textContent = parkFeature[destination].name;
+				placeholderEnd.textContent = parkFeature[destination].name;
 			});
-    });
-    endDropDownState = false;
+		});
+		endDropDownState = false;
 	});
 
 	// Handle Go button event, will execute zoom function upon click
 	GO_BTN.addEventListener('click', function () {
-    // Call zoom function based on current destination selection
-    if(!destination) {
-      destination = 0;
-    }
-			console.log('Loc: ' + currentLocation + ' ' + parkFeature[currentLocation].name);
-			console.log('Dest: ' + destination + ' ' + parkFeature[destination].name);
-			pathZoomIn(currentLocation, destination);
+		// Call zoom function based on current destination selection
+		if (!destination) {
+			destination = 0;
+		}
+		console.log('Loc: ' + currentLocation + ' ' + parkFeature[currentLocation].name);
+		console.log('Dest: ' + destination + ' ' + parkFeature[destination].name);
+		pathZoomIn(currentLocation, destination);
 
-			//retrieves the path name,duration, length and repeat info from paths array inside the parkFeature array.
-			pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[destination][0]);
-			duration = parkFeature[currentLocation].paths[destination][1];
-			length = parkFeature[currentLocation].paths[destination][2];
-			repeat = parkFeature[currentLocation].paths[destination][3];
+		//retrieves the path name,duration, length and repeat info from paths array inside the parkFeature array.
+		pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[destination][0]);
+		duration = parkFeature[currentLocation].paths[destination][1];
+		length = parkFeature[currentLocation].paths[destination][2];
+		repeat = parkFeature[currentLocation].paths[destination][3];
 
+		if (currentLocation === destination) {
+			ICON_ANIMATION(pathToDraw, duration, length, repeat);
+		} else {
 			//Animates the path
 			DRAW(pathToDraw, duration, length, repeat);
+		}
 
-			// Hide with the path finder menu
-      closeDropDown();
 
-			PLACE_HOLDER.textContent = "Navigating...";
+
+		// Hide with the path finder menu
+		closeDropDown();
+
+		PLACE_HOLDER.textContent = "Navigating...";
 	});
 
 	// NEW DROP DOWN CODE ********* END
@@ -495,7 +548,7 @@ window.onload = function () {
 	// opening the info panel and populating it with content based on the id and tab determined from the URL
 	if (!isNaN(id)) {
 		setContent();
-    openInfoPanel();
+		openInfoPanel();
 
 	} else {
 		id = 0;
@@ -541,61 +594,64 @@ window.onload = function () {
 			// opening the panel with new content
 			openInfoPanel();
 			//update starting point text to respresent new starting location
-      placeholderStart.textContent = parkFeature[currentLocation].name;
-      placeholderStart.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
-      placeholderStart.style.color = "#f7f2db";
+			placeholderStart.textContent = parkFeature[currentLocation].name;
+			placeholderStart.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
+			placeholderStart.style.color = "#f7f2db";
 			// hide the path finder menu
 			PATH_FINDER.classList.add('hidden');
-    }
-  };
-
-		// setting event listeners on each of the icons on the map
-		// selects the icons from the map using their IDs
-		// goes through a loop to open the specific tab
-		for (let i in MAP_ICONS) {
-			MAP_ICONS[i].onclick = function () {
-				closeInfoPanel();
-				id = i;
-				currentLocation = i;
-				setContent();
-				openInfoPanel();
-			};
 		}
+	};
 
-		// minimizing/maximizing the infoPanel on clicking the title bar
-		TITLE_BAR.onclick = function () {
-			minimizeInfoPanel();
-		};
-
-		// closing the tab on close button click
-		CLOSE_BUTTON.onclick = function () {
+	// setting event listeners on each of the icons on the map
+	// selects the icons from the map using their IDs
+	// goes through a loop to open the specific tab
+	for (let i in MAP_ICONS) {
+		MAP_ICONS[i].onclick = function () {
 			closeInfoPanel();
+			id = i;
+			currentLocation = i;
+			setContent();
+			openInfoPanel();
 
 		};
+	}
 
-		// Functions to reset the appearance of the tabs
-		function resetTabAppearance() {
-			for (let i = 0; i < 6; i++) {
-				TABS[i].style.backgroundColor = '';
-				TITLE_BAR.style.backgroundColor = '#383838';
-			}
+	// //Animates the path
+	// ICON_ANIMATION(pathToDraw, duration, length, repeat);
+	// minimizing/maximizing the infoPanel on clicking the title bar
+	TITLE_BAR.onclick = function () {
+		minimizeInfoPanel();
+	};
 
-			//reset info to the top - the info will scroll to the top once click to other tab
-			document.getElementById('contentBox').scrollTop = 0;
+	// closing the tab on close button click
+	CLOSE_BUTTON.onclick = function () {
+		closeInfoPanel();
+
+	};
+
+	// Functions to reset the appearance of the tabs
+	function resetTabAppearance() {
+		for (let i = 0; i < 6; i++) {
+			TABS[i].style.backgroundColor = '';
+			TITLE_BAR.style.backgroundColor = '#383838';
 		}
 
-		// function to set all the content inside the info panel
-		function setContent() {
-			resetTabAppearance();
-			activeColour = parkFeature[id].colour;
-			TABS[id].style.backgroundColor = activeColour;
-			TITLE_BAR.style.backgroundColor = activeColour;
-			TITLE.textContent = parkFeature[id].name;
-			TITLE_BAR_ICON.src = parkFeature[id].icon;
-			for (let j in GALLERY_IMAGES) GALLERY_IMAGES[j].src = parkFeature[id].galleryImages[j];
-			ABOUT_TEXT.innerHTML = parkFeature[id].about;
-		};
-	
+		//reset info to the top - the info will scroll to the top once click to other tab
+		document.getElementById('contentBox').scrollTop = 0;
+	}
+
+	// function to set all the content inside the info panel
+	function setContent() {
+		resetTabAppearance();
+		activeColour = parkFeature[id].colour;
+		TABS[id].style.backgroundColor = activeColour;
+		TITLE_BAR.style.backgroundColor = activeColour;
+		TITLE.textContent = parkFeature[id].name;
+		TITLE_BAR_ICON.src = parkFeature[id].icon;
+		for (let j in GALLERY_IMAGES) GALLERY_IMAGES[j].src = parkFeature[id].galleryImages[j];
+		ABOUT_TEXT.innerHTML = parkFeature[id].about;
+	};
+
 
 	// this function animates the infoPanel and its contents when it opens up
 	function openInfoPanel() {
@@ -612,6 +668,7 @@ window.onload = function () {
 						ease: Sine.easeOut,
 					}
 				);
+
 			} else if (infoPanelState === 1) {
 				TweenMax.fromTo(
 					'#infoPanel',
@@ -632,6 +689,7 @@ window.onload = function () {
 			// setting state of the info panel to OPEN
 			infoPanelState = 2;
 
+
 			//retrieves the path name,duration, length and repeat info from paths array inside the parkFeature array.
 			pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[id][0]);
 			duration = parkFeature[currentLocation].paths[id][1];
@@ -639,7 +697,8 @@ window.onload = function () {
 			repeat = parkFeature[currentLocation].paths[id][3];
 
 			//Animates the path
-			DRAW(pathToDraw, duration, length, repeat);
+			ICON_ANIMATION(pathToDraw, duration, length, repeat);
+
 		}
 	}
 
@@ -979,61 +1038,61 @@ window.onload = function () {
 
 	CLOSE_GALLERY.addEventListener('click', function () {
 		closeImgGallery();
-  });
-  
-  // animation for dropdown on pageload
-  function sneakPeakDropDown() {
-    PATH_FINDER.classList.remove('hidden');
-    TweenMax
-    .from(PATH_FINDER, 1, {
-      delay: 0.5,
-      opacity: 0,
-      top: 15,
-      onComplete:  function() {
-        TweenMax
-        .to(PATH_FINDER, 0.8, {
-          delay: 2,
-          opacity: 0,
-          top: 15,
-          onComplete:  function() {
-            PATH_FINDER.classList.add('hidden');
-            PATH_FINDER.style.opacity = 1;
-            PATH_FINDER.style.top = "10vh";
-          }
-        });
-      }  
-    });
-  }
-// dropdown animation to open
-  function openDropDown() {
-    PATH_FINDER.classList.remove('hidden');
-    TweenMax
-    .from(PATH_FINDER, 0.8, {
-      delay: 0.2,
-      opacity: 0,
-      top: 15,
-      onComplete:  function() {
-        PATH_FINDER.style.opacity = 1;
-        PATH_FINDER.style.top = "10vh";
-        dropdownState = true;
-      }  
-    });
-  }
-// dropdown animation to close
-  function closeDropDown() {
-    TweenMax
-    .to(PATH_FINDER, 0.7, {
-      delay: 0.2,
-      opacity: 0,
-      top: 15,
-      onComplete:  function() {
-        PATH_FINDER.style.opacity = 1;
-        PATH_FINDER.style.top = "10vh";
-        dropdownState = false;
-        PATH_FINDER.classList.add('hidden');
-      }  
-    });
-  }
+	});
+
+	// animation for dropdown on pageload
+	function sneakPeakDropDown() {
+		PATH_FINDER.classList.remove('hidden');
+		TweenMax
+			.from(PATH_FINDER, 1, {
+				delay: 0.5,
+				opacity: 0,
+				top: 15,
+				onComplete: function () {
+					TweenMax
+						.to(PATH_FINDER, 0.8, {
+							delay: 2,
+							opacity: 0,
+							top: 15,
+							onComplete: function () {
+								PATH_FINDER.classList.add('hidden');
+								PATH_FINDER.style.opacity = 1;
+								PATH_FINDER.style.top = "10vh";
+							}
+						});
+				}
+			});
+	}
+	// dropdown animation to open
+	function openDropDown() {
+		PATH_FINDER.classList.remove('hidden');
+		TweenMax
+			.from(PATH_FINDER, 0.8, {
+				delay: 0.2,
+				opacity: 0,
+				top: 15,
+				onComplete: function () {
+					PATH_FINDER.style.opacity = 1;
+					PATH_FINDER.style.top = "10vh";
+					dropdownState = true;
+				}
+			});
+	}
+	// dropdown animation to close
+	function closeDropDown() {
+		TweenMax
+			.to(PATH_FINDER, 0.7, {
+				delay: 0.2,
+				opacity: 0,
+				top: 15,
+				onComplete: function () {
+					PATH_FINDER.style.opacity = 1;
+					PATH_FINDER.style.top = "10vh";
+					dropdownState = false;
+					PATH_FINDER.classList.add('hidden');
+				}
+			});
+	}
 
 	function openFullScreen() {
 		// const PAGE = document.documentElement;
