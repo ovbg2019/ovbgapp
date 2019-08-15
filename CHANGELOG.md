@@ -1,4 +1,16 @@
-*** Updated on Monday, August 12, 2019 9:30 PM ***
+-----------------------------------------------------------------------------------------------------------
+*** Updated on Thursday, August 15, 2019 2:50 PM ***
+Branch - iconAnimation:
+SVG
+	-updated SVG to latest
+JS
+	- Updated Icon Animation, animating circle only.
+    -Created separate fn “ICON_ANIMATION” icon animation.
+    -Added if statement to Go so when starting and ending location are same,
+     the icon Animation run, instead of path.
+
+-----------------------------------------------------------------------------------------------------------
+
 Branch - onTabAnimation
 JS
     - Added: Constant MAP_ICONS to access all the icons inside the map SVG. (its an array similar to TABS and follows the same order as the tabs, menus)
