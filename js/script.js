@@ -327,7 +327,13 @@ window.onload = function () {
 		});
 	}
 
-	showSplashScreen();
+	// localStorage.removeItem('myKey');
+	var initialLoad = localStorage['initialLoad'] || 1;
+	localStorage['initialLoad'] = '0';
+	if (initialLoad === 1) {
+		showSplashScreen();
+		console.log(initialLoad);
+	}
 
 
 	// MAIN DRAW Function
