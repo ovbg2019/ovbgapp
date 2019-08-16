@@ -989,7 +989,7 @@ window.onload = function () {
       onComplete:  function() {
         TweenMax
         .to(PATH_FINDER, 0.8, {
-          delay: 2,
+          delay: 1.2,
           opacity: 0,
           top: 15,
           onComplete:  function() {
@@ -1002,35 +1002,35 @@ window.onload = function () {
     });
   }
 // dropdown animation to open
-  function openDropDown() {
-    PATH_FINDER.classList.remove('hidden');
-    TweenMax
-    .from(PATH_FINDER, 0.8, {
-      delay: 0.2,
-      opacity: 0,
-      top: 15,
-      onComplete:  function() {
-        PATH_FINDER.style.opacity = 1;
-        PATH_FINDER.style.top = "10vh";
-        dropdownState = true;
-      }  
-    });
-  }
+function openDropDown() {
+  PATH_FINDER.classList.remove('hidden');
+  TweenMax
+  .from(PATH_FINDER, 0.8, {
+    delay: 0.2,
+    opacity: 0,
+    top: 15,
+    onComplete:  function() {
+      PATH_FINDER.style.opacity = 1;
+      PATH_FINDER.style.top = "10vh";
+      dropdownState = true;
+    }  
+  });
+}
 // dropdown animation to close
-  function closeDropDown() {
-    TweenMax
-    .to(PATH_FINDER, 0.7, {
-      delay: 0.2,
-      opacity: 0,
-      top: 15,
-      onComplete:  function() {
-        PATH_FINDER.style.opacity = 1;
-        PATH_FINDER.style.top = "10vh";
-        dropdownState = false;
-        PATH_FINDER.classList.add('hidden');
-      }  
-    });
-  }
+function closeDropDown() {
+  TweenMax
+  .to(PATH_FINDER, 0.7, {
+    delay: 0.2,
+    opacity: 0,
+    top: 15,
+    onComplete:  function() {
+      PATH_FINDER.style.opacity = 1;
+      PATH_FINDER.style.top = "10vh";
+      dropdownState = false;
+      PATH_FINDER.classList.add('hidden');
+    }  
+  });
+}
 
 function colorBikePath() {
   TweenMax.to(MAP_SVG.getElementById('bike_path'), 2, {
@@ -1042,7 +1042,6 @@ function resetBikePath() {
   TweenMax.to(MAP_SVG.getElementById('bike_path'), 2, {
     stroke: '#f7f2db',
   });
-  
 }
 
 	function openFullScreen() {
