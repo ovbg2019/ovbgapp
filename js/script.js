@@ -299,6 +299,7 @@
 		
 		function showSplashScreen() {
 			const appScreen = document.querySelector('#app');
+			const splashScreen = document.querySelector('#splash');
 		
 			//hide the app screen
 			appScreen.style.display = "none";
@@ -308,7 +309,7 @@
 				opacity: 1
 			});
 
-			TweenMax.fromTo("#splashLogo", 1, {
+			TweenMax.fromTo("#splashLogo", 1 , {
 				opacity: 0,
 				scale:0.3,
 				ease: Sine.easeInOut
@@ -317,43 +318,34 @@
 				opacity: 1
 			});
 			
-			TweenMax.fromTo("#welcomeText p",1 ,{
-				
-				ease: Sine.easeIn,
+			TweenMax.fromTo("#welcomeText p", 1 ,{
+				ease: Sine.easeInOut,
 				opacity: 0,
-				scale: 0
+                y: "-5vh"
 			},{
 				delay: 0.5,
-				ease: Sine.easeOut,
-				opacity: 1,
-				scale:1
-			});
-
-			TweenMax.to("#welcomeText p", 0.5, {
-				delay: 3.5,
-				opacity:0,
-				scale: 1,
-				ease: Sine.easeOut
-			});
-			TweenMax.to("#splashLogo", 0.5, {
-				delay: 4,
-				scale: 0,
-				ease: Sine.easeOut
-			});
-
-			TweenMax.to("#welcomeBg", 0.3, {
-				delay: 4,
-				opacity:0,
 				ease: Sine.easeInOut,
-				onComplete: function () {
-					appScreen.style.display = "";
+				opacity: 1,
+                y: 0
+			});
+            TweenMax.to("#splash", 1 ,{
+                delay: 2.5,
+                opacity: 0,
+                ease: Sine.easeInOut,
+            });
+			TweenMax.to("#splashLogo", 0.5, {
+				delay: 2.5,
+				ease: Sine.easeInOut,
+                scale: 0,
+               	onComplete: function () {
+                    splashScreen.style.display = "none";
+                    appScreen.style.display = "";
 					appScreen.style.opacity = "1";
-				}
+                }
 			});
 		}
 
 		showSplashScreen();
-
 
 		// MAIN DRAW Function
 		const DRAW = (path, duration, length, repeat) => {
