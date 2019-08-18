@@ -61,7 +61,7 @@ window.onload = function () {
 
 	//Clears Current/Active Path Animation
 	const REMOVE_CURRENT_ANIMATION_PATH = function () {
-		TLM_ICON.progress(0).clear();
+		TLM.progress(0).clear();
 	};
 	//Clears Current/Active Icon Animation
 	const REMOVE_CURRENT_ANIMATION_ICON = function () {
@@ -581,7 +581,8 @@ window.onload = function () {
 		// applying a function to onclick event of each tab
 		TABS[i].onclick = function () {
 			openFullScreen();
-			REMOVE_CURRENT_ANIMATION();
+			REMOVE_CURRENT_ANIMATION_PATH();
+			REMOVE_CURRENT_ANIMATION_ICON();
 			// setting the id and the content based on the id
 			id = i;
 			//update current location value based on tab clicked
