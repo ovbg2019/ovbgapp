@@ -50,7 +50,6 @@ window.onload = function () {
 
 	//GSAP TimeLine Max const for Path Animation
 	const TLM_PATH = new TimelineMax({
-		// delay: 3,
 		repeat: -1,
 		repeatDelay: 1
 	});
@@ -349,7 +348,7 @@ window.onload = function () {
 				strokeDasharray: length,
 				strokeDashoffset: length
 			}, {
-				delay: 2,
+				delay: 3,
 				stroke: strokeColor,
 				strokeWidth: STROKE_WIDTH,
 				strokeDasharray: length,
