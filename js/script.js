@@ -294,7 +294,7 @@ window.onload = function () {
 			],
 			/* SVG PATHS */
 			paths: [
-				['memory_git garden_to_bike_path', 8],
+				['memory_garden_to_bike_path', 8],
 				['memory_garden_to_peony', 10],
 				['memory_garden_to_waterfall_garden', 12],
 				['memory_garden_to_bridge', 8],
@@ -324,8 +324,6 @@ window.onload = function () {
 		duration = parkFeature[currentLocation].paths[destination][1];
 		length = Math.ceil(path.getTotalLength());
 		// length = parkFeature[currentLocation].paths[destination][2];
-
-
 
 		//setting the path values, before animating the path
 		TLM_PATH.set(path, {
