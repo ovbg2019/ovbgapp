@@ -1,0 +1,18 @@
+<svg id="welcome_bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 769 1025">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f7f2dc;
+        stroke: #f7f2dc;
+      }
+
+      .cls-2 {
+        fill: #78a075;
+      }
+    </style>
+  </defs>
+  <title>welcome_bg</title>
+  <rect class="cls-1" x="0.5" y="0.5" width="768" height="1024"/>
+  <path class="cls-2" d="M768,413.84V347C618.65,219.4,421.13,141.75,204.53,141.75A886.75,886.75,0,0,0,0,165.51v4.59a771.51,771.51,0,0,1,180.72-21.4C411,148.7,619.08,250.28,768,413.84Z" transform="translate(0.5 0.5)"/>
+  <path class="cls-2" d="M0,0V158.78a909,909,0,0,1,224.81-28C430.61,130.75,619.59,199,768,313V0Z" transform="translate(0.5 0.5)"/>
+</svg>
