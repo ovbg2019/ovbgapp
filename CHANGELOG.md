@@ -3,6 +3,8 @@
 
 *** Updated on Sunday, August 18, 2019 10:50 PM ***
 Branch - AnimationArrayUpdate
+SVG
+	-updated SVG to the latest version.
 JS
 	-Renamed, the PATH time line max to TLM_PATH from TLM.
 	-Updated TLM to TLM_PATH in all places.
