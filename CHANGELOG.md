@@ -1,6 +1,21 @@
 
 -----------------------------------------------------------------------------------------------------------
 
+*** Updated on Monday, August 19, 2019 4:30 PM ***
+Branch - AnimationArrayUpdate
+SVG
+    -Updated SVG to the latest version, last one did not have the icon in order and on click incorrect tabs were opening
+
+JS
+    -Removed parameters from PATH/Icon animation function and put them inside the function.
+    -Added setTimeout function inside Icon Animation function.
+    -Switched Icon Animation “fromto” to “to”, to  clear the path and repeat if current location and destination are the same.
+    -On tab click icon still animates only onces.
+    -As per group discussion added getTotalLength function to get lengths for all path for drawing, instead of hard coding it inside the array, also removed the length values from inside the array.
+    -Added MapZoom and Close info panel function under Go, so if info Panel is open or minimized it will be closed once the go button is clicked and navigation is started
+
+-----------------------------------------------------------------------------------------------------------
+
 *** Updated on Sunday, August 18, 2019 11:00 PM ***
 Branch - AnimationArrayUpdate
 SVG
@@ -8,7 +23,7 @@ SVG
 JS
 	-Renamed, the PATH timeline max to TLM_PATH from TLM.
 	-Updated TLM to TLM_PATH in all places.
-	-Switched “fromto” to “to”, to make the animation smooth and not blink out on before disappearing and repeating.
+	-Switched Path Animation “fromto” to “to”, to make the animation smooth and not blink out on before disappearing and repeating.
 	- Added repeat and repeat delay into TLM_PATH now and not needed for TLM_ICON
 
 	-Icon colour animates to parkFeature colour on the tab
