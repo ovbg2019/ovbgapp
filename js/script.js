@@ -4,6 +4,11 @@
 		/* VARIABLE DECLARATIONS */
 
 		/**********LIST OF DOM REFERENCES *********/
+		// Accessing the splash screen and the app screens
+		const APP_SCREEN = document.querySelector('#app');
+		const SPLASH_SCREEN = document.querySelector('#splash');
+		let splashDelay = 0;
+
 		// Access SVG inside Object by using Object ID and .contentDocument
 		const MAP_SVG = document.querySelector('#svgMapObj').contentDocument;
 
@@ -294,10 +299,16 @@
 
 		// localStorage.removeItem('myKey');
 		var initialLoad = localStorage['initialLoad'] || 1;
+		initialLoad = 1;
 		localStorage['initialLoad'] = '0';
 		if (initialLoad === 1) {
 			showSplashScreen();
 			console.log(initialLoad);
+			splashDelay = 2500;
+		} else {
+			TweenMax.to('#app', 0.2, {
+				opacity: 1,
+			});
 		}
 
 		/* FUNCTION DEFINITIONS */
@@ -305,54 +316,57 @@
 		// ANIMATING THE SPLASH SCREEN
 
 		function showSplashScreen() {
-			const appScreen = document.querySelector('#app');
-			const splashScreen = document.querySelector('#splash');
-
 			//hide the app screen
-			appScreen.style.display = "none";
-
-			TweenMax.to("#splash", 0, {
-				ease: Sine.easeInOut,
-				opacity: 1
-			});
-
-			TweenMax.fromTo("#splashLogo", 1, {
-				opacity: 0,
-				scale: 0.3,
-				ease: Sine.easeInOut
-			}, {
-				scale: 1,
-				opacity: 1
-			});
-
-			TweenMax.fromTo("#welcomeText p", 1, {
-				ease: Sine.easeInOut,
-				opacity: 0,
-				y: "-5vh"
-			}, {
-				delay: 0.5,
-				ease: Sine.easeInOut,
+			APP_SCREEN.style.display = 'none';
+			TweenMax.to("#splash", 0.25, {
 				opacity: 1,
-				y: 0
-			});
-			TweenMax.to("#splash", 1, {
-				delay: 2.5,
-				opacity: 0,
-				ease: Sine.easeInOut,
-			});
-			TweenMax.to("#splashLogo", 0.5, {
-				delay: 2.5,
-				ease: Sine.easeInOut,
-				scale: 0,
+				ease: Sine.easeIn,
 				onComplete: function () {
-					splashScreen.style.display = "none";
-					appScreen.style.display = "";
-					appScreen.style.opacity = "1";
+					APP_SCREEN.style.display = '';
+				}
+			});
+
+			TweenMax.from("#splashLogo", 0.5, {
+				scale: 0,
+				ease: Sine.easeOut,
+				onComplete: function () {
+					TweenMax.fromTo("#welcomeText p", 0.5, {
+						opacity: 0,
+						y: "-5vh"
+
+					}, {
+						// delay: 0.25,
+						ease: Sine.easeInOut,
+						opacity: 1,
+						y: "0vh",
+						onComplete: function () {
+							TweenMax.to("#welcomeText p", 0.5, {
+								delay: 0.5,
+								opacity: 0,
+								onComplete: function () {
+									TweenMax.to("#splashLogo", 0.25, {
+										scale: 0,
+										ease: Sine.easeIn,
+										onComplete: function () {
+											TweenMax.to("#splash", 0.25, {
+												delay: 0.25,
+												opacity: 0
+											});
+											TweenMax.to('#app', 0.5, {
+												opacity: 1,
+												onComplete: function () {
+													SPLASH_SCREEN.style.display = 'none';
+												}
+											});
+										}
+									});
+								}
+							})
+						}
+					});
 				}
 			});
 		}
-
-		showSplashScreen();
 
 		// MAIN DRAW Function
 		const DRAW = (path, duration, length, repeat) => {
@@ -386,9 +400,10 @@
 		/* FUNCTIONS FOR THE ANIMATING THE MAP USING CLASSES, SET THE START POINT AND DROP DOWN MENU */
 
 		// NEW DROP DOWN CODE ********* START
-
+		
 		// Dropdown opens on page load// or at end of splash animation, then closes again
-		sneakPeakDropDown();
+		setTimeout(sneakPeakDropDown, splashDelay);
+
 
 		// if anywhere in the map is clicked the dropdown will close
 		MAP_SVG.addEventListener('click', function (e) {
@@ -555,8 +570,7 @@
 		// opening the info panel and populating it with content based on the id and tab determined from the URL
 		if (!isNaN(id)) {
 			setContent();
-			openInfoPanel();
-
+			setTimeout(openInfoPanel, splashDelay);
 		} else {
 			id = 0;
 		}

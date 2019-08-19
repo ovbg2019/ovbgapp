@@ -109,7 +109,8 @@ header {
 #welcomeText p {
     font-size: 2.7vh;
     font-family: "ParaFont";
-    color: #383838;
+	color: #383838;
+	opacity: 0;
 }
 #welcomeText{
     display: flex;
