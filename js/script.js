@@ -10,6 +10,9 @@ window.onload = function () {
 	// Access SVG inside Object by using Object ID and .contentDocument
 	const MAP_SVG = document.querySelector('#svgMapObj').contentDocument;
 
+	//To Total Path Length
+	// console.log(`peonyToBridgePathLength: ${MAP_SVG.querySelector('#peony_to_bridge').getTotalLength()}`);
+
 	// Accessing all the icons inside the SVG map
 	const MAP_ICONS = MAP_SVG.querySelectorAll('#bike_path_icon, #peony_icon, #water_feature_icon, #bridge_icon, #daylily_icon, #memory_gazebo_icon');
 
@@ -51,7 +54,7 @@ window.onload = function () {
 	//GSAP TimeLine Max const for Path Animation
 	const TLM_PATH = new TimelineMax({
 		repeat: -1,
-		repeatDelay: 1
+		repeatDelay: .5
 	});
 
 	//GSAP TimeLine Max const for Icon Animation
@@ -143,12 +146,12 @@ window.onload = function () {
 				'images/bike_path/image4.jpg',
 			],
 			paths: [
-				['pin circle', 5, 500],
-				['bike_path_to_peony', 5, 608],
-				['bike_path_to_waterfall_garden', 5, 915],
-				['bike_path_to_bridge', 3, 199],
-				['bike_path_to_daylily', 8, 630],
-				['bike_path_to_memory_garden', 8, 1829],
+				['pin circle', 5],
+				['bike_path_to_peony', 5],
+				['bike_path_to_waterfall_garden', 5],
+				['bike_path_to_bridge', 3],
+				['bike_path_to_daylily', 8],
+				['bike_path_to_memory_garden', 8],
 			],
 			featureZoomPoints: ['180%', 0.2, 1],
 			pathZoomPoints: [
@@ -173,12 +176,12 @@ window.onload = function () {
 			],
 			/* SVG PATHS */
 			paths: [
-				['peony_to_bike_path', 5, 608],
-				['peony_icon g circle', 5, 375],
-				['peony_to_waterfall_garden', 5, 866],
-				['peony_to_bridge', 5, 807],
-				['peony_to_daylily', 8, 1272],
-				['peony_to_memory_garden', 12, 2472],
+				['peony_to_bike_path', 5],
+				['peony_icon g circle', 5],
+				['peony_to_waterfall_garden', 5],
+				['peony_to_bridge', 5],
+				['peony_to_daylily', 8],
+				['peony_to_memory_garden', 12],
 			],
 			featureZoomPoints: ['180%', 0.4, 0.95],
 			pathZoomPoints: [
@@ -202,12 +205,12 @@ window.onload = function () {
 			],
 			/* SVG PATHS */
 			paths: [
-				['waterfall_garden_to_bike_path', 5, 915],
-				['waterfall_garden_to_peony', 5, 866],
-				['water_feature_icon g circle', 5, 375],
-				['waterfall_garden_to_bridge', 7, 1118],
-				['waterfall_garden_to_daylily', 7, 1580],
-				['waterfall_garden_to_memory_garden', 10, 2779],
+				['waterfall_garden_to_bike_path', 5],
+				['waterfall_garden_to_peony', 5],
+				['water_feature_icon g circle', 5],
+				['waterfall_garden_to_bridge', 7],
+				['waterfall_garden_to_daylily', 7],
+				['waterfall_garden_to_memory_garden', 10],
 			],
 			featureZoomPoints: ['170%', 0.35, 0.4],
 			pathZoomPoints: [
@@ -231,12 +234,12 @@ window.onload = function () {
 			],
 			/* SVG PATHS */
 			paths: [
-				['bridge_to_bike_path', 3, 199],
-				['bridge_to_peony', 5, 807],
-				['bridge_to_waterfall_garden', 7, 1118],
-				['bridge_icon circle', 5, 375],
-				['bridge_to_daylily', 5, 615],
-				['bridge_to_memory_garden', 8, 1814],
+				['bridge_to_bike_path', 3],
+				['bridge_to_peony', 5],
+				['bridge_to_waterfall_garden', 7],
+				['bridge_icon circle', 5],
+				['bridge_to_daylily', 5],
+				['bridge_to_memory_garden', 8],
 			],
 			featureZoomPoints: ['200%', 0.145, 1.4],
 			pathZoomPoints: [
@@ -261,12 +264,12 @@ window.onload = function () {
 			],
 			/* SVG PATHS */
 			paths: [
-				['daylily_to_bike_path', 8, 630],
-				['daylily_to_peony', 8, 1272],
-				['daylily_to_waterfall_garden', 7, 1580],
-				['daylily_to_bridge', 5, 615],
-				['daylily_icon circle', 5, 375],
-				['daylily_to_memory_garden', 6, 1214],
+				['daylily_to_bike_path', 8],
+				['daylily_to_peony', 8],
+				['daylily_to_waterfall_garden', 7],
+				['daylily_to_bridge', 5],
+				['daylily_icon circle', 5],
+				['daylily_to_memory_garden', 6],
 
 			],
 			featureZoomPoints: ['220%', 0, 1.33],
@@ -291,12 +294,12 @@ window.onload = function () {
 			],
 			/* SVG PATHS */
 			paths: [
-				['memory_git garden_to_bike_path', 8, 1829],
-				['memory_garden_to_peony', 10, 2472],
-				['memory_garden_to_waterfall_garden', 12, 2779],
-				['memory_garden_to_bridge', 8, 1814],
-				['memory_garden_to_daylily', 6, 1214],
-				['memory_gazebo_icon circle', 5, 500],
+				['memory_git garden_to_bike_path', 8],
+				['memory_garden_to_peony', 10],
+				['memory_garden_to_waterfall_garden', 12],
+				['memory_garden_to_bridge', 8],
+				['memory_garden_to_daylily', 6],
+				['memory_gazebo_icon circle', 5],
 			],
 			featureZoomPoints: ['170%', 0, 0.06],
 			pathZoomPoints: [
@@ -312,49 +315,89 @@ window.onload = function () {
 
 	/* FUNCTION DEFINITIONS */
 	// Path Animation Function
-	const PATH_ANIMATION = (path, duration, length) => {
+	const PATH_ANIMATION = () => {
 		REMOVE_CURRENT_ANIMATION_PATH();
 		REMOVE_CURRENT_ANIMATION_ICON();
+
+		//retrieves the path name,duration, length and repeat info from paths array inside the parkFeature array.
+		path = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[destination][0]);
+		duration = parkFeature[currentLocation].paths[destination][1];
+		length = Math.ceil(path.getTotalLength());
+		// length = parkFeature[currentLocation].paths[destination][2];
+
+
 
 		//setting the path values, before animating the path
 		TLM_PATH.set(path, {
 				strokeDashoffset: length,
 				strokeDasharray: length,
 				strokeWidth: 15,
-				stroke: '#679DF6',
-
-			}) //animates the path
+				stroke: '#679DF6'
+			})
+			//animates the path
 			.to(path, duration, {
 				delay: 2,
 				strokeDashoffset: 0
 			})
 			//clears the path before repeat
-			.to(path, 3, {
-				delay: 1,
-				strokeDashoffset: 0 - length
+			.to(path, 4, {
+				delay: 0.5,
+				strokeDashoffset: -length
 			})
 	};
 
 	// Icon Animation Function
-	const ICON_ANIMATION = (path, duration, length, strokeColor) => {
+	const ICON_ANIMATION = () => {
 		REMOVE_CURRENT_ANIMATION_ICON();
 		REMOVE_CURRENT_ANIMATION_PATH();
-		const STROKE_WIDTH = 10;
+		//retrieves the path name,duration, length and repeat info from paths array inside the parkFeature array.
+		path = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[currentLocation][0]);
+		// duration = parkFeature[currentLocation].paths[currentLocation][1];
+		duration = 2;
+		// length = parkFeature[currentLocation].paths[currentLocation][2];
+		length = Math.ceil(path.getTotalLength());
+		strokeColor = parkFeature[currentLocation].colour;
 
-		TLM_ICON.fromTo(
-			path,
-			duration, {
-				strokeWidth: STROKE_WIDTH,
-				strokeDasharray: length,
-				strokeDashoffset: length
-			}, {
-				delay: 3,
-				stroke: strokeColor,
-				strokeWidth: STROKE_WIDTH,
-				strokeDasharray: length,
-				strokeDashoffset: 0,
+		setTimeout(function () {
+
+			TLM_ICON.progress(0).set(path, {
+					strokeDashoffset: length,
+					strokeDasharray: length,
+					strokeWidth: 10,
+					stroke: strokeColor
+				})
+				.to(path, duration, {
+					delay: 0.25,
+					strokeDashoffset: 0,
+					ease: Power4.easeInOut
+				})
+				.repeat(0);
+
+			if (currentLocation === destination) {
+
+				//clears the path before repeat
+				TLM_ICON.to(path, duration, {
+						strokeDashoffset: -length,
+						ease: Power4.easeInOut
+					}).repeat(-1)
+					.progress(0)
 			}
-		);
+		}, 2000);
+
+		// TLM_ICON.fromTo(
+		// 	path,
+		// 	duration, {
+		// 		strokeWidth: STROKE_WIDTH,
+		// 		strokeDasharray: length,
+		// 		strokeDashoffset: length
+		// 	}, {
+		// 		delay: 3,
+		// 		stroke: strokeColor,
+		// 		strokeWidth: STROKE_WIDTH,
+		// 		strokeDasharray: length,
+		// 		strokeDashoffset: 0,
+		// 		repeat: -1
+		// 	});
 	};
 
 
@@ -363,7 +406,7 @@ window.onload = function () {
 	// NEW DROP DOWN CODE ********* START
 
 	// Dropdown opens on page load// or at end of splash animation, then closes again
-	sneakPeakDropDown();
+	// sneakPeakDropDown();
 
 	// if anywhere in the map is clicked the dropdown will close
 	MAP_SVG.addEventListener('click', function (e) {
@@ -507,22 +550,23 @@ window.onload = function () {
 		console.log('Dest: ' + destination + ' ' + parkFeature[destination].name);
 		pathZoomIn(currentLocation, destination);
 
-		//retrieves the path name,duration, length and repeat info from paths array inside the parkFeature array.
-		pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[destination][0]);
-		duration = parkFeature[currentLocation].paths[destination][1];
-		length = parkFeature[currentLocation].paths[destination][2];
-		strokeColor = parkFeature[currentLocation].colour;
-
 
 		if (currentLocation === destination) {
-			//Animates the Icon
-			ICON_ANIMATION(pathToDraw, duration, length, strokeColor);
+			// Animates theIcon
+			ICON_ANIMATION();
 		} else {
 			//Animates the path
-			PATH_ANIMATION(pathToDraw, duration, length);
+			PATH_ANIMATION();
 		}
 		// Hide with the path finder menu
 		closeDropDown();
+
+		//Zooms outs
+		mapZoomOut(92);
+
+		//CloseInfoPanel or minimized
+		closeInfoPanel();
+
 
 		PLACE_HOLDER.textContent = "Navigating...";
 	});
@@ -600,7 +644,7 @@ window.onload = function () {
 			currentLocation = i;
 			setContent();
 			openInfoPanel();
-
+			console.log(MAP_ICONS[i]);
 		};
 	}
 	// minimizing/maximizing the infoPanel on clicking the title bar
@@ -674,15 +718,9 @@ window.onload = function () {
 			// setting state of the info panel to OPEN
 			infoPanelState = 2;
 
-
-			//retrieves the path name,duration, length and repeat info from paths array inside the parkFeature array.
-			pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[id][0]);
-			duration = parkFeature[currentLocation].paths[id][1];
-			length = parkFeature[currentLocation].paths[id][2];
-			strokeColor = parkFeature[currentLocation].colour;
-
 			//Animates the Icon
-			ICON_ANIMATION(pathToDraw, duration, length, strokeColor);
+			ICON_ANIMATION()
+
 
 		}
 	}
