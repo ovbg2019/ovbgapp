@@ -318,6 +318,11 @@
 
 			// setting the delay for the subsequent animations (opening the dropdown, opening the tab, zoom etc)
 			splashDelay = 2500;
+
+			// Dropdown opens on page load// or at end of splash animation, then closes again
+			if (window.innerWidth < 769) {
+				setTimeout(sneakPeakDropDown, splashDelay);
+			}
 		} else {
 			console.log('App has been launched before. Clear cache to load the splash again.');
 
@@ -410,9 +415,6 @@
 		/* FUNCTIONS FOR THE ANIMATING THE MAP USING CLASSES, SET THE START POINT AND DROP DOWN MENU */
 
 		// NEW DROP DOWN CODE ********* START
-		
-		// Dropdown opens on page load// or at end of splash animation, then closes again
-		setTimeout(sneakPeakDropDown, splashDelay);
 
 
 		// if anywhere in the map is clicked the dropdown will close
