@@ -7,6 +7,8 @@
 		// Accessing the splash screen and the app screens
 		const APP_SCREEN = document.querySelector('#app');
 		const SPLASH_SCREEN = document.querySelector('#splash');
+
+		// delay variable to set delay for animations after splash screen opens
 		let splashDelay = 0;
 
 		// Access SVG inside Object by using Object ID and .contentDocument
@@ -297,15 +299,29 @@
 			},
 		];
 
-		// localStorage.removeItem('myKey');
+		// STORING THE DATA ON LOCAL STORAGE OPEN THE SPLASH ONLY ONCE
+
+		// variable to store the state of the load
 		var initialLoad = localStorage['initialLoad'] || 1;
-		initialLoad = 1;
+
+		// setting the state to first load for TESTING ONLY.... REMOVE IN FINAL VERSION
+		// initialLoad = 1;
+
+		// setting the load state to 0 (not first load) for future app loads
 		localStorage['initialLoad'] = '0';
+
+		// open splash screen when apps loads for the first time
 		if (initialLoad === 1) {
+			// showing the splash screen
 			showSplashScreen();
-			console.log(initialLoad);
+			console.log('First time loading');
+
+			// setting the delay for the subsequent animations (opening the dropdown, opening the tab, zoom etc)
 			splashDelay = 2500;
 		} else {
+			console.log('App has been launched before. Clear cache to load the splash again.');
+
+			// load the app screen if the splash is not loading
 			TweenMax.to('#app', 0.2, {
 				opacity: 1,
 			});
@@ -317,13 +333,9 @@
 
 		function showSplashScreen() {
 			//hide the app screen
-			APP_SCREEN.style.display = 'none';
+
 			TweenMax.to("#splash", 0.25, {
-				opacity: 1,
-				ease: Sine.easeIn,
-				onComplete: function () {
-					APP_SCREEN.style.display = '';
-				}
+				opacity: 1
 			});
 
 			TweenMax.from("#splashLogo", 0.5, {
@@ -335,13 +347,11 @@
 						y: "-5vh"
 
 					}, {
-						// delay: 0.25,
-						ease: Sine.easeInOut,
 						opacity: 1,
 						y: "0vh",
 						onComplete: function () {
 							TweenMax.to("#welcomeText p", 0.5, {
-								delay: 0.5,
+								delay: 0.75,
 								opacity: 0,
 								onComplete: function () {
 									TweenMax.to("#splashLogo", 0.25, {
@@ -349,10 +359,10 @@
 										ease: Sine.easeIn,
 										onComplete: function () {
 											TweenMax.to("#splash", 0.25, {
-												delay: 0.25,
 												opacity: 0
 											});
 											TweenMax.to('#app', 0.5, {
+												delay: 0.25,
 												opacity: 1,
 												onComplete: function () {
 													SPLASH_SCREEN.style.display = 'none';
@@ -1009,9 +1019,10 @@
 			BIG_IMAGES.src = parkFeature[id].galleryImages[index];
 
 			//animate the image gallery
-			TweenMax.from('#expandedImg', 0.5, {
-				opacity: 0,
-				ease: Sine.easeOut
+			TweenMax.fromTo('#expandedImg', 0.5, {
+				opacity: 0
+			}, {
+				opacity: 1
 			});
 
 		};
