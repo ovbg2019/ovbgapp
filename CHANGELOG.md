@@ -4,13 +4,13 @@
 *** Updated on Monday, August 19, 2019 4:30 PM ***
 Branch - AnimationArrayUpdate
 SVG
-    -Updated SVG to the latest version, last one did not have the icon in order and on click incorrect tabs were opening
+    -Updated SVG to the latest version, the last one did not have the icon in order and on click incorrect tabs were opening
 
 JS
     -Removed parameters from PATH/Icon animation function and put them inside the function.
     -Added setTimeout function inside Icon Animation function.
-    -Switched Icon Animation “fromto” to “to”, to  clear the path and repeat if current location and destination are the same.
-    -On tab click icon still animates only onces.
+    -Switched Icon Animation “fromto” to “to”, to clear the path and repeat if current location and destination are the same.
+    -On tab click icon still animates only once.
     -As per group discussion added getTotalLength function to get lengths for all path for drawing, instead of hard coding it inside the array, also removed the length values from inside the array.
     -Added MapZoom and Close info panel function under Go, so if info Panel is open or minimized it will be closed once the go button is clicked and navigation is started
 
