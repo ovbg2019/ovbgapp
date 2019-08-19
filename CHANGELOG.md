@@ -1,3 +1,23 @@
+
+-----------------------------------------------------------------------------------------------------------
+
+*** Updated on Sunday, August 18, 2019 10:50 PM ***
+Branch - AnimationArrayUpdate
+JS
+	-Renamed, the PATH time line max to TLM_PATH from TLM.
+	-Updated TLM to TLM_PATH in all places.
+	-Switched “fromto” to “to”, to make animation smooth and not blink out on before disappearing and repeating.
+	- Added repeat and repeat delay into TLM_PATH now and not needed for TLM_ICON
+
+	-Icon colour animates to parkFeature colour on tab
+	  click and when location and destination are same.
+	-Renamed DRAW() to PATH_ANIMATION() and also updated across the file
+	-Corrected few spelling error.
+
+	REMOVED:
+	-onComplete from the path/icon function, no longer needed.
+	-removed repeat from parkFeature array
+
 -----------------------------------------------------------------------------------------------------------
 *** Updated on Thursday, August 15, 2019 2:50 PM ***
 Branch - iconAnimation:

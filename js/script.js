@@ -1,5 +1,9 @@
 // Put everything inside an onload to ensure that everything has loaded in before any code is executed
 window.onload = function () {
+
+	//Clearing Console
+	console.clear()
+
 	/* VARIABLE DECLARATIONS */
 
 	/**********LIST OF DOM REFERENCES *********/
@@ -44,13 +48,9 @@ window.onload = function () {
 	//placeholder
 	const PLACE_HOLDER = document.querySelector('#placeholder');
 
-
-	//to be deleted
-	const TLM = new TimelineMax({
-
-	});
 	//GSAP TimeLine Max const for Path Animation
 	const TLM_PATH = new TimelineMax({
+		// delay: 3,
 		repeat: -1,
 		repeatDelay: 1
 	});
@@ -58,11 +58,11 @@ window.onload = function () {
 	//GSAP TimeLine Max const for Icon Animation
 	const TLM_ICON = new TimelineMax({});
 
-
 	//Clears Current/Active Path Animation
 	const REMOVE_CURRENT_ANIMATION_PATH = function () {
-		TLM.progress(0).clear();
+		TLM_PATH.progress(0).clear();
 	};
+
 	//Clears Current/Active Icon Animation
 	const REMOVE_CURRENT_ANIMATION_ICON = function () {
 		TLM_ICON.progress(0).clear();
@@ -81,9 +81,7 @@ window.onload = function () {
 	let pathToDraw = '';
 	let duration = 0;
 	let length = 0;
-	let repeat = 0;
-	let strokeColor = "#000";
-
+	let strokeColor = '';
 
 	// variable to store the active colour to be set to the tabs
 	let activeColour = '';
@@ -105,17 +103,18 @@ window.onload = function () {
 
 	// Set this via QR or nav button
 	// *** Hard coded for testing purposes ***
+
 	// currently defaults to 0 if ID is not set
 	let currentLocation = id ? id : 0;
 
 	// drop down elements for styling background upon click events
 	let placeholderStart = document.querySelector('.placeholder-start');
 	let placeholderEnd = document.querySelector('.placeholder-end');
+
 	// drop down state management
 	let startDropDownState = false;
 	let endDropDownState = false;
 	let dropdownState = false;
-
 
 	// set destination position based on dropdown selection, initially based on id
 	let destination = '';
@@ -131,7 +130,6 @@ window.onload = function () {
 	let evCache = new Array();
 	let prevDiff = -1;
 
-
 	// declaring an array of object to to store the values
 	let parkFeature = [{
 			//0
@@ -146,12 +144,12 @@ window.onload = function () {
 				'images/bike_path/image4.jpg',
 			],
 			paths: [
-				['pin circle', 5, 500, -1],
-				['bike_path_to_peony', 5, 608, -1],
-				['bike_path_to_waterfall_garden', 5, 915, -1],
-				['bike_path_to_bridge', 3, 199, -1],
-				['bike_path_to_daylily', 8, 630, -1],
-				['bike_path_to_memory_garden', 8, 1829, -1],
+				['pin circle', 5, 500],
+				['bike_path_to_peony', 5, 608],
+				['bike_path_to_waterfall_garden', 5, 915],
+				['bike_path_to_bridge', 3, 199],
+				['bike_path_to_daylily', 8, 630],
+				['bike_path_to_memory_garden', 8, 1829],
 			],
 			featureZoomPoints: ['180%', 0.2, 1],
 			pathZoomPoints: [
@@ -174,14 +172,14 @@ window.onload = function () {
 				'images/peony/image3.jpg',
 				'images/peony/image4.jpg',
 			],
-			/* DRAWING PATHS*/
+			/* SVG PATHS */
 			paths: [
-				['peony_to_bike_path', 5, 608, -1],
-				['peony_icon g circle', 5, 375, -1],
-				['peony_to_waterfall_garden', 5, 866, -1],
-				['peony_to_bridge', 5, 807, -1],
-				['peony_to_daylily', 8, 1272, -1],
-				['peony_to_memory_garden', 12, 2472, -1],
+				['peony_to_bike_path', 5, 608],
+				['peony_icon g circle', 5, 375],
+				['peony_to_waterfall_garden', 5, 866],
+				['peony_to_bridge', 5, 807],
+				['peony_to_daylily', 8, 1272],
+				['peony_to_memory_garden', 12, 2472],
 			],
 			featureZoomPoints: ['180%', 0.4, 0.95],
 			pathZoomPoints: [
@@ -203,13 +201,14 @@ window.onload = function () {
 				'images/waterfall_garden/image3.jpg',
 				'images/waterfall_garden/image4.jpg',
 			],
+			/* SVG PATHS */
 			paths: [
-				['waterfall_garden_to_bike_path', 5, 915, -1],
-				['waterfall_garden_to_peony', 5, 866, -1],
-				['water_feature_icon g circle', 5, 375, -1],
-				['waterfall_garden_to_bridge', 7, 1118, -1],
-				['waterfall_garden_to_daylily', 7, 1580, -1],
-				['waterfall_garden_to_memory_garden', 10, 2779, -1],
+				['waterfall_garden_to_bike_path', 5, 915],
+				['waterfall_garden_to_peony', 5, 866],
+				['water_feature_icon g circle', 5, 375],
+				['waterfall_garden_to_bridge', 7, 1118],
+				['waterfall_garden_to_daylily', 7, 1580],
+				['waterfall_garden_to_memory_garden', 10, 2779],
 			],
 			featureZoomPoints: ['170%', 0.35, 0.4],
 			pathZoomPoints: [
@@ -231,13 +230,14 @@ window.onload = function () {
 				'images/bridge/image3.jpg',
 				'images/bridge/image4.jpg',
 			],
+			/* SVG PATHS */
 			paths: [
-				['bridge_to_bike_path', 3, 199, -1],
-				['bridge_to_peony', 5, 807, -1],
-				['bridge_to_waterfall_garden', 7, 1118, -1],
-				['bridge_icon circle', 5, 375, -1],
-				['bridge_to_daylily', 5, 615, -1],
-				['bridge_to_memory_garden', 8, 1814, -1],
+				['bridge_to_bike_path', 3, 199],
+				['bridge_to_peony', 5, 807],
+				['bridge_to_waterfall_garden', 7, 1118],
+				['bridge_icon circle', 5, 375],
+				['bridge_to_daylily', 5, 615],
+				['bridge_to_memory_garden', 8, 1814],
 			],
 			featureZoomPoints: ['200%', 0.145, 1.4],
 			pathZoomPoints: [
@@ -260,13 +260,14 @@ window.onload = function () {
 				'images/daylily/image3.jpg',
 				'images/daylily/image4.jpg',
 			],
+			/* SVG PATHS */
 			paths: [
-				['daylily_to_bike_path', 8, 630, -1],
-				['daylily_to_peony', 8, 1272, -1],
-				['daylily_to_waterfall_garden', 7, 1580, -1],
-				['daylily_to_bridge', 5, 615, -1],
-				['daylily_icon circle', 5, 375, -1],
-				['daylily_to_memory_garden', 6, 1214, -1],
+				['daylily_to_bike_path', 8, 630],
+				['daylily_to_peony', 8, 1272],
+				['daylily_to_waterfall_garden', 7, 1580],
+				['daylily_to_bridge', 5, 615],
+				['daylily_icon circle', 5, 375],
+				['daylily_to_memory_garden', 6, 1214],
 
 			],
 			featureZoomPoints: ['220%', 0, 1.33],
@@ -289,13 +290,14 @@ window.onload = function () {
 				'images/memory_garden/image3.jpg',
 				'images/memory_garden/image4.jpg',
 			],
+			/* SVG PATHS */
 			paths: [
-				['memory_garden_to_bike_path', 8, 1829, -1],
-				['memory_garden_to_peony', 10, 2472, -1],
-				['memory_garden_to_waterfall_garden', 12, 2779, -1],
-				['memory_garden_to_bridge', 8, 1814, -1],
-				['memory_garden_to_daylily', 6, 1214, -1],
-				['memory_gazebo_icon circle', 5, 500, -1],
+				['memory_git garden_to_bike_path', 8, 1829],
+				['memory_garden_to_peony', 10, 2472],
+				['memory_garden_to_waterfall_garden', 12, 2779],
+				['memory_garden_to_bridge', 8, 1814],
+				['memory_garden_to_daylily', 6, 1214],
+				['memory_gazebo_icon circle', 5, 500],
 			],
 			featureZoomPoints: ['170%', 0, 0.06],
 			pathZoomPoints: [
@@ -309,39 +311,35 @@ window.onload = function () {
 		},
 	];
 
-
 	/* FUNCTION DEFINITIONS */
-
-	// MAIN DRAW Function
-	const DRAW = (path, duration, length, repeat) => {
+	// Path Animation Function
+	const PATH_ANIMATION = (path, duration, length) => {
 		REMOVE_CURRENT_ANIMATION_PATH();
-		const STROKE_WIDTH = 15;
-		TLM.fromTo(
-			path,
-			duration, {
-				strokeWidth: STROKE_WIDTH,
-				strokeDasharray: length,
-				strokeDashoffset: length
-			}, {
-				delay: 2,
-				stroke: '#679DF6',
-				strokeWidth: STROKE_WIDTH,
-				strokeDasharray: length,
-				strokeDashoffset: 0,
-				repeat: repeat,
-				ease: Sine.easeInOut,
-				repeatDelay: 1.3,
-				onComplete: () => {
-					if (repeat === 0) {
-						REMOVE_CURRENT_ANIMATION_PATH();
-					}
-				}
-			}
-		);
-	};
-	// MAIN DRAW Function
-	const ICON_ANIMATION = (path, duration, length, repeat) => {
 		REMOVE_CURRENT_ANIMATION_ICON();
+
+		//setting the path values, before animating the path
+		TLM_PATH.set(path, {
+				strokeDashoffset: length,
+				strokeDasharray: length,
+				strokeWidth: 15,
+				stroke: '#679DF6',
+
+			}) //animates the path
+			.to(path, duration, {
+				delay: 2,
+				strokeDashoffset: 0
+			})
+			//clears the path before repeat
+			.to(path, 3, {
+				delay: 1,
+				strokeDashoffset: 0 - length
+			})
+	};
+
+	// Icon Animation Function
+	const ICON_ANIMATION = (path, duration, length, strokeColor) => {
+		REMOVE_CURRENT_ANIMATION_ICON();
+		REMOVE_CURRENT_ANIMATION_PATH();
 		const STROKE_WIDTH = 10;
 
 		TLM_ICON.fromTo(
@@ -352,19 +350,10 @@ window.onload = function () {
 				strokeDashoffset: length
 			}, {
 				delay: 2,
-				stroke: '#000',
+				stroke: strokeColor,
 				strokeWidth: STROKE_WIDTH,
 				strokeDasharray: length,
 				strokeDashoffset: 0,
-				// repeat: repeat,
-				ease: Sine.easeInOut,
-				// repeatDelay: 1.3
-				// strokeCap: "round",
-				onComplete: () => {
-					if (repeat === 0) {
-						REMOVE_CURRENT_ANIMATION_ICON();
-					}
-				}
 			}
 		);
 	};
@@ -385,7 +374,7 @@ window.onload = function () {
 		PLACE_HOLDER.textContent = "Where to?";
 
 		DROP_DOWN_ITEM_START.forEach((item, i) => {
-			// toggle the hidden class on each item in the list (unhiding them)
+			// toggle the hidden class on each item in the list (reveling them)
 			if (i !== 0) {
 				item.classList.add('hidden');
 			} else {
@@ -403,7 +392,7 @@ window.onload = function () {
 		});
 
 		DROP_DOWN_ITEM_END.forEach((item, i) => {
-			// toggle the hidden class on each item in the list (unhiding them)
+			// toggle the hidden class on each item in the list (reveling them)
 			if (i !== 0) {
 				item.classList.add('hidden');
 			} else {
@@ -431,7 +420,7 @@ window.onload = function () {
 		placeholderStart.style.color = "#f7f2db";
 
 
-		// To accomidate the dropdowns removing redundent locations
+		// To accommodate the dropdowns removing redundant locations
 		if (destination) {
 			placeholderEnd.textContent = parkFeature[destination].name;
 		}
@@ -458,7 +447,7 @@ window.onload = function () {
 				item.style.color = '#383838';
 			}
 
-			// toggle the hidden class on each item in the list (unhiding them)
+			// toggle the hidden class on each item in the list (reveling them)
 			// hide destination from starting list
 			item.classList.toggle('hidden');
 			// Add the event listener to the item
@@ -492,7 +481,7 @@ window.onload = function () {
 				item.style.color = '#383838';
 			}
 
-			// toggle the hidden class on each item in the list (unhiding them)
+			// toggle the hidden class on each item in the list (reveling them)
 			// hide destination if it has been selected as start position
 			item.classList.toggle('hidden');
 			// Add the event listener to the item
@@ -523,17 +512,16 @@ window.onload = function () {
 		pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[destination][0]);
 		duration = parkFeature[currentLocation].paths[destination][1];
 		length = parkFeature[currentLocation].paths[destination][2];
-		repeat = parkFeature[currentLocation].paths[destination][3];
+		strokeColor = parkFeature[currentLocation].colour;
+
 
 		if (currentLocation === destination) {
-			ICON_ANIMATION(pathToDraw, duration, length, repeat);
+			//Animates the Icon
+			ICON_ANIMATION(pathToDraw, duration, length, strokeColor);
 		} else {
 			//Animates the path
-			DRAW(pathToDraw, duration, length, repeat);
+			PATH_ANIMATION(pathToDraw, duration, length);
 		}
-
-
-
 		// Hide with the path finder menu
 		closeDropDown();
 
@@ -594,7 +582,7 @@ window.onload = function () {
 			setTimeout(setContent, 350);
 			// opening the panel with new content
 			openInfoPanel();
-			//update starting point text to respresent new starting location
+			//update starting point text to represent new starting location
 			placeholderStart.textContent = parkFeature[currentLocation].name;
 			placeholderStart.style.backgroundColor = BACKGROUND_COLORS[currentLocation];
 			placeholderStart.style.color = "#f7f2db";
@@ -616,9 +604,6 @@ window.onload = function () {
 
 		};
 	}
-
-	// //Animates the path
-	// ICON_ANIMATION(pathToDraw, duration, length, repeat);
 	// minimizing/maximizing the infoPanel on clicking the title bar
 	TITLE_BAR.onclick = function () {
 		minimizeInfoPanel();
@@ -695,10 +680,10 @@ window.onload = function () {
 			pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[id][0]);
 			duration = parkFeature[currentLocation].paths[id][1];
 			length = parkFeature[currentLocation].paths[id][2];
-			repeat = parkFeature[currentLocation].paths[id][3];
+			strokeColor = parkFeature[currentLocation].colour;
 
-			//Animates the path
-			ICON_ANIMATION(pathToDraw, duration, length, repeat);
+			//Animates the Icon
+			ICON_ANIMATION(pathToDraw, duration, length, strokeColor);
 
 		}
 	}
