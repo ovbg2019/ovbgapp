@@ -1,4 +1,10 @@
 -----------------------------------------------------------------------------------------------------------
+*** Updated on Monday, August 19, 2019 7:00 PM ***
+JS
+    -Switched Icon Animation timeline max "to" back to  “fromto”, because in iOS/Desktop Safari all the icon animations do not animate with or with repeat on. When switched back to "fromto" it animate in iOS/Desktop Safari.
+    -Also hard code length value because in iOS/Desktop Safari all the icon animations were not animating.
+
+-----------------------------------------------------------------------------------------------------------
 
 *** Updated on Monday, August 19, 2019 4:30 PM ***
 Branch - AnimationArrayUpdate

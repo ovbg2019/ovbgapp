@@ -446,49 +446,73 @@ window.onload = function () {
 		// duration = parkFeature[currentLocation].paths[currentLocation][1];
 		duration = 2;
 		// length = parkFeature[currentLocation].paths[currentLocation][2];
-		length = Math.ceil(path.getTotalLength());
+		// length = Math.ceil(path.getTotalLength());
+		length = 350;
 		strokeColor = parkFeature[currentLocation].colour;
 
-		setTimeout(function () {
+		// setTimeout(function () {
+		// 	TLM_ICON.set(path, {
+		// 			strokeDashoffset: length,
+		// 			strokeDasharray: length,
+		// 			strokeWidth: 10,
+		// 			stroke: strokeColor
+		// 		})
+		// 		.to(path, duration, {
+		// 			delay: 0.25,
+		// 			strokeDashoffset: 0,
+		// 			ease: Power4.easeInOut
+		// 		});
+		// 	if (currentLocation === destination) {
 
-			TLM_ICON.progress(0).set(path, {
-					strokeDashoffset: length,
-					strokeDasharray: length,
-					strokeWidth: 10,
-					stroke: strokeColor
-				})
-				.to(path, duration, {
-					delay: 0.25,
-					strokeDashoffset: 0,
-					ease: Power4.easeInOut
-				})
-				.repeat(0);
+		// 		//clears the path before repeat
+		// 		TLM_ICON.to(path, duration, {
+		// 				strokeDashoffset: -length,
+		// 				ease: Power4.easeInOut
+		// 			}).repeat(-1)
+		// 			.progress(0);
+		// 	}
+		// }, 2000);
+		// setTimeout(function () {
 
-			if (currentLocation === destination) {
+		// 	TLM_ICON.progress(0).set(path, {
+		// 			strokeDashoffset: length,
+		// 			strokeDasharray: length,
+		// 			strokeWidth: 10,
+		// 			stroke: strokeColor
+		// 		})
+		// 		.to(path, duration, {
+		// 			delay: 0.25,
+		// 			strokeDashoffset: 0,
+		// 			ease: Power4.easeInOut
+		// 		})
+		// 		.repeat(0);
 
-				//clears the path before repeat
-				TLM_ICON.to(path, duration, {
-						strokeDashoffset: -length,
-						ease: Power4.easeInOut
-					}).repeat(-1)
-					.progress(0)
-			}
-		}, 2000);
+		// 	if (currentLocation === destination) {
 
-		// TLM_ICON.fromTo(
-		// 	path,
-		// 	duration, {
-		// 		strokeWidth: STROKE_WIDTH,
-		// 		strokeDasharray: length,
-		// 		strokeDashoffset: length
-		// 	}, {
-		// 		delay: 3,
-		// 		stroke: strokeColor,
-		// 		strokeWidth: STROKE_WIDTH,
-		// 		strokeDasharray: length,
-		// 		strokeDashoffset: 0,
-		// 		repeat: -1
-		// 	});
+		// 		//clears the path before repeat
+		// 		TLM_ICON.to(path, duration, {
+		// 				strokeDashoffset: -length,
+		// 				ease: Power4.easeInOut
+		// 			}).repeat(-1)
+		// 			.progress(0);
+		// 	}
+		// }, 2000);
+
+		let STROKE_WIDTH = 10;
+		TLM_ICON.fromTo(
+			path,
+			duration, {
+				strokeWidth: STROKE_WIDTH,
+				strokeDasharray: length,
+				strokeDashoffset: length
+			}, {
+				delay: 3,
+				stroke: strokeColor,
+				strokeWidth: STROKE_WIDTH,
+				strokeDasharray: length,
+				strokeDashoffset: 0,
+				// repeat: -1
+			});
 	};
 
 	// if anywhere in the map is clicked the dropdown will close
@@ -649,8 +673,6 @@ window.onload = function () {
 
 		//CloseInfoPanel or minimized
 		closeInfoPanel();
-
-
 		PLACE_HOLDER.textContent = "Navigating...";
 	});
 
@@ -798,7 +820,7 @@ window.onload = function () {
 			infoPanelState = 2;
 
 			//Animates the Icon
-			ICON_ANIMATION()
+			ICON_ANIMATION();
 
 
 		}
@@ -950,7 +972,6 @@ window.onload = function () {
 			height: mapHeight + 'vh',
 		});
 	}
-
 
 	/* PINCH AND ZOOM */
 
