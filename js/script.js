@@ -7,6 +7,13 @@ window.onload = function () {
 	/* VARIABLE DECLARATIONS */
 
 	/**********LIST OF DOM REFERENCES *********/
+	// Accessing the splash screen and the app screens
+	const APP_SCREEN = document.querySelector('#app');
+	const SPLASH_SCREEN = document.querySelector('#splash');
+
+	// delay variable to set delay for animations after splash screen opens
+	let splashDelay = 0;
+
 	// Access SVG inside Object by using Object ID and .contentDocument
 	const MAP_SVG = document.querySelector('#svgMapObj').contentDocument;
 
@@ -313,6 +320,91 @@ window.onload = function () {
 		},
 	];
 
+	// STORING THE DATA ON LOCAL STORAGE OPEN THE SPLASH ONLY ONCE
+
+	// variable to store the state of the load
+	var initialLoad = localStorage['initialLoad'] || 1;
+
+	// setting the state to first load for TESTING ONLY.... REMOVE IN FINAL VERSION
+	// initialLoad = 1;
+
+	// setting the load state to 0 (not first load) for future app loads
+	localStorage['initialLoad'] = '0';
+
+	// open splash screen when apps loads for the first time
+	if (initialLoad === 1) {
+		// showing the splash screen
+		showSplashScreen();
+		console.log('First time loading');
+
+		// setting the delay for the subsequent animations (opening the dropdown, opening the tab, zoom etc)
+		splashDelay = 2500;
+
+		// Dropdown opens on page load// or at end of splash animation, then closes again
+		if (window.innerWidth < 769) {
+			setTimeout(sneakPeakDropDown, splashDelay);
+		}
+	} else {
+		console.log('App has been launched before. Clear cache to load the splash again.');
+
+		// load the app screen if the splash is not loading
+		TweenMax.to('#app', 0.2, {
+			opacity: 1,
+		});
+	}
+
+	/* FUNCTION DEFINITIONS */
+
+	// ANIMATING THE SPLASH SCREEN
+
+	function showSplashScreen() {
+		//hide the app screen
+
+		TweenMax.to("#splash", 0.25, {
+			opacity: 1
+		});
+
+		TweenMax.from("#splashLogo", 0.5, {
+			scale: 0,
+			ease: Sine.easeOut,
+			onComplete: function () {
+				TweenMax.fromTo("#welcomeText p", 0.5, {
+					opacity: 0,
+					y: "-5vh"
+
+				}, {
+					opacity: 1,
+					y: "0vh",
+					onComplete: function () {
+						TweenMax.to("#welcomeText p", 0.5, {
+							delay: 0.75,
+							opacity: 0,
+							onComplete: function () {
+								TweenMax.to("#splashLogo", 0.25, {
+									scale: 0,
+									ease: Sine.easeIn,
+									onComplete: function () {
+										TweenMax.to("#splash", 0.25, {
+											opacity: 0
+										});
+										TweenMax.to('#app', 0.5, {
+											delay: 0.25,
+											opacity: 1,
+											onComplete: function () {
+												SPLASH_SCREEN.style.display = 'none';
+											}
+										});
+									}
+								});
+							}
+						})
+					}
+				});
+			}
+		});
+	}
+
+	// MAIN DRAW Function
 	/* FUNCTION DEFINITIONS */
 	// Path Animation Function
 	const PATH_ANIMATION = () => {
@@ -398,14 +490,6 @@ window.onload = function () {
 		// 		repeat: -1
 		// 	});
 	};
-
-
-	/* FUNCTIONS FOR THE ANIMATING THE MAP USING CLASSES, SET THE START POINT AND DROP DOWN MENU */
-
-	// NEW DROP DOWN CODE ********* START
-
-	// Dropdown opens on page load// or at end of splash animation, then closes again
-	// sneakPeakDropDown();
 
 	// if anywhere in the map is clicked the dropdown will close
 	MAP_SVG.addEventListener('click', function (e) {
@@ -578,8 +662,7 @@ window.onload = function () {
 	// opening the info panel and populating it with content based on the id and tab determined from the URL
 	if (!isNaN(id)) {
 		setContent();
-		openInfoPanel();
-
+		setTimeout(openInfoPanel, splashDelay);
 	} else {
 		id = 0;
 	}
@@ -643,7 +726,6 @@ window.onload = function () {
 			currentLocation = i;
 			setContent();
 			openInfoPanel();
-			console.log(MAP_ICONS[i]);
 		};
 	}
 	// minimizing/maximizing the infoPanel on clicking the title bar
@@ -654,7 +736,6 @@ window.onload = function () {
 	// closing the tab on close button click
 	CLOSE_BUTTON.onclick = function () {
 		closeInfoPanel();
-
 	};
 
 	// Functions to reset the appearance of the tabs
@@ -679,7 +760,6 @@ window.onload = function () {
 		for (let j in GALLERY_IMAGES) GALLERY_IMAGES[j].src = parkFeature[id].galleryImages[j];
 		ABOUT_TEXT.innerHTML = parkFeature[id].about;
 	};
-
 
 	// this function animates the infoPanel and its contents when it opens up
 	function openInfoPanel() {
@@ -1018,9 +1098,10 @@ window.onload = function () {
 		BIG_IMAGES.src = parkFeature[id].galleryImages[index];
 
 		//animate the image gallery
-		TweenMax.from('#expandedImg', 0.5, {
-			opacity: 0,
-			ease: Sine.easeOut
+		TweenMax.fromTo('#expandedImg', 0.5, {
+			opacity: 0
+		}, {
+			opacity: 1
 		});
 
 	};

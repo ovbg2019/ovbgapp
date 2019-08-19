@@ -1,4 +1,3 @@
-
 -----------------------------------------------------------------------------------------------------------
 
 *** Updated on Monday, August 19, 2019 4:30 PM ***
@@ -36,6 +35,28 @@ JS
 	-removed repeat from parkFeature array
 
 -----------------------------------------------------------------------------------------------------------
+
+Branch - onTabAnimation
+
+*** Updated on Monday, August 19, 2019 4:38 PM ***
+HTML
+    - ADDED: Splash screen <main>
+    - UPDATED: the map <main> id to 'app'
+
+CSS
+    - ADDED: Styles for the splash screen
+
+JS
+    - ADDED: Constants to access the splash screen and the app screen
+    - ADDED: function to open and animate the splash screen
+    - ADDED: variable to store the state of the app (initial launch/subsequent launch)
+    - ADDED: mechanism to read the app state and load the splash screen or the app accordingly
+    - UPDATED: sneakPeakDropDown function call moved. Only opens on the initial app load.
+
+
+-----------------------------------------------------------------------------------------------------------
+
+
 *** Updated on Thursday, August 15, 2019 2:50 PM ***
 Branch - iconAnimation:
 SVG
@@ -49,7 +70,7 @@ JS
 
 -----------------------------------------------------------------------------------------------------------
 
-Branch - onTabAnimation
+*** Updated on Monday, August 12, 2019 9:30 PM ***
 JS
     - Added: Constant MAP_ICONS to access all the icons inside the map SVG. (its an array similar to TABS and follows the same order as the tabs, menus)
     - Added: Event handler to handle the click on the icons
@@ -58,7 +79,6 @@ JS
 -----------------------------------------------------------------------------------------------------------
 
 *** Updated on Monday, August 12, 2019 7:55 PM ***
-Branch - onTabAnimation
 JS
     -Removed REMOVE_CURRENT_ANIMATION(); from the function that closes the tab, so the icon animation does not stop after the tab is closed.
 
