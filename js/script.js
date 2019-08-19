@@ -147,7 +147,7 @@ window.onload = function () {
 			],
 			paths: [
 				['pin circle', 5],
-				['bike_path_to_peony', 5],
+				['bike_path_to_peony', 4],
 				['bike_path_to_waterfall_garden', 5],
 				['bike_path_to_bridge', 3],
 				['bike_path_to_daylily', 8],
@@ -335,10 +335,11 @@ window.onload = function () {
 			//animates the path
 			.to(path, duration, {
 				delay: 2,
-				strokeDashoffset: 0
+				strokeDashoffset: 0,
+				ease: Sine.easeInOut
 			})
 			//clears the path before repeat
-			.to(path, 4, {
+			.to(path, duration, {
 				delay: 0.5,
 				strokeDashoffset: -length
 			})
