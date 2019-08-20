@@ -416,7 +416,7 @@ window.onload = function () {
 		duration = parkFeature[currentLocation].paths[destination][1];
 		length = Math.ceil(path.getTotalLength());
 		// length = parkFeature[currentLocation].paths[destination][2];
-
+		let delayCount = 2
 		//setting the path values, before animating the path
 		TLM_PATH.set(path, {
 				strokeDashoffset: length,
@@ -426,13 +426,13 @@ window.onload = function () {
 			})
 			//animates the path
 			.to(path, duration, {
-				delay: 2,
+				delay: delayCount,
 				strokeDashoffset: 0,
 				ease: Sine.easeInOut
 			})
 			//clears the path before repeat
 			.to(path, duration, {
-				delay: 0.5,
+				delay: delayCount,
 				strokeDashoffset: -length
 			})
 	};
@@ -505,6 +505,7 @@ window.onload = function () {
 				strokeWidth: STROKE_WIDTH,
 				strokeDasharray: length,
 				strokeDashoffset: length
+
 			}, {
 				delay: 3,
 				stroke: strokeColor,
@@ -657,14 +658,14 @@ window.onload = function () {
 		console.log('Dest: ' + destination + ' ' + parkFeature[destination].name);
 		pathZoomIn(currentLocation, destination);
 
-
-		if (currentLocation === destination) {
-			// Animates theIcon
-			ICON_ANIMATION();
-		} else {
-			//Animates the path
-			PATH_ANIMATION();
-		}
+		PATH_ANIMATION();
+		// if (currentLocation === destination) {
+		// 	// Animates theIcon
+		// 	ICON_ANIMATION();
+		// } else {
+		// 	//Animates the path
+		// 	PATH_ANIMATION();
+		// }
 		// Hide with the path finder menu
 		closeDropDown();
 
