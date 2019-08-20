@@ -1,5 +1,82 @@
-*** Updated on Monday, August 12, 2019 9:30 PM ***
+-----------------------------------------------------------------------------------------------------------
+*** Updated on Monday, August 19, 2019 7:00 PM ***
+JS
+    -Switched Icon Animation timeline max "to" back to  “fromto”, because in iOS/Desktop Safari all the icon animations do not animate with or with repeat on. When switched back to "fromto" it animate in iOS/Desktop Safari.
+    -Also hard code length value because in iOS/Desktop Safari all the icon animations were not animating.
+
+-----------------------------------------------------------------------------------------------------------
+
+*** Updated on Monday, August 19, 2019 4:30 PM ***
+Branch - AnimationArrayUpdate
+SVG
+    -Updated SVG to the latest version, the last one did not have the icon in order and on click incorrect tabs were opening
+
+JS
+    -Removed parameters from PATH/Icon animation function and put them inside the function.
+    -Added setTimeout function inside Icon Animation function.
+    -Switched Icon Animation “fromto” to “to”, to clear the path and repeat if current location and destination are the same.
+    -On tab click icon still animates only once.
+    -As per group discussion added getTotalLength function to get lengths for all path for drawing, instead of hard coding it inside the array, also removed the length values from inside the array.
+    -Added MapZoom and Close info panel function under Go, so if info Panel is open or minimized it will be closed once the go button is clicked and navigation is started
+
+-----------------------------------------------------------------------------------------------------------
+
+*** Updated on Sunday, August 18, 2019 11:00 PM ***
+Branch - AnimationArrayUpdate
+SVG
+	-updated SVG to the latest version.
+JS
+	-Renamed, the PATH timeline max to TLM_PATH from TLM.
+	-Updated TLM to TLM_PATH in all places.
+	-Switched Path Animation “fromto” to “to”, to make the animation smooth and not blink out on before disappearing and repeating.
+	- Added repeat and repeat delay into TLM_PATH now and not needed for TLM_ICON
+
+	-Icon colour animates to parkFeature colour on the tab
+	  click and when location and destination are the same.
+	-Renamed DRAW() to PATH_ANIMATION() and also updated across the file
+	-Corrected a few spelling errors.
+
+	REMOVED:
+	-onComplete from the path/icon function, no longer needed.
+	-removed repeat from parkFeature array
+
+-----------------------------------------------------------------------------------------------------------
+
 Branch - onTabAnimation
+
+*** Updated on Monday, August 19, 2019 4:38 PM ***
+HTML
+    - ADDED: Splash screen <main>
+    - UPDATED: the map <main> id to 'app'
+
+CSS
+    - ADDED: Styles for the splash screen
+
+JS
+    - ADDED: Constants to access the splash screen and the app screen
+    - ADDED: function to open and animate the splash screen
+    - ADDED: variable to store the state of the app (initial launch/subsequent launch)
+    - ADDED: mechanism to read the app state and load the splash screen or the app accordingly
+    - UPDATED: sneakPeakDropDown function call moved. Only opens on the initial app load.
+
+
+-----------------------------------------------------------------------------------------------------------
+
+
+*** Updated on Thursday, August 15, 2019 2:50 PM ***
+Branch - iconAnimation:
+SVG
+	-updated SVG to latest
+JS
+	-Updated Icon Animation, animating circle only.
+    -Created separate fn “ICON_ANIMATION” icon animation.
+    -Added if statement to Go so when starting and ending location are same,
+     the icon Animation run, instead of path.
+     -Created separate functions for removing Icon Animation and Path Animation
+
+-----------------------------------------------------------------------------------------------------------
+
+*** Updated on Monday, August 12, 2019 9:30 PM ***
 JS
     - Added: Constant MAP_ICONS to access all the icons inside the map SVG. (its an array similar to TABS and follows the same order as the tabs, menus)
     - Added: Event handler to handle the click on the icons
@@ -8,7 +85,6 @@ JS
 -----------------------------------------------------------------------------------------------------------
 
 *** Updated on Monday, August 12, 2019 7:55 PM ***
-Branch - onTabAnimation
 JS
     -Removed REMOVE_CURRENT_ANIMATION(); from the function that closes the tab, so the icon animation does not stop after the tab is closed.
 

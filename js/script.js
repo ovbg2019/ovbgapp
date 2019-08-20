@@ -1,10 +1,24 @@
 // Put everything inside an onload to ensure that everything has loaded in before any code is executed
 window.onload = function () {
+
+	//Clearing Console
+	console.clear()
+
 	/* VARIABLE DECLARATIONS */
 
 	/**********LIST OF DOM REFERENCES *********/
+	// Accessing the splash screen and the app screens
+	const APP_SCREEN = document.querySelector('#app');
+	const SPLASH_SCREEN = document.querySelector('#splash');
+
+	// delay variable to set delay for animations after splash screen opens
+	let splashDelay = 0;
+
 	// Access SVG inside Object by using Object ID and .contentDocument
 	const MAP_SVG = document.querySelector('#svgMapObj').contentDocument;
+
+	//To Total Path Length
+	// console.log(`peonyToBridgePathLength: ${MAP_SVG.querySelector('#peony_to_bridge').getTotalLength()}`);
 
 	// Accessing all the icons inside the SVG map
 	const MAP_ICONS = MAP_SVG.querySelectorAll('#bike_path_icon, #peony_icon, #water_feature_icon, #bridge_icon, #daylily_icon, #memory_gazebo_icon');
@@ -44,19 +58,31 @@ window.onload = function () {
 	//placeholder
 	const PLACE_HOLDER = document.querySelector('#placeholder');
 
-	//New TimeLine Max const for GSAP
-	const TLM = new TimelineMax({});
-	//Clears Current/Active Animation
-	const REMOVE_CURRENT_ANIMATION = function () {
-		TLM.progress(0).clear();
-  };
+	//GSAP TimeLine Max const for Path Animation
+	const TLM_PATH = new TimelineMax({
+		repeat: -1,
+		repeatDelay: .5
+	});
+
+	//GSAP TimeLine Max const for Icon Animation
+	const TLM_ICON = new TimelineMax({});
+
+	//Clears Current/Active Path Animation
+	const REMOVE_CURRENT_ANIMATION_PATH = function () {
+		TLM_PATH.progress(0).clear();
+	};
+
+	//Clears Current/Active Icon Animation
+	const REMOVE_CURRENT_ANIMATION_ICON = function () {
+		TLM_ICON.progress(0).clear();
+	};
+
 
 	//SVG PATH VARIABLES
 	let pathToDraw = '';
 	let duration = 0;
 	let length = 0;
-	let repeat = 0;
-
+	let strokeColor = '';
 
 	// variable to store the active colour to be set to the tabs
 	let activeColour = '';
@@ -78,17 +104,18 @@ window.onload = function () {
 
 	// Set this via QR or nav button
 	// *** Hard coded for testing purposes ***
+
 	// currently defaults to 0 if ID is not set
 	let currentLocation = id ? id : 0;
 
-  // drop down elements for styling background upon click events
+	// drop down elements for styling background upon click events
 	let placeholderStart = document.querySelector('.placeholder-start');
-  let placeholderEnd = document.querySelector('.placeholder-end');
-  // drop down state management
-  let startDropDownState = false;
-  let endDropDownState = false;
-  let dropdownState = false;
+	let placeholderEnd = document.querySelector('.placeholder-end');
 
+	// drop down state management
+	let startDropDownState = false;
+	let endDropDownState = false;
+	let dropdownState = false;
 
 	// set destination position based on dropdown selection, initially based on id
 	let destination = '';
@@ -102,8 +129,7 @@ window.onload = function () {
 	let MAP_SVG_OBJ = document.querySelector('#svgMapObj');
 	MAP_SVG_OBJ.style.height = '100%';
 	let evCache = new Array();
-  let prevDiff = -1;
-
+	let prevDiff = -1;
 
 	// declaring an array of object to to store the values
 	let parkFeature = [{
@@ -119,12 +145,12 @@ window.onload = function () {
 				'images/bike_path/image4.jpg',
 			],
 			paths: [
-				['pin', 5, 500, -1],
-				['bike_path_to_peony', 5, 608, -1],
-				['bike_path_to_waterfall_garden', 5, 915, -1],
-				['bike_path_to_bridge', 3, 199, -1],
-				['bike_path_to_daylily', 8, 630, -1],
-				['bike_path_to_memory_garden', 8, 1829, -1],
+				['pin circle', 5],
+				['bike_path_to_peony', 4],
+				['bike_path_to_waterfall_garden', 5],
+				['bike_path_to_bridge', 3],
+				['bike_path_to_daylily', 8],
+				['bike_path_to_memory_garden', 8],
 			],
 			featureZoomPoints: ['180%', 0.2, 1],
 			pathZoomPoints: [
@@ -147,14 +173,14 @@ window.onload = function () {
 				'images/peony/image3.jpg',
 				'images/peony/image4.jpg',
 			],
-			/* DRAWING PATHS*/
+			/* SVG PATHS */
 			paths: [
-				['peony_to_bike_path', 5, 608, -1],
-				['pin-2', 5, 375, -1],
-				['peony_to_waterfall_garden', 5, 866, -1],
-				['peony_to_bridge', 5, 807, -1],
-				['peony_to_daylily', 8, 1272, -1],
-				['peony_to_memory_garden', 12, 2472, -1],
+				['peony_to_bike_path', 5],
+				['peony_icon g circle', 5],
+				['peony_to_waterfall_garden', 5],
+				['peony_to_bridge', 5],
+				['peony_to_daylily', 8],
+				['peony_to_memory_garden', 12],
 			],
 			featureZoomPoints: ['180%', 0.4, 0.95],
 			pathZoomPoints: [
@@ -176,13 +202,14 @@ window.onload = function () {
 				'images/waterfall_garden/image3.jpg',
 				'images/waterfall_garden/image4.jpg',
 			],
+			/* SVG PATHS */
 			paths: [
-				['waterfall_garden_to_bike_path', 5, 915, -1],
-				['waterfall_garden_to_peony', 5, 866, -1],
-				['pin-3', 5, 375, -1],
-				['waterfall_garden_to_bridge', 7, 1118, -1],
-				['waterfall_garden_to_daylily', 7, 1580, -1],
-				['waterfall_garden_to_memory_garden', 10, 2779, -1],
+				['waterfall_garden_to_bike_path', 5],
+				['waterfall_garden_to_peony', 5],
+				['water_feature_icon g circle', 5],
+				['waterfall_garden_to_bridge', 7],
+				['waterfall_garden_to_daylily', 7],
+				['waterfall_garden_to_memory_garden', 10],
 			],
 			featureZoomPoints: ['170%', 0.35, 0.4],
 			pathZoomPoints: [
@@ -204,13 +231,14 @@ window.onload = function () {
 				'images/bridge/image3.jpg',
 				'images/bridge/image4.jpg',
 			],
+			/* SVG PATHS */
 			paths: [
-				['bridge_to_bike_path', 3, 199, -1],
-				['bridge_to_peony', 5, 807, -1],
-				['bridge_to_waterfall_garden', 7, 1118, -1],
-				['pin-4', 5, 375, -1],
-				['bridge_to_daylily', 5, 615, -1],
-				['bridge_to_memory_garden', 8, 1814, -1],
+				['bridge_to_bike_path', 3],
+				['bridge_to_peony', 5],
+				['bridge_to_waterfall_garden', 7],
+				['bridge_icon circle', 5],
+				['bridge_to_daylily', 5],
+				['bridge_to_memory_garden', 8],
 			],
 			featureZoomPoints: ['200%', 0.145, 1.4],
 			pathZoomPoints: [
@@ -233,13 +261,14 @@ window.onload = function () {
 				'images/daylily/image3.jpg',
 				'images/daylily/image4.jpg',
 			],
+			/* SVG PATHS */
 			paths: [
-				['daylily_to_bike_path', 8, 630, -1],
-				['daylily_to_peony', 8, 1272, -1],
-				['daylily_to_waterfall_garden', 7, 1580, -1],
-				['daylily_to_bridge', 5, 615, -1],
-				['pin-5', 5, 375, -1],
-				['daylily_to_memory_garden', 6, 1214, -1],
+				['daylily_to_bike_path', 8],
+				['daylily_to_peony', 8],
+				['daylily_to_waterfall_garden', 7],
+				['daylily_to_bridge', 5],
+				['daylily_icon circle', 5],
+				['daylily_to_memory_garden', 6],
 
 			],
 			featureZoomPoints: ['220%', 0, 1.33],
@@ -262,13 +291,14 @@ window.onload = function () {
 				'images/memory_garden/image3.jpg',
 				'images/memory_garden/image4.jpg',
 			],
+			/* SVG PATHS */
 			paths: [
-				['memory_garden_to_bike_path', 8, 1829, -1],
-				['memory_garden_to_peony', 10, 2472, -1],
-				['memory_garden_to_waterfall_garden', 12, 2779, -1],
-				['memory_garden_to_bridge', 8, 1814, -1],
-				['memory_garden_to_daylily', 6, 1214, -1],
-				['memory_gazebo_icon', 5, 500, 0],
+				['memory_garden_to_bike_path', 8],
+				['memory_garden_to_peony', 10],
+				['memory_garden_to_waterfall_garden', 12],
+				['memory_garden_to_bridge', 8],
+				['memory_garden_to_daylily', 6],
+				['memory_gazebo_icon circle', 5],
 			],
 			featureZoomPoints: ['170%', 0, 0.06],
 			pathZoomPoints: [
@@ -282,58 +312,215 @@ window.onload = function () {
 		},
 	];
 
+	// STORING THE DATA ON LOCAL STORAGE OPEN THE SPLASH ONLY ONCE
+
+	// variable to store the state of the load
+	var initialLoad = localStorage['initialLoad'] || 1;
+
+	// setting the state to first load for TESTING ONLY.... REMOVE IN FINAL VERSION
+	// initialLoad = 1;
+
+	// setting the load state to 0 (not first load) for future app loads
+	localStorage['initialLoad'] = '0';
+
+	// open splash screen when apps loads for the first time
+	if (initialLoad === 1) {
+		// showing the splash screen
+		showSplashScreen();
+		console.log('First time loading');
+
+		// setting the delay for the subsequent animations (opening the dropdown, opening the tab, zoom etc)
+		splashDelay = 2500;
+
+		// Dropdown opens on page load// or at end of splash animation, then closes again
+		if (window.innerWidth < 769) {
+			setTimeout(sneakPeakDropDown, splashDelay);
+		}
+	} else {
+		console.log('App has been launched before. Clear cache to load the splash again.');
+
+		// load the app screen if the splash is not loading
+		TweenMax.to('#app', 0.2, {
+			opacity: 1,
+		});
+	}
 
 	/* FUNCTION DEFINITIONS */
 
+	// ANIMATING THE SPLASH SCREEN
+
+	function showSplashScreen() {
+		//hide the app screen
+
+		TweenMax.to("#splash", 0.25, {
+			opacity: 1
+		});
+
+		TweenMax.from("#splashLogo", 0.5, {
+			scale: 0,
+			ease: Sine.easeOut,
+			onComplete: function () {
+				TweenMax.fromTo("#welcomeText p", 0.5, {
+					opacity: 0,
+					y: "-5vh"
+
+				}, {
+					opacity: 1,
+					y: "0vh",
+					onComplete: function () {
+						TweenMax.to("#welcomeText p", 0.5, {
+							delay: 0.75,
+							opacity: 0,
+							onComplete: function () {
+								TweenMax.to("#splashLogo", 0.25, {
+									scale: 0,
+									ease: Sine.easeIn,
+									onComplete: function () {
+										TweenMax.to("#splash", 0.25, {
+											opacity: 0
+										});
+										TweenMax.to('#app', 0.5, {
+											delay: 0.25,
+											opacity: 1,
+											onComplete: function () {
+												SPLASH_SCREEN.style.display = 'none';
+											}
+										});
+									}
+								});
+							}
+						})
+					}
+				});
+			}
+		});
+	}
+
 	// MAIN DRAW Function
-	const DRAW = (path, duration, length, repeat) => {
-		REMOVE_CURRENT_ANIMATION();
-		const STROKE_WIDTH = 15;
-		TLM.fromTo(
+	/* FUNCTION DEFINITIONS */
+	// Path Animation Function
+	const PATH_ANIMATION = () => {
+		REMOVE_CURRENT_ANIMATION_PATH();
+		REMOVE_CURRENT_ANIMATION_ICON();
+
+		//retrieves the path name,duration, length and repeat info from paths array inside the parkFeature array.
+		path = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[destination][0]);
+		duration = parkFeature[currentLocation].paths[destination][1];
+		length = Math.ceil(path.getTotalLength());
+		// length = parkFeature[currentLocation].paths[destination][2];
+		let delayCount = 2
+		//setting the path values, before animating the path
+		TLM_PATH.set(path, {
+				strokeDashoffset: length,
+				strokeDasharray: length,
+				strokeWidth: 15,
+				stroke: '#679DF6'
+			})
+			//animates the path
+			.to(path, duration, {
+				delay: delayCount,
+				strokeDashoffset: 0,
+				ease: Sine.easeInOut
+			})
+			//clears the path before repeat
+			.to(path, duration, {
+				delay: delayCount,
+				strokeDashoffset: -length
+			})
+	};
+
+	// Icon Animation Function
+	const ICON_ANIMATION = () => {
+		REMOVE_CURRENT_ANIMATION_ICON();
+		REMOVE_CURRENT_ANIMATION_PATH();
+		//retrieves the path name,duration, length and repeat info from paths array inside the parkFeature array.
+		path = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[currentLocation][0]);
+		// duration = parkFeature[currentLocation].paths[currentLocation][1];
+		duration = 2;
+		// length = parkFeature[currentLocation].paths[currentLocation][2];
+		// length = Math.ceil(path.getTotalLength());
+		length = 350;
+		strokeColor = parkFeature[currentLocation].colour;
+
+		// setTimeout(function () {
+		// 	TLM_ICON.set(path, {
+		// 			strokeDashoffset: length,
+		// 			strokeDasharray: length,
+		// 			strokeWidth: 10,
+		// 			stroke: strokeColor
+		// 		})
+		// 		.to(path, duration, {
+		// 			delay: 0.25,
+		// 			strokeDashoffset: 0,
+		// 			ease: Power4.easeInOut
+		// 		});
+		// 	if (currentLocation === destination) {
+
+		// 		//clears the path before repeat
+		// 		TLM_ICON.to(path, duration, {
+		// 				strokeDashoffset: -length,
+		// 				ease: Power4.easeInOut
+		// 			}).repeat(-1)
+		// 			.progress(0);
+		// 	}
+		// }, 2000);
+		// setTimeout(function () {
+
+		// 	TLM_ICON.progress(0).set(path, {
+		// 			strokeDashoffset: length,
+		// 			strokeDasharray: length,
+		// 			strokeWidth: 10,
+		// 			stroke: strokeColor
+		// 		})
+		// 		.to(path, duration, {
+		// 			delay: 0.25,
+		// 			strokeDashoffset: 0,
+		// 			ease: Power4.easeInOut
+		// 		})
+		// 		.repeat(0);
+
+		// 	if (currentLocation === destination) {
+
+		// 		//clears the path before repeat
+		// 		TLM_ICON.to(path, duration, {
+		// 				strokeDashoffset: -length,
+		// 				ease: Power4.easeInOut
+		// 			}).repeat(-1)
+		// 			.progress(0);
+		// 	}
+		// }, 2000);
+
+		let STROKE_WIDTH = 10;
+		TLM_ICON.fromTo(
 			path,
 			duration, {
 				strokeWidth: STROKE_WIDTH,
 				strokeDasharray: length,
-				strokeDashoffset: length,
+				strokeDashoffset: length
+
 			}, {
-				delay: 2,
-				stroke: '#679DF6',
+				delay: 3,
+				stroke: strokeColor,
 				strokeWidth: STROKE_WIDTH,
 				strokeDasharray: length,
 				strokeDashoffset: 0,
-				repeat: repeat,
-				ease: Sine.easeInOut,
-				repeatDelay: 1.3,
-				onComplete: () => {
-					if (repeat === 0) {
-						REMOVE_CURRENT_ANIMATION();
-					}
-				}
-			}
-		);
+				// repeat: -1
+			});
 	};
-
-
-	/* FUNCTIONS FOR THE ANIMATING THE MAP USING CLASSES, SET THE START POINT AND DROP DOWN MENU */
-
-	// NEW DROP DOWN CODE ********* START
-
-  // Dropdown opens on page load// or at end of splash animation, then closes again
-  sneakPeakDropDown();
 
 	// if anywhere in the map is clicked the dropdown will close
 	MAP_SVG.addEventListener('click', function (e) {
 		openFullScreen();
-    closeDropDown();
-    //reset the place holder text to where to?
+		closeDropDown();
+		//reset the place holder text to where to?
 		PLACE_HOLDER.textContent = "Where to?";
-    
+
 		DROP_DOWN_ITEM_START.forEach((item, i) => {
-      // toggle the hidden class on each item in the list (unhiding them)
+			// toggle the hidden class on each item in the list (reveling them)
 			if (i !== 0) {
-        item.classList.add('hidden');
+				item.classList.add('hidden');
 			} else {
-        item.classList.remove('hidden');
+				item.classList.remove('hidden');
 			}
 			// PATH_FINDER.classList.add('hidden'); // hide pathfinder dropdown
 			// hide endpoint menu while starting point is being selected
@@ -347,7 +534,7 @@ window.onload = function () {
 		});
 
 		DROP_DOWN_ITEM_END.forEach((item, i) => {
-			// toggle the hidden class on each item in the list (unhiding them)
+			// toggle the hidden class on each item in the list (reveling them)
 			if (i !== 0) {
 				item.classList.add('hidden');
 			} else {
@@ -364,18 +551,17 @@ window.onload = function () {
 		// change the text on place holder
 		PLACE_HOLDER.textContent = "Select Destination";
 
-    if(dropdownState) {
-      closeDropDown();
-    } else  {
-      openDropDown();
-    }
+		if (dropdownState) {
+			closeDropDown();
+		} else {
+			openDropDown();
+		}
 
     placeholderStart.textContent = parkFeature[currentLocation].name;
     placeholderStart.style.backgroundColor = parkFeature[currentLocation].colour;
     placeholderStart.style.color = "#f7f2db";
 
-    
-		// To accomidate the dropdowns removing redundent locations
+		// To accommodate the dropdowns removing redundant locations
 		if (destination) {
 			placeholderEnd.textContent = parkFeature[destination].name;
 		}
@@ -410,14 +596,14 @@ window.onload = function () {
           startDropDownState = !startDropDownState;
         // will set destination location based item in dropdown being selected
 				if (i !== 0) {
-          currentLocation = i - 1;
-        }
+					currentLocation = i - 1;
+				}
 
-        placeholderStart.textContent = parkFeature[currentLocation].name;
+				placeholderStart.textContent = parkFeature[currentLocation].name;
 			});
-    });
-    startDropDownState = false;
-    
+		});
+		startDropDownState = false;
+
 	});
 
 	// Create event listener on drop down menu
@@ -431,57 +617,63 @@ window.onload = function () {
         placeholderEnd.style.backgroundColor = parkFeature[destination].colour;
         placeholderEnd.style.color = "#f7f2db";
 
-      } else {
-        item.style.backgroundColor = "#FAF7E9";
-        item.style.color = '#383838';
-      }
+			} else {
+				item.style.backgroundColor = "#FAF7E9";
+				item.style.color = '#383838';
+			}
 
-			// toggle the hidden class on each item in the list (unhiding them)
+			// toggle the hidden class on each item in the list (reveling them)
 			// hide destination if it has been selected as start position
 			item.classList.toggle('hidden');
 			// Add the event listener to the item
 			item.addEventListener('click', function () {
-        endDropDownState = !endDropDownState;
+				endDropDownState = !endDropDownState;
 				// will set destination location based item in drop down being selected
 				if (i !== 0) {
 					destination = i - 1;
-        }
+				}
 
-        placeholderEnd.textContent = parkFeature[destination].name;
+				placeholderEnd.textContent = parkFeature[destination].name;
 			});
-    });
-    endDropDownState = false;
+		});
+		endDropDownState = false;
 	});
 
 	// Handle Go button event, will execute zoom function upon click
 	GO_BTN.addEventListener('click', function () {
-    // Call zoom function based on current destination selection
-    if(!destination) {
-      destination = 0;
+		// Call zoom function based on current destination selection
+		if (!destination) {
+			destination = 0;
+		}
+		console.log('Loc: ' + currentLocation + ' ' + parkFeature[currentLocation].name);
+		console.log('Dest: ' + destination + ' ' + parkFeature[destination].name);
+		pathZoomIn(currentLocation, destination);
+
+    // Colour the bike path or reset it to normal depending on currentLocation and destination
+    if(destination === 0 || currentLocation === 0) {
+      colorBikePath();
+    } else {
+      resetBikePath();
     }
-			console.log('Loc: ' + currentLocation + ' ' + parkFeature[currentLocation].name);
-			console.log('Dest: ' + destination + ' ' + parkFeature[destination].name);
-			pathZoomIn(currentLocation, destination);
 
-			//retrieves the path name,duration, length and repeat info from paths array inside the parkFeature array.
-			pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[destination][0]);
-			duration = parkFeature[currentLocation].paths[destination][1];
-			length = parkFeature[currentLocation].paths[destination][2];
-			repeat = parkFeature[currentLocation].paths[destination][3];
 
+		if (currentLocation === destination) {
+			// Animates theIcon
+			ICON_ANIMATION();
+		} else {
 			//Animates the path
-			DRAW(pathToDraw, duration, length, repeat);
+			PATH_ANIMATION();
+		}
+		// Hide with the path finder menu
+		closeDropDown();
 
-      // Hide with the path finder menu
-      if(destination === 0 || currentLocation === 0) {
-        colorBikePath();
-      } else {
-        resetBikePath();
-      }
+    closeDropDown();
+		//Zooms outs
+		mapZoomOut(92);
 
-      closeDropDown();
-
-			PLACE_HOLDER.textContent = "Navigating...";
+		//CloseInfoPanel or minimized
+		closeInfoPanel();
+		PLACE_HOLDER.textContent = "Navigating...";
 	});
 
 	// NEW DROP DOWN CODE ********* END
@@ -492,8 +684,7 @@ window.onload = function () {
 	// opening the info panel and populating it with content based on the id and tab determined from the URL
 	if (!isNaN(id)) {
 		setContent();
-    openInfoPanel();
-
+		setTimeout(openInfoPanel, splashDelay);
 	} else {
 		id = 0;
 	}
@@ -525,7 +716,8 @@ window.onload = function () {
 		// applying a function to onclick event of each tab
 		TABS[i].onclick = function () {
 			openFullScreen();
-			REMOVE_CURRENT_ANIMATION();
+			REMOVE_CURRENT_ANIMATION_PATH();
+			REMOVE_CURRENT_ANIMATION_ICON();
 			// setting the id and the content based on the id
 			id = i;
 			//update current location value based on tab clicked
@@ -543,56 +735,53 @@ window.onload = function () {
       placeholderStart.style.color = "#f7f2db";
 			// hide the path finder menu
 			PATH_FINDER.classList.add('hidden');
-    }
-  };
-
-		// setting event listeners on each of the icons on the map
-		// selects the icons from the map using their IDs
-		// goes through a loop to open the specific tab
-		for (let i in MAP_ICONS) {
-			MAP_ICONS[i].onclick = function () {
-				closeInfoPanel();
-				id = i;
-				currentLocation = i;
-				setContent();
-				openInfoPanel();
-			};
 		}
+	};
 
-		// minimizing/maximizing the infoPanel on clicking the title bar
-		TITLE_BAR.onclick = function () {
-			minimizeInfoPanel();
-		};
-
-		// closing the tab on close button click
-		CLOSE_BUTTON.onclick = function () {
+	// setting event listeners on each of the icons on the map
+	// selects the icons from the map using their IDs
+	// goes through a loop to open the specific tab
+	for (let i in MAP_ICONS) {
+		MAP_ICONS[i].onclick = function () {
 			closeInfoPanel();
-
+			id = i;
+			currentLocation = i;
+			setContent();
+			openInfoPanel();
 		};
+	}
+	// minimizing/maximizing the infoPanel on clicking the title bar
+	TITLE_BAR.onclick = function () {
+		minimizeInfoPanel();
+	};
 
-		// Functions to reset the appearance of the tabs
-		function resetTabAppearance() {
-			for (let i = 0; i < 6; i++) {
-				TABS[i].style.backgroundColor = '';
-				TITLE_BAR.style.backgroundColor = '#383838';
-			}
+	// closing the tab on close button click
+	CLOSE_BUTTON.onclick = function () {
+		closeInfoPanel();
+	};
 
-			//reset info to the top - the info will scroll to the top once click to other tab
-			document.getElementById('contentBox').scrollTop = 0;
+	// Functions to reset the appearance of the tabs
+	function resetTabAppearance() {
+		for (let i = 0; i < 6; i++) {
+			TABS[i].style.backgroundColor = '';
+			TITLE_BAR.style.backgroundColor = '#383838';
 		}
 
-		// function to set all the content inside the info panel
-		function setContent() {
-			resetTabAppearance();
-			activeColour = parkFeature[id].colour;
-			TABS[id].style.backgroundColor = activeColour;
-			TITLE_BAR.style.backgroundColor = activeColour;
-			TITLE.textContent = parkFeature[id].name;
-			TITLE_BAR_ICON.src = parkFeature[id].icon;
-			for (let j in GALLERY_IMAGES) GALLERY_IMAGES[j].src = parkFeature[id].galleryImages[j];
-			ABOUT_TEXT.innerHTML = parkFeature[id].about;
-		};
-	
+		//reset info to the top - the info will scroll to the top once click to other tab
+		document.getElementById('contentBox').scrollTop = 0;
+	}
+
+	// function to set all the content inside the info panel
+	function setContent() {
+		resetTabAppearance();
+		activeColour = parkFeature[id].colour;
+		TABS[id].style.backgroundColor = activeColour;
+		TITLE_BAR.style.backgroundColor = activeColour;
+		TITLE.textContent = parkFeature[id].name;
+		TITLE_BAR_ICON.src = parkFeature[id].icon;
+		for (let j in GALLERY_IMAGES) GALLERY_IMAGES[j].src = parkFeature[id].galleryImages[j];
+		ABOUT_TEXT.innerHTML = parkFeature[id].about;
+	};
 
 	// this function animates the infoPanel and its contents when it opens up
 	function openInfoPanel() {
@@ -609,6 +798,7 @@ window.onload = function () {
 						ease: Sine.easeOut,
 					}
 				);
+
 			} else if (infoPanelState === 1) {
 				TweenMax.fromTo(
 					'#infoPanel',
@@ -629,14 +819,10 @@ window.onload = function () {
 			// setting state of the info panel to OPEN
 			infoPanelState = 2;
 
-			//retrieves the path name,duration, length and repeat info from paths array inside the parkFeature array.
-			pathToDraw = MAP_SVG.querySelector('#' + parkFeature[currentLocation].paths[id][0]);
-			duration = parkFeature[currentLocation].paths[id][1];
-			length = parkFeature[currentLocation].paths[id][2];
-			repeat = parkFeature[currentLocation].paths[id][3];
+			//Animates the Icon
+			ICON_ANIMATION();
 
-			//Animates the path
-			DRAW(pathToDraw, duration, length, repeat);
+
 		}
 	}
 
@@ -787,7 +973,6 @@ window.onload = function () {
 		});
 	}
 
-
 	/* PINCH AND ZOOM */
 
 	// function to register touch when it starts
@@ -934,9 +1119,10 @@ window.onload = function () {
 		BIG_IMAGES.src = parkFeature[id].galleryImages[index];
 
 		//animate the image gallery
-		TweenMax.from('#expandedImg', 0.5, {
-			opacity: 0,
-			ease: Sine.easeOut
+		TweenMax.fromTo('#expandedImg', 0.5, {
+			opacity: 0
+		}, {
+			opacity: 1
 		});
 
 	};
@@ -1033,13 +1219,13 @@ function closeDropDown() {
 }
 
 function colorBikePath() {
-  TweenMax.to(MAP_SVG.getElementById('bike_path'), 2, {
+  TweenMax.to(MAP_SVG.getElementById('bike_path_animate'), 2, {
     stroke: '#efaa5f'
   });
 }
 
 function resetBikePath() {
-  TweenMax.to(MAP_SVG.getElementById('bike_path'), 2, {
+  TweenMax.to(MAP_SVG.getElementById('bike_path_animate'), 2, {
     stroke: '#f7f2db',
   });
 }
