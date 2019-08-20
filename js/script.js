@@ -658,14 +658,14 @@ window.onload = function () {
 		console.log('Dest: ' + destination + ' ' + parkFeature[destination].name);
 		pathZoomIn(currentLocation, destination);
 
-		PATH_ANIMATION();
-		// if (currentLocation === destination) {
-		// 	// Animates theIcon
-		// 	ICON_ANIMATION();
-		// } else {
-		// 	//Animates the path
-		// 	PATH_ANIMATION();
-		// }
+
+		if (currentLocation === destination) {
+			// Animates theIcon
+			ICON_ANIMATION();
+		} else {
+			//Animates the path
+			PATH_ANIMATION();
+		}
 		// Hide with the path finder menu
 		closeDropDown();
 
