@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------------------------
-*** Updated on Wednesday, August 21, 2019 1:40 PM ***
-Branch - AnimationArrayUpdate
+*** Updated on Wednesday, August 21, 2019 1:45 PM ***
+Branch - pathStartEndAnimation
 JS
     -enabled start and end icon animation on path navigation/animation, using the same icon function.
     -removed the disabled timelinemax for icon animation.
