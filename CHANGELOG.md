@@ -4,8 +4,8 @@ Branch - AnimationArrayUpdate
 JS
     -enabled start and end icon animation on path navigation/animation, using the same icon function.
     -removed the disabled timelinemax for icon animation.
-    -moved SVG variables inside the the functions they are being used.
-    -Updated icon names in paths array , few icon path name were missing g, and circle was being called by in now updated to called by the icon path like rest of the icon.
+    -moved SVG variables inside the functions they are being used.
+    -Updated icon names in paths array, few icon path names were missing g, and the circle was being called by in now updated to called by the icon path like rest of the icon.
     -merged the removed animation function into one.
 
 -----------------------------------------------------------------------------------------------------------
