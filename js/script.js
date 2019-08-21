@@ -318,15 +318,19 @@ window.onload = function () {
 				['100%', 0, 0.33],
 			],
 		}, { //6
+			location: 2,
 			paths: [['adelaide_to_water', 6]],
 			pathZoomPoints: [['100%', 0.1, 0.05]]
 		}, { //7
+			location: 5,
 			paths: [['kaiser_adelaide_to_memory', 5]],
 			pathZoomPoints: [['100%', 0.1, 0.2]]
 		}, { //8
+			location: 4,
 			paths: [['kaiser_daylily', 6]],
 			pathZoomPoints: [['100%', 0, 0.7]]
 		}, { //9
+			location: 3,
 			paths: [['kaiser_bond_to_bridge', 4]],
 			pathZoomPoints: [['100%', 0.01, 1.3]]
 		}
@@ -701,6 +705,10 @@ window.onload = function () {
 			destination = 0;
 			pathZoomIn(currentLocation, destination);
 			PATH_ANIMATION();
+			currentLocation = parkFeature[id].location;
+			id = currentLocation;
+			ICON_ANIMATION(currentLocation);
+			destination = '';
 		} else {
 			setContent();
 			setTimeout(openInfoPanel, splashDelay);
