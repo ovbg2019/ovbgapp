@@ -1,4 +1,13 @@
 -----------------------------------------------------------------------------------------------------------
+*** Updated on Wednesday, August 21, 2019 7:00 PM ***
+JS
+    -enabled start and end icon animation on path navigation/animation, using the same icon function.
+    -removed the disabled timelinemax for icon animation.
+    -moved SVG variables inside the the functions they are being used.
+    -Updated icon names in paths array , few icon path name were missing g, and circle was being called by in now updated to called by the icon path like rest of the icon.
+    -merged the removed animation function into one.
+
+-----------------------------------------------------------------------------------------------------------
 *** Updated on Monday, August 19, 2019 7:00 PM ***
 JS
     -Switched Icon Animation timeline max "to" back to  “fromto”, because in iOS/Desktop Safari all the icon animations do not animate with or with repeat on. When switched back to "fromto" it animate in iOS/Desktop Safari.
