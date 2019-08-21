@@ -526,11 +526,6 @@ window.onload = function () {
 			// hide endpoint menu while starting point is being selected
 			END_POINT.classList.remove('hidden');
 
-			// Update to and from values to prevent errors when drop downs are left open upon outside click on map
-			placeholderStart.textContent = parkFeature[id].name;
-			// Reset destination display text
-			placeholderEnd.textContent = 'Where to?'
-
 		});
 
 		DROP_DOWN_ITEM_END.forEach((item, i) => {
@@ -547,7 +542,6 @@ window.onload = function () {
 	});
 
 	TOP_BAR.addEventListener('click', function () {
-    console.log("From Top bar: " + destination);
 		// openFullScreen();
 		// change the text on place holder
 		PLACE_HOLDER.textContent = "Select Destination";
@@ -558,18 +552,14 @@ window.onload = function () {
 			openDropDown();
     }
 
-
     placeholderStart.textContent = parkFeature[currentLocation].name;
     placeholderStart.style.backgroundColor = parkFeature[currentLocation].colour;
     placeholderStart.style.color = "#f7f2db";
 
-		// To accommodate the dropdowns removing redundant locations
-		if (destination) {
-			placeholderEnd.textContent = parkFeature[destination].name;
-		} else {
+		if (!destination) {
       placeholderEnd.textContent = 'Where to?';
-			placeholderEnd.style.backgroundColor = "#f7f2db"; 
-			placeholderEnd.style.color = "#383838"; 
+      placeholderEnd.style.backgroundColor = "#f7f2db"; 
+      placeholderEnd.style.color = "#383838"; 
     }
 	});
 
@@ -639,12 +629,12 @@ window.onload = function () {
 					destination = i - 1;
 				}
 
-        if(destination) {
-          placeholderEnd.textContent = parkFeature[destination].name;
-        } else {
+        if(!destination) {
           placeholderEnd.textContent = 'Where to?';
           placeholderEnd.style.backgroundColor = "#f7f2db"; 
         }
+        
+        // placeholderEnd.textContent = parkFeature[destination].name;
 			});
 		});
 		endDropDownState = false;
@@ -1220,10 +1210,12 @@ function closeDropDown() {
     opacity: 0,
     top: 15,
     height: 10 +'vh',
+    overflow: "hidden",
     onComplete:  function() {
       PATH_FINDER.style.opacity = 1;
       PATH_FINDER.style.top = "10vh";
       PATH_FINDER.style.height = '15vh';
+      PATH_FINDER.style.overflow = "unset";
       dropdownState = false;
       PATH_FINDER.classList.add('hidden');
     }  
