@@ -628,7 +628,7 @@ window.onload = function () {
 	// Handle Go button event, will execute zoom function upon click
 	GO_BTN.addEventListener('click', function () {
 		// Call zoom function based on current destination selection
-		if (destination) {
+		if (!(destination === '')) {
 			console.log(
 				'Loc: ' + currentLocation + ' ' + parkFeature[currentLocation].name
 			);
@@ -648,10 +648,8 @@ window.onload = function () {
 			REMOVE_CURRENT_PATH_ICON_ANIMATION();
 
 			if (currentLocation === destination) {
-				console.log(currentLocation);
-				console.log(destination);
 				// Animates theIcon
-				ICON_ANIMATION();
+				ICON_ANIMATION(currentLocation);
 				PLACE_HOLDER.textContent = "Where to?";
 			} else {
 				//Animates icon pins for End Location
