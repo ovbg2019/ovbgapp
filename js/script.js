@@ -16,24 +16,9 @@ window.onload = function() {
 	// Access SVG inside Object by using Object ID and .contentDocument
 	const MAP_SVG = document.querySelector('#svgMapObj').contentDocument;
 
-	//To Total Path Length
-	// console.log(`peonyToBridgePathLength: ${MAP_SVG.querySelector('#peony_to_bridge').getTotalLength()}`);
-
 	// Accessing all the icons inside the SVG map
 	const MAP_ICONS = MAP_SVG.querySelectorAll(
 		'#bike_path_icon, #peony_icon, #water_feature_icon, #bridge_icon, #daylily_icon, #memory_gazebo_icon'
-	);
-	// Accessing all the icon pins inside the SVG map
-	const START_MAP_ICONS = MAP_SVG.querySelectorAll(
-		'#pin circle, #peony_icon circle, #water_feature_icon circle, #bridge_icon circle, #daylily_icon circle, #memory_gazebo_icon circle'
-	);
-	// Accessing all the icon pins inside the SVG map
-	const END_MAP_ICONS = MAP_SVG.querySelectorAll(
-		'#pin circle, #peony_icon circle, #water_feature_icon circle, #bridge_icon circle, #daylily_icon circle, #memory_gazebo_icon circle'
-	);
-	// Accessing all the icon pins inside the SVG map
-	const MAP_ICON_PINS = MAP_SVG.querySelectorAll(
-		'#pin circle, #peony_icon circle, #water_feature_icon circle, #bridge_icon circle, #daylily_icon circle, #memory_gazebo_icon circle'
 	);
 
 	// NEW DROPDOWN
@@ -82,17 +67,9 @@ window.onload = function() {
 	//GSAP TimeLine Max const for Icon Animation
 	const TLM_ICON = new TimelineMax({});
 
-	//Clears Current/Active Path Animation
-	const REMOVE_CURRENT_ANIMATION_PATH = function() {
+	//Clears Current/Active Path/Icon Animation
+	const REMOVE_CURRENT_PATH_ICON_ANIMATION = function() {
 		TLM_PATH.progress(0).clear();
-	};
-
-	//Clears Current/Active Icon Animation
-	const REMOVE_CURRENT_ANIMATION_ICON = function() {
-		TLM_ICON.progress(0).clear();
-	};
-	//Clears Current/Active Icon Animation
-	const REMOVE_PATH_START_END_ANIMATION = function() {
 		TLM_ICON.progress(0).clear();
 	};
 
@@ -104,17 +81,6 @@ window.onload = function() {
 		'#7D6287',
 		'#4571A2'
 	];
-
-	//SVG VARIABLES */
-	let pathToDraw = '';
-	let iconToDraw = '';
-	let startLocationIcon = '';
-	let endLocationIcon = '';
-	let iconStrokeColor = '';
-	let startStrokeColor = '';
-	let endStrokeColor = '';
-	let duration = 0;
-	let length = 0;
 
 	// variable to store the active colour to be set to the tabs
 	let activeColour = '';
@@ -179,7 +145,7 @@ window.onload = function() {
 				'images/bike_path/image4.jpg'
 			],
 			paths: [
-				['pin circle', 5],
+				['bike_path_icon g circle', 5],
 				['bike_path_to_peony', 4],
 				['bike_path_to_waterfall_garden', 5],
 				['bike_path_to_bridge', 3],
@@ -278,7 +244,7 @@ window.onload = function() {
 				['bridge_to_bike_path', 3],
 				['bridge_to_peony', 5],
 				['bridge_to_waterfall_garden', 7],
-				['bridge_icon circle', 5],
+				['bridge_icon g circle', 5],
 				['bridge_to_daylily', 5],
 				['bridge_to_memory_garden', 8]
 			],
@@ -311,7 +277,7 @@ window.onload = function() {
 				['daylily_to_peony', 8],
 				['daylily_to_waterfall_garden', 7],
 				['daylily_to_bridge', 5],
-				['daylily_icon circle', 5],
+				['daylily_icon g circle', 5],
 				['daylily_to_memory_garden', 6]
 			],
 			featureZoomPoints: ['220%', 0, 1.33],
@@ -394,9 +360,7 @@ window.onload = function() {
 	}
 
 	/* FUNCTION DEFINITIONS */
-
 	// ANIMATING THE SPLASH SCREEN
-
 	function showSplashScreen() {
 		//hide the app screen
 
@@ -453,21 +417,19 @@ window.onload = function() {
 	/* FUNCTION DEFINITIONS */
 	// Path Animation Function
 	const PATH_ANIMATION = () => {
-		//The functions below removes all active animation on the function call.
-		REMOVE_CURRENT_ANIMATION_PATH();
-		REMOVE_CURRENT_ANIMATION_ICON();
-		REMOVE_PATH_START_END_ANIMATION();
+		let pathToDraw = '';
+		let duration = 0;
+		let length = 0;
 
 		//retrieves the path name,duration, and info for paths inside the parkFeature.
 		pathToDraw = MAP_SVG.querySelector(
 			'#' + parkFeature[currentLocation].paths[destination][0]
 		);
 		duration = parkFeature[currentLocation].paths[destination][1];
+
 		//length calculated with getTotalLength()
 		length = Math.ceil(pathToDraw.getTotalLength());
-		// length = parkFeature[currentLocation].paths[destination][2];
-		//Stores Delay Count
-		// let delayCount = 2;
+
 		//setting the path values, before animating the path
 		TLM_PATH.set(pathToDraw, {
 			strokeDashoffset: length,
@@ -484,27 +446,24 @@ window.onload = function() {
 			//clears the path before repeat
 			.to(pathToDraw, duration, {
 				delay: 3,
-				strokeDashoffset: length
+				strokeDashoffset: -length
 			});
 	};
 	// TODO:
-	// Icon Animation Function
-	const ICON_ANIMATION = () => {
-		//The functions below removes all active animation on the function call.
-		REMOVE_CURRENT_ANIMATION_ICON();
-		REMOVE_CURRENT_ANIMATION_PATH();
-		REMOVE_PATH_START_END_ANIMATION();
 
+	// Icon Animation Function
+	const ICON_ANIMATION = iconLocation => {
 		//retrieves the path for icons.
+		let iconToDraw = '';
+		let iconStrokeColor = '';
+		let duration = 0;
+		let length = 0;
 		iconToDraw = MAP_SVG.querySelector(
-			'#' + parkFeature[currentLocation].paths[currentLocation][0]
+			'#' + parkFeature[iconLocation].paths[iconLocation][0]
 		);
-		// iconToDraw = MAP_ICON_PINS[currentLocation];
+		iconStrokeColor = parkFeature[iconLocation].colour;
 		duration = 2;
-		// length = parkFeature[currentLocation].paths[currentLocation][2];
-		// length = Math.ceil(path.getTotalLength());
 		length = 350;
-		iconStrokeColor = parkFeature[currentLocation].colour;
 		TLM_ICON.set(iconToDraw, {
 			strokeDashoffset: length,
 			strokeDasharray: length,
@@ -515,158 +474,6 @@ window.onload = function() {
 			strokeDashoffset: 0,
 			ease: Power4.easeInOut
 		});
-
-		// setTimeout(function () {
-		// 	TLM_ICON.set(path, {
-		// 			strokeDashoffset: length,
-		// 			strokeDasharray: length,
-		// 			strokeWidth: 10,
-		// 			stroke: strokeColor
-		// 		})
-		// 		.to(path, duration, {
-		// 			delay: 0.25,
-		// 			strokeDashoffset: 0,
-		// 			ease: Power4.easeInOut
-		// 		});
-		// 	if (currentLocation === destination) {
-
-		// 		//clears the path before repeat
-		// 		TLM_ICON.to(path, duration, {
-		// 				strokeDashoffset: -length,
-		// 				ease: Power4.easeInOut
-		// 			}).repeat(-1)
-		// 			.progress(0);
-		// 	}
-		// }, 2000);
-		// setTimeout(function () {
-
-		// 	TLM_ICON.progress(0).set(path, {
-		// 			strokeDashoffset: length,
-		// 			strokeDasharray: length,
-		// 			strokeWidth: 10,
-		// 			stroke: strokeColor
-		// 		})
-		// 		.to(path, duration, {
-		// 			delay: 0.25,
-		// 			strokeDashoffset: 0,
-		// 			ease: Power4.easeInOut
-		// 		})
-		// 		.repeat(0);
-
-		// 	if (currentLocation === destination) {
-
-		// 		//clears the path before repeat
-		// 		TLM_ICON.to(path, duration, {
-		// 				strokeDashoffset: -length,
-		// 				ease: Power4.easeInOut
-		// 			}).repeat(-1)
-		// 			.progress(0);
-		// 	}
-		// }, 2000);
-
-		// let STROKE_WIDTH = 10;
-
-		// TLM_ICON.fromTo(
-		// 	iconToDraw,
-		// 	duration,
-		// 	{
-		// 		strokeWidth: STROKE_WIDTH,
-		// 		strokeDasharray: length,
-		// 		strokeDashoffset: length
-		// 	},
-		// 	{
-		// 		delay: 3,
-		// 		stroke: iconStrokeColor,
-		// 		strokeWidth: STROKE_WIDTH,
-		// 		strokeDasharray: length,
-		// 		strokeDashoffset: 0
-		// 		// repeat: -1
-		// 	}
-		// );
-	};
-
-	const PATH_START_END_ANIMATION = (startLocation, endLocation) => {
-		//Removes current PATH_START_END_ANIMATION
-		REMOVE_PATH_START_END_ANIMATION();
-
-		startLocation = startLocationIcon;
-		endLocation = endLocationIcon;
-
-		//retrieves the path for icons.
-		startLocationIcon = MAP_SVG.querySelector(
-			'#' + parkFeature[currentLocation].paths[currentLocation][0]
-		);
-		endLocationIcon = MAP_SVG.querySelector(
-			'#' + parkFeature[destination].paths[destination][0]
-		);
-		// startLocationIcon = START_MAP_ICONS[currentLocation];
-		// endLocationIcon = END_MAP_ICONS[destination];
-		// startLocationIcon = MAP_ICON_PINS[currentLocation];
-		// endLocationIcon = MAP_ICON_PINS[destination];
-		duration = 2;
-		length = 350;
-		startStrokeColor = parkFeature[currentLocation].colour;
-		endStrokeColor = parkFeature[destination].colour;
-		//Stores width
-		let STROKE_WIDTH = 10;
-		//Sets and Animations the Start Location Icon
-		TLM_ICON.set(startLocationIcon, {
-			strokeDashoffset: length,
-			strokeDasharray: length,
-			strokeWidth: STROKE_WIDTH,
-			stroke: startStrokeColor
-		}).to(startLocationIcon, duration, {
-			delay: 3,
-			strokeDashoffset: 0,
-			ease: Power4.easeInOut
-		});
-		//Sets and Animations the End Location Icon
-		TLM_ICON.set(endLocationIcon, {
-			strokeDashoffset: length,
-			strokeDasharray: length,
-			strokeWidth: STROKE_WIDTH,
-			stroke: endStrokeColor
-		}).to(endLocationIcon, duration, {
-			delay: 3,
-			strokeDashoffset: 0,
-			ease: Power4.easeInOut
-		});
-
-		// let STROKE_WIDTH = 10;
-		// TLM_ICON.fromTo(
-		// 	startLocationIcon,
-		// 	duration,
-		// 	{
-		// 		strokeWidth: STROKE_WIDTH,
-		// 		strokeDasharray: length,
-		// 		strokeDashoffset: length
-		// 	},
-		// 	{
-		// 		delay: 3,
-		// 		stroke: startStrokeColor,
-		// 		strokeWidth: STROKE_WIDTH,
-		// 		strokeDasharray: length,
-		// 		strokeDashoffset: 0
-		// 		// repeat: -1
-		// 	}
-		// );
-		// TLM_ICON.fromTo(
-		// 	endLocationIcon,
-		// 	duration,
-		// 	{
-		// 		strokeWidth: STROKE_WIDTH,
-		// 		strokeDasharray: length,
-		// 		strokeDashoffset: length
-		// 	},
-		// 	{
-		// 		delay: 3,
-		// 		stroke: endStrokeColor,
-		// 		strokeWidth: STROKE_WIDTH,
-		// 		strokeDasharray: length,
-		// 		strokeDashoffset: 0
-		// 		// repeat: -1
-		// 	}
-		// );
 	};
 
 	// if anywhere in the map is clicked the dropdown will close
@@ -809,15 +616,19 @@ window.onload = function() {
 			'Dest: ' + destination + ' ' + parkFeature[destination].name
 		);
 		pathZoomIn(currentLocation, destination);
+		//Clears Current/Active Path/Icon Animation
+		REMOVE_CURRENT_PATH_ICON_ANIMATION();
 
 		if (currentLocation === destination) {
 			// Animates theIcon
-			ICON_ANIMATION();
+			ICON_ANIMATION(currentLocation);
 		} else {
+			ICON_ANIMATION(currentLocation);
 			//Animates the path
 			PATH_ANIMATION();
 			//Animates icon pins for Start and End Location
-			PATH_START_END_ANIMATION(currentLocation, destination);
+			// PATH_START_END_ANIMATION(currentLocation, destination);
+			ICON_ANIMATION(destination);
 		}
 
 		// Hide with the path finder menu
@@ -871,8 +682,8 @@ window.onload = function() {
 		// applying a function to onclick event of each tab
 		TABS[i].onclick = function() {
 			openFullScreen();
-			REMOVE_CURRENT_ANIMATION_PATH();
-			REMOVE_CURRENT_ANIMATION_ICON();
+			//Clears Current/Active Path/Icon Animation
+			REMOVE_CURRENT_PATH_ICON_ANIMATION();
 			// setting the id and the content based on the id
 			id = i;
 			//update current location value based on tab clicked
@@ -899,6 +710,8 @@ window.onload = function() {
 	// goes through a loop to open the specific tab
 	for (let i in MAP_ICONS) {
 		MAP_ICONS[i].onclick = function() {
+			//Clears Current/Active Path/Icon Animation
+			REMOVE_CURRENT_PATH_ICON_ANIMATION();
 			closeInfoPanel();
 			id = i;
 			currentLocation = i;
@@ -980,7 +793,7 @@ window.onload = function() {
 			infoPanelState = 2;
 
 			//Animates the Icon
-			ICON_ANIMATION();
+			ICON_ANIMATION(currentLocation);
 		}
 	}
 
