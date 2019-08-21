@@ -1,4 +1,9 @@
 -----------------------------------------------------------------------------------------------------------
+*** Updated on Wednesday, August 21, 2019 2:15 PM ***
+JS
+    -Increased delay for path animation and decreased for icon, so when path is animated the started icon is animated before the path starts.
+
+-----------------------------------------------------------------------------------------------------------
 *** Updated on Wednesday, August 21, 2019 1:45 PM ***
 Branch - pathStartEndAnimation
 JS

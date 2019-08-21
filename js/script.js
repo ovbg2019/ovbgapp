@@ -439,7 +439,7 @@ window.onload = function() {
 		})
 			//animates the path
 			.to(pathToDraw, duration, {
-				delay: 2,
+				delay: 3,
 				strokeDashoffset: 0,
 				ease: Sine.easeInOut
 			})
@@ -470,7 +470,7 @@ window.onload = function() {
 			strokeWidth: 10,
 			stroke: iconStrokeColor
 		}).to(iconToDraw, duration, {
-			delay: 3,
+			delay: 2,
 			strokeDashoffset: 0,
 			ease: Power4.easeInOut
 		});
@@ -624,8 +624,12 @@ window.onload = function() {
 			ICON_ANIMATION(currentLocation);
 		} else {
 			ICON_ANIMATION(currentLocation);
+			// setTimeout(() => {
+			// setTimeout(function() {
 			//Animates the path
 			PATH_ANIMATION();
+			// }, 3000);
+
 			//Animates icon pins for Start and End Location
 			// PATH_START_END_ANIMATION(currentLocation, destination);
 			ICON_ANIMATION(destination);
