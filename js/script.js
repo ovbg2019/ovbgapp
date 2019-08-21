@@ -510,7 +510,7 @@ window.onload = function () {
 
 	// if anywhere in the map is clicked the dropdown will close
 	MAP_SVG.addEventListener('click', function (e) {
-		openFullScreen();
+		// openFullScreen();
 		closeDropDown();
 		//reset the place holder text to where to?
 		PLACE_HOLDER.textContent = "Where to?";
@@ -547,7 +547,8 @@ window.onload = function () {
 	});
 
 	TOP_BAR.addEventListener('click', function () {
-		openFullScreen();
+    console.log("From Top bar: " + destination);
+		// openFullScreen();
 		// change the text on place holder
 		PLACE_HOLDER.textContent = "Select Destination";
 
@@ -555,7 +556,8 @@ window.onload = function () {
 			closeDropDown();
 		} else {
 			openDropDown();
-		}
+    }
+
 
     placeholderStart.textContent = parkFeature[currentLocation].name;
     placeholderStart.style.backgroundColor = parkFeature[currentLocation].colour;
@@ -564,7 +566,11 @@ window.onload = function () {
 		// To accommodate the dropdowns removing redundant locations
 		if (destination) {
 			placeholderEnd.textContent = parkFeature[destination].name;
-		}
+		} else {
+      placeholderEnd.textContent = 'Where to?';
+			placeholderEnd.style.backgroundColor = "#f7f2db"; 
+			placeholderEnd.style.color = "#383838"; 
+    }
 	});
 
 
@@ -633,7 +639,12 @@ window.onload = function () {
 					destination = i - 1;
 				}
 
-				placeholderEnd.textContent = parkFeature[destination].name;
+        if(destination) {
+          placeholderEnd.textContent = parkFeature[destination].name;
+        } else {
+          placeholderEnd.textContent = 'Where to?';
+          placeholderEnd.style.backgroundColor = "#f7f2db"; 
+        }
 			});
 		});
 		endDropDownState = false;
@@ -658,6 +669,9 @@ window.onload = function () {
 
 
 		if (currentLocation === destination) {
+      console.log('Inside go button icon ifelse');
+      console.log(currentLocation);
+      console.log(destination);
 			// Animates theIcon
 			ICON_ANIMATION();
 		} else {
@@ -667,7 +681,6 @@ window.onload = function () {
 		// Hide with the path finder menu
 		closeDropDown();
 
-    closeDropDown();
 		//Zooms outs
 		mapZoomOut(92);
 
@@ -675,9 +688,6 @@ window.onload = function () {
 		closeInfoPanel();
 		PLACE_HOLDER.textContent = "Navigating...";
 	});
-
-	// NEW DROP DOWN CODE ********* END
-	// ************************************************************************************************
 
 	/* OPENING AND CLOSING THE INFORMATION PANEL AND POPULATING IT WITH THE CONTENT */
 
@@ -715,13 +725,15 @@ window.onload = function () {
 	for (let i in TABS) {
 		// applying a function to onclick event of each tab
 		TABS[i].onclick = function () {
-			openFullScreen();
+			// openFullScreen();
 			REMOVE_CURRENT_ANIMATION_PATH();
 			REMOVE_CURRENT_ANIMATION_ICON();
 			// setting the id and the content based on the id
 			id = i;
 			//update current location value based on tab clicked
-			currentLocation = parseInt(i);
+      currentLocation = parseInt(i);
+      // reset destination to prevent animation bug
+      destination = '';
 			// closing the info panel before changing content
 			closeInfoPanel();
 			// using the setTimeout to delay and sync the loading of content with the animation
@@ -745,7 +757,7 @@ window.onload = function () {
 		MAP_ICONS[i].onclick = function () {
 			closeInfoPanel();
 			id = i;
-			currentLocation = i;
+			currentLocation = parseInt(i);
 			setContent();
 			openInfoPanel();
 		};
@@ -821,14 +833,12 @@ window.onload = function () {
 
 			//Animates the Icon
 			ICON_ANIMATION();
-
-
 		}
 	}
 
 	// this function animates the infoPanel and its contents when it closes
 	function closeInfoPanel() {
-		openFullScreen();
+		// openFullScreen();
 		// animating the info panel while closing
 		if (infoPanelState > 0) {
 			TweenMax.fromTo(
@@ -860,7 +870,7 @@ window.onload = function () {
 	}
 
 	function minimizeInfoPanel() {
-		openFullScreen();
+		// openFullScreen();
 		// animating the info panel while closing
 		if (infoPanelState === 2) {
 			TweenMax.fromTo(
@@ -1205,13 +1215,15 @@ function openDropDown() {
 // dropdown animation to close
 function closeDropDown() {
   TweenMax
-  .to(PATH_FINDER, 0.7, {
+  .to(PATH_FINDER, 0.8, {
     delay: 0.2,
     opacity: 0,
     top: 15,
+    height: 10 +'vh',
     onComplete:  function() {
       PATH_FINDER.style.opacity = 1;
       PATH_FINDER.style.top = "10vh";
+      PATH_FINDER.style.height = '15vh';
       dropdownState = false;
       PATH_FINDER.classList.add('hidden');
     }  
