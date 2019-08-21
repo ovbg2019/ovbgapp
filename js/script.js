@@ -676,9 +676,11 @@ window.onload = function () {
 		if (currentLocation === destination) {
 			// Animates theIcon
 			ICON_ANIMATION();
+			PLACE_HOLDER.textContent = "Where to?";
 		} else {
 			//Animates the path
 			PATH_ANIMATION();
+			PLACE_HOLDER.textContent = "Navigating...";
 		}
 		// Hide with the path finder menu
 		closeDropDown();
@@ -688,7 +690,6 @@ window.onload = function () {
 
 		//CloseInfoPanel or minimized
 		closeInfoPanel();
-		PLACE_HOLDER.textContent = "Navigating...";
 	});
 
 	// NEW DROP DOWN CODE ********* END
