@@ -1,5 +1,5 @@
 -----------------------------------------------------------------------------------------------------------
-*** Updated on Wednesday, August 21, 2019 7:00 PM ***
+*** Updated on Wednesday, August 21, 2019 1:40 PM ***
 JS
     -enabled start and end icon animation on path navigation/animation, using the same icon function.
     -removed the disabled timelinemax for icon animation.
