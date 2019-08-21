@@ -1,5 +1,33 @@
+*** Updated on Wednesday, August 21, 2019 4:25 PM ***
+JS
+    - Added all the entry points data in the array (including the path id, zoom points, and the location they lead to)
+    - Updated the detection ID from the URL. If the id is greater than 5 (anything after the the memory garden), it will start the path navigation from the entry points
+    - resetting the destination in the appropriate location
+    - bug fixes in dropdown and adjusted animations
+    - Increased delay for path animation and decreased for icon, so when path is animated the started icon is animated before the path starts.
+    - added clear to destination variable upon tab selection
+    - adds some new variables, enabled end to start icon animation
+    - changes to dropdown timing values
+    - shortened dropdown initial animation and re-adding bike path highlight animation
+
+-----------------------------------------------------------------------------------------------------------
+*** Updated on Wednesday, August 21, 2019 2:15 PM ***
+JS
+    -Increased delay for path animation and decreased for icon, so when path is animated the started icon is animated before the path starts.
+
+-----------------------------------------------------------------------------------------------------------
+*** Updated on Wednesday, August 21, 2019 1:45 PM ***
+Branch - pathStartEndAnimation
+JS
+    -enabled start and end icon animation on path navigation/animation, using the same icon function.
+    -removed the disabled timelinemax for icon animation.
+    -moved SVG variables inside the functions they are being used.
+    -Updated icon names in paths array, few icon path names were missing g, and the circle was being called by in now updated to called by the icon path like rest of the icon.
+    -merged the removed animation function into one.
+
 -----------------------------------------------------------------------------------------------------------
 *** Updated on Monday, August 19, 2019 7:00 PM ***
+Branch - AnimationArrayUpdate
 JS
     -Switched Icon Animation timeline max "to" back to  “fromto”, because in iOS/Desktop Safari all the icon animations do not animate with or with repeat on. When switched back to "fromto" it animate in iOS/Desktop Safari.
     -Also hard code length value because in iOS/Desktop Safari all the icon animations were not animating.
