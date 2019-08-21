@@ -534,7 +534,6 @@ window.onload = function () {
 
 	// if anywhere in the map is clicked the dropdown will close
 	MAP_SVG.addEventListener('click', function (e) {
-		openFullScreen();
 		closeDropDown();
 		//reset the place holder text to where to?
 		PLACE_HOLDER.textContent = "Where to?";
@@ -571,7 +570,6 @@ window.onload = function () {
 	});
 
 	TOP_BAR.addEventListener('click', function () {
-		openFullScreen();
 		// change the text on place holder
 		PLACE_HOLDER.textContent = "Select Destination";
 
@@ -717,33 +715,11 @@ window.onload = function () {
 		id = 0;
 	}
 
-	// a user can use TAB key to bring focus to different tabs
-	// this loop changes the id based on the tab that is being focused
-	for (let i in TABS) {
-		TABS[i].onfocus = function () {
-			id = i;
-		};
-	}
-
-	// this function opens the info panel when ENTER key is pressed
-	document.body.onkeyup = function (e) {
-		if (e.keyCode === 13) {
-			// closing the info panel before changing content
-			closeInfoPanel();
-			// using the setTimeout to delay and sync the loading of content with the animation
-			// setting the content in the info panel
-			setTimeout(setContent, 350);
-			// opening the panel with new content
-			setTimeout(openInfoPanel, 500);
-		}
-	};
-
 	// setting event listener on each tab using a loop (to reduce redundant code)
 	// will allow the user to click each tab and based on the tab selected, it will populate the content
 	for (let i in TABS) {
 		// applying a function to onclick event of each tab
 		TABS[i].onclick = function () {
-			openFullScreen();
 			REMOVE_CURRENT_ANIMATION_PATH();
 			REMOVE_CURRENT_ANIMATION_ICON();
 			// setting the id and the content based on the id
@@ -854,7 +830,6 @@ window.onload = function () {
 
 	// this function animates the infoPanel and its contents when it closes
 	function closeInfoPanel() {
-		openFullScreen();
 		// animating the info panel while closing
 		if (infoPanelState > 0) {
 			TweenMax.fromTo(
@@ -886,7 +861,6 @@ window.onload = function () {
 	}
 
 	function minimizeInfoPanel() {
-		openFullScreen();
 		// animating the info panel while closing
 		if (infoPanelState === 2) {
 			TweenMax.fromTo(
@@ -1243,24 +1217,5 @@ window.onload = function () {
 				}
 			});
 	}
-
-	function openFullScreen() {
-		// const PAGE = document.documentElement;
-		// if (!fullScreen) {
-		// 	if (PAGE.requestFullscreen) {
-		// 		PAGE.requestFullscreen();
-		// 	} else if (PAGE.mozRequestFullScreen) {
-		// 		/* Firefox */
-		// 		PAGE.mozRequestFullScreen();
-		// 	} else if (PAGE.webkitRequestFullscreen) {
-		// 		/* Chrome, Safari and Opera */
-		// 		PAGE.webkitRequestFullscreen();
-		// 	} else if (PAGE.msRequestFullscreen) {
-		// 		/* IE/Edge */
-		// 		PAGE.msRequestFullscreen();
-		// 	}
-		// }
-	}
-
 	// END IMAGE GALLERY SCRIPT ----------
 };
