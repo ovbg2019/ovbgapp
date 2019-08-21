@@ -1,5 +1,6 @@
 -----------------------------------------------------------------------------------------------------------
 *** Updated on Wednesday, August 21, 2019 1:40 PM ***
+Branch - AnimationArrayUpdate
 JS
     -enabled start and end icon animation on path navigation/animation, using the same icon function.
     -removed the disabled timelinemax for icon animation.
@@ -9,6 +10,7 @@ JS
 
 -----------------------------------------------------------------------------------------------------------
 *** Updated on Monday, August 19, 2019 7:00 PM ***
+Branch - AnimationArrayUpdate
 JS
     -Switched Icon Animation timeline max "to" back to  “fromto”, because in iOS/Desktop Safari all the icon animations do not animate with or with repeat on. When switched back to "fromto" it animate in iOS/Desktop Safari.
     -Also hard code length value because in iOS/Desktop Safari all the icon animations were not animating.
