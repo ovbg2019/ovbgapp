@@ -317,7 +317,19 @@ window.onload = function () {
 				['100%', 0.01, 0.2],
 				['100%', 0, 0.33],
 			],
-		},
+		}, { //6
+			paths: [['adelaide_to_water', 6]],
+			pathZoomPoints: [['100%', 0.1, 0.05]]
+		}, { //7
+			paths: [['kaiser_adelaide_to_memory', 5]],
+			pathZoomPoints: [['100%', 0.1, 0.2]]
+		}, { //8
+			paths: [['kaiser_daylily', 6]],
+			pathZoomPoints: [['100%', 0, 0.7]]
+		}, { //9
+			paths: [['kaiser_bond_to_bridge', 4]],
+			pathZoomPoints: [['100%', 0.01, 1.3]]
+		}
 	];
 
 	// STORING THE DATA ON LOCAL STORAGE OPEN THE SPLASH ONLY ONCE
@@ -684,8 +696,15 @@ window.onload = function () {
 
 	// opening the info panel and populating it with content based on the id and tab determined from the URL
 	if (!isNaN(id)) {
-		setContent();
-		setTimeout(openInfoPanel, splashDelay);
+		if (id > 5) {
+			currentLocation = id;
+			destination = 0;
+			pathZoomIn(currentLocation, destination);
+			PATH_ANIMATION();
+		} else {
+			setContent();
+			setTimeout(openInfoPanel, splashDelay);
+		}
 	} else {
 		id = 0;
 	}
@@ -822,8 +841,6 @@ window.onload = function () {
 
 			//Animates the Icon
 			ICON_ANIMATION();
-
-
 		}
 	}
 
