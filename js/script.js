@@ -23,6 +23,7 @@ window.onload = function () {
 
 	// NEW DROPDOWN
 	const TOP_BAR = document.getElementById('destination-menu'); // Initial top bar menu
+	const TOP_BAR_BODY = document.querySelector('.destination-select');
 	const PATH_FINDER = document.querySelector('.pathfinder'); // secondary path finder menu to display when top bar is clicked
 	const DROP_DOWN_START = document.querySelector('.path-start-select'); // Select the drop down
 	const DROP_DOWN_ITEM_START = document.querySelectorAll(
@@ -1190,6 +1191,13 @@ window.onload = function () {
 	}
 	// dropdown animation to open
 	function openDropDown() {
+		TweenMax.to(TOP_BAR_BODY, 0.5, {
+			backgroundColor: 'rgba(247, 242, 219, 1)',
+			onComplete: function () {
+				TOP_BAR.style.backgroundColor = 'rgba(247, 242, 219, 1)';
+			}
+		});
+
 		PATH_FINDER.classList.remove('hidden');
 		TweenMax
 			.from(PATH_FINDER, 0.8, {
@@ -1202,9 +1210,17 @@ window.onload = function () {
 					dropdownState = true;
 				}
 			});
+
 	}
 	// dropdown animation to close
 	function closeDropDown() {
+		TweenMax.to(TOP_BAR_BODY, 0.5, {
+			backgroundColor: 'rgba(247, 242, 219, 0.65)',
+			onComplete: function () {
+				TOP_BAR.style.backgroundColor = 'rgba(247, 242, 219, 0.65)';
+			}
+		});
+
 		TweenMax
 			.to(PATH_FINDER, 0.8, {
 				delay: 0.2,
@@ -1217,10 +1233,11 @@ window.onload = function () {
 					PATH_FINDER.style.top = "10vh";
 					PATH_FINDER.style.height = '15vh';
 					PATH_FINDER.style.overflow = "unset";
-					dropdownState = false;
 					PATH_FINDER.classList.add('hidden');
+					dropdownState = false;
 				}
 			});
+
 	}
 
 	function colorBikePath() {
