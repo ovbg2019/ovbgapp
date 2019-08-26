@@ -284,7 +284,8 @@ button {
 .destination-select {
 	width: 95vw;
 	height: 6vh;
-	background: var(--paths);
+  /* background: var(--paths); */
+  background: rgba(247, 242, 219, 0.65);
 	border-radius: 1vh;
 	border: 1px solid var(--concrete-path);
 	z-index: 900;
@@ -294,7 +295,7 @@ button {
 	overflow: hidden;
 	font-size: 15px;
 	font-family: "ButtonFont";
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .destination-select h2 {
