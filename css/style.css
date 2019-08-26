@@ -211,7 +211,7 @@ header {
 
 .path-start-select,
 .path-end-select {
-	border-radius: 1vh;
+	border-radius: 5px;
 	border: 1px solid var(--concrete-path);
 	background-color: var(--paths);
 	/* padding: 0.5vh 0.5vh; */
