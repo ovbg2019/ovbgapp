@@ -22,8 +22,8 @@ window.onload = function () {
 	);
 
 	// NEW DROPDOWN
-  const TOP_BAR = document.getElementById('destination-menu'); // Initial top bar menu
-  const TOP_BAR_BODY = document.querySelector('.destination-select');
+	const TOP_BAR = document.getElementById('destination-menu'); // Initial top bar menu
+	const TOP_BAR_BODY = document.querySelector('.destination-select');
 	const PATH_FINDER = document.querySelector('.pathfinder'); // secondary path finder menu to display when top bar is clicked
 	const DROP_DOWN_START = document.querySelector('.path-start-select'); // Select the drop down
 	const DROP_DOWN_ITEM_START = document.querySelectorAll(
@@ -152,10 +152,10 @@ window.onload = function () {
 			featureZoomPoints: ['180%', 0.2, 1],
 			pathZoomPoints: [
 				['100%', 0.4, 0.95],
-				['100%', 0.3, 1.05],
-				['100%', 0.1, 0.9],
-				['100%', 0.1, 1.05],
-				['100%', 0.01, 1],
+				['100%', 0.3, 0.95],
+				['100%', 0.1, 0.85],
+				['100%', 0.1, 1.1],
+				['100%', 0.01, 1.05],
 				['100%', 0, 1]
 			]
 		},
@@ -183,8 +183,8 @@ window.onload = function () {
 			featureZoomPoints: ['180%', 0.4, 0.95],
 			pathZoomPoints: [
 				['100%', 0.4, 0.95],
-				['100%', 0.3, 1.05],
-				['100%', 0.1, 0.7],
+				['100%', 0.3, 0.95],
+				['100%', 0.1, 0.9],
 				['100%', 0.1, 1],
 				['100%', 0.01, 1],
 				['100%', 0, 1]
@@ -214,7 +214,7 @@ window.onload = function () {
 			featureZoomPoints: ['170%', 0.35, 0.4],
 			pathZoomPoints: [
 				['100%', 0.4, 0.55],
-				['100%', 0.3, 0.65],
+				['100%', 0.3, 0.55],
 				['100%', 0.1, 0.4],
 				['100%', 0.1, 0.6],
 				['100%', 0.01, 0.6],
@@ -244,12 +244,12 @@ window.onload = function () {
 			],
 			featureZoomPoints: ['200%', 0.145, 1.4],
 			pathZoomPoints: [
-				['100%', 0.4, 1.3],
-				['100%', 0.3, 1.3],
-				['100%', 0.1, 1.3],
-				['100%', 0.1, 1.3],
-				['100%', 0.01, 1.3],
-				['100%', 0, 1.3]
+				['100%', 0.4, 1.1],
+				['100%', 0.3, 1.1],
+				['100%', 0.1, 1.1],
+				['100%', 0.1, 1.1],
+				['100%', 0.01, 1.1],
+				['100%', 0, 1.1]
 			]
 		},
 		{
@@ -279,8 +279,8 @@ window.onload = function () {
 				['100%', 0.3, 1],
 				['100%', 0.1, 1],
 				['100%', 0.1, 1],
-				['100%', 0.01, 0.6],
-				['100%', 0, 0.83]
+				['100%', 0.01, 0.9],
+				['100%', 0, 0.9]
 			]
 		},
 		{
@@ -311,7 +311,7 @@ window.onload = function () {
 				['100%', 0.1, 0.2],
 				['100%', 0.1, 0.2],
 				['100%', 0.01, 0.2],
-				['100%', 0, 0.33],
+				['100%', 0, 0.1],
 			],
 		}, { //6
 			location: 2,
@@ -1191,13 +1191,13 @@ window.onload = function () {
 	}
 	// dropdown animation to open
 	function openDropDown() {
-    TweenMax.to(TOP_BAR_BODY, 0.5, {
-      backgroundColor: 'rgba(247, 242, 219, 1)',
-      onComplete: function() {
-      TOP_BAR.style.backgroundColor = 'rgba(247, 242, 219, 1)';
-      }
-    });
-    
+		TweenMax.to(TOP_BAR_BODY, 0.5, {
+			backgroundColor: 'rgba(247, 242, 219, 1)',
+			onComplete: function () {
+				TOP_BAR.style.backgroundColor = 'rgba(247, 242, 219, 1)';
+			}
+		});
+
 		PATH_FINDER.classList.remove('hidden');
 		TweenMax
 			.from(PATH_FINDER, 0.8, {
@@ -1207,19 +1207,19 @@ window.onload = function () {
 				onComplete: function () {
 					PATH_FINDER.style.opacity = 1;
 					PATH_FINDER.style.top = "10vh";
-          dropdownState = true;
-    }
-  });
-    
+					dropdownState = true;
+				}
+			});
+
 	}
 	// dropdown animation to close
 	function closeDropDown() {
-    TweenMax.to(TOP_BAR_BODY, 0.5, {
-      backgroundColor: 'rgba(247, 242, 219, 0.65)',
-      onComplete: function() {
-        TOP_BAR.style.backgroundColor = 'rgba(247, 242, 219, 0.65)';
-      }
-    });
+		TweenMax.to(TOP_BAR_BODY, 0.5, {
+			backgroundColor: 'rgba(247, 242, 219, 0.65)',
+			onComplete: function () {
+				TOP_BAR.style.backgroundColor = 'rgba(247, 242, 219, 0.65)';
+			}
+		});
 
 		TweenMax
 			.to(PATH_FINDER, 0.8, {
@@ -1233,11 +1233,11 @@ window.onload = function () {
 					PATH_FINDER.style.top = "10vh";
 					PATH_FINDER.style.height = '15vh';
 					PATH_FINDER.style.overflow = "unset";
-          PATH_FINDER.classList.add('hidden');
-          dropdownState = false;
+					PATH_FINDER.classList.add('hidden');
+					dropdownState = false;
 				}
-      });
-      
+			});
+
 	}
 
 	function colorBikePath() {

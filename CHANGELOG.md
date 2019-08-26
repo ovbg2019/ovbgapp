@@ -1,3 +1,17 @@
+*** Updated on Wednesday, August 26, 2019 12:20 PM ***
+
+CSS
+    - Added the @font-face for the map fonts
+
+HTML
+    - Updated the <title> of the map
+    - Added <meta> tags
+
+SVG
+    - Added a link to the stylesheet to link the fonts
+
+-----------------------------------------------------------------------------------------------------------
+
 *** Updated on Wednesday, August 21, 2019 4:25 PM ***
 JS
     - Added all the entry points data in the array (including the path id, zoom points, and the location they lead to)
